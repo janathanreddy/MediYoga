@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88BE25186F0100C59A6E /* AppDelegate.swift */; };
+		210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88C025186F0100C59A6E /* SceneDelegate.swift */; };
+		210E88C325186F0100C59A6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88C225186F0100C59A6E /* ViewController.swift */; };
+		210E88C625186F0100C59A6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 210E88C425186F0100C59A6E /* Main.storyboard */; };
+		210E88C825186F0500C59A6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 210E88C725186F0500C59A6E /* Assets.xcassets */; };
+		210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 210E88C925186F0500C59A6E /* LaunchScreen.storyboard */; };
+		210E88D625186F0600C59A6E /* MediYogaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88D525186F0600C59A6E /* MediYogaTests.swift */; };
+		210E88E125186F0600C59A6E /* MediYogaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88E025186F0600C59A6E /* MediYogaUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		210E88D225186F0600C59A6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210E88B325186F0100C59A6E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210E88BA25186F0100C59A6E;
+			remoteInfo = MediYoga;
+		};
+		210E88DD25186F0600C59A6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210E88B325186F0100C59A6E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210E88BA25186F0100C59A6E;
+			remoteInfo = MediYoga;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		210E88BB25186F0100C59A6E /* MediYoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediYoga.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		210E88BE25186F0100C59A6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		210E88C025186F0100C59A6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		210E88C225186F0100C59A6E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		210E88C525186F0100C59A6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		210E88C725186F0500C59A6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		210E88CA25186F0500C59A6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		210E88CC25186F0500C59A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		210E88D125186F0600C59A6E /* MediYogaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediYogaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		210E88D525186F0600C59A6E /* MediYogaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediYogaTests.swift; sourceTree = "<group>"; };
+		210E88D725186F0600C59A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		210E88DC25186F0600C59A6E /* MediYogaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediYogaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		210E88E025186F0600C59A6E /* MediYogaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediYogaUITests.swift; sourceTree = "<group>"; };
+		210E88E225186F0600C59A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		210E88B825186F0100C59A6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210E88CE25186F0600C59A6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210E88D925186F0600C59A6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		210E88B225186F0100C59A6E = {
+			isa = PBXGroup;
+			children = (
+				210E88BD25186F0100C59A6E /* MediYoga */,
+				210E88D425186F0600C59A6E /* MediYogaTests */,
+				210E88DF25186F0600C59A6E /* MediYogaUITests */,
+				210E88BC25186F0100C59A6E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		210E88BC25186F0100C59A6E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				210E88BB25186F0100C59A6E /* MediYoga.app */,
+				210E88D125186F0600C59A6E /* MediYogaTests.xctest */,
+				210E88DC25186F0600C59A6E /* MediYogaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		210E88BD25186F0100C59A6E /* MediYoga */ = {
+			isa = PBXGroup;
+			children = (
+				210E88BE25186F0100C59A6E /* AppDelegate.swift */,
+				210E88C025186F0100C59A6E /* SceneDelegate.swift */,
+				210E88C225186F0100C59A6E /* ViewController.swift */,
+				210E88C425186F0100C59A6E /* Main.storyboard */,
+				210E88C725186F0500C59A6E /* Assets.xcassets */,
+				210E88C925186F0500C59A6E /* LaunchScreen.storyboard */,
+				210E88CC25186F0500C59A6E /* Info.plist */,
+			);
+			path = MediYoga;
+			sourceTree = "<group>";
+		};
+		210E88D425186F0600C59A6E /* MediYogaTests */ = {
+			isa = PBXGroup;
+			children = (
+				210E88D525186F0600C59A6E /* MediYogaTests.swift */,
+				210E88D725186F0600C59A6E /* Info.plist */,
+			);
+			path = MediYogaTests;
+			sourceTree = "<group>";
+		};
+		210E88DF25186F0600C59A6E /* MediYogaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				210E88E025186F0600C59A6E /* MediYogaUITests.swift */,
+				210E88E225186F0600C59A6E /* Info.plist */,
+			);
+			path = MediYogaUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		210E88BA25186F0100C59A6E /* MediYoga */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210E88E525186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYoga" */;
+			buildPhases = (
+				210E88B725186F0100C59A6E /* Sources */,
+				210E88B825186F0100C59A6E /* Frameworks */,
+				210E88B925186F0100C59A6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MediYoga;
+			productName = MediYoga;
+			productReference = 210E88BB25186F0100C59A6E /* MediYoga.app */;
+			productType = "com.apple.product-type.application";
+		};
+		210E88D025186F0600C59A6E /* MediYogaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210E88E825186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYogaTests" */;
+			buildPhases = (
+				210E88CD25186F0600C59A6E /* Sources */,
+				210E88CE25186F0600C59A6E /* Frameworks */,
+				210E88CF25186F0600C59A6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				210E88D325186F0600C59A6E /* PBXTargetDependency */,
+			);
+			name = MediYogaTests;
+			productName = MediYogaTests;
+			productReference = 210E88D125186F0600C59A6E /* MediYogaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		210E88DB25186F0600C59A6E /* MediYogaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210E88EB25186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYogaUITests" */;
+			buildPhases = (
+				210E88D825186F0600C59A6E /* Sources */,
+				210E88D925186F0600C59A6E /* Frameworks */,
+				210E88DA25186F0600C59A6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				210E88DE25186F0600C59A6E /* PBXTargetDependency */,
+			);
+			name = MediYogaUITests;
+			productName = MediYogaUITests;
+			productReference = 210E88DC25186F0600C59A6E /* MediYogaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		210E88B325186F0100C59A6E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					210E88BA25186F0100C59A6E = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					210E88D025186F0600C59A6E = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 210E88BA25186F0100C59A6E;
+					};
+					210E88DB25186F0600C59A6E = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 210E88BA25186F0100C59A6E;
+					};
+				};
+			};
+			buildConfigurationList = 210E88B625186F0100C59A6E /* Build configuration list for PBXProject "MediYoga" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 210E88B225186F0100C59A6E;
+			productRefGroup = 210E88BC25186F0100C59A6E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				210E88BA25186F0100C59A6E /* MediYoga */,
+				210E88D025186F0600C59A6E /* MediYogaTests */,
+				210E88DB25186F0600C59A6E /* MediYogaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		210E88B925186F0100C59A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */,
+				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
+				210E88C625186F0100C59A6E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210E88CF25186F0600C59A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210E88DA25186F0600C59A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		210E88B725186F0100C59A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210E88C325186F0100C59A6E /* ViewController.swift in Sources */,
+				210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */,
+				210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210E88CD25186F0600C59A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210E88D625186F0600C59A6E /* MediYogaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210E88D825186F0600C59A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210E88E125186F0600C59A6E /* MediYogaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		210E88D325186F0600C59A6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210E88BA25186F0100C59A6E /* MediYoga */;
+			targetProxy = 210E88D225186F0600C59A6E /* PBXContainerItemProxy */;
+		};
+		210E88DE25186F0600C59A6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210E88BA25186F0100C59A6E /* MediYoga */;
+			targetProxy = 210E88DD25186F0600C59A6E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		210E88C425186F0100C59A6E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				210E88C525186F0100C59A6E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		210E88C925186F0500C59A6E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				210E88CA25186F0500C59A6E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		210E88E325186F0600C59A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		210E88E425186F0600C59A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		210E88E625186F0600C59A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GL92UNQ3FG;
+				INFOPLIST_FILE = MediYoga/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "JANTEL-CORP.MediYoga";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		210E88E725186F0600C59A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GL92UNQ3FG;
+				INFOPLIST_FILE = MediYoga/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "JANTEL-CORP.MediYoga";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		210E88E925186F0600C59A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GL92UNQ3FG;
+				INFOPLIST_FILE = MediYogaTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "JANTEL-CORP.MediYogaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediYoga.app/MediYoga";
+			};
+			name = Debug;
+		};
+		210E88EA25186F0600C59A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GL92UNQ3FG;
+				INFOPLIST_FILE = MediYogaTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "JANTEL-CORP.MediYogaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediYoga.app/MediYoga";
+			};
+			name = Release;
+		};
+		210E88EC25186F0600C59A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GL92UNQ3FG;
+				INFOPLIST_FILE = MediYogaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "JANTEL-CORP.MediYogaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MediYoga;
+			};
+			name = Debug;
+		};
+		210E88ED25186F0600C59A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GL92UNQ3FG;
+				INFOPLIST_FILE = MediYogaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "JANTEL-CORP.MediYogaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MediYoga;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		210E88B625186F0100C59A6E /* Build configuration list for PBXProject "MediYoga" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210E88E325186F0600C59A6E /* Debug */,
+				210E88E425186F0600C59A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210E88E525186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYoga" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210E88E625186F0600C59A6E /* Debug */,
+				210E88E725186F0600C59A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210E88E825186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYogaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210E88E925186F0600C59A6E /* Debug */,
+				210E88EA25186F0600C59A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210E88EB25186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYogaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210E88EC25186F0600C59A6E /* Debug */,
+				210E88ED25186F0600C59A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 210E88B325186F0100C59A6E /* Project object */;
+}
