@@ -9,8 +9,10 @@ import UIKit
 
 class CommunicationTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var CountUnseen: UILabel!
     
+    @IBOutlet weak var messageField: UILabel!
     @IBOutlet weak var chatimage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
