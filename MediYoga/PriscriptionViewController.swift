@@ -55,5 +55,11 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
 //        UIButton.isSelected = !buttonOutlet.isSelected
 //
 //    }
+    @IBAction func backsegue(_ sender: Any) {
+        
 
+        dismiss(animated: true, completion: nil)
+
+    }
+    
 }

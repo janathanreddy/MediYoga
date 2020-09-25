@@ -9,7 +9,7 @@ import UIKit
 //import FirebaseAuth
 //import Firebase
 
-class ViewController: UIViewController{
+class ViewController: UIViewController,UITextFieldDelegate{
    
     
 
@@ -30,6 +30,9 @@ class ViewController: UIViewController{
         PasswordTextField.rightView = button
         PasswordTextField.rightViewMode = .always
         PasswordTextField.isSecureTextEntry = true
+        PasswordTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        MobileNoTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+
 
     }
 
@@ -57,6 +60,10 @@ class ViewController: UIViewController{
 
     }
     
-    
+
+    @IBAction func done(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+
 }
 

@@ -18,8 +18,23 @@ class AdminCommunicationViewController: UIViewController, UITableViewDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 70
+        self.navigationItem.setHidesBackButton(true, animated: true)
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return image.count
@@ -31,9 +46,7 @@ class AdminCommunicationViewController: UIViewController, UITableViewDelegate, U
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "AdminChatViewController") as! AdminChatViewController
-        self.navigationController?.pushViewController(vc, animated: true)
-
+        performSegue(withIdentifier: "Adminsegue", sender: self)
     }
 
 }

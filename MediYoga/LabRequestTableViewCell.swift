@@ -21,5 +21,8 @@ class LabRequestTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+    class func cellHeight() -> CGFloat {
+        return 60
+    }
+
 }

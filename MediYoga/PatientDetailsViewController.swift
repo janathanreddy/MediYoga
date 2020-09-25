@@ -42,7 +42,8 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(name)
+
         patientimage.clipsToBounds = true
         patientimage.layer.cornerRadius = 25
         prescriptionbtn.clipsToBounds = true
@@ -62,10 +63,19 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
 
     }
     
+    @IBAction func Backsegue(_ sender: Any) {
+
+        dismiss(animated: true, completion: nil)
+        
+    }
     @IBAction func labrequestactionbtn(_ sender: Any) {
+        print("labrequestactionbtn")
+        
     }
     
     @IBAction func prescriptionactionbtn(_ sender: Any) {
+        print("prescriptionactionbtn")
+
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Headers.count

@@ -15,7 +15,11 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
     @IBOutlet var NotesView: UIView!
     
     @IBOutlet weak var TextViewField: UITextView!
-    
+    var age_1:String?
+    var image_1:String?
+    var ccd_1:String?
+    var time_1:String?
+    var name_1:String?
 //    private var search = UISearchController(searchResultsController: nil)
     var image:[String] = ["31","32","33","34","35","36","37","38","39","40"]
     var age:[String] = ["34","32","36","40","45","40","43","28","22","41"]
@@ -31,16 +35,24 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
         tableView.rowHeight = 92
         TextViewField.layer.borderColor = UIColor.systemGray.cgColor
         TextViewField.layer.borderWidth = 0.8
+        self.navigationItem.setHidesBackButton(true, animated: true)
 
     }
+    
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
-//        navigationItem.hidesSearchBarWhenScrolling = false
     }
+
     override func viewWillDisappear(_ animated: Bool) {
-           super.viewWillDisappear(animated)
-//           navigationItem.hidesSearchBarWhenScrolling = true
-       }
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     
 //    func Search_Bar(){
 //        search.searchBar.delegate = self
@@ -98,22 +110,14 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
 
 
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let vc = storyboard?.instantiateViewController(identifier: "PatientDetailsViewController") as! PatientDetailsViewController
-            
-        vc.name = name[indexPath.row]
-        vc.age = age[indexPath.row]
-        vc.image = image[indexPath.row]
-        vc.cdd = ccd[indexPath.row]
-        vc.time = time[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
-        print(indexPath.row)
-//       return infoViewController.deselectRow(at: indexPath, animated: true)
-
-        
-        
+//        name_1 = name[indexPath.row]
+//        age_1 = age[indexPath.row]
+//        time_1 = time[indexPath.row]
+//        ccd_1 = ccd[indexPath.row]
+//        image_1 = image[indexPath.row]
+       performSegue(withIdentifier: "DeatailofPatient", sender: self)
+       return tableView.deselectRow(at: indexPath, animated: true)
 
     }
     @IBAction func CancelNotes(_ sender: Any) {
@@ -122,6 +126,23 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
     }
     
     @IBAction func OkNotes(_ sender: Any) {
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DeatailofPatient" {
+            let VC:PatientDetailsViewController = segue.destination as! PatientDetailsViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            VC.name = self.name[indexPath!.row]
+            VC.image = self.age[indexPath!.row]
+            VC.time = self.time[indexPath!.row]
+            VC.age = self.age[indexPath!.row]
+            VC.cdd = self.ccd[indexPath!.row]
+
+                }
+
+            
     }
 }
 

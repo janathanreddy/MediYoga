@@ -1,5 +1,5 @@
 //
-//  AdminChatViewController.swift
+//  CommunicationChatViewController.swift
 //  MediYoga
 //
 //  Created by Janarthan Subburaj on 24/09/20.
@@ -9,41 +9,43 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
-
-
-struct Sender:SenderType {
+struct Senders:SenderType {
     var senderId: String
     var displayName: String
 }
-struct Message: MessageType{
+struct Messages: MessageType{
     var sender: SenderType
     
-    var messageId: String 
+    var messageId: String
     
     var sentDate: Date
-    
     var kind: MessageKind
     
     
 }
-
-class AdminChatViewController: MessagesViewController,MessagesDataSource,MessageCellDelegate,MessagesLayoutDelegate,MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
-     
+//CommunicationChatViewController
+class CommunicationChatViewController: MessagesViewController,MessagesDataSource,MessageCellDelegate,MessagesLayoutDelegate,MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
     
-    let currentuser = Sender(senderId: "Self", displayName: "Test Message")
-    let otheruser = Sender(senderId: "other", displayName: "Name")
+    let GroupAdmin:String = ""
+    let currentuser = Senders(senderId: "Self", displayName: "Test Message")
+    let otheruser = Senders(senderId: "other", displayName: "Name")
 
     var messages = [MessageType]()
     var textmessage:String = ""
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        messages.append(Message(sender: otheruser,messageId: "2",sentDate: Date(),kind: .text("Hello")))
+        iMessage()
+        self.becomeFirstResponder()
+
+        messageInputBar.delegate = self
+        messages.append(Messages(sender: otheruser,messageId: "2",sentDate: Date(),kind: .text("hi ... How Are you")))
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
-        messageInputBar.delegate = self as InputBarAccessoryViewDelegate
+        
+//        messageInputBar.delegate = self as InputBarAccessoryViewDelegate
         
         messagesCollectionView.messagesCollectionViewFlowLayout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: .zero))
         messagesCollectionView.messagesCollectionViewFlowLayout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: .zero))
@@ -62,35 +64,38 @@ class AdminChatViewController: MessagesViewController,MessagesDataSource,Message
 
               }
           
-                let logoImage = UIImage.init(named: "34")
-                let logoImageView = UIImageView.init(image: logoImage)
-                logoImageView.frame = CGRect(x:0.0,y:0.0, width:40,height:40)
-                logoImageView.contentMode = .scaleAspectFit
-                let imageItem = UIBarButtonItem.init(customView: logoImageView)
-                let widthConstraint = logoImageView.widthAnchor.constraint(equalToConstant: 40)
-                let heightConstraint = logoImageView.heightAnchor.constraint(equalToConstant: 40)
-                heightConstraint.isActive = true
-                widthConstraint.isActive = true
-                navigationItem.leftBarButtonItem =  imageItem
-//                self.navigationController?.navigationBar.topItem?.title = "Home"
-//                self.navigationItem.leftItemsSupplementBackButton = true
-        iMessage()
+//                let logoImage = UIImage.init(named: "34")
+//                let logoImageView = UIImageView.init(image: logoImage)
+//                logoImageView.frame = CGRect(x:0.0,y:0.0, width:40,height:40)
+//                logoImageView.contentMode = .scaleAspectFit
+//                let imageItem = UIBarButtonItem.init(customView: logoImageView)
+//                let widthConstraint = logoImageView.widthAnchor.constraint(equalToConstant: 40)
+//                let heightConstraint = logoImageView.heightAnchor.constraint(equalToConstant: 40)
+//                heightConstraint.isActive = true
+//                widthConstraint.isActive = true
+//                navigationItem.leftBarButtonItems =  [imageItem]
+
+
+                self.navigationController?.navigationBar.topItem?.title = GroupAdmin
+                self.navigationItem.leftItemsSupplementBackButton = true
+        let editImage    = UIImage(named: "back arrow")!
         
-        self.navigationController?.navigationBar.topItem?.title = "GroupAdmin"
-        self.navigationItem.leftItemsSupplementBackButton = true
-let editImage    = UIImage(named: "back arrow")!
 
-
-let editButton   = UIBarButtonItem(image: editImage,  style: .plain, target: self, action: #selector(didTapBackButton(sender:)))
+        let editButton   = UIBarButtonItem(image: editImage,  style: .plain, target: self, action: #selector(didTapBackButton(sender:)))
 
 
 
-navigationItem.leftBarButtonItems = [editButton]
+        navigationItem.leftBarButtonItems = [editButton]
 
 
 
     }
     
+    override func viewDidLayoutSubviews() {
+        messagesCollectionView.contentInset.bottom = messageInputBar.frame.height
+        messagesCollectionView.scrollIndicatorInsets.bottom = messageInputBar.frame.height
+    }
+
     @objc func didTapBackButton(sender: AnyObject){
         
 //                let vc = storyboard?.instantiateViewController(identifier: "CommunicationViewController") as! CommunicationViewController
@@ -103,16 +108,6 @@ navigationItem.leftBarButtonItems = [editButton]
         
     }
     
-    func isFromCurrentSender(message: MessageType) -> Bool {
-return true
-    }
-    func defaultStyle() {
-        let newMessageInputBar = InputBarAccessoryView()
-            newMessageInputBar.sendButton.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
-        newMessageInputBar.delegate = self as! InputBarAccessoryViewDelegate
-            messageInputBar = newMessageInputBar
-            reloadInputViews()
-        }
     func iMessage() {
         defaultStyle()
         
@@ -142,7 +137,26 @@ return true
         messageInputBar.sendButton.backgroundColor = .clear
         messageInputBar.textViewPadding.right = -38
     }
+
     
+    
+    func isFromCurrentSender(message: MessageType) -> Bool {
+return true
+    }
+    
+    func defaultStyle() {
+        let newMessageInputBar = InputBarAccessoryView()
+            newMessageInputBar.sendButton.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
+        newMessageInputBar.delegate = self as! InputBarAccessoryViewDelegate
+            messageInputBar = newMessageInputBar
+            reloadInputViews()
+        }
+    
+    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+            let name = message.sender.displayName
+        return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
+        }
+
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
             if indexPath.item % 4 == 0 {
                 return NSAttributedString(
@@ -172,10 +186,9 @@ return true
         let borderColor:UIColor = isFromCurrentSender(message: message) ? .clear : .clear
         return .bubbleTailOutline(borderColor, corner, .curved)
     }
-//    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-//        return .bubbleTailOutline
-//    }
-
+    
+    
+    
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
             return CGSize(width: 0, height: 8)
         }
@@ -187,6 +200,8 @@ return true
                 return 0
             }
         }
+    
+    
         
         func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
             return 16
@@ -194,7 +209,7 @@ return true
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         
-        messages.append(Message(sender: currentuser,messageId: "1",sentDate: Date(),kind: .text(inputBar.inputTextView.text)))
+        messages.append(Messages(sender: currentuser,messageId: "1",sentDate: Date(),kind: .text(inputBar.inputTextView.text)))
             inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
@@ -202,6 +217,7 @@ return true
 
         }
     
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -222,6 +238,9 @@ return true
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-  
+    
+    
 
+  
 }
+

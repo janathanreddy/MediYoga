@@ -11,9 +11,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         RunLoop.current.run(until: NSDate(timeIntervalSinceNow: 1) as Date)
+
 //        FirebaseApp.configure()
         return true
     }
