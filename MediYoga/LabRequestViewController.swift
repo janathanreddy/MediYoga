@@ -7,13 +7,24 @@
 
 import UIKit
 
+struct cellData {
+    var opened = Bool()
+    var title = String()
+    var imagepain = String()
+    var sectiondata = [String]()
+    
+}
+
 class LabRequestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    
     var xibindexpath:IndexPath?
+    var tableviewdata = [cellData]()
     var pains:[String] = ["Head","Neck","Back","Shoulder","Arm"]
     var imagepains:[String] = ["Head.png","Neck.png","Back.png","Shoulder.png","Arm.png"]
-    var xrays:[String] = ["X-ray PNS","X-Ray face wirh PNS","CT PNS","CT PNS","CT Brains"]
+    var xrays:[String] = ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"]
     var touch:Int?
+    
     @IBOutlet weak var Descriptionlab: UITextField!
     
     
@@ -27,14 +38,53 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
         Descriptionlab.layer.borderWidth = 1
         tableView.delegate = self
         tableView.dataSource = self
+        tableviewdata = [cellData(opened: false, title: "Head",imagepain: "Head.png",sectiondata: ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"]),
+                         cellData(opened: false, title: "Neck",imagepain: "Neck.png",sectiondata: ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"]),
+                         cellData(opened: false, title: "Back",imagepain: "Back.png",sectiondata: ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"]),
+                         cellData(opened: false, title: "Shoulder",imagepain: "Shoulder.png",sectiondata: ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"]),
+                         cellData(opened: false, title: "Arm",imagepain: "Arm.png",sectiondata: ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"])]
         tableView.register(UINib(nibName: labxibTableViewCell.nibName(), bundle: nil), forCellReuseIdentifier: labxibTableViewCell.reuseIdentifier())
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableviewdata.count
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if xibindexpath != nil {
-            return pains.count + 1
-        } else {
-            return pains.count
+        if tableviewdata[section].opened == true{
+            return tableviewdata[section].sectiondata.count + 1
+        } else{
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath) as! LabRequestTableViewCell
+            LabRequestTableViewCell.cellHeight()
+            cell.labIMAGE.image = UIImage(named: tableviewdata[indexPath.section].imagepain)
+            cell.labelname.text = tableviewdata[indexPath.section].title
+            return cell
+        }
+        else{
+            let xibcell = tableView.dequeueReusableCell(withIdentifier: "labxibTableViewCell",for: indexPath) as! labxibTableViewCell
+            labxibTableViewCell.cellHeight()
+            tableView.separatorStyle = .none
+            tableView.showsVerticalScrollIndicator = false
+            xibcell.dropdownlabel.text = tableviewdata[indexPath.section].sectiondata[indexPath.row - 1]
+            return xibcell
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        if tableviewdata[indexPath.section].opened == true{
+            tableviewdata[indexPath.section].opened = false
+            let sections = IndexSet.init(integer: indexPath.section)
+            tableView.reloadSections(sections, with: .none)
+        }else{
+            tableviewdata[indexPath.section].opened = true
+            let sections = IndexSet.init(integer: indexPath.section)
+            tableView.reloadSections(sections, with: .none)
+
         }
     }
     @IBAction func backsegue(_ sender: Any) {
@@ -43,62 +93,9 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
 
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if xibindexpath == indexPath {
-
-            let xibcell = tableView.dequeueReusableCell(withIdentifier: labxibTableViewCell.reuseIdentifier()) as! labxibTableViewCell
-            xibcell.dropdownlabel.text = xrays[indexPath.row]
-            return xibcell
-            
-            
-        } else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LabRequestTableViewCell
-            cell.labIMAGE.image = UIImage(named:imagepains[indexPath.row])
-            cell.labelname.text = pains[indexPath.row]
-                return cell
-
-        }
-    }
     @IBAction func saveAction(_ sender: Any) {
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.beginUpdates()
-            if let xibindexpath = xibindexpath, xibindexpath.row - 1 == indexPath.row {
-                tableView.deleteRows(at: [xibindexpath], with: .fade)
-                self.xibindexpath = nil
-            } else {
-                if let datePickerIndexPath = xibindexpath {
-                    tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
-                }
-                xibindexpath = indexPathToInsertDatePicker(indexPath: indexPath)
-                tableView.insertRows(at: [xibindexpath!], with: .fade)
-                tableView.deselectRow(at: indexPath, animated: true)
-            }
-            tableView.endUpdates()
-        }
-    }
-    
-    func indexPathToInsertDatePicker(indexPath: IndexPath) -> IndexPath {
-        if let xibindexpath = xibindexpath, xibindexpath.row < indexPath.row {
-            return indexPath
-        } else {
-            return IndexPath(row: indexPath.row + 1, section: indexPath.section)
-        }
-    }
-
-
-
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if xibindexpath == indexPath {
-            return labxibTableViewCell.cellHeight()
-        } else {
-            return LabRequestTableViewCell.cellHeight()
-        }
-    }
     
 }
     
