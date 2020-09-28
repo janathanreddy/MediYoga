@@ -23,12 +23,18 @@ struct Messages: MessageType{
     
     
 }
+struct Media: MediaItem{
+    var placeholderImage: UIImage
+    var image: UIImage?
+    var size: CGSize
+    var url: URL?
+}
 //CommunicationChatViewController
 class CommunicationChatViewController: MessagesViewController,MessagesDataSource,MessageCellDelegate,MessagesLayoutDelegate,MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
     
     let GroupAdmin:String = ""
-    let currentuser = Senders(senderId: "Self", displayName: "Test Message")
-    let otheruser = Senders(senderId: "other", displayName: "Name")
+    let currentuser = Senders(senderId: "Self", displayName: "John")
+    let otheruser = Senders(senderId: "other", displayName: "Michal")
 
     var messages = [MessageType]()
     var textmessage:String = ""
@@ -37,7 +43,7 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
         super.viewDidLoad()
         iMessage()
         self.becomeFirstResponder()
-
+        camera()
         messageInputBar.delegate = self
         messages.append(Messages(sender: otheruser,messageId: "2",sentDate: Date(),kind: .text("hi ... How Are you")))
         messagesCollectionView.messagesDataSource = self
@@ -126,6 +132,8 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
         messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: true)
         messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .right, animated: true)
+        messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .left, animated: true)
+
 //        messageInputBar.sendButton.imageView?.backgroundColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: true)
@@ -139,10 +147,39 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
     }
 
     
-    
-    func isFromCurrentSender(message: MessageType) -> Bool {
-return true
+    func camera(){
+        defaultStyle()
+        
+        messageInputBar.isTranslucent = false
+        messageInputBar.backgroundView.backgroundColor = .white
+        messageInputBar.separatorLine.isHidden = true
+        messageInputBar.inputTextView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        messageInputBar.inputTextView.placeholderTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
+        messageInputBar.inputTextView.placeholder = "Type Message"
+        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 36)
+        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 36)
+        messageInputBar.inputTextView.layer.borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1).cgColor
+        messageInputBar.inputTextView.layer.borderWidth = 1.0
+        messageInputBar.inputTextView.layer.cornerRadius = 16.0
+        messageInputBar.inputTextView.layer.masksToBounds = true
+        messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        messageInputBar.setRightStackViewWidthConstant(to: 36, animated: true)
+        messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .left, animated: true)
+
+//        messageInputBar.sendButton.imageView?.backgroundColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
+        messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: true)
+        messageInputBar.sendButton.image =  UIImage(systemName: "mic.circle")
+        messageInputBar.sendButton.title = nil
+        messageInputBar.sendButton.imageView?.layer.cornerRadius = 10
+        messageInputBar.sendButton.imageView?.tintColor = UIColor.systemGray
+
+        messageInputBar.sendButton.backgroundColor = .clear
+        messageInputBar.textViewPadding.right = -38
     }
+//    func isFromCurrentSender(message: MessageType) -> Bool {
+//return true
+//    }
     
     func defaultStyle() {
         let newMessageInputBar = InputBarAccessoryView()

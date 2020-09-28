@@ -12,6 +12,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
     @IBOutlet weak var BlurEffect: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var DropDownTableView: UITableView!
     @IBOutlet var NotesView: UIView!
     
     @IBOutlet weak var TextViewField: UITextView!
@@ -36,6 +37,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
         TextViewField.layer.borderColor = UIColor.systemGray.cgColor
         TextViewField.layer.borderWidth = 0.8
         self.navigationItem.setHidesBackButton(true, animated: true)
+        DropDownTableView.register(UINib(nibName: "DropDown", bundle: nil), forCellReuseIdentifier: "DropDownCell")
 
     }
     
@@ -69,6 +71,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView {
+        case tableView:
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApplicationTableViewCell
         cell.appointmentimage.image = UIImage(named: image[indexPath.row])
         cell.NameField.text = name[indexPath.row]
@@ -78,7 +82,18 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
         cell.statusField.image = UIImage(named: at[indexPath.row])
 //        cell.delegate = self
 //        cell.index = indexPath
+        
         return cell
+            
+        case DropDownTableView:
+            let DropDown = tableView.dequeueReusableCell(withIdentifier: "DropDownCell", for: indexPath) as! DropDown
+            
+            DropDown.dropdownlabel.text = "hi"
+            return DropDown
+
+        default:
+              return UITableViewCell()
+        }
         
     }
     

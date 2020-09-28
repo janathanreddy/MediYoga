@@ -16,6 +16,7 @@ struct Sender:SenderType {
     var displayName: String
 }
 struct Message: MessageType{
+    
     var sender: SenderType
     
     var messageId: String 
@@ -38,6 +39,10 @@ class AdminChatViewController: MessagesViewController,MessagesDataSource,Message
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        
         messages.append(Message(sender: otheruser,messageId: "2",sentDate: Date(),kind: .text("Hello")))
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -91,21 +96,32 @@ navigationItem.leftBarButtonItems = [editButton]
 
     }
     
+    func messageTopLabelAttributedText(
+      for message: MessageType,
+      at indexPath: IndexPath) -> NSAttributedString? {
+
+      return NSAttributedString(
+        string: message.sender.displayName,
+        attributes: [.font: UIFont.systemFont(ofSize: 12)])
+    }
+  
+  
+    
     @objc func didTapBackButton(sender: AnyObject){
-        
-//                let vc = storyboard?.instantiateViewController(identifier: "CommunicationViewController") as! CommunicationViewController
-//                vc.hidesBottomBarWhenPushed = true
-//                self.navigationController?.pushViewController(vc, animated: true)
         
         navigationController?.popViewController(animated: true)
 
         dismiss(animated: true, completion: nil)
         
     }
-    
-    func isFromCurrentSender(message: MessageType) -> Bool {
-return true
+    func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+
+        return NSAttributedString(string: "Read", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
+
+//    func isFromCurrentSender(message: MessageType) -> Bool {
+//return true
+//    }
     func defaultStyle() {
         let newMessageInputBar = InputBarAccessoryView()
             newMessageInputBar.sendButton.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
@@ -113,6 +129,14 @@ return true
             messageInputBar = newMessageInputBar
             reloadInputViews()
         }
+    
+    
+
+    
+    
+    
+    
+    
     func iMessage() {
         defaultStyle()
         
@@ -142,6 +166,26 @@ return true
         messageInputBar.sendButton.backgroundColor = .clear
         messageInputBar.textViewPadding.right = -38
     }
+    
+    
+    
+//    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView)
+//        {
+//        switch message.kind {
+//                case .photo:
+//                    if let messagee = message as? Message, let url = URL(string: messagee.imageURL) {
+//                            let resource = ImageResource(downloadURL: url, cacheKey: messagee.imageURL)
+//                            imageView.kf.setImage(with: resource)
+//                            messagesCollectionView.reloadItems(at: [indexPath])
+//                    }
+//                default:
+//                    break
+//                }
+//        }
+
+    
+    
+    
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
             if indexPath.item % 4 == 0 {
