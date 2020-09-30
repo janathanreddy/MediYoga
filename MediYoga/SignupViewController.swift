@@ -12,6 +12,7 @@ import UIKit
 class SignupViewController: UIViewController {
 
     
+    @IBOutlet weak var ErrorLabel: UILabel!
     @IBOutlet weak var NameField: UITextField!
     
     @IBOutlet weak var MobileNumberField: UITextField!
@@ -25,6 +26,7 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         SignupButton.clipsToBounds = true
         SignupButton.layer.cornerRadius = 10
+        
         
     }
     

@@ -1,31 +1,28 @@
 //
-//  ComChatViewController.swift
+//  AdminComViewController.swift
 //  MediYoga
 //
-//  Created by Janarthan Subburaj on 29/09/20.
+//  Created by Janarthan Subburaj on 30/09/20.
 //
 
 import UIKit
 
-class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate {
+class AdminComViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate{
     
     fileprivate let application = UIApplication.shared
     var messages: [MessageData] = [MessageData(text: "Hi", isFirstUser: true),
-                                   MessageData(text: "Hi,Hello", isFirstUser: false),
-                                   MessageData(text: "How are you", isFirstUser: true),
-                                   MessageData(text: "fine you", isFirstUser: false),
-                                   MessageData(text: "Where are you", isFirstUser: true),
-                                   MessageData(text: "i am Chennai You", isFirstUser: false),
-                                   MessageData(text: "okay", isFirstUser: true)]
+                                   MessageData(text: "Hi,Hello", isFirstUser: false)]
     var imagename:String = ""
     var GroupName:String = ""
     var dateupdate: String?
     var isFirstUser: Bool = true
     var timeupdate: String?
-    @IBOutlet weak var profileimage: UIImageView!
-    @IBOutlet weak var TextField: UITextField!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var MessageLabel: UILabel!
+    
+   @IBOutlet weak var profileimage: UIImageView!
+   @IBOutlet weak var TextField: UITextField!
+   @IBOutlet weak var tableView: UITableView!
+   @IBOutlet weak var MessageLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -39,8 +36,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         TextField.layer.cornerRadius = 13.0
         TextField.layer.borderWidth = 1.0
         TextField.layer.borderColor = UIColor.systemGray5.cgColor
-        profileimage.image = UIImage(named: imagename)
-        MessageLabel.text = GroupName
+        profileimage.image = UIImage(named: "33")
+        MessageLabel.text = "Admin Group"
 
     }
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -74,20 +71,18 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         formatter.timeStyle = .short
         formatter.dateStyle = .none
         timeupdate = formatter.string(from: currentDateTime)
- 
-    }
-    @IBAction func backsegue(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func CallBtnAction(_ sender: UIButton) {
+  @IBAction func backsegue(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+   @IBAction func CallBtnAction(_ sender: UIButton) {
         if let phoneURL = URL(string: "tel://9003660005"){
             if application.canOpenURL(phoneURL){
                 application.open(phoneURL,options: [:],completionHandler: nil)
             }
         }
     }
-    
     @IBAction func CameraAction(_ sender: Any) {
     }
     
@@ -96,10 +91,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AdminComTableViewCell
         cell.updateMessageCell(by: messages[indexPath.row])
-        cell.ReadCheckLabel.text = "unread"
-        cell.timeLabel.text = timeupdate
+        cell.ReadCheckLabelAdmin.text = "unread"
+        cell.timeLabelAdmin.text = timeupdate
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -127,6 +122,4 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
        return true
         tableView.reloadData()
     }
-
-    
 }

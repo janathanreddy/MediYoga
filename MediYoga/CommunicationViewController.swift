@@ -80,15 +80,15 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue!, sender: Any?){
-
-        let navVC = segue.destination as! UINavigationController
-
-        let tableVC = navVC.viewControllers.first as! CommunicationChatViewController
-        var indexpath = self.tableView.indexPathForSelectedRow
-        tableVC.GroupName = name_1[indexpath!.row].name
-        tableVC.imagename = name_1[indexpath!.row].image
-    }
+//    override func prepare(for segue: UIStoryboardSegue!, sender: Any?){
+//
+//        let navVC = segue.destination as! UINavigationController
+//
+//        let tableVC = navVC.viewControllers.first as! CommunicationChatViewController
+//        var indexpath = self.tableView.indexPathForSelectedRow
+//        tableVC.GroupName = name_1[indexpath!.row].name
+//        tableVC.imagename = name_1[indexpath!.row].image
+//    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedname_1 = name_1.filter({$0.name.contains(searchText)})
@@ -113,17 +113,17 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.reloadData()
     }
 
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ComSegue_1" {
-//            let VC:CommunicationChatViewController = segue.destination as! CommunicationChatViewController
-//            let indexPath = self.tableView.indexPathForSelectedRow
-//            VC.GroupName = name[indexPath!.row]
-//            VC.imagename = image[indexPath!.row]
-//
-//        }
-//
-//                }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ComSegue_1" {
+            let VC:ComChatViewController = segue.destination as! ComChatViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            VC.GroupName = name_1[indexPath!.row].name
+            VC.imagename = name_1[indexPath!.row].image
+
+        }
+
+                }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "ComSegue_1", sender: self)

@@ -46,7 +46,7 @@ class AdminCommunicationViewController: UIViewController, UITableViewDelegate, U
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Adminsegue", sender: self)
+        performSegue(withIdentifier: "AdminSegue", sender: self)
     }
 
 }

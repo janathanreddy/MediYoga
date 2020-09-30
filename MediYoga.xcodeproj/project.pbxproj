@@ -62,6 +62,10 @@
 		219846382521133A00E35F26 /* check historyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219846362521133A00E35F26 /* check historyTableViewCell.xib */; };
 		219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */; };
 		219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */; };
+		21F37A892524FCE1002AD530 /* AdminComViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37A882524FCE0002AD530 /* AdminComViewController.swift */; };
+		21F37A8F2524FD1D002AD530 /* AdminComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */; };
+		21F37A902524FD1D002AD530 /* AdminComTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */; };
+		21F37A952524FEF2002AD530 /* AdminComStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37A942524FEF2002AD530 /* AdminComStruct.swift */; };
 		21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */; };
 		21FBA7F4251B542000466C3A /* PatientDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */; };
 		21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */; };
@@ -149,6 +153,10 @@
 		219846362521133A00E35F26 /* check historyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "check historyTableViewCell.xib"; sourceTree = "<group>"; };
 		219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = labxibTableViewCell.swift; sourceTree = "<group>"; };
 		219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = labxibTableViewCell.xib; sourceTree = "<group>"; };
+		21F37A882524FCE0002AD530 /* AdminComViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminComViewController.swift; sourceTree = "<group>"; };
+		21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminComTableViewCell.swift; sourceTree = "<group>"; };
+		21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminComTableViewCell.xib; sourceTree = "<group>"; };
+		21F37A942524FEF2002AD530 /* AdminComStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminComStruct.swift; sourceTree = "<group>"; };
 		21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
 		21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -273,6 +281,10 @@
 				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
 				212800D0252394ED00110A10 /* ComChatTableViewCell.xib */,
 				212800D62523978500110A10 /* ComChatMessageStruct.swift */,
+				21F37A882524FCE0002AD530 /* AdminComViewController.swift */,
+				21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */,
+				21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */,
+				21F37A942524FEF2002AD530 /* AdminComStruct.swift */,
 			);
 			path = MediYoga;
 			sourceTree = "<group>";
@@ -439,6 +451,7 @@
 				21550D5C2521CAF1004A46B9 /* DropDown.xib in Resources */,
 				212800D2252394ED00110A10 /* ComChatTableViewCell.xib in Resources */,
 				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
+				21F37A902524FD1D002AD530 /* AdminComTableViewCell.xib in Resources */,
 				2176A8542518E3D3005979E9 /* SettingsTableViewCell_2.xib in Resources */,
 				2176A82E2518DCA4005979E9 /* AdminCommunicationTableViewCell.xib in Resources */,
 				21005DD9251BE3F90078E470 /* LabRequestTableViewCell.xib in Resources */,
@@ -576,6 +589,7 @@
 				219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */,
 				21005DE9251BFC010078E470 /* AdminChatViewController.swift in Sources */,
 				2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */,
+				21F37A952524FEF2002AD530 /* AdminComStruct.swift in Sources */,
 				21435767251CF4B2002DC326 /* CommunicationChatViewController.swift in Sources */,
 				21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */,
 				2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */,
@@ -585,6 +599,7 @@
 				210E88C325186F0100C59A6E /* ViewController.swift in Sources */,
 				2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */,
 				21550D612521FC59004A46B9 /* ChattingCommViewController.swift in Sources */,
+				21F37A8F2524FD1D002AD530 /* AdminComTableViewCell.swift in Sources */,
 				21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */,
 				21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */,
 				212800CB2523906800110A10 /* ComChatViewController.swift in Sources */,
@@ -608,6 +623,7 @@
 				219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */,
 				2116C522251BC2F400E7C6F2 /* Allign.swift in Sources */,
 				2176A8272518DC7D005979E9 /* AdminCommunicationViewController.swift in Sources */,
+				21F37A892524FCE1002AD530 /* AdminComViewController.swift in Sources */,
 				2182210F251C6F6D0022AD65 /* AdminChatMessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

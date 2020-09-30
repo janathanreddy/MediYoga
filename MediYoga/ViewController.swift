@@ -13,6 +13,7 @@ class ViewController: UIViewController,UITextFieldDelegate{
    
     
 
+    @IBOutlet weak var ErrorLabel: UILabel!
     
     let button = UIButton(type: .custom)
     
@@ -32,6 +33,7 @@ class ViewController: UIViewController,UITextFieldDelegate{
         PasswordTextField.isSecureTextEntry = true
         PasswordTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
         MobileNoTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        validateFields()
 
     }
 
@@ -56,6 +58,13 @@ class ViewController: UIViewController,UITextFieldDelegate{
     
     @IBAction func LoginAction(_ sender: Any) {
         
+        let MobileNo=MobileNoTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let Password=PasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        self.ErrorLabel.alpha = 1
+        ErrorLabel.text = "Please Fill Mobile No and Text Field"
+        self.dismiss(animated: false, completion: nil)
+
 
     }
     
@@ -63,6 +72,22 @@ class ViewController: UIViewController,UITextFieldDelegate{
     @IBAction func done(_ sender: UITextField) {
         sender.resignFirstResponder()
     }
-
+    
+    
+    func validateFields() -> String? {
+        if MobileNoTextField.text?.trimmingCharacters(in:.whitespacesAndNewlines)==""||PasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)==""{
+            return "Please Fill in all Fields"
+        }
+        let cleanpassword=PasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if ViewController.isPasswordValid(cleanpassword)==false{
+            return "Please Make Sure Your Password is at least 8 Characters, Contains a Special Character and a Number"
+        }
+        return nil
+    }
+    static func isPasswordValid(_ password : String) -> Bool {
+        
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+        return passwordTest.evaluate(with: password)
+    }
 }
 

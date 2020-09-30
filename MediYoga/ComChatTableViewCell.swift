@@ -9,6 +9,9 @@ import UIKit
 
 class ComChatTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ReadCheckLabel: UILabel!
+    
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var messageBackgroundView: UIView!
     @IBOutlet weak var CellMessageLabel: UILabel!
     var trailingConstraint:NSLayoutConstraint!
@@ -19,6 +22,7 @@ class ComChatTableViewCell: UITableViewCell {
         CellMessageLabel.text = nil
         leadingConstraint.isActive = false
         trailingConstraint.isActive = false
+        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,11 +41,16 @@ class ComChatTableViewCell: UITableViewCell {
             messageBackgroundView.backgroundColor = UIColor(red: 53/255, green: 150/255, blue: 255/255, alpha: 1)
             trailingConstraint.isActive = true
             CellMessageLabel.textAlignment = .right
+            timeLabel.textAlignment = .right
+            ReadCheckLabel.textAlignment = .right
             
-        }else {
+        }
+            else {
             messageBackgroundView.backgroundColor = UIColor(red: 83/255, green: 160/255, blue: 93/255, alpha: 1)
             leadingConstraint.isActive = true
             CellMessageLabel.textAlignment = .left
+            timeLabel.textAlignment = .left
+            ReadCheckLabel.textAlignment = .left
 
         }
     }

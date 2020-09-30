@@ -26,7 +26,7 @@ class ChattingCommViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func backsegue(_ sender: Any) {
-        
+        dismiss(animated: true, completion: nil)
     }
     @IBAction func callbtn(_ sender: Any) {
         
