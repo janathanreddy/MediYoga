@@ -29,7 +29,6 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         NameSearch.delegate = self
         appenddata()
         tableView.reloadData()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,7 +101,7 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         NameSearch.resignFirstResponder()
-       
+        tableView.reloadData()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
@@ -140,9 +139,6 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
 }
-
-
-
 
 class filtername {
     let name: String

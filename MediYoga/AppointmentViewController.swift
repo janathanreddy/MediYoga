@@ -16,22 +16,14 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     @IBOutlet var NotesView: UIView!
     
     @IBOutlet weak var TextViewField: UITextView!
-    var searchedname = [String]()
-    var searchedimage = [String]()
-    var searchedage = [String]()
-    var searchedccd = [String]()
-    var searchedtime = [String]()
+    
     var searching = false
+    var name_1 = [filternames]()
+    var searchedname_1 = [filternames]()
 
-    var image:[String] = ["31","32","33","34","35","36","37","38","39","40"]
-    var age:[String] = ["34","32","36","40","45","40","43","28","22","41"]
-    var name:[String] = ["Johnson","Maclarn","Lee","Chuva","Roamanson","Jonny","Anderson","BikiDev","Assik","Kaamil"]
-    var ccd:[String] = ["CCD","CCD/LDD","LDD","CDD","LDD","CDD","CCD/LDD","LDD","CDD","LDD"]
-    var time:[String] = ["8:40AM-8.50AM","8:50AM-9:00AM","9:00AM-9:10AM","9:10AM-9:20AM","9:20AM-9:30AM","9:30AM-9:40AM","9:40AM-9:50AM","9:50AM-10:00AM","10:00AM-10:10AM","10:10AM-10:20AM"]
-    var at:[String] = ["AT.png","FC.png","old.png","MT.png","N.png","AT.png","FC.png","old.png","MT.png","N.png"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Search_Bar()
         namesearch.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,7 +33,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         self.navigationItem.setHidesBackButton(true, animated: true)
         
         tableView.showsVerticalScrollIndicator = false
-
+        appenddata()
 
     }
     
@@ -60,22 +52,29 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     }
 
     
-//    func Search_Bar(){
-//        search.searchBar.delegate = self
-//        search.searchBar.sizeToFit()
-//        search.obscuresBackgroundDuringPresentation = false
-//        search.hidesNavigationBarDuringPresentation = true
-//        self.definesPresentationContext = true
-//        search.searchBar.placeholder = "Search Appointment"
-//        self.navigationItem.searchController = search
-//    }
-    
+
+    private func appenddata() {
+        name_1.append(filternames(name: "Roamanson",image:"35",age:"32",time:"8:40AM-8.50AM",ccd:"CCD",at:"AT.png"))
+        name_1.append(filternames(name: "Jonny",image:"36",age:"31",time:"8:50AM-9.00AM",ccd:"CDD",at:"FC.png"))
+        name_1.append(filternames(name: "Anderson",image:"37",age:"36",time:"9:00AM-9.10AM",ccd:"LDD",at:"old.png"))
+        name_1.append(filternames(name: "BikiDev",image:"38",age:"37",time:"9.10AM-9.20AM",ccd:"CCD/LDD",at:"MT.png"))
+        name_1.append(filternames(name: "Assik",image:"39",age:"26",time:"9:20AM-9.40AM",ccd:"CCD",at:"N.png"))
+        name_1.append(filternames(name: "Kaamil",image:"40",age:"28",time:"9:40AM-10.00AM",ccd:"CDD",at:"AT.png"))
+        name_1.append(filternames(name: "Johnson",image:"31",age:"29",time:"10:00AM-10.10AM",ccd:"LDD",at:"FC.png"))
+        name_1.append(filternames(name: "Maclarn",image:"32",age:"31",time:"10:10AM-10.20AM",ccd:"CCD/LDD",at:"old.png"))
+        name_1.append(filternames(name: "Chuva",image:"33",age:"22",time:"10:20AM-10.30AM",ccd:"LDD",at:"N.png"))
+        name_1.append(filternames(name: "Lee",image:"34",age:"21",time:"10:30AM-10.40AM",ccd:"CCD",at:"MT.png"))
+
+        
+//        searchedname_1 = name_1
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searching {
-            return searchedname.count
+            return searchedname_1.count
         } else {
-            return name.count
+            return name_1.count
         }
         
     }
@@ -88,22 +87,28 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApplicationTableViewCell
         if searching {
-                cell.NameField.text = searchedname[indexPath.row]
-            cell.appointmentimage.image = UIImage(named: image[indexPath.row])
-            cell.AgeField.text = age[indexPath.row]
-            cell.TimeField.text = time[indexPath.row]
-            cell.ccdField.text = ccd[indexPath.row]
-                cell.statusField.image = UIImage(named: at[indexPath.row])       } else {
-                cell.appointmentimage.image = UIImage(named: image[indexPath.row])
-                cell.NameField.text = name[indexPath.row]
-                cell.AgeField.text = age[indexPath.row]
-                cell.TimeField.text = time[indexPath.row]
-                cell.ccdField.text = ccd[indexPath.row]
-                cell.statusField.image = UIImage(named: at[indexPath.row])        }
+            cell.NameField.text = searchedname_1[indexPath.row].name
+            cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
+            cell.AgeField.text = searchedname_1[indexPath.row].age
+            cell.TimeField.text = searchedname_1[indexPath.row].time
+            cell.ccdField.text = searchedname_1[indexPath.row].ccd
+            cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
+            return cell
+
+        } else {
+                cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
+                cell.NameField.text = name_1[indexPath.row].name
+                cell.AgeField.text = name_1[indexPath.row].age
+                cell.TimeField.text = name_1[indexPath.row].time
+                cell.ccdField.text = name_1[indexPath.row].ccd
+                cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
+            return cell
+
+        }
         
 //        cell.delegate = self
 //        cell.index = indexPath
-        return cell
+        return UITableViewCell()
             
         
         
@@ -161,44 +166,49 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         if segue.identifier == "DeatailofPatient" {
             let VC:PatientDetailsViewController = segue.destination as! PatientDetailsViewController
             let indexPath = self.tableView.indexPathForSelectedRow
-            VC.name = self.name[indexPath!.row]
-            VC.image = self.age[indexPath!.row]
-            VC.time = self.time[indexPath!.row]
-            VC.age = self.age[indexPath!.row]
-            VC.cdd = self.ccd[indexPath!.row]
+            VC.name = self.name_1[indexPath!.row].name
+            VC.image = self.name_1[indexPath!.row].age
+            VC.time = self.name_1[indexPath!.row].time
+            VC.age = self.name_1[indexPath!.row].age
+            VC.cdd = self.name_1[indexPath!.row].ccd
 
                 }
-
-            
     }
-//    class filterreult {
-//        var searchedname:String
-//        var searchedimage:String
-//        var searchedage:String
-//        var searchedccd:String
-//        var searchedtime:String
-//    }
 }
 extension AppointmentViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedname = name.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
-        
+        namesearch.showsCancelButton = true
+
+        searchedname_1 = name_1.filter({$0.name.contains(searchText)})
         searching = true
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
-        searchBar.text = ""
+        namesearch.text = ""
+        namesearch.showsCancelButton = false
         tableView.reloadData()
     }
     
+    
+    
 }
-//extension UIViewController: TableViewCellDelegate {
-//  func didSelect(_ cell: UITableViewCell, _ button: UIButton) {
-//    let indexPath = IndexPath(row: 0, section: 0)
-//    let cell = tableView.cellForRow(at: indexPath)
-//    let tag = button.tag
-//  }
-//}
+class filternames {
+    let name: String
+    let image: String
+    let age: String
+    let time: String
+    let ccd: String
+    let at:String
+    init(name: String,image: String,age: String,time: String,ccd: String,at: String) {
+        self.name = name
+        self.image = image
+        self.age = age
+        self.time = time
+        self.ccd = ccd
+        self.at = at
+    }
+    
+}
