@@ -11,7 +11,7 @@ class AdminCommunicationViewController: UIViewController, UITableViewDelegate, U
    
 
     @IBOutlet weak var tableView: UITableView!
-    var image:[String] = ["33.jpg","37.jpg","40.jpg"]
+    var image:[String] = ["33.jpg"]
     override func viewDidLoad() {
         super.viewDidLoad()
 

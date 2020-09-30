@@ -33,7 +33,6 @@ class ViewController: UIViewController,UITextFieldDelegate{
         PasswordTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
         MobileNoTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
 
-
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -30,7 +30,8 @@ struct Message: MessageType{
 
 class AdminChatViewController: MessagesViewController,MessagesDataSource,MessageCellDelegate,MessagesLayoutDelegate,MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
      
-    
+    var imagename:String = ""
+    var GroupName:String = ""
     let currentuser = Sender(senderId: "Self", displayName: "Test Message")
     let otheruser = Sender(senderId: "other", displayName: "Name")
 
@@ -67,22 +68,35 @@ class AdminChatViewController: MessagesViewController,MessagesDataSource,Message
 
               }
           
-                let logoImage = UIImage.init(named: "34")
-                let logoImageView = UIImageView.init(image: logoImage)
-                logoImageView.frame = CGRect(x:0.0,y:0.0, width:40,height:40)
-                logoImageView.contentMode = .scaleAspectFit
-                let imageItem = UIBarButtonItem.init(customView: logoImageView)
-                let widthConstraint = logoImageView.widthAnchor.constraint(equalToConstant: 40)
-                let heightConstraint = logoImageView.heightAnchor.constraint(equalToConstant: 40)
-                heightConstraint.isActive = true
-                widthConstraint.isActive = true
-                navigationItem.leftBarButtonItem =  imageItem
+//                let logoImage = UIImage.init(named: "34")
+//                let logoImageView = UIImageView.init(image: logoImage)
+//                logoImageView.frame = CGRect(x:0.0,y:0.0, width:40,height:40)
+//                logoImageView.contentMode = .scaleAspectFit
+//                let imageItem = UIBarButtonItem.init(customView: logoImageView)
+//                let widthConstraint = logoImageView.widthAnchor.constraint(equalToConstant: 40)
+//                let heightConstraint = logoImageView.heightAnchor.constraint(equalToConstant: 40)
+//                heightConstraint.isActive = true
+//                widthConstraint.isActive = true
+//                navigationItem.leftBarButtonItem =  imageItem
 //                self.navigationController?.navigationBar.topItem?.title = "Home"
 //                self.navigationItem.leftItemsSupplementBackButton = true
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        button.setImage(UIImage(named: "35"), for: .normal)
+        button.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 2,left: 2,bottom: 2,right: 240)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.setTitle("Admin Group", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+
+
+            button.sizeToFit()
+            var leftBarButton = UIBarButtonItem(customView: button)
+        leftBarButton.customView?.translatesAutoresizingMaskIntoConstraints = true
         iMessage()
         
-        self.navigationController?.navigationBar.topItem?.title = "GroupAdmin"
-        self.navigationItem.leftItemsSupplementBackButton = true
+//        self.navigationController?.navigationBar.topItem?.title = GroupAdmin
+//        self.navigationItem.leftItemsSupplementBackButton = true
 let editImage    = UIImage(named: "back arrow")!
 
 
@@ -90,7 +104,7 @@ let editButton   = UIBarButtonItem(image: editImage,  style: .plain, target: sel
 
 
 
-navigationItem.leftBarButtonItems = [editButton]
+navigationItem.leftBarButtonItems = [editButton,leftBarButton]
 
 
 

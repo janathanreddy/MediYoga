@@ -7,21 +7,22 @@
 
 import UIKit
 
-class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate{
+class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate{
    
+    @IBOutlet weak var namesearch: UISearchBar!
     @IBOutlet weak var BlurEffect: UIView!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var DropDownTableView: UITableView!
     @IBOutlet var NotesView: UIView!
     
     @IBOutlet weak var TextViewField: UITextView!
-    var age_1:String?
-    var image_1:String?
-    var ccd_1:String?
-    var time_1:String?
-    var name_1:String?
-//    private var search = UISearchController(searchResultsController: nil)
+    var searchedname = [String]()
+    var searchedimage = [String]()
+    var searchedage = [String]()
+    var searchedccd = [String]()
+    var searchedtime = [String]()
+    var searching = false
+
     var image:[String] = ["31","32","33","34","35","36","37","38","39","40"]
     var age:[String] = ["34","32","36","40","45","40","43","28","22","41"]
     var name:[String] = ["Johnson","Maclarn","Lee","Chuva","Roamanson","Jonny","Anderson","BikiDev","Assik","Kaamil"]
@@ -31,13 +32,16 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
     override func viewDidLoad() {
         super.viewDidLoad()
 //        Search_Bar()
+        namesearch.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 92
         TextViewField.layer.borderColor = UIColor.systemGray.cgColor
         TextViewField.layer.borderWidth = 0.8
         self.navigationItem.setHidesBackButton(true, animated: true)
-        DropDownTableView.register(UINib(nibName: "DropDown", bundle: nil), forCellReuseIdentifier: "DropDownCell")
+        
+        tableView.showsVerticalScrollIndicator = false
+
 
     }
     
@@ -67,33 +71,42 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return image.count
+        
+        if searching {
+            return searchedname.count
+        } else {
+            return name.count
+        }
+        
     }
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        namesearch.resignFirstResponder()
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableView {
-        case tableView:
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApplicationTableViewCell
-        cell.appointmentimage.image = UIImage(named: image[indexPath.row])
-        cell.NameField.text = name[indexPath.row]
-        cell.AgeField.text = age[indexPath.row]
-        cell.TimeField.text = time[indexPath.row]
-        cell.ccdField.text = ccd[indexPath.row]
-        cell.statusField.image = UIImage(named: at[indexPath.row])
+        if searching {
+                cell.NameField.text = searchedname[indexPath.row]
+            cell.appointmentimage.image = UIImage(named: image[indexPath.row])
+            cell.AgeField.text = age[indexPath.row]
+            cell.TimeField.text = time[indexPath.row]
+            cell.ccdField.text = ccd[indexPath.row]
+                cell.statusField.image = UIImage(named: at[indexPath.row])       } else {
+                cell.appointmentimage.image = UIImage(named: image[indexPath.row])
+                cell.NameField.text = name[indexPath.row]
+                cell.AgeField.text = age[indexPath.row]
+                cell.TimeField.text = time[indexPath.row]
+                cell.ccdField.text = ccd[indexPath.row]
+                cell.statusField.image = UIImage(named: at[indexPath.row])        }
+        
 //        cell.delegate = self
 //        cell.index = indexPath
-        
         return cell
             
-        case DropDownTableView:
-            let DropDown = tableView.dequeueReusableCell(withIdentifier: "DropDownCell", for: indexPath) as! DropDown
-            
-            DropDown.dropdownlabel.text = "hi"
-            return DropDown
-
-        default:
-              return UITableViewCell()
-        }
+        
+        
         
     }
     
@@ -132,7 +145,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
 //        ccd_1 = ccd[indexPath.row]
 //        image_1 = image[indexPath.row]
        performSegue(withIdentifier: "DeatailofPatient", sender: self)
-       return tableView.deselectRow(at: indexPath, animated: true)
 
     }
     @IBAction func CancelNotes(_ sender: Any) {
@@ -159,8 +171,30 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UISearch
 
             
     }
+//    class filterreult {
+//        var searchedname:String
+//        var searchedimage:String
+//        var searchedage:String
+//        var searchedccd:String
+//        var searchedtime:String
+//    }
 }
-
+extension AppointmentViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedname = name.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        
+        searching = true
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+    }
+    
+}
 //extension UIViewController: TableViewCellDelegate {
 //  func didSelect(_ cell: UITableViewCell, _ button: UIButton) {
 //    let indexPath = IndexPath(row: 0, section: 0)

@@ -13,14 +13,18 @@ struct Senders:SenderType {
     var senderId: String
     var displayName: String
 }
+
+
 struct Messages: MessageType{
+
     var sender: SenderType
     
     var messageId: String
     
     var sentDate: Date
     var kind: MessageKind
-    
+    var senderName: String
+
     
 }
 struct Media: MediaItem{
@@ -31,27 +35,32 @@ struct Media: MediaItem{
 }
 //CommunicationChatViewController
 class CommunicationChatViewController: MessagesViewController,MessagesDataSource,MessageCellDelegate,MessagesLayoutDelegate,MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
-    
-    let GroupAdmin:String = ""
-    let currentuser = Senders(senderId: "Self", displayName: "John")
-    let otheruser = Senders(senderId: "other", displayName: "Michal")
+    var imageView: UIImageView!
+    var frame =  CGRect(x: 0, y: 0, width: 40, height: 40)
+
+    var imagename:String = ""
+    var GroupName:String = ""
+    let currentuser = Sender(senderId: "Current User", displayName: "John")
+    let otheruser = Sender(senderId: "Other User", displayName: "Abdul")
 
     var messages = [MessageType]()
     var textmessage:String = ""
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        iMessage()
-        self.becomeFirstResponder()
-        camera()
-        messageInputBar.delegate = self
-        messages.append(Messages(sender: otheruser,messageId: "2",sentDate: Date(),kind: .text("hi ... How Are you")))
+        
+
+        scrollsToBottomOnKeyboardBeginsEditing = true
+        maintainPositionOnKeyboardFrameChanged = true
+
+
+        
+        messages.append(Message(sender: otheruser,messageId: "2",sentDate: Date(),kind: .text("Hi .. Hello")))
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
-        
-//        messageInputBar.delegate = self as InputBarAccessoryViewDelegate
+        messageInputBar.delegate = self as InputBarAccessoryViewDelegate
         
         messagesCollectionView.messagesCollectionViewFlowLayout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: .zero))
         messagesCollectionView.messagesCollectionViewFlowLayout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: .zero))
@@ -79,44 +88,95 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
 //                let heightConstraint = logoImageView.heightAnchor.constraint(equalToConstant: 40)
 //                heightConstraint.isActive = true
 //                widthConstraint.isActive = true
-//                navigationItem.leftBarButtonItems =  [imageItem]
+//                navigationItem.leftBarButtonItem =  imageItem
+//                self.navigationController?.navigationBar.topItem?.title = "Home"
+//                self.navigationItem.leftItemsSupplementBackButton = true
 
+        let button = UIButton(frame: frame)
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.backgroundColor = .white
+        imageView.layer.cornerRadius = frame.height/2
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+//        imageView.clipsToBounds = true
 
-                self.navigationController?.navigationBar.topItem?.title = GroupAdmin
-                self.navigationItem.leftItemsSupplementBackButton = true
-        let editImage    = UIImage(named: "back arrow")!
+        button.setImage(UIImage(named: "\(imagename)"), for: .normal)
+//        button.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 2,left: 2,bottom: 2,right: 240)
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.setTitle("\(GroupName)", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+ 
+            button.sizeToFit()
+            var leftBarButton = UIBarButtonItem(customView: button)
+        leftBarButton.customView?.translatesAutoresizingMaskIntoConstraints = true
+        iMessage()
         
+//        self.navigationController?.navigationBar.topItem?.title = GroupAdmin
+//        self.navigationItem.leftItemsSupplementBackButton = true
+let editImage    = UIImage(named: "back arrow")!
 
-        let editButton   = UIBarButtonItem(image: editImage,  style: .plain, target: self, action: #selector(didTapBackButton(sender:)))
+
+let editButton   = UIBarButtonItem(image: editImage,  style: .plain, target: self, action: #selector(didTapBackButton(sender:)))
 
 
 
-        navigationItem.leftBarButtonItems = [editButton]
+navigationItem.leftBarButtonItems = [editButton,leftBarButton]
 
 
 
     }
     
-    override func viewDidLayoutSubviews() {
-        messagesCollectionView.contentInset.bottom = messageInputBar.frame.height
-        messagesCollectionView.scrollIndicatorInsets.bottom = messageInputBar.frame.height
-    }
+    func messageTopLabelAttributedText(
+      for message: MessageType,
+      at indexPath: IndexPath) -> NSAttributedString? {
 
+      return NSAttributedString(
+        string: message.sender.displayName,
+        attributes: [.font: UIFont.systemFont(ofSize: 12)])
+    }
+  
+
+    
     @objc func didTapBackButton(sender: AnyObject){
-        
-//                let vc = storyboard?.instantiateViewController(identifier: "CommunicationViewController") as! CommunicationViewController
-//                vc.hidesBottomBarWhenPushed = true
-//                self.navigationController?.pushViewController(vc, animated: true)
         
         navigationController?.popViewController(animated: true)
 
         dismiss(animated: true, completion: nil)
         
     }
+    func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+
+        return NSAttributedString(string: "Read", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+    }
+
+//    func isFromCurrentSender(message: MessageType) -> Bool {
+//return true
+//    }
+    func defaultStyle() {
+        let newMessageInputBar = InputBarAccessoryView()
+            newMessageInputBar.sendButton.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
+        newMessageInputBar.delegate = self as! InputBarAccessoryViewDelegate
+            messageInputBar = newMessageInputBar
+            reloadInputViews()
+        }
+    
+    
+
+    
+    
+    
+    
     
     func iMessage() {
         defaultStyle()
         
+        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: true)
+        messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .left, animated: true)
+        messageInputBar.sendButton.image =  UIImage(systemName: "mic.circle.fill")
+
         messageInputBar.isTranslucent = false
         messageInputBar.backgroundView.backgroundColor = .white
         messageInputBar.separatorLine.isHidden = true
@@ -132,8 +192,6 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
         messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: true)
         messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .right, animated: true)
-        messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .left, animated: true)
-
 //        messageInputBar.sendButton.imageView?.backgroundColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: true)
@@ -144,56 +202,30 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
 
         messageInputBar.sendButton.backgroundColor = .clear
         messageInputBar.textViewPadding.right = -38
-    }
-
-    
-    func camera(){
-        defaultStyle()
         
-        messageInputBar.isTranslucent = false
-        messageInputBar.backgroundView.backgroundColor = .white
-        messageInputBar.separatorLine.isHidden = true
-        messageInputBar.inputTextView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
-        messageInputBar.inputTextView.placeholderTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
-        messageInputBar.inputTextView.placeholder = "Type Message"
-        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 36)
-        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 36)
-        messageInputBar.inputTextView.layer.borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1).cgColor
-        messageInputBar.inputTextView.layer.borderWidth = 1.0
-        messageInputBar.inputTextView.layer.cornerRadius = 16.0
-        messageInputBar.inputTextView.layer.masksToBounds = true
-        messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        messageInputBar.setRightStackViewWidthConstant(to: 36, animated: true)
-        messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .left, animated: true)
-
-//        messageInputBar.sendButton.imageView?.backgroundColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
-        messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: true)
-        messageInputBar.sendButton.image =  UIImage(systemName: "mic.circle")
-        messageInputBar.sendButton.title = nil
-        messageInputBar.sendButton.imageView?.layer.cornerRadius = 10
-        messageInputBar.sendButton.imageView?.tintColor = UIColor.systemGray
-
-        messageInputBar.sendButton.backgroundColor = .clear
-        messageInputBar.textViewPadding.right = -38
+        
     }
-//    func isFromCurrentSender(message: MessageType) -> Bool {
-//return true
-//    }
     
-    func defaultStyle() {
-        let newMessageInputBar = InputBarAccessoryView()
-            newMessageInputBar.sendButton.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
-        newMessageInputBar.delegate = self as! InputBarAccessoryViewDelegate
-            messageInputBar = newMessageInputBar
-            reloadInputViews()
-        }
     
-    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-            let name = message.sender.displayName
-        return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
-        }
+    
+//    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView)
+//        {
+//        switch message.kind {
+//                case .photo:
+//                    if let messagee = message as? Message, let url = URL(string: messagee.imageURL) {
+//                            let resource = ImageResource(downloadURL: url, cacheKey: messagee.imageURL)
+//                            imageView.kf.setImage(with: resource)
+//                            messagesCollectionView.reloadItems(at: [indexPath])
+//                    }
+//                default:
+//                    break
+//                }
+//        }
 
+    
+    
+    
+    
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
             if indexPath.item % 4 == 0 {
                 return NSAttributedString(
@@ -223,9 +255,10 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
         let borderColor:UIColor = isFromCurrentSender(message: message) ? .clear : .clear
         return .bubbleTailOutline(borderColor, corner, .curved)
     }
-    
-    
-    
+//    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+//        return .bubbleTailOutline
+//    }
+
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
             return CGSize(width: 0, height: 8)
         }
@@ -237,8 +270,6 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
                 return 0
             }
         }
-    
-    
         
         func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
             return 16
@@ -246,7 +277,7 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         
-        messages.append(Messages(sender: currentuser,messageId: "1",sentDate: Date(),kind: .text(inputBar.inputTextView.text)))
+        messages.append(Message(sender: currentuser,messageId: "1",sentDate: Date(),kind: .text(inputBar.inputTextView.text)))
             inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
@@ -254,7 +285,6 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
 
         }
     
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -277,7 +307,14 @@ class CommunicationChatViewController: MessagesViewController,MessagesDataSource
     }
     
     
-
   
-}
 
+}
+extension UIButton {
+    func centerTextAndImage(spacing: CGFloat) {
+        let insetAmount = spacing / 2
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)
+        contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
+    }
+}

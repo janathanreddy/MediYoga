@@ -9,11 +9,11 @@ import UIKit
 
 class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
    
-
+    @IBOutlet weak var casehistory: UIButton!
+    
     @IBOutlet weak var patientimage: UIImageView!
     
     @IBOutlet weak var patientname: UILabel!
-    
     
     @IBOutlet weak var patientage: UILabel!
     
@@ -43,7 +43,8 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     override func viewDidLoad() {
         super.viewDidLoad()
         print(name)
-
+        casehistory.layer.cornerRadius = 10
+        casehistory.clipsToBounds = true
         patientimage.clipsToBounds = true
         patientimage.layer.cornerRadius = 25
         prescriptionbtn.clipsToBounds = true

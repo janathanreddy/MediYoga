@@ -7,12 +7,18 @@
 
 import UIKit
 
-class PriscriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewNew {
+class PriscriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewNew, UISearchBarDelegate {
     
     
-   
+    @IBOutlet var NameSearch: UISearchBar!
+    
+    @IBOutlet weak var SearchButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     var names:[String] = ["Tylenol","Celecoxib","Meloxicam","Nabumetone","ibuprofen"]
+    var searching = false
+    var searchedname = [String]()
 
+    @IBOutlet weak var prescriptionLabel: UILabel!
     @IBOutlet weak var SaveBtn: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,15 +30,26 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         SaveBtn.layer.cornerRadius = 10
+        NameSearch.delegate = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        if searching {
+            return searchedname.count
+        } else {
+            return names.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PriscriptionTableViewCell
-        cell.PriscriptionLabel.text = names[indexPath.row]
+        if searching{
+        
+            cell.PriscriptionLabel.text = searchedname[indexPath.row] }
+        else{
+            
+                cell.PriscriptionLabel.text = names[indexPath.row]
+        }
 
 //        cell.checkbtn.addTarget(self, action: #selector(checkmarck(_:)), for: .touchUpInside)
 //        cell.favbtn.addTarget(self, action: #selector(favourite(_:)), for: .touchUpInside)
@@ -53,7 +70,44 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
 //    }
 //    @objc func favourite(_ sender: UIButton){
 //        UIButton.isSelected = !buttonOutlet.isSelected
-//
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedname = names.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        
+        searching = true
+        tableView.reloadData()
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        NameSearch.resignFirstResponder()
+        NameSearch.isHidden = true
+        backButton.isHidden = false
+        NameSearch.showsCancelButton = false
+        SearchButton.isHidden = false
+        prescriptionLabel.isHidden = false
+
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        NameSearch.text = ""
+        NameSearch.isHidden = true
+        backButton.isHidden = false
+        NameSearch.showsCancelButton = false
+        SearchButton.isHidden = false
+        prescriptionLabel.isHidden = false
+        tableView.reloadData()
+
+
+    }
+
+    @IBAction func search(_ sender: UISearchBar) {
+        print("button tapped")
+        NameSearch.isHidden = false
+        backButton.isHidden = true
+        NameSearch.showsCancelButton = true
+        SearchButton.isHidden = true
+        prescriptionLabel.isHidden = true
+
+    }
+    //
 //    }
     @IBAction func backsegue(_ sender: Any) {
         
@@ -62,4 +116,7 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
 
     }
     
+    
+    
 }
+
