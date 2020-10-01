@@ -9,6 +9,7 @@ import UIKit
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate {
     
+    @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
     var messages: [MessageData] = [MessageData(text: "Hi", isFirstUser: true),
                                    MessageData(text: "Hi,Hello", isFirstUser: false),
@@ -32,10 +33,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         profileimage.layer.cornerRadius = 23
         profileimage.clipsToBounds = true
-        tableView.layer.borderWidth = 0.3
-        tableView.layer.borderColor = UIColor.black.cgColor
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        tableView.layer.borderWidth = 0.3
+//        tableView.layer.borderColor = UIColor.black.cgColor
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         TextField.layer.cornerRadius = 13.0
         TextField.layer.borderWidth = 1.0
         TextField.layer.borderColor = UIColor.systemGray5.cgColor
@@ -43,19 +44,41 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         MessageLabel.text = GroupName
 
     }
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+    @objc func keyBoardWillShow(notification: Notification){
+        if let userInfo = notification.userInfo as? Dictionary<String, AnyObject>{
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey]
+            let keyBoardRect = frame?.cgRectValue
+            if let keyBoardHeight = keyBoardRect?.height {
+                self.ButtomSpace.constant = keyBoardHeight
+
+                var contentInset:UIEdgeInsets = self.tableView.contentInset
+
+                self.tableView.contentInset = contentInset
+
+                tableView.scrollToRow(at: IndexPath(row: messages.count - 1 , section: 0), at: .top, animated: true)
+                contentInset.bottom = keyBoardRect!.height
+
+
+                
+                let indexpath = NSIndexPath(row: 1, section: 0)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.layoutIfNeeded()
+                })
             }
         }
     }
+    
+    @objc func keyBoardWillHide(notification: Notification){
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = contentInset
 
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y += 0
-        }
+        self.ButtomSpace.constant = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
+
 //    override func viewDidAppear(_ animated: Bool) {
 //        TextField.borderStyle = UITextField.BorderStyle.roundedRect
 //    }
@@ -112,7 +135,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         return UITableView.automaticDimension
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-        TextField.resignFirstResponder()
+//        TextField.resignFirstResponder()
         date()
         time()
         var textFromField:String = TextField.text!
@@ -129,4 +152,21 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     
+}
+extension Date {
+    static func dateFromCustomString(customString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        return dateFormatter.date(from: customString) ?? Date()
+    }
+    
+    func reduceToMonthDayYear() -> Date {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: self)
+        let day = calendar.component(.day, from: self)
+        let year = calendar.component(.year, from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        return dateFormatter.date(from: "\(month)/\(day)/\(year)") ?? Date()
+    }
 }

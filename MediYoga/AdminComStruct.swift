@@ -10,4 +10,5 @@ import Foundation
 struct MessageDataAdmin {
     let text: String
     let isFirstUser: Bool
+
 }

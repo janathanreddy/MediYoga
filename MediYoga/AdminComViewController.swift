@@ -9,6 +9,9 @@ import UIKit
 
 class AdminComViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate{
     
+    @IBOutlet weak var TableViewConstraints: NSLayoutConstraint!
+    @IBOutlet weak var ButtomConstraints: NSLayoutConstraint!
+    @IBOutlet weak var ViewTop: UIView!
     fileprivate let application = UIApplication.shared
     var messages: [MessageData] = [MessageData(text: "Hi", isFirstUser: true),
                                    MessageData(text: "Hi,Hello", isFirstUser: false)]
@@ -29,10 +32,11 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         profileimage.layer.cornerRadius = 23
         profileimage.clipsToBounds = true
-        tableView.layer.borderWidth = 0.3
-        tableView.layer.borderColor = UIColor.black.cgColor
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        tableView.layer.borderWidth = 0.3
+//        tableView.layer.borderColor = UIColor.black.cgColor
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(notification:)), name:UIResponder.keyboardWillHideNotification, object: nil)
         TextField.layer.cornerRadius = 13.0
         TextField.layer.borderWidth = 1.0
         TextField.layer.borderColor = UIColor.systemGray5.cgColor
@@ -40,18 +44,41 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         MessageLabel.text = "Admin Group"
 
     }
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+    @objc func keyBoardWillShow(notification: Notification){
+        if let userInfo = notification.userInfo as? Dictionary<String, AnyObject>{
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey]
+            let keyBoardRect = frame?.cgRectValue
+            if let keyBoardHeight = keyBoardRect?.height {
+                
+                var contentInset:UIEdgeInsets = self.tableView.contentInset
+
+                self.tableView.contentInset = contentInset
+
+                tableView.scrollToRow(at: IndexPath(row: messages.count - 1 , section: 0), at: .top, animated: true)
+                contentInset.bottom = keyBoardRect!.height
+
+
+
+                self.ButtomConstraints.constant = keyBoardHeight
+//                self.TableViewConstraints.constant = keyBoardHeight
+                
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.layoutIfNeeded()
+                })
             }
         }
     }
+    
+    @objc func keyBoardWillHide(notification: Notification){
+        
+        self.ButtomConstraints.constant = 0
+//        self.TableViewConstraints.constant = 0
+        let contentInset:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = contentInset
 
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y += 0
-        }
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 //    override func viewDidAppear(_ animated: Bool) {
 //        TextField.borderStyle = UITextField.BorderStyle.roundedRect
