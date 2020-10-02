@@ -47,4 +47,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
              }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            performSegue(withIdentifier: "ResetPassword", sender: self)
+        }
+        else if indexPath.row == 3 {
+            let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+
+            let appDel:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+
+            appDel.window?.rootViewController = loginVC
+
+        }
+    }
+    
 }

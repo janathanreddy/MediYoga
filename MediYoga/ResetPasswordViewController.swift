@@ -30,5 +30,8 @@ class ResetPasswordViewController: UIViewController {
         ConfirmPasswordField.borderStyle = UITextField.BorderStyle.roundedRect
     }
   
-
+    @IBAction func BackSegue(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

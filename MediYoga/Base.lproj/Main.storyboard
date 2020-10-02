@@ -212,6 +212,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="Name:" destination="PQk-Qq-jIW" eventType="editingChanged" id="a0z-a0-8xO"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZXP-aX-kGu">
                                                                 <rect key="frame" x="0.0" y="59" width="350" height="44"/>
@@ -220,7 +223,10 @@
                                                                     <constraint firstAttribute="width" constant="350" id="vxs-Pj-nyY"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" textContentType="tel"/>
+                                                                <connections>
+                                                                    <action selector="MobileNumber:" destination="PQk-Qq-jIW" eventType="editingChanged" id="mez-6b-sMg"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0q-it-G81">
                                                                 <rect key="frame" x="0.0" y="118" width="350" height="44"/>
@@ -230,6 +236,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="Password:" destination="PQk-Qq-jIW" eventType="editingChanged" id="ccf-cN-bTP"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pf9-DC-Xj6">
                                                                 <rect key="frame" x="0.0" y="177" width="350" height="44"/>
@@ -239,6 +248,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="ConfirmPassword:" destination="PQk-Qq-jIW" eventType="editingChanged" id="CfP-Om-cXf"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -258,6 +270,7 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="SignupAction:" destination="PQk-Qq-jIW" eventType="touchUpInside" id="5fJ-O4-RnM"/>
+                                                                    <segue destination="sg3-Kz-B2a" kind="show" identifier="SignUpSegue" id="YUI-h0-Aat"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -304,9 +317,12 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mR1-ae-hJ6">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mR1-ae-hJ6">
                                                 <rect key="frame" x="32" y="747" width="350" height="35"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="350" id="Uro-Jh-daR"/>
+                                                    <constraint firstAttribute="height" constant="35" id="dv7-Le-RTv"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -315,8 +331,13 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="zsZ-Oa-l3f" firstAttribute="centerX" secondItem="7ty-u0-OMz" secondAttribute="centerX" id="BHk-bD-vtO"/>
+                                            <constraint firstItem="mR1-ae-hJ6" firstAttribute="top" secondItem="zsZ-Oa-l3f" secondAttribute="bottom" constant="27" id="Ima-EM-uvN"/>
                                             <constraint firstItem="zsZ-Oa-l3f" firstAttribute="centerY" secondItem="7ty-u0-OMz" secondAttribute="centerY" id="JI1-BZ-XIt"/>
                                             <constraint firstAttribute="height" constant="900" id="PnD-dP-W0D"/>
+                                            <constraint firstAttribute="bottom" secondItem="mR1-ae-hJ6" secondAttribute="bottom" constant="118" id="ZhY-Yr-4Rp"/>
+                                            <constraint firstAttribute="trailing" secondItem="mR1-ae-hJ6" secondAttribute="trailing" constant="32" id="bTh-25-d0O"/>
+                                            <constraint firstItem="mR1-ae-hJ6" firstAttribute="leading" secondItem="7ty-u0-OMz" secondAttribute="leading" constant="32" id="j7B-YG-xR1"/>
+                                            <constraint firstItem="mR1-ae-hJ6" firstAttribute="centerX" secondItem="7ty-u0-OMz" secondAttribute="centerX" id="sXn-HN-6fK"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -355,7 +376,7 @@
         <!--View Controller-->
         <scene sceneID="puZ-Ey-Uf7">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="sg3-Kz-B2a" customClass="ViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" modalPresentationStyle="fullScreen" id="sg3-Kz-B2a" customClass="ViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NEE-XI-i6h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -406,7 +427,7 @@
                                                                     <constraint firstAttribute="height" constant="44" id="Sp3-iS-mJj"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" textContentType="tel"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cPM-Ln-KIM">
                                                                 <rect key="frame" x="0.0" y="68" width="350" height="44"/>
@@ -415,7 +436,7 @@
                                                                     <constraint firstAttribute="width" constant="350" id="6Cx-8s-Fze"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -435,7 +456,7 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="LoginAction:" destination="sg3-Kz-B2a" eventType="touchUpInside" id="hQG-Wt-cFD"/>
-                                                                    <segue destination="SAp-qX-NGn" kind="show" id="mt3-Cd-dEd"/>
+                                                                    <segue destination="SAp-qX-NGn" kind="show" id="dOB-VS-ofY"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -482,7 +503,7 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9p-ZF-76H">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9p-ZF-76H">
                                                 <rect key="frame" x="32" y="722" width="350" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="350" id="JTC-q8-1cv"/>
@@ -1984,9 +2005,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="qd7-8i-uri" secondAttribute="trailing" constant="19" id="tbz-0o-uJV"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="l65-5K-bAd" kind="show" animates="NO" id="Xms-kX-xs8"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell_4" rowHeight="60" id="XJg-s5-muh" customClass="SettingsTableViewCell_3" customModule="MediYoga" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="208" width="414" height="60"/>
@@ -2057,6 +2075,7 @@
                     <navigationItem key="navigationItem" id="5xD-zJ-Mcb"/>
                     <connections>
                         <outlet property="tableView" destination="9pt-1v-PF8" id="Ota-9T-ixl"/>
+                        <segue destination="l65-5K-bAd" kind="show" identifier="ResetPassword" id="1CJ-PB-ZBB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7w-Kd-fnf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2079,7 +2098,7 @@
                                 </constraints>
                                 <state key="normal" image="back arrow"/>
                                 <connections>
-                                    <segue destination="SAp-qX-NGn" kind="show" animates="NO" id="udY-Lx-iBw"/>
+                                    <action selector="BackSegue:" destination="l65-5K-bAd" eventType="touchUpInside" id="qLM-0M-XY6"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Aq-Ts-fP6">
@@ -2164,6 +2183,7 @@
                         <outlet property="ConfirmPasswordField" destination="UxU-PZ-Bwc" id="q5d-7A-e8Z"/>
                         <outlet property="CurrentPasswordField" destination="JGt-G5-MDu" id="RH1-KD-4u2"/>
                         <outlet property="NewPasswordField" destination="8i4-hu-SOb" id="VXm-0o-O3W"/>
+                        <segue destination="sg3-Kz-B2a" kind="show" identifier="LoginSegue" animates="NO" id="gtd-fK-SkI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghY-N1-IhC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3102,8 +3122,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mt3-Cd-dEd"/>
-        <segue reference="xj4-rx-EOT"/>
+        <segue reference="gtd-fK-SkI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="32" width="400" height="400"/>
