@@ -25,6 +25,7 @@
 		2116C528251BD1B700E7C6F2 /* PriscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */; };
 		2116C52E251BD27000E7C6F2 /* PriscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */; };
 		2116C52F251BD27000E7C6F2 /* PriscriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */; };
+		2118DE8F2529076A008C4D43 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2118DE8E2529076A008C4D43 /* Data.swift */; };
 		211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */; };
 		2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2120D49A2528C457003332EF /* ComImageTableViewCell.swift */; };
 		2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2120D49B2528C457003332EF /* ComImageTableViewCell.xib */; };
@@ -119,6 +120,7 @@
 		2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionViewController.swift; sourceTree = "<group>"; };
 		2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriscriptionTableViewCell.xib; sourceTree = "<group>"; };
+		2118DE8E2529076A008C4D43 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsViewController.swift; sourceTree = "<group>"; };
 		2120D49A2528C457003332EF /* ComImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComImageTableViewCell.swift; sourceTree = "<group>"; };
 		2120D49B2528C457003332EF /* ComImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComImageTableViewCell.xib; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */,
 				21F37A942524FEF2002AD530 /* AdminComStruct.swift */,
 				21CEA26E25262ED80049B4F7 /* Validation.swift */,
+				2118DE8E2529076A008C4D43 /* Data.swift */,
 			);
 			path = MediYoga;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */,
 				21550D5B2521CAF1004A46B9 /* DropDown.swift in Sources */,
 				2176A8492518E3A9005979E9 /* SettingsTableViewCell_1.swift in Sources */,
+				2118DE8F2529076A008C4D43 /* Data.swift in Sources */,
 				216661FA2519266A000373DA /* SignupViewController.swift in Sources */,
 				2176A82D2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift in Sources */,
 				2176A83A2518E063005979E9 /* SettingsTableViewCell.swift in Sources */,

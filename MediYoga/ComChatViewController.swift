@@ -23,6 +23,9 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var dateupdate: String?
     var isFirstUser: Bool = true
     var timeupdate: String?
+    var sendimage:Bool? = false
+    let imageCache = NSCache<AnyObject, AnyObject>()
+
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -49,6 +52,12 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.register(UINib(nibName: "ComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComImageTableViewCell")
 
+        if let savedImages = Image.loadImages() {
+            images = savedImages
+        } else {
+            images = Image.loadSampleImages()
+        }
+        tableView.rowHeight = UITableView.automaticDimension
 
     }
     
@@ -123,42 +132,76 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    @IBAction func CameraAction(_ sender: Any) {
-        let image = UIImagePickerController()
-        image.delegate = self
+    @IBAction func CameraAction(_ sender: AnyObject) {
+        sendimage = true
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
-        image.sourceType = UIImagePickerController.SourceType.photoLibrary
+        let alertViewController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        image.allowsEditing = false
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { action in
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            alertViewController.addAction(photoLibraryAction)
+        }
+
+        alertViewController.addAction(cancelAction)
+        present(alertViewController, animated: true, completion: nil)
         
-        self.present(image, animated: true)
-        {
-            //After it is complete
+        alertViewController.view.subviews.flatMap({$0.constraints}).filter{ (one: NSLayoutConstraint)-> (Bool)  in
+            return (one.constant < 0) && (one.secondItem == nil) &&  (one.firstAttribute == .width)
+            }.first?.isActive = false
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            let image = Image(imageData: selectedImage.pngData()!, recordID: String(data: selectedImage.pngData()!, encoding: .unicode)!)
+            images.append(image)
+            Image.saveImages(images)
+            dismiss(animated: true, completion: nil)
         }
     }
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
-//    {
-//        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
-//        {
-//            myImageView.image = image
-//        }
-//        else
-//        {
-//            //Error message
-//        }
-//        
-//        self.dismiss(animated: true, completion: nil)
-//    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if sendimage == false{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
         cell.updateMessageCell(by: messages[indexPath.row])
         cell.ReadCheckLabel.text = "unread"
-        cell.timeLabel.text = timeupdate
-        return cell
+            cell.timeLabel.text = timeupdate
+            return cell
+
+        }else{
+            print("true")
+            let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
+
+            ComImageTableViewCell.sendimage.image = nil
+            
+            if let imageFromCache = imageCache.object(forKey: images[indexPath.row].recordID as AnyObject) as? UIImage {
+                ComImageTableViewCell.sendimage.image = imageFromCache
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75) { [self] in
+                    if let index = tableView.indexPath(for: ComImageTableViewCell) {
+                        if let data = images[index.row].imageData {
+                            let imageToCache = UIImage(data: data)
+                            imageCache.setObject(imageToCache!, forKey: images[indexPath.row].recordID! as AnyObject)
+                            ComImageTableViewCell.sendimage.image = UIImage(data: data)
+                            ComImageTableViewCell.setNeedsLayout()
+                        }
+                    }
+                }
+            }
+            return ComImageTableViewCell
+        }
+        return UITableViewCell()
+
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -204,4 +247,10 @@ extension Date {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         return dateFormatter.date(from: "\(month)/\(day)/\(year)") ?? Date()
     }
+    
+    
+    
+    
+    
+    
 }

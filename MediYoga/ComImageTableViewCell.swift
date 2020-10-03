@@ -9,6 +9,8 @@ import UIKit
 
 class ComImageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var sendimage: UIImageView!
+    @IBOutlet weak var sendlabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
