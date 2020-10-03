@@ -42,6 +42,11 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         TextField.layer.borderColor = UIColor.systemGray5.cgColor
         profileimage.image = UIImage(named: "33")
         MessageLabel.text = "Admin Group"
+        
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: "didTapView")
+        self.view.addGestureRecognizer(tapRecognizer)
+
 
     }
     @objc func keyBoardWillShow(notification: Notification){
@@ -68,6 +73,10 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
+    @objc func didTapView(){
+      self.view.endEditing(true)
+    }
+
     
     @objc func keyBoardWillHide(notification: Notification){
         
@@ -111,7 +120,10 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     @IBAction func CameraAction(_ sender: Any) {
+        
+        
     }
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
@@ -134,7 +146,6 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         return UITableView.automaticDimension
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-        TextField.resignFirstResponder()
         date()
         time()
         var textFromField:String = TextField.text!
@@ -149,4 +160,5 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
        return true
         tableView.reloadData()
     }
+    
 }

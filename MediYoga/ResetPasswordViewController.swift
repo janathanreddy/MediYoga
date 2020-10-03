@@ -11,7 +11,6 @@ class ResetPasswordViewController: UIViewController {
 var validation = Validation()
     @IBOutlet weak var CurrentPasswordField: UITextField!
     
-    
     @IBOutlet weak var NewPasswordField: UITextField!
     
     @IBOutlet weak var ConfirmPasswordField: UITextField!
@@ -58,16 +57,6 @@ var validation = Validation()
             self.present(alertController, animated: true, completion: nil)
             
         }
-//        else if mobileno.count < 10 || mobileno.count > 10{
-//          print("Enter Your 10 Digits Mobile Number")
-//
-//            let alertController = UIAlertController(title: "Alert", message:
-//                "Check Your Mobile Number", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-//
-//            self.present(alertController, animated: true, completion: nil)
-//
-//        }
 
         else if validation.validatePassword(password: NewPassword)==false || validation.validatePassword(password: ConfirmPassword)==false ||
                     validation.validatePassword(password: CurrentPassword) == false{

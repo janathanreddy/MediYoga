@@ -26,6 +26,8 @@
 		2116C52E251BD27000E7C6F2 /* PriscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */; };
 		2116C52F251BD27000E7C6F2 /* PriscriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */; };
 		211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */; };
+		2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2120D49A2528C457003332EF /* ComImageTableViewCell.swift */; };
+		2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2120D49B2528C457003332EF /* ComImageTableViewCell.xib */; };
 		212800CB2523906800110A10 /* ComChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CA2523906800110A10 /* ComChatViewController.swift */; };
 		212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CF252394ED00110A10 /* ComChatTableViewCell.swift */; };
 		212800D2252394ED00110A10 /* ComChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212800D0252394ED00110A10 /* ComChatTableViewCell.xib */; };
@@ -118,6 +120,8 @@
 		2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriscriptionTableViewCell.xib; sourceTree = "<group>"; };
 		211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsViewController.swift; sourceTree = "<group>"; };
+		2120D49A2528C457003332EF /* ComImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComImageTableViewCell.swift; sourceTree = "<group>"; };
+		2120D49B2528C457003332EF /* ComImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComImageTableViewCell.xib; sourceTree = "<group>"; };
 		212800CA2523906800110A10 /* ComChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatViewController.swift; sourceTree = "<group>"; };
 		212800CF252394ED00110A10 /* ComChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatTableViewCell.swift; sourceTree = "<group>"; };
 		212800D0252394ED00110A10 /* ComChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatTableViewCell.xib; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 		210E88BD25186F0100C59A6E /* MediYoga */ = {
 			isa = PBXGroup;
 			children = (
+				2120D49A2528C457003332EF /* ComImageTableViewCell.swift */,
+				2120D49B2528C457003332EF /* ComImageTableViewCell.xib */,
 				210E88BE25186F0100C59A6E /* AppDelegate.swift */,
 				210E88C025186F0100C59A6E /* SceneDelegate.swift */,
 				216661F92519266A000373DA /* SignupViewController.swift */,
@@ -445,6 +451,7 @@
 				2176A83B2518E063005979E9 /* SettingsTableViewCell.xib in Resources */,
 				2176A85B2518E3F3005979E9 /* SettingsTableViewCell_3.xib in Resources */,
 				21FBA7F4251B542000466C3A /* PatientDetailsCollectionViewCell.xib in Resources */,
+				2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */,
 				2176A8152518D542005979E9 /* CommunicationTableViewCell.xib in Resources */,
 				219846382521133A00E35F26 /* check historyTableViewCell.xib in Resources */,
 				210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */,
@@ -619,6 +626,7 @@
 				216661FA2519266A000373DA /* SignupViewController.swift in Sources */,
 				2176A82D2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift in Sources */,
 				2176A83A2518E063005979E9 /* SettingsTableViewCell.swift in Sources */,
+				2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */,
 				212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */,
 				21822108251C5AE40022AD65 /* ViewControllertest2.swift in Sources */,
 				210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */,

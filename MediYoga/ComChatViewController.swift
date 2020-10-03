@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate {
+class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
@@ -33,6 +33,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         profileimage.layer.cornerRadius = 23
         profileimage.clipsToBounds = true
+        
 //        tableView.layer.borderWidth = 0.3
 //        tableView.layer.borderColor = UIColor.black.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -42,8 +43,19 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         TextField.layer.borderColor = UIColor.systemGray5.cgColor
         profileimage.image = UIImage(named: imagename)
         MessageLabel.text = GroupName
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: "didTapView")
+        self.view.addGestureRecognizer(tapRecognizer)
+        
+        tableView.register(UINib(nibName: "ComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComImageTableViewCell")
+
 
     }
+    
+    @objc func didTapView(){
+      self.view.endEditing(true)
+    }
+
     @objc func keyBoardWillShow(notification: Notification){
         if let userInfo = notification.userInfo as? Dictionary<String, AnyObject>{
             let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey]
@@ -112,8 +124,31 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func CameraAction(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        
+        image.sourceType = UIImagePickerController.SourceType.photoLibrary
+        
+        image.allowsEditing = false
+        
+        self.present(image, animated: true)
+        {
+            //After it is complete
+        }
     }
-    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+//    {
+//        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
+//        {
+//            myImageView.image = image
+//        }
+//        else
+//        {
+//            //Error message
+//        }
+//        
+//        self.dismiss(animated: true, completion: nil)
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }

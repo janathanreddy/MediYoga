@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UIViewController,UITextFieldDelegate{
    
     
+    @IBOutlet weak var txtbc: NSLayoutConstraint!
     var validation = Validation()
 
     @IBOutlet weak var ErrorLabel: UILabel!
@@ -34,13 +35,20 @@ class ViewController: UIViewController,UITextFieldDelegate{
         PasswordTextField.isSecureTextEntry = true
         PasswordTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
         MobileNoTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        MobileNoTextField.delegate = self
+        PasswordTextField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
 
     }
 
     override func viewDidAppear(_ animated: Bool) {
         MobileNoTextField.borderStyle = UITextField.BorderStyle.roundedRect
         PasswordTextField.borderStyle = UITextField.BorderStyle.roundedRect
+
     }
+    
     
     @IBAction func passwordVissible(_ sender: Any){
         (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
@@ -56,6 +64,29 @@ class ViewController: UIViewController,UITextFieldDelegate{
         }
     }
     
+    @objc func keyBoardWillShow(notification: Notification){
+        if let userInfo = notification.userInfo as? Dictionary<String, AnyObject>{
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey]
+            let keyBoardRect = frame?.cgRectValue
+            if let keyBoardHeight = keyBoardRect?.height {
+                self.txtbc.constant = keyBoardHeight
+                
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+    }
+
+    
+    @objc func keyBoardWillHide(notification: Notification){
+        
+        self.txtbc.constant = 183.5
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+
     
     
     @IBAction func LoginAction(_ sender: Any) {
