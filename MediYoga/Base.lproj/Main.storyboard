@@ -212,9 +212,6 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
-                                                                <connections>
-                                                                    <action selector="Name:" destination="PQk-Qq-jIW" eventType="editingChanged" id="a0z-a0-8xO"/>
-                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZXP-aX-kGu">
                                                                 <rect key="frame" x="0.0" y="59" width="350" height="44"/>
@@ -224,9 +221,6 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" textContentType="tel"/>
-                                                                <connections>
-                                                                    <action selector="MobileNumber:" destination="PQk-Qq-jIW" eventType="editingChanged" id="mez-6b-sMg"/>
-                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0q-it-G81">
                                                                 <rect key="frame" x="0.0" y="118" width="350" height="44"/>
@@ -236,9 +230,6 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
-                                                                <connections>
-                                                                    <action selector="Password:" destination="PQk-Qq-jIW" eventType="editingChanged" id="ccf-cN-bTP"/>
-                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pf9-DC-Xj6">
                                                                 <rect key="frame" x="0.0" y="177" width="350" height="44"/>
@@ -248,9 +239,6 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
-                                                                <connections>
-                                                                    <action selector="ConfirmPassword:" destination="PQk-Qq-jIW" eventType="editingChanged" id="CfP-Om-cXf"/>
-                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -270,7 +258,6 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="SignupAction:" destination="PQk-Qq-jIW" eventType="touchUpInside" id="5fJ-O4-RnM"/>
-                                                                    <segue destination="sg3-Kz-B2a" kind="show" identifier="SignUpSegue" id="YUI-h0-Aat"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -367,6 +354,7 @@
                         <outlet property="NameField" destination="UT3-iG-ThO" id="GHy-Mi-c3q"/>
                         <outlet property="PasswordField" destination="t0q-it-G81" id="25M-xR-xlZ"/>
                         <outlet property="SignupButton" destination="JIc-xP-oD1" id="6DT-3b-HI0"/>
+                        <segue destination="sg3-Kz-B2a" kind="show" identifier="SignUPToLogin" id="4Ab-mV-78u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iB-8g-et7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -456,7 +444,6 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="LoginAction:" destination="sg3-Kz-B2a" eventType="touchUpInside" id="hQG-Wt-cFD"/>
-                                                                    <segue destination="SAp-qX-NGn" kind="show" id="dOB-VS-ofY"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -503,25 +490,11 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9p-ZF-76H">
-                                                <rect key="frame" x="32" y="722" width="350" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="JTC-q8-1cv"/>
-                                                    <constraint firstAttribute="height" constant="34" id="doG-jx-JIF"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="850" id="85B-Lj-KmZ"/>
-                                            <constraint firstItem="K9p-ZF-76H" firstAttribute="leading" secondItem="or5-DY-2ic" secondAttribute="leading" constant="32" id="FsS-Sl-HYM"/>
-                                            <constraint firstItem="K9p-ZF-76H" firstAttribute="top" secondItem="huW-qD-tw1" secondAttribute="bottom" constant="55.5" id="QBP-F6-7gO"/>
                                             <constraint firstItem="huW-qD-tw1" firstAttribute="centerY" secondItem="or5-DY-2ic" secondAttribute="centerY" id="VQH-Jo-1nQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="K9p-ZF-76H" secondAttribute="bottom" constant="94" id="gHZ-jF-pU2"/>
-                                            <constraint firstAttribute="trailing" secondItem="K9p-ZF-76H" secondAttribute="trailing" constant="32" id="gx5-zi-GCX"/>
                                             <constraint firstItem="huW-qD-tw1" firstAttribute="centerX" secondItem="or5-DY-2ic" secondAttribute="centerX" id="kBz-lp-O4f"/>
                                         </constraints>
                                     </view>
@@ -546,10 +519,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="DGe-BE-56i"/>
                     <connections>
-                        <outlet property="ErrorLabel" destination="K9p-ZF-76H" id="boq-vh-Qcg"/>
                         <outlet property="LoginButton" destination="WmI-qw-RsS" id="4dx-SN-6qQ"/>
                         <outlet property="MobileNoTextField" destination="VW1-sj-MXl" id="iBb-J8-XcI"/>
                         <outlet property="PasswordTextField" destination="cPM-Ln-KIM" id="KHy-Mk-0m3"/>
+                        <segue destination="SAp-qX-NGn" kind="show" identifier="LoginToTab" id="93f-ev-zYm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQs-v6-igA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -900,7 +873,6 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOI-LX-02B">
                                         <rect key="frame" x="290" y="0.0" width="84" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="84" id="KaA-Zv-sTy"/>
                                             <constraint firstAttribute="height" constant="40" id="KsA-d6-EhT"/>
@@ -2139,6 +2111,9 @@
                                 <state key="normal" title="Change Password">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="ResetPassWordAct:" destination="l65-5K-bAd" eventType="touchUpInside" id="vmk-Qm-wD2"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-hu-SOb">
                                 <rect key="frame" x="20" y="242" width="374" height="44"/>
@@ -2183,7 +2158,7 @@
                         <outlet property="ConfirmPasswordField" destination="UxU-PZ-Bwc" id="q5d-7A-e8Z"/>
                         <outlet property="CurrentPasswordField" destination="JGt-G5-MDu" id="RH1-KD-4u2"/>
                         <outlet property="NewPasswordField" destination="8i4-hu-SOb" id="VXm-0o-O3W"/>
-                        <segue destination="sg3-Kz-B2a" kind="show" identifier="LoginSegue" animates="NO" id="gtd-fK-SkI"/>
+                        <segue destination="sg3-Kz-B2a" kind="show" identifier="LoginSegue" id="QyH-xi-0ch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghY-N1-IhC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2605,18 +2580,18 @@
                                                         <constraint firstAttribute="trailing" secondItem="MXJ-w1-w8R" secondAttribute="trailing" constant="14" id="UWe-fg-DpJ"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.30 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9o-rD-qMK">
-                                                    <rect key="frame" x="344.5" y="54" width="40.5" height="10"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.30 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9o-rD-qMK">
+                                                    <rect key="frame" x="338" y="54" width="56" height="10"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40.5" id="XWO-In-iOu"/>
+                                                        <constraint firstAttribute="width" constant="56" id="XWO-In-iOu"/>
                                                         <constraint firstAttribute="height" constant="10" id="ZIY-Bk-fdf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unread" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F4-nc-KNs">
-                                                    <rect key="frame" x="301.5" y="54" width="35" height="12"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unread" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F4-nc-KNs">
+                                                    <rect key="frame" x="295" y="54" width="35" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="12" id="7a5-iJ-3F6"/>
                                                         <constraint firstAttribute="width" constant="35" id="Dl1-c2-qgW"/>
@@ -2629,7 +2604,7 @@
                                             <constraints>
                                                 <constraint firstItem="D9o-rD-qMK" firstAttribute="leading" secondItem="0F4-nc-KNs" secondAttribute="trailing" constant="8" symbolic="YES" id="7PC-Cc-JhK"/>
                                                 <constraint firstAttribute="bottom" secondItem="0F4-nc-KNs" secondAttribute="bottom" constant="3" id="A0r-Gl-tzn"/>
-                                                <constraint firstAttribute="trailing" secondItem="D9o-rD-qMK" secondAttribute="trailing" constant="29" id="ATr-La-NmW"/>
+                                                <constraint firstAttribute="trailing" secondItem="D9o-rD-qMK" secondAttribute="trailing" constant="20" id="ATr-La-NmW"/>
                                                 <constraint firstAttribute="trailing" secondItem="pN9-jd-nFU" secondAttribute="trailing" constant="20" placeholder="YES" id="DGa-7h-kCF"/>
                                                 <constraint firstAttribute="bottom" secondItem="D9o-rD-qMK" secondAttribute="bottom" constant="5" id="gDC-5e-dy1"/>
                                                 <constraint firstItem="pN9-jd-nFU" firstAttribute="width" secondItem="eww-R0-0X7" secondAttribute="width" multiplier="0.7" placeholder="YES" id="iOX-zG-Ocg"/>
@@ -3122,7 +3097,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gtd-fK-SkI"/>
+        <segue reference="QyH-xi-0ch"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="32" width="400" height="400"/>
@@ -3174,9 +3149,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

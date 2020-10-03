@@ -34,7 +34,6 @@ class ViewController: UIViewController,UITextFieldDelegate{
         PasswordTextField.isSecureTextEntry = true
         PasswordTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
         MobileNoTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
-//        validateFields()
 
     }
 
@@ -61,49 +60,46 @@ class ViewController: UIViewController,UITextFieldDelegate{
     
     @IBAction func LoginAction(_ sender: Any) {
         
-        let MobileNo = MobileNoTextField.text!
-        let password = PasswordTextField.text!
-              
-        let isValidatePhone = self.validation.validaPhoneNumber(phoneNumber: MobileNo)
-              if (isValidatePhone == false)
-                {
-                    print("Mobile Number is valid")
-                } else {
-                    print("Mobile Number is not valid")
-                    displayAlertMessage(messageToDisplay: "Mobile Number is not valid")
-                }
-              
-        
-        let isValidatePass = self.validation.validatePassword(password: password)
-        if (isValidatePass == false)
-          {
-              print("Password is valid")
-          } else {
-              print("Password is not valid")
-              displayAlertMessage(messageToDisplay: "Password is not valid")
-          }
-        
-        if (isValidatePhone == true || isValidatePass == true) {
-            displayAlertMessage(messageToDisplay: "All fields are correct")
-                 print("All fields are correct")
-              }
+        let password = PasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let mobileno = MobileNoTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        print(mobileno.count)
+        if mobileno == "" || password == ""{
+            
+            let alertController = UIAlertController(title: "Alert", message:
+                "Fill Both 10 digit Mobile Number and Secure Password", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        else if mobileno.count < 10 || mobileno.count > 10{
+          print("Enter Your 10 Digits Mobile Number")
+            
+            let alertController = UIAlertController(title: "Alert", message:
+                "Check Your Mobile Number", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+
+            self.present(alertController, animated: true, completion: nil)
+
+        }
+
+        else if validation.validatePassword(password: password)==false{
+            
+            let alertController = UIAlertController(title: "Alert", message:
+                "Please Make Sure Your Password is at least 8 Characters, Contains a Special Character and a Number", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+
+            self.present(alertController, animated: true, completion: nil)
+            
+            print("Please Make Sure Your Password is at least 8 Characters, Contains a Special Character and a Number")
+        }
+        else{
+            performSegue(withIdentifier: "LoginToTab", sender: self)
+        }
     }
     
     
-    func displayAlertMessage(messageToDisplay: String)
-       {
-           let alertController = UIAlertController(title: "Alert", message: messageToDisplay, preferredStyle: .alert)
-           
-           let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-               
-               print("Ok button tapped");
-               
-           }
-           
-           alertController.addAction(OKAction)
-           
-           self.present(alertController, animated: true, completion:nil)
-       }
+    
 
     @IBAction func done(_ sender: UITextField) {
         sender.resignFirstResponder()

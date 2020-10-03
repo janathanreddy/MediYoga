@@ -9,9 +9,9 @@ import UIKit
 //import Firebase
 //import FirebaseAuth
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController,UITextViewDelegate {
 
-    
+    var validation = Validation()
     @IBOutlet weak var ErrorLabel: UILabel!
     @IBOutlet weak var NameField: UITextField!
     
@@ -26,6 +26,12 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         SignupButton.clipsToBounds = true
         SignupButton.layer.cornerRadius = 10
+        
+        NameField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        MobileNumberField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+
+        PasswordField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        ConfirmPasswordField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
 
         
     }
@@ -37,121 +43,63 @@ class SignupViewController: UIViewController {
         PasswordField.borderStyle = UITextField.BorderStyle.roundedRect
         ConfirmPasswordField.borderStyle = UITextField.BorderStyle.roundedRect
         
+        
        
     }
     @IBAction func SignupAction(_ sender: Any) {
         
-        
+        let password = PasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let mobileno = MobileNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let Name = MobileNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let confirmpassword = MobileNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        
-        
-        
-        
-        
-//        PhoneAuthProvider.provider().verifyPhoneNumber(self.MobileNumberField.text!, uiDelegate: nil) { (verificationID, error) in
-//            if error != nil {
-//                print("eror: \(String(describing: error?.localizedDescription))")
-//            } else {
-//                let defaults = UserDefaults.standard
-//                defaults.set(verificationID, forKey: "authVID")
-//                self.performSegue(withIdentifier: "code", sender: Any?.self)
-//            }
-//        }
-        
-        
-        
-        
-        
-        
-    }
-    
-    @IBAction func Name(_ sender: Any) {
-        
-        let text = NameField.text ?? ""
-        if text.isValidName() {
-            NameField.textColor = UIColor.black
-            ErrorLabel.text = ""
-        } else {
-            NameField.textColor = UIColor.red
-            ErrorLabel.text = "not valid name"
-            SignupButton.isEnabled = false
+        print(mobileno.count)
+        if mobileno == "" || password == "" || Name == "" || confirmpassword == ""{
+            
+            let alertController = UIAlertController(title: "Alert", message:
+                "Fill All Fields", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+
+            self.present(alertController, animated: true, completion: nil)
+            
         }
         
-    }
-    
-    @IBAction func MobileNumber(_ sender: Any) {
-        
-        let text = MobileNumberField.text ?? ""
+        else if mobileno.count < 10 || mobileno.count > 10{
+          print("Enter Your 10 Digits Mobile Number")
+            
+            let alertController = UIAlertController(title: "Alert", message:
+                "Check Your Mobile Number", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
 
-        if text.filterPhoneNumber().isValidPhone() {
-            MobileNumberField.textColor = UIColor.black
-            ErrorLabel.text = ""
-        } else {
-            MobileNumberField.textColor = UIColor.red
-            ErrorLabel.text = "not valid phone"
-            SignupButton.isEnabled = false
+            self.present(alertController, animated: true, completion: nil)
 
         }
-        
-    }
-    
-    @IBAction func Password(_ sender: Any) {
-        
-        let text = PasswordField.text ?? ""
 
-        if text.isValidPassword() {
-            PasswordField.textColor = UIColor.black
-            ErrorLabel.text = "Strong Password"
-            ErrorLabel.textColor = UIColor.green
-        } else {
-            PasswordField.textColor = UIColor.red
-            ErrorLabel.text = "Weak password"
-            ErrorLabel.textColor = UIColor.red
-            SignupButton.isEnabled = false
+        else if validation.validatePassword(password: password)==false{
+            
+            let alertController = UIAlertController(title: "Alert", message:
+                "Please Make Sure Your Password is at least 8 Characters, Contains a Special Character and a Number", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
 
+            self.present(alertController, animated: true, completion: nil)
+            
+            print("Please Make Sure Your Password is at least 8 Characters, Contains a Special Character and a Number")
         }
-    }
-        
-    
-    @IBAction func ConfirmPassword(_ sender: Any) {
-        let text = ConfirmPasswordField.text ?? ""
+        else if PasswordField.text != ConfirmPasswordField.text {
+            let alertController = UIAlertController(title: "Alert", message:
+                "Check Your Password Not Same ConfirmPassword", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
 
-        if text.isValidPassword() {
-            ConfirmPasswordField.textColor = UIColor.black
-            ErrorLabel.text = "Strong Password"
-            ErrorLabel.textColor = UIColor.green
-        } else {
-            ConfirmPasswordField.textColor = UIColor.red
-            ErrorLabel.text = "Weak password"
-            ErrorLabel.textColor = UIColor.red
-            SignupButton.isEnabled = false
-
+            self.present(alertController, animated: true, completion: nil)
+            
+            print("Check Your Password Not Same ConfirmPassword")
         }
-    }
-}
-extension String {
-    func isValidName() -> Bool {
-        let inputRegEx = "^[a-zA-Z\\_]{2,25}$"
-        let inputpred = NSPredicate(format: "SELF MATCHES %@", inputRegEx)
-        return inputpred.evaluate(with:self)
-    }
-    func isValidEmail() -> Bool {
-        let inputRegEx = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,64}"
-        let inputpred = NSPredicate(format: "SELF MATCHES %@", inputRegEx)
-        return inputpred.evaluate(with:self)
-    }
-    func isValidPhone() -> Bool {
-        let inputRegEx = "^((\\+)|(00))[0-9]{6,14}$"
-        let inputpred = NSPredicate(format: "SELF MATCHES %@", inputRegEx)
-        return inputpred.evaluate(with:self)
-    }
-    func isValidPassword() -> Bool {
-        let inputRegEx = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()-_+={}?>.<,:;~`']{8,}$"
-        let inputpred = NSPredicate(format: "SELF MATCHES %@", inputRegEx)
-        return inputpred.evaluate(with:self)
+        else{
+            performSegue(withIdentifier: "SignUPToLogin", sender: self)
+        }
+print("tapped")
     }
     
-    public func filterPhoneNumber() -> String {
-        return String(self.filter {!" ()._-\n\t\r".contains($0)})
-    }
+
+    
 }
