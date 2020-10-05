@@ -13,44 +13,51 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComImageTableViewCell" rowHeight="187" id="KGk-i7-Jjw" customClass="ComImageTableViewCell" customModule="MediYoga" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="187"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="187"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fN-0N-oIB">
-                        <rect key="frame" x="154" y="14" width="240" height="157"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fN-0N-oIB">
+                        <rect key="frame" x="154" y="15" width="240" height="157"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="31" id="pMH-H0-cik">
-                                <rect key="frame" x="14" y="11" width="213" height="100"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="34" id="pMH-H0-cik">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccO-OB-4KN">
-                                <rect key="frame" x="22" y="128" width="205" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccO-OB-4KN">
+                                <rect key="frame" x="0.0" y="128" width="240" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="157" id="DBi-cD-yXU"/>
+                            <constraint firstAttribute="width" constant="240" id="FcF-ga-5gD"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="8fN-0N-oIB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="EBo-eF-5Rj"/>
+                    <constraint firstAttribute="bottom" secondItem="8fN-0N-oIB" secondAttribute="bottom" constant="15" id="KEY-77-bBK"/>
+                    <constraint firstAttribute="trailing" secondItem="8fN-0N-oIB" secondAttribute="trailing" constant="45" id="VH8-Dj-xuJ"/>
+                    <constraint firstItem="8fN-0N-oIB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="154" id="z0S-Q0-0Tt"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="sendimage" destination="pMH-H0-cik" id="fk9-Ih-dK9"/>
+                <outlet property="sendimageview" destination="8fN-0N-oIB" id="obU-xG-Dl6"/>
                 <outlet property="sendlabel" destination="ccO-OB-4KN" id="ZVX-yc-Wzk"/>
             </connections>
             <point key="canvasLocation" x="89.855072463768124" y="109.48660714285714"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="31" width="236" height="236"/>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="34" width="200" height="200"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

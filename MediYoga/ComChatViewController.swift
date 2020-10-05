@@ -7,23 +7,42 @@
 
 import UIKit
 
+
+struct messagedata {
+    var text : String
+    var time : String
+    var isFirstUser : Bool
+    var sendimagebool : Bool
+    var sentimage:UIImage?
+    var sentlabel:String
+
+}
+
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+     var messages = [messagedata]()
     
+    var trailingConstraint:NSLayoutConstraint!
+    var leadingConstraint:NSLayoutConstraint!
+
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
-    var messages: [MessageData] = [MessageData(text: "Hi", isFirstUser: true),
-                                   MessageData(text: "Hi,Hello", isFirstUser: false),
-                                   MessageData(text: "How are you", isFirstUser: true),
-                                   MessageData(text: "fine you", isFirstUser: false),
-                                   MessageData(text: "Where are you", isFirstUser: true),
-                                   MessageData(text: "i am Chennai You", isFirstUser: false),
-                                   MessageData(text: "okay", isFirstUser: true)]
+    var message: [messagedata] = [messagedata(text: "Hi,Hello", time: "7.00 PM", isFirstUser: false, sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "How are you", time: "8.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "fine you", time: "8.30 PM", isFirstUser: false, sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "Where are you", time: "9.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "i am Chennai You", time: "9.30 PM", isFirstUser: false,sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "okay", time: "10.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:"")]
+//    var imagestuct:[imageStruct] = [imageStruct(image: UIImage(named: "32")!, labelStruct: "", imagestruct_1: false)]
+//    var selectedbut:Bool?
+    @IBOutlet weak var camerabutton: UIButton!
+    let picker = UIImagePickerController()
+    var images = [UIImage]()
     var imagename:String = ""
     var GroupName:String = ""
     var dateupdate: String?
-    var isFirstUser: Bool = true
+//    var isFirstUser: Bool = true
     var timeupdate: String?
-    var sendimage:Bool? = false
+//    var sendimage:Bool? = false
     let imageCache = NSCache<AnyObject, AnyObject>()
 
     @IBOutlet weak var profileimage: UIImageView!
@@ -36,7 +55,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         profileimage.layer.cornerRadius = 23
         profileimage.clipsToBounds = true
-        
+        self.picker.delegate=self
 //        tableView.layer.borderWidth = 0.3
 //        tableView.layer.borderColor = UIColor.black.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -52,13 +71,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.register(UINib(nibName: "ComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComImageTableViewCell")
 
-        if let savedImages = Image.loadImages() {
-            images = savedImages
-        } else {
-            images = Image.loadSampleImages()
-        }
         tableView.rowHeight = UITableView.automaticDimension
-
+        scrollToBottom()
     }
     
     @objc func didTapView(){
@@ -76,11 +90,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
 
                 self.tableView.contentInset = contentInset
 
-                tableView.scrollToRow(at: IndexPath(row: messages.count - 1 , section: 0), at: .top, animated: true)
+                tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
                 contentInset.bottom = keyBoardRect!.height
-
-
-                
                 let indexpath = NSIndexPath(row: 1, section: 0)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.view.layoutIfNeeded()
@@ -133,81 +144,99 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func CameraAction(_ sender: AnyObject) {
-        sendimage = true
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
-        let alertViewController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { action in
-                imagePicker.sourceType = .photoLibrary
-                self.present(imagePicker, animated: true, completion: nil)
-            })
-            alertViewController.addAction(photoLibraryAction)
-        }
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        picker.allowsEditing = true
+        self.present(picker, animated: true, completion: nil)
+        present(picker,animated: true,completion: nil)
 
-        alertViewController.addAction(cancelAction)
-        present(alertViewController, animated: true, completion: nil)
-        
-        alertViewController.view.subviews.flatMap({$0.constraints}).filter{ (one: NSLayoutConstraint)-> (Bool)  in
-            return (one.constant < 0) && (one.secondItem == nil) &&  (one.firstAttribute == .width)
-            }.first?.isActive = false
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+             tableView.reloadData()
+         }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
-            let image = Image(imageData: selectedImage.pngData()!, recordID: String(data: selectedImage.pngData()!, encoding: .unicode)!)
-            images.append(image)
-            Image.saveImages(images)
-            dismiss(animated: true, completion: nil)
-        }
-    }
+        date()
+        time()
+        if let images = info[UIImagePickerController.InfoKey.originalImage] {
+            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!))
+            TextField.text = ""
+            tableView.reloadData()
+            scrollToBottom()
+
+                } else {
+                    print("something wrong in image picking")
+                }
+                
+                self.dismiss(animated: true, completion: nil)
+        
+        
+         }
+    
+
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return message.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if sendimage == false{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
-        cell.updateMessageCell(by: messages[indexPath.row])
-        cell.ReadCheckLabel.text = "unread"
-            cell.timeLabel.text = timeupdate
-            return cell
-
-        }else{
-            print("true")
-            let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
-
-            ComImageTableViewCell.sendimage.image = nil
+        if message[indexPath.row].isFirstUser == false{
             
-            if let imageFromCache = imageCache.object(forKey: images[indexPath.row].recordID as AnyObject) as? UIImage {
-                ComImageTableViewCell.sendimage.image = imageFromCache
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75) { [self] in
-                    if let index = tableView.indexPath(for: ComImageTableViewCell) {
-                        if let data = images[index.row].imageData {
-                            let imageToCache = UIImage(data: data)
-                            imageCache.setObject(imageToCache!, forKey: images[indexPath.row].recordID! as AnyObject)
-                            ComImageTableViewCell.sendimage.image = UIImage(data: data)
-                            ComImageTableViewCell.setNeedsLayout()
-                        }
-                    }
-                }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
+
+//                   cell.updateMessageCell(by: message[indexPath.row])
+            cell.messageBackgroundView.layer.cornerRadius = 16
+            cell.CellMessageLabel.text = message[indexPath.row].text
+                   cell.ReadCheckLabel.text = "unread"
+            cell.timeLabel.text = message[indexPath.row].time
+                       return cell
+        }
+       
+        else if message[indexPath.row].sentimage != nil{
+                let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
+            ComImageTableViewCell.sendimageview.layer.cornerRadius = 10
+            ComImageTableViewCell.sendimageview.clipsToBounds = true
+            ComImageTableViewCell.sendimage.layer.cornerRadius = 10
+            ComImageTableViewCell.sendimage.clipsToBounds = true
+
+            ComImageTableViewCell.sendimage.image = message[indexPath.row].sentimage
+            if message[indexPath.row].sentlabel == ""{
+                ComImageTableViewCell.sendlabel.isHidden = true
+            }else{
+                ComImageTableViewCell.sendlabel.isHidden = false
+                ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
             }
             return ComImageTableViewCell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
+//                   cell.updateMessageCell(by: message[indexPath.row])
+//            cell.trailingConstraint.isActive = true
+            cell.messageBackgroundView.layer.cornerRadius = 16
+            cell.CellMessageLabel.text = message[indexPath.row].text
+                   cell.ReadCheckLabel.text = "unread"
+            cell.timeLabel.text = message[indexPath.row].time
+                       return cell
         }
-        return UITableViewCell()
+
+return UITableViewCell()
 
     }
+    func scrollToBottom() {
+            if message.count >= 5 {
+            DispatchQueue.main.async {
+                let indexpath = IndexPath(row: self.message.count - 1, section: 0)
+                self.tableView.scrollToRow(at: indexpath, at: .bottom, animated: true)
+            }
+            } else {
+                //
+            }
+        }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return 200
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -218,11 +247,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         time()
         var textFromField:String = TextField.text!
         if TextField != nil{
-            messages.append(MessageData(text: textFromField, isFirstUser: isFirstUser))
+            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: ""))
             tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: messages.count - 1, section: 0)], with: .fade)
+            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
             tableView.endUpdates()
-            tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at: .top, animated: true)
+            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
 //        isFirstUser = !isFirstUser
             TextField.text = ""}
        return true
@@ -247,7 +276,6 @@ extension Date {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         return dateFormatter.date(from: "\(month)/\(day)/\(year)") ?? Date()
     }
-    
     
     
     

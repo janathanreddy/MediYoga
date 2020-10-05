@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseABTesting
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate{
    
@@ -17,6 +22,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
     @IBOutlet weak var TextViewField: UITextView!
     
+    let db = Firestore.firestore()
+
     var searching = false
     var name_1 = [filternames]()
     var searchedname_1 = [filternames]()
@@ -33,18 +40,46 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         self.navigationItem.setHidesBackButton(true, animated: true)
         
         tableView.showsVerticalScrollIndicator = false
-        appenddata()
+//        appenddata()
+        
+        db.collection("appointments").getDocuments() { [self] (querySnapshot, error) in
+                    if let error = error {
+                        print("Error getting documents: \(error)")
+                        self.dismiss(animated: false, completion: nil)
+
+                    } else {
+                        self.dismiss(animated: false, completion: nil)
+                        for document in querySnapshot!.documents {
+                            let documentData = document.data()
+                            var patient_first_name = documentData["patient_first_name"] as! String
+                            var patient_id = documentData["patient_id"] as! String
+                            var patient_age = String(documentData["patient_age"] as! Int)
+                            var patient_gender = documentData["patient_gender"]as! String
+                            var appointment_time = documentData["appointment_time"] as! String
+                            
+                            print(documentData)
+                            print(patient_first_name,patient_id,patient_age,patient_gender,appointment_time)
+                            name_1.append(filternames(name: documentData["patient_first_name"] as! String,image:"35",age:String(documentData["patient_age"] as! Int),time:"02:00PM - 02:15PM",ccd:"CCD",at:"AT.png"))
+
+                    }
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        
+                }
+            }
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
+        tableView.reloadData()
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -54,28 +89,32 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
 
     private func appenddata() {
-        name_1.append(filternames(name: "Roamanson",image:"35",age:"32",time:"8:40AM-8.50AM",ccd:"CCD",at:"AT.png"))
-        name_1.append(filternames(name: "Jonny",image:"36",age:"31",time:"8:50AM-9.00AM",ccd:"CDD",at:"FC.png"))
-        name_1.append(filternames(name: "Anderson",image:"37",age:"36",time:"9:00AM-9.10AM",ccd:"LDD",at:"old.png"))
-        name_1.append(filternames(name: "BikiDev",image:"38",age:"37",time:"9.10AM-9.20AM",ccd:"CCD/LDD",at:"MT.png"))
-        name_1.append(filternames(name: "Assik",image:"39",age:"26",time:"9:20AM-9.40AM",ccd:"CCD",at:"N.png"))
-        name_1.append(filternames(name: "Kaamil",image:"40",age:"28",time:"9:40AM-10.00AM",ccd:"CDD",at:"AT.png"))
-        name_1.append(filternames(name: "Johnson",image:"31",age:"29",time:"10:00AM-10.10AM",ccd:"LDD",at:"FC.png"))
-        name_1.append(filternames(name: "Maclarn",image:"32",age:"31",time:"10:10AM-10.20AM",ccd:"CCD/LDD",at:"old.png"))
-        name_1.append(filternames(name: "Chuva",image:"33",age:"22",time:"10:20AM-10.30AM",ccd:"LDD",at:"N.png"))
-        name_1.append(filternames(name: "Lee",image:"34",age:"21",time:"10:30AM-10.40AM",ccd:"CCD",at:"MT.png"))
-
+        
+        
+//        name_1.append(filternames(name: documentData["patient_first_name"] as! String,image:"35",age:documentData["patient_age"] as! Int,time:documentData["appointment_time"] as! String,ccd:"CCD",at:"AT.png"))
+//        name_1.append(filternames(name: "Roamanson",image:"35",age:"32",time:"8:40AM-8.50AM",ccd:"CCD",at:"AT.png"))
+//        name_1.append(filternames(name: "Jonny",image:"36",age:"31",time:"8:50AM-9.00AM",ccd:"CDD",at:"FC.png"))
+//        name_1.append(filternames(name: "Anderson",image:"37",age:"36",time:"9:00AM-9.10AM",ccd:"LDD",at:"old.png"))
+//        name_1.append(filternames(name: "BikiDev",image:"38",age:"37",time:"9.10AM-9.20AM",ccd:"CCD/LDD",at:"MT.png"))
+//        name_1.append(filternames(name: "Assik",image:"39",age:"26",time:"9:20AM-9.40AM",ccd:"CCD",at:"N.png"))
+//        name_1.append(filternames(name: "Kaamil",image:"40",age:"28",time:"9:40AM-10.00AM",ccd:"CDD",at:"AT.png"))
+//        name_1.append(filternames(name: "Johnson",image:"31",age:"29",time:"10:00AM-10.10AM",ccd:"LDD",at:"FC.png"))
+//        name_1.append(filternames(name: "Maclarn",image:"32",age:"31",time:"10:10AM-10.20AM",ccd:"CCD/LDD",at:"old.png"))
+//        name_1.append(filternames(name: "Chuva",image:"33",age:"22",time:"10:20AM-10.30AM",ccd:"LDD",at:"N.png"))
+//        name_1.append(filternames(name: "Lee",image:"34",age:"21",time:"10:30AM-10.40AM",ccd:"CCD",at:"MT.png"))
+        
         
 //        searchedname_1 = name_1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if searching {
-            return searchedname_1.count
-        } else {
+//        if searching {
+//            return searchedname_1.count
+//        } else {
             return name_1.count
-        }
+        print(name_1.count)
+//        }
         
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -86,16 +125,18 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApplicationTableViewCell
-        if searching {
-            cell.NameField.text = searchedname_1[indexPath.row].name
-            cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
-            cell.AgeField.text = searchedname_1[indexPath.row].age
-            cell.TimeField.text = searchedname_1[indexPath.row].time
-            cell.ccdField.text = searchedname_1[indexPath.row].ccd
-            cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
-            return cell
-
-        } else {
+//        if searching {
+//            cell.NameField.text = searchedname_1[indexPath.row].name
+//            cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
+//            cell.AgeField.text = searchedname_1[indexPath.row].age
+//            cell.TimeField.text = searchedname_1[indexPath.row].time
+//            cell.ccdField.text = searchedname_1[indexPath.row].ccd
+//            cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
+//            return cell
+//
+//        } else {
+        print(name_1[indexPath.row].name,name_1[indexPath.row].age,name_1[indexPath.row].time)
+        
                 cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
                 cell.NameField.text = name_1[indexPath.row].name
                 cell.AgeField.text = name_1[indexPath.row].age
@@ -104,11 +145,11 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
             return cell
 
-        }
-        
+//        }
+//
 //        cell.delegate = self
 //        cell.index = indexPath
-        return UITableViewCell()
+//        return UITableViewCell()
             
         
         
@@ -167,7 +208,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             let VC:PatientDetailsViewController = segue.destination as! PatientDetailsViewController
             let indexPath = self.tableView.indexPathForSelectedRow
             VC.name = self.name_1[indexPath!.row].name
-            VC.image = self.name_1[indexPath!.row].age
+            VC.image = self.name_1[indexPath!.row].image
             VC.time = self.name_1[indexPath!.row].time
             VC.age = self.name_1[indexPath!.row].age
             VC.cdd = self.name_1[indexPath!.row].ccd

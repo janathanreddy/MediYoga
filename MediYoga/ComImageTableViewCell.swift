@@ -9,11 +9,16 @@ import UIKit
 
 class ComImageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var sendimageview: UIView!
     @IBOutlet weak var sendimage: UIImageView!
     @IBOutlet weak var sendlabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        sendimageview.layer.borderWidth = 0.5
+
+        sendimageview.layer.borderColor = UIColor.systemGray.cgColor
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

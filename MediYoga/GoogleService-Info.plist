@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>166099990575-88urrot0v2emnmsge38o12afksv7i14v.apps.googleusercontent.com</string>
+	<string>299959083700-fc5l76p7m87jjlq4geno5da40ocbpvao.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.166099990575-88urrot0v2emnmsge38o12afksv7i14v</string>
+	<string>com.googleusercontent.apps.299959083700-fc5l76p7m87jjlq4geno5da40ocbpvao</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDDI9w3XcleBLl5eAn5NmJOONgRpB8ZcK8</string>
+	<string>AIzaSyAfOgWZoxd-jUARzHHWS1XP7RUC0G_lCPg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>166099990575</string>
+	<string>299959083700</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>JANTEL-CORP.MediYoga</string>
+	<string>macappstudio.com.mediyoga-doctor</string>
 	<key>PROJECT_ID</key>
-	<string>mediyoga-377bf</string>
+	<string>mediyoga-doctor</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mediyoga-377bf.appspot.com</string>
+	<string>mediyoga-doctor.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:166099990575:ios:0fab531257b974529d6eda</string>
+	<string>1:299959083700:ios:7acdc294ea163253fd2de1</string>
 	<key>DATABASE_URL</key>
-	<string>https://mediyoga-377bf.firebaseio.com</string>
+	<string>https://mediyoga-doctor.firebaseio.com</string>
 </dict>
 </plist>
