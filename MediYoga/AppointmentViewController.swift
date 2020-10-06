@@ -23,7 +23,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     @IBOutlet weak var TextViewField: UITextView!
     
     let db = Firestore.firestore()
-
     var searching = false
     var name_1 = [filternames]()
     var searchedname_1 = [filternames]()
@@ -38,28 +37,35 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         TextViewField.layer.borderColor = UIColor.systemGray.cgColor
         TextViewField.layer.borderWidth = 0.8
         self.navigationItem.setHidesBackButton(true, animated: true)
-        
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "MMMM d, yyyy"
+        let formattedDate = format.string(from: date)
+//        currentdate = formattedDate
+//        print(currentdate)
+        print("outer \(formattedDate)")
         tableView.showsVerticalScrollIndicator = false
 //        appenddata()
-        
-        db.collection("appointments").getDocuments() { [self] (querySnapshot, error) in
-                    if let error = error {
-                        print("Error getting documents: \(error)")
-                        self.dismiss(animated: false, completion: nil)
 
-                    } else {
-                        self.dismiss(animated: false, completion: nil)
-                        for document in querySnapshot!.documents {
+        db.collection("appointments").whereField("appointment_date", isEqualTo: formattedDate).order(by: "appointment_time").getDocuments(){ (querySnapshot, error) in
+                            if  error == nil && querySnapshot != nil {
+
+                            for document in querySnapshot!.documents {
                             let documentData = document.data()
                             var patient_first_name = documentData["patient_first_name"] as! String
                             var patient_id = documentData["patient_id"] as! String
                             var patient_age = String(documentData["patient_age"] as! Int)
                             var patient_gender = documentData["patient_gender"]as! String
                             var appointment_time = documentData["appointment_time"] as! String
+                            var appointment_date = documentData["appointment_date"] as! String
+//                             print(appointment_date,patient_first_name,patient_id,patient_age,patient_gender,appointment_time)
+                                print(formattedDate)
+//                            let patient_symptoms = documentData["patient_symptoms"] as? [Any]
+//                            print(" hi \(patient_symptoms?[1])")
                             
-                            print(documentData)
-                            print(patient_first_name,patient_id,patient_age,patient_gender,appointment_time)
-                            name_1.append(filternames(name: documentData["patient_first_name"] as! String,image:"35",age:String(documentData["patient_age"] as! Int),time:"02:00PM - 02:15PM",ccd:"CCD",at:"AT.png"))
+//                            print(patient_first_name,patient_id,patient_age,patient_gender,appointment_time)
+                            
+                                self.name_1.append(filternames(name: patient_first_name,image:"35",age:patient_age,time:appointment_time,ccd:"CCD",at:"AT.png"))
 
                     }
                         DispatchQueue.main.async {
@@ -73,12 +79,12 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+//        tableView.reloadData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        tableView.reloadData()
+//        tableView.reloadData()
 
     }
     override func viewDidLayoutSubviews() {
@@ -135,7 +141,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //            return cell
 //
 //        } else {
-        print(name_1[indexPath.row].name,name_1[indexPath.row].age,name_1[indexPath.row].time)
+//        print(name_1[indexPath.row].name,name_1[indexPath.row].age,name_1[indexPath.row].time)
         
                 cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
                 cell.NameField.text = name_1[indexPath.row].name
