@@ -14,6 +14,11 @@ import FirebaseDatabase
 
 class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate{
    
+    @IBOutlet weak var Todaytoptitle: UIButton!
+    @IBOutlet weak var TodayBtn: UIButton!
+    @IBOutlet weak var monthlybtn: UIButton!
+    
+    @IBOutlet weak var Weeklybtn: UIButton!
     @IBOutlet weak var namesearch: UISearchBar!
     @IBOutlet weak var BlurEffect: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -221,6 +226,22 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 
                 }
     }
+    
+    @IBAction func actionTodayWeekly(_ sender: Any) {
+        
+    
+    }
+    
+    @IBAction func TodayAct(_ sender: Any) {
+    }
+    
+    
+    @IBAction func Weeklyact(_ sender: Any) {
+    }
+    
+    @IBAction func Monthlyact(_ sender: Any) {
+    }
+    
 }
 extension AppointmentViewController: UISearchBarDelegate {
     
@@ -257,5 +278,8 @@ class filternames {
         self.ccd = ccd
         self.at = at
     }
+ 
+    
+   
     
 }

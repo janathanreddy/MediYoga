@@ -10,7 +10,6 @@
 		21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */; };
 		21005DD9251BE3F90078E470 /* LabRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */; };
 		21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DDD251BE4210078E470 /* LabRequestViewController.swift */; };
-		21005DE9251BFC010078E470 /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DE8251BFC010078E470 /* AdminChatViewController.swift */; };
 		210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */; };
 		210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88BE25186F0100C59A6E /* AppDelegate.swift */; };
 		210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88C025186F0100C59A6E /* SceneDelegate.swift */; };
@@ -20,23 +19,17 @@
 		210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 210E88C925186F0500C59A6E /* LaunchScreen.storyboard */; };
 		210E88D625186F0600C59A6E /* MediYogaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88D525186F0600C59A6E /* MediYogaTests.swift */; };
 		210E88E125186F0600C59A6E /* MediYogaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88E025186F0600C59A6E /* MediYogaUITests.swift */; };
-		2116C522251BC2F400E7C6F2 /* Allign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C521251BC2F400E7C6F2 /* Allign.swift */; };
 		2116C528251BD1B700E7C6F2 /* PriscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */; };
 		2116C52E251BD27000E7C6F2 /* PriscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */; };
 		2116C52F251BD27000E7C6F2 /* PriscriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */; };
-		2118DE8F2529076A008C4D43 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2118DE8E2529076A008C4D43 /* Data.swift */; };
 		211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */; };
 		2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2120D49A2528C457003332EF /* ComImageTableViewCell.swift */; };
 		2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2120D49B2528C457003332EF /* ComImageTableViewCell.xib */; };
 		212800CB2523906800110A10 /* ComChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CA2523906800110A10 /* ComChatViewController.swift */; };
 		212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CF252394ED00110A10 /* ComChatTableViewCell.swift */; };
 		212800D2252394ED00110A10 /* ComChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212800D0252394ED00110A10 /* ComChatTableViewCell.xib */; };
-		212800D72523978500110A10 /* ComChatMessageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800D62523978500110A10 /* ComChatMessageStruct.swift */; };
-		21435767251CF4B2002DC326 /* CommunicationChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21435766251CF4B2002DC326 /* CommunicationChatViewController.swift */; };
 		2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */; };
-		21550D5B2521CAF1004A46B9 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21550D592521CAF1004A46B9 /* DropDown.swift */; };
 		21550D5C2521CAF1004A46B9 /* DropDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21550D5A2521CAF1004A46B9 /* DropDown.xib */; };
-		21550D612521FC59004A46B9 /* ChattingCommViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21550D602521FC59004A46B9 /* ChattingCommViewController.swift */; };
 		2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */; };
 		2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */; };
 		2155B41C252BA04600148B92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2155B41B252BA04600148B92 /* GoogleService-Info.plist */; };
@@ -59,9 +52,6 @@
 		2176A8542518E3D3005979E9 /* SettingsTableViewCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8522518E3D3005979E9 /* SettingsTableViewCell_2.xib */; };
 		2176A85A2518E3F3005979E9 /* SettingsTableViewCell_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */; };
 		2176A85B2518E3F3005979E9 /* SettingsTableViewCell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8592518E3F3005979E9 /* SettingsTableViewCell_3.xib */; };
-		21822103251C5A170022AD65 /* ViewControllertest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21822102251C5A170022AD65 /* ViewControllertest.swift */; };
-		21822108251C5AE40022AD65 /* ViewControllertest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21822107251C5AE40022AD65 /* ViewControllertest2.swift */; };
-		2182210F251C6F6D0022AD65 /* AdminChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2182210D251C6F6D0022AD65 /* AdminChatMessageCell.swift */; };
 		21822110251C6F6D0022AD65 /* AdminChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2182210E251C6F6D0022AD65 /* AdminChatMessageCell.xib */; };
 		219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */; };
 		219846382521133A00E35F26 /* check historyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219846362521133A00E35F26 /* check historyTableViewCell.xib */; };
@@ -101,7 +91,6 @@
 		21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestTableViewCell.swift; sourceTree = "<group>"; };
 		21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabRequestTableViewCell.xib; sourceTree = "<group>"; };
 		21005DDD251BE4210078E470 /* LabRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestViewController.swift; sourceTree = "<group>"; };
-		21005DE8251BFC010078E470 /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
 		210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		210E88BB25186F0100C59A6E /* MediYoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediYoga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		210E88BE25186F0100C59A6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,23 +106,17 @@
 		210E88DC25186F0600C59A6E /* MediYogaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediYogaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210E88E025186F0600C59A6E /* MediYogaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediYogaUITests.swift; sourceTree = "<group>"; };
 		210E88E225186F0600C59A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2116C521251BC2F400E7C6F2 /* Allign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allign.swift; sourceTree = "<group>"; };
 		2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionViewController.swift; sourceTree = "<group>"; };
 		2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriscriptionTableViewCell.xib; sourceTree = "<group>"; };
-		2118DE8E2529076A008C4D43 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsViewController.swift; sourceTree = "<group>"; };
 		2120D49A2528C457003332EF /* ComImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComImageTableViewCell.swift; sourceTree = "<group>"; };
 		2120D49B2528C457003332EF /* ComImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComImageTableViewCell.xib; sourceTree = "<group>"; };
 		212800CA2523906800110A10 /* ComChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatViewController.swift; sourceTree = "<group>"; };
 		212800CF252394ED00110A10 /* ComChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatTableViewCell.swift; sourceTree = "<group>"; };
 		212800D0252394ED00110A10 /* ComChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatTableViewCell.xib; sourceTree = "<group>"; };
-		212800D62523978500110A10 /* ComChatMessageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatMessageStruct.swift; sourceTree = "<group>"; };
-		21435766251CF4B2002DC326 /* CommunicationChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationChatViewController.swift; sourceTree = "<group>"; };
 		2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseHistoryViewController.swift; sourceTree = "<group>"; };
-		21550D592521CAF1004A46B9 /* DropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		21550D5A2521CAF1004A46B9 /* DropDown.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDown.xib; sourceTree = "<group>"; };
-		21550D602521FC59004A46B9 /* ChattingCommViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCommViewController.swift; sourceTree = "<group>"; };
 		2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiverTableViewCell.xib; sourceTree = "<group>"; };
 		2155B41B252BA04600148B92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -156,9 +139,6 @@
 		2176A8522518E3D3005979E9 /* SettingsTableViewCell_2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell_2.xib; sourceTree = "<group>"; };
 		2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell_3.swift; sourceTree = "<group>"; };
 		2176A8592518E3F3005979E9 /* SettingsTableViewCell_3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell_3.xib; sourceTree = "<group>"; };
-		21822102251C5A170022AD65 /* ViewControllertest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllertest.swift; sourceTree = "<group>"; };
-		21822107251C5AE40022AD65 /* ViewControllertest2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllertest2.swift; sourceTree = "<group>"; };
-		2182210D251C6F6D0022AD65 /* AdminChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatMessageCell.swift; sourceTree = "<group>"; };
 		2182210E251C6F6D0022AD65 /* AdminChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminChatMessageCell.xib; sourceTree = "<group>"; };
 		219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkhistoryTableViewCell.swift; sourceTree = "<group>"; };
 		219846362521133A00E35F26 /* check historyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "check historyTableViewCell.xib"; sourceTree = "<group>"; };
@@ -262,8 +242,16 @@
 				2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */,
 				21005DDD251BE4210078E470 /* LabRequestViewController.swift */,
 				21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */,
-				21005DE8251BFC010078E470 /* AdminChatViewController.swift */,
-				2182210D251C6F6D0022AD65 /* AdminChatMessageCell.swift */,
+				219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */,
+				2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */,
+				219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */,
+				212800CA2523906800110A10 /* ComChatViewController.swift */,
+				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
+				21F37A882524FCE0002AD530 /* AdminComViewController.swift */,
+				21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */,
+				21F37A942524FEF2002AD530 /* AdminComStruct.swift */,
+				21CEA26E25262ED80049B4F7 /* Validation.swift */,
+				2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */,
 				210E88C425186F0100C59A6E /* Main.storyboard */,
 				210E88C725186F0500C59A6E /* Assets.xcassets */,
 				210E88C925186F0500C59A6E /* LaunchScreen.storyboard */,
@@ -276,32 +264,14 @@
 				2176A8522518E3D3005979E9 /* SettingsTableViewCell_2.xib */,
 				2176A8592518E3F3005979E9 /* SettingsTableViewCell_3.xib */,
 				21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */,
-				2116C521251BC2F400E7C6F2 /* Allign.swift */,
 				2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */,
-				21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */,
-				21822102251C5A170022AD65 /* ViewControllertest.swift */,
-				21822107251C5AE40022AD65 /* ViewControllertest2.swift */,
 				2182210E251C6F6D0022AD65 /* AdminChatMessageCell.xib */,
-				21435766251CF4B2002DC326 /* CommunicationChatViewController.swift */,
-				219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */,
+				21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */,
 				219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */,
-				2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */,
-				219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */,
-				219846362521133A00E35F26 /* check historyTableViewCell.xib */,
-				21550D592521CAF1004A46B9 /* DropDown.swift */,
 				21550D5A2521CAF1004A46B9 /* DropDown.xib */,
-				21550D602521FC59004A46B9 /* ChattingCommViewController.swift */,
-				212800CA2523906800110A10 /* ComChatViewController.swift */,
-				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
+				219846362521133A00E35F26 /* check historyTableViewCell.xib */,
 				212800D0252394ED00110A10 /* ComChatTableViewCell.xib */,
-				212800D62523978500110A10 /* ComChatMessageStruct.swift */,
-				21F37A882524FCE0002AD530 /* AdminComViewController.swift */,
-				21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */,
 				21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */,
-				21F37A942524FEF2002AD530 /* AdminComStruct.swift */,
-				21CEA26E25262ED80049B4F7 /* Validation.swift */,
-				2118DE8E2529076A008C4D43 /* Data.swift */,
-				2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */,
 				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
 			);
 			path = MediYoga;
@@ -607,10 +577,8 @@
 			files = (
 				2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */,
 				219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */,
-				21005DE9251BFC010078E470 /* AdminChatViewController.swift in Sources */,
 				2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */,
 				21F37A952524FEF2002AD530 /* AdminComStruct.swift in Sources */,
-				21435767251CF4B2002DC326 /* CommunicationChatViewController.swift in Sources */,
 				21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */,
 				2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */,
 				211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */,
@@ -618,37 +586,29 @@
 				2116C528251BD1B700E7C6F2 /* PriscriptionViewController.swift in Sources */,
 				210E88C325186F0100C59A6E /* ViewController.swift in Sources */,
 				2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */,
-				21550D612521FC59004A46B9 /* ChattingCommViewController.swift in Sources */,
 				21F37A8F2524FD1D002AD530 /* AdminComTableViewCell.swift in Sources */,
 				21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */,
 				21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */,
 				212800CB2523906800110A10 /* ComChatViewController.swift in Sources */,
 				2176A8532518E3D3005979E9 /* SettingsTableViewCell_2.swift in Sources */,
-				21822103251C5A170022AD65 /* ViewControllertest.swift in Sources */,
-				212800D72523978500110A10 /* ComChatMessageStruct.swift in Sources */,
 				2176A81B2518D56B005979E9 /* ApplicationTableViewCell.swift in Sources */,
 				210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */,
 				210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */,
 				21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */,
 				2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */,
-				21550D5B2521CAF1004A46B9 /* DropDown.swift in Sources */,
 				2176A8492518E3A9005979E9 /* SettingsTableViewCell_1.swift in Sources */,
-				2118DE8F2529076A008C4D43 /* Data.swift in Sources */,
 				216661FA2519266A000373DA /* SignupViewController.swift in Sources */,
 				2176A82D2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift in Sources */,
 				2176A83A2518E063005979E9 /* SettingsTableViewCell.swift in Sources */,
 				2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */,
 				212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */,
-				21822108251C5AE40022AD65 /* ViewControllertest2.swift in Sources */,
 				210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */,
 				21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */,
 				2176A85A2518E3F3005979E9 /* SettingsTableViewCell_3.swift in Sources */,
 				219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */,
-				2116C522251BC2F400E7C6F2 /* Allign.swift in Sources */,
 				2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */,
 				2176A8272518DC7D005979E9 /* AdminCommunicationViewController.swift in Sources */,
 				21F37A892524FCE1002AD530 /* AdminComViewController.swift in Sources */,
-				2182210F251C6F6D0022AD65 /* AdminChatMessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
