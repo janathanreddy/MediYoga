@@ -20,7 +20,8 @@ class ApplicationTableViewCell: UITableViewCell {
     @IBOutlet weak var statusField: UIImageView!
     @IBOutlet weak var ccdField: UILabel!
     @IBOutlet weak var TimeField: UILabel!
-    
+    @IBOutlet weak var notesbtn: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         appointmentimage.clipsToBounds = true

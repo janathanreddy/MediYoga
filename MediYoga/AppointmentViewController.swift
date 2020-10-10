@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseCore
 import FirebaseABTesting
 import FirebaseAuth
 import FirebaseStorage
@@ -14,6 +15,7 @@ import FirebaseDatabase
 
 class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate{
    
+    @IBOutlet weak var TodayWeeklyView: UIView!
     @IBOutlet weak var Todaytoptitle: UIButton!
     @IBOutlet weak var TodayBtn: UIButton!
     @IBOutlet weak var monthlybtn: UIButton!
@@ -31,8 +33,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var searching = false
     var name_1 = [filternames]()
     var searchedname_1 = [filternames]()
-
-
+    var selectindex: Int = 0
+    var patient_id_notes:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         namesearch.delegate = self
@@ -51,7 +53,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         print("outer \(formattedDate)")
         tableView.showsVerticalScrollIndicator = false
 //        appenddata()
-
+        TodayWeeklyView.isHidden = true
         db.collection("appointments").whereField("appointment_date", isEqualTo: formattedDate).order(by: "appointment_time").getDocuments(){ (querySnapshot, error) in
                             if  error == nil && querySnapshot != nil {
 
@@ -63,14 +65,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                             var patient_gender = documentData["patient_gender"]as! String
                             var appointment_time = documentData["appointment_time"] as! String
                             var appointment_date = documentData["appointment_date"] as! String
-//                             print(appointment_date,patient_first_name,patient_id,patient_age,patient_gender,appointment_time)
-                                print(formattedDate)
-//                            let patient_symptoms = documentData["patient_symptoms"] as? [Any]
-//                            print(" hi \(patient_symptoms?[1])")
                             
-//                            print(patient_first_name,patient_id,patient_age,patient_gender,appointment_time)
-                            
-                                self.name_1.append(filternames(name: patient_first_name,image:"35",age:patient_age,time:appointment_time,ccd:"CCD",at:"AT.png"))
+                                self.name_1.append(filternames(name: patient_first_name,image:"35",age:patient_age,time:appointment_time,ccd:"CCD",at:"AT.png",patient_id:patient_id))
 
                     }
                         DispatchQueue.main.async {
@@ -154,7 +150,9 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                 cell.TimeField.text = name_1[indexPath.row].time
                 cell.ccdField.text = name_1[indexPath.row].ccd
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
-            return cell
+                cell.notesbtn.tag = indexPath.row
+                cell.notesbtn.addTarget(self, action: #selector(cellbtntapped(sender:)), for: .touchUpInside)
+                return cell
 
 //        }
 //
@@ -166,32 +164,39 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         
         
     }
-    
-    func animateIn(desiredView:UIView){
+    @objc func cellbtntapped(sender:UIButton){
         
-        let backgroundView = self.view
-        backgroundView?.addSubview(desiredView)
-        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        desiredView.alpha = 0
-        desiredView.center = backgroundView?.center as! CGPoint
-        UIView.animate(withDuration: 0.3, animations: {
-            desiredView.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
-            desiredView.alpha = 1
-
-        })
-        
+        selectindex = sender.tag
+        print(sender.tag)
+         
     }
+//    func animateIn(desiredView:UIView){
+//
+//        let backgroundView = self.view
+//        backgroundView?.addSubview(desiredView)
+//        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+//        desiredView.alpha = 0
+//        desiredView.center = backgroundView?.center as! CGPoint
+//        UIView.animate(withDuration: 0.3, animations: {
+//            desiredView.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
+//            desiredView.alpha = 1
+//
+//        })
+//
+//    }
     
-    func  animatedismiss(desiredView:UIView){
-        UIView.animate(withDuration: 0.3, animations: {
-            desiredView.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
-            desiredView.alpha = 0
-        },completion: { _ in desiredView.removeFromSuperview()} )
-    }
+//    func  animatedismiss(desiredView:UIView){
+//        UIView.animate(withDuration: 0.3, animations: {
+//            desiredView.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
+//            desiredView.alpha = 0
+//        },completion: { _ in desiredView.removeFromSuperview()} )
+//    }
 
     @IBAction func NotesButtonAction(_ sender: Any) {
-        animateIn(desiredView: NotesView)
-        animateIn(desiredView: BlurEffect)
+//        animateIn(desiredView: NotesView)
+//        animateIn(desiredView: BlurEffect)
+        
+//        performSegue(withIdentifier: "NotesSegue", sender: self)
 
 
     }
@@ -201,12 +206,13 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //        time_1 = time[indexPath.row]
 //        ccd_1 = ccd[indexPath.row]
 //        image_1 = image[indexPath.row]
-       performSegue(withIdentifier: "DeatailofPatient", sender: self)
+        performSegue(withIdentifier: "DeatailofPatient", sender: self)
+
 
     }
     @IBAction func CancelNotes(_ sender: Any) {
-        animatedismiss(desiredView: BlurEffect)
-        animatedismiss(desiredView: NotesView)
+//        animatedismiss(desiredView: BlurEffect)
+//        animatedismiss(desiredView: NotesView)
     }
     
     @IBAction func OkNotes(_ sender: Any) {
@@ -223,13 +229,20 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             VC.time = self.name_1[indexPath!.row].time
             VC.age = self.name_1[indexPath!.row].age
             VC.cdd = self.name_1[indexPath!.row].ccd
-
-                }
+            VC.patient_id = self.name_1[indexPath!.row].patient_id
+            }
+        else if segue.identifier == "NotesSegue"{
+            let Notes:NOTESViewController = segue.destination as! NOTESViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            Notes.patient_id = self.name_1[indexPath!.row].patient_id
+        }
+        
     }
     
     @IBAction func actionTodayWeekly(_ sender: Any) {
         
-    
+        TodayWeeklyView.isHidden = false
+
     }
     
     @IBAction func TodayAct(_ sender: Any) {
@@ -270,13 +283,15 @@ class filternames {
     let time: String
     let ccd: String
     let at:String
-    init(name: String,image: String,age: String,time: String,ccd: String,at: String) {
+    let patient_id:String
+    init(name: String,image: String,age: String,time: String,ccd: String,at: String,patient_id: String) {
         self.name = name
         self.image = image
         self.age = age
         self.time = time
         self.ccd = ccd
         self.at = at
+        self.patient_id = patient_id
     }
  
     

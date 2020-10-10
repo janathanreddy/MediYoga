@@ -6,6 +6,12 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseABTesting
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
+import FirebaseFirestore
 
 class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
    
@@ -28,16 +34,21 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     @IBOutlet weak var PatientCollectionView: UICollectionView!
     
     
-    
+    var patient_id:String = ""
     var name:String = ""
     var age:String = ""
     var time:String = ""
     var cdd:String = ""
     var image:String = ""
-    
-    
+//    var Symptom = [PatientSymptoms]()
+//    var duration: Int?
+//    var type: String = ""
+//    var symptoms: String = ""
+
+    let db = Firestore.firestore()
+
     var Headers:[String] = ["Symtoms","Diagnosis","Prescription","Lab Request"]
-    var Description:[[String]] = [["Central LBP - 15 Days","Mid back Pain - 12 Days","Gluteal Pain - 7 Days"],["Left side/Rigt Side","Bilateral","Radiation to arm"],["ACECLO PLUS","BACTRIM DS","CYCLOPAM","GRAVOL","SNEPDOL"],["X-Ray LS SPINE AP & LAT VIEW","X-RAY DORRSAL SPINE AP & LAT VIEW"]]
+    var Description = [[String](),[String](),["ACECLO PLUS","BACTRIM DS","CYCLOPAM","GRAVEL","SNEPDOL"],["X-RAY LS SPINE AP & LAT VIEW","X-RAY DORSAL SPINE P & LAT VIEW"]]
     
     
     override func viewDidLoad() {
@@ -61,6 +72,33 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         patientage.text = age
         patinetappointtime.text = time
         patientage.text = age
+        
+        db.collection("appointments").whereField("patient_id", isEqualTo: patient_id).getDocuments(){ [self] (querySnapshot, error) in
+                            if  error == nil && querySnapshot != nil {
+
+                            for document in querySnapshot!.documents {
+                                
+                            let documentData = document.data()
+                            let patient_symptoms = documentData["patient_symptoms"] as! [[String:Any]]
+                            for Symptoms in patient_symptoms{
+                            
+                                Description[0].append("\(Symptoms["symptoms"] as! String) - \(Symptoms["duration"] as! String)\(Symptoms["type"] as! String)")
+                                
+                                }
+                                let patient_diagnosis = documentData["diagnosis"] as! [[String:Any]]
+
+                                for diagnosis in patient_diagnosis{
+                                    
+                                    Description[1].append("\(diagnosis["diagnosis_name"] as! String)")
+                                    
+                                }
+                    }
+                        DispatchQueue.main.async {
+                            self.PatientCollectionView.reloadData()
+                        }
+                        
+                }
+            }
 
     }
     
@@ -113,12 +151,8 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         return UICollectionReusableView()
 }
 
-  
-    
-    
-    
-    
 }
+
 
 
 

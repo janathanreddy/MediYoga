@@ -34,6 +34,7 @@
 		2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */; };
 		2155B41C252BA04600148B92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2155B41B252BA04600148B92 /* GoogleService-Info.plist */; };
 		216661FA2519266A000373DA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216661F92519266A000373DA /* SignupViewController.swift */; };
+		21674E5B2530D579007D1D13 /* NOTESViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21674E5A2530D579007D1D13 /* NOTESViewController.swift */; };
 		2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8042518A059005979E9 /* AppointmentViewController.swift */; };
 		2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A80D2518C2B8005979E9 /* CommunicationViewController.swift */; };
 		2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8122518D542005979E9 /* CommunicationTableViewCell.swift */; };
@@ -65,9 +66,9 @@
 		21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */; };
 		21FBA7F4251B542000466C3A /* PatientDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */; };
 		21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */; };
-		453F9F82ECCC12D2C73A7F44 /* Pods_MediYogaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DAC850BE3D0B7C15D985A2 /* Pods_MediYogaTests.framework */; };
-		C3CFB4CC77BA3E8FB7EE9984 /* Pods_MediYoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678EE7C9DC1C9FED92EAF122 /* Pods_MediYoga.framework */; };
-		F1E440F16BC1BDDE7563EA32 /* Pods_MediYoga_MediYogaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C72EC84170159DDEB44762 /* Pods_MediYoga_MediYogaUITests.framework */; };
+		7C541B3FE85A709F24A722B6 /* Pods_MediYoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA513AD305EC10D5F48867DD /* Pods_MediYoga.framework */; };
+		8A274245E8534C3902AB88C7 /* Pods_MediYogaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE56BF3C1DA5A2441C47788 /* Pods_MediYogaTests.framework */; };
+		FF0481EE5A9934532B53AA81 /* Pods_MediYoga_MediYogaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EE56BF3C1DA5A2441C47788 /* Pods_MediYogaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYogaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestTableViewCell.swift; sourceTree = "<group>"; };
 		21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabRequestTableViewCell.xib; sourceTree = "<group>"; };
 		21005DDD251BE4210078E470 /* LabRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiverTableViewCell.xib; sourceTree = "<group>"; };
 		2155B41B252BA04600148B92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		216661F92519266A000373DA /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		21674E5A2530D579007D1D13 /* NOTESViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTESViewController.swift; sourceTree = "<group>"; };
 		2176A8042518A059005979E9 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
 		2176A80D2518C2B8005979E9 /* CommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationViewController.swift; sourceTree = "<group>"; };
 		2176A8122518D542005979E9 /* CommunicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,15 +155,14 @@
 		21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
 		21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		3950F9F9D33721CF20927A14 /* Pods-MediYogaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.debug.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		461FC16EDEFD05F56100A1D0 /* Pods-MediYoga-MediYogaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga-MediYogaUITests.release.xcconfig"; path = "Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests.release.xcconfig"; sourceTree = "<group>"; };
-		591BC7C03F361DF74F6A00D1 /* Pods-MediYoga-MediYogaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga-MediYogaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		678EE7C9DC1C9FED92EAF122 /* Pods_MediYoga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		73CAA6C8CC1D5B2FFFF35909 /* Pods-MediYogaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.release.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.release.xcconfig"; sourceTree = "<group>"; };
-		82C72EC84170159DDEB44762 /* Pods_MediYoga_MediYogaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga_MediYogaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A1CDC35E8B8A3C2B8572235 /* Pods-MediYoga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga.release.xcconfig"; path = "Target Support Files/Pods-MediYoga/Pods-MediYoga.release.xcconfig"; sourceTree = "<group>"; };
-		A9DAC850BE3D0B7C15D985A2 /* Pods_MediYogaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYogaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F324562BD0B17516539E9473 /* Pods-MediYoga.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga.debug.xcconfig"; path = "Target Support Files/Pods-MediYoga/Pods-MediYoga.debug.xcconfig"; sourceTree = "<group>"; };
+		3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga_MediYogaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		506500CD5534C269B507FCA1 /* Pods-MediYogaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.release.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.release.xcconfig"; sourceTree = "<group>"; };
+		5DCC6198E637FCEB39BDD7C8 /* Pods-MediYogaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.debug.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A5963CC33E2B07701539209A /* Pods-MediYoga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga.release.xcconfig"; path = "Target Support Files/Pods-MediYoga/Pods-MediYoga.release.xcconfig"; sourceTree = "<group>"; };
+		AD24535125505DE8348DEBC9 /* Pods-MediYoga-MediYogaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga-MediYogaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BA9F4ECD12DBABC29B277A6D /* Pods-MediYoga-MediYogaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga-MediYogaUITests.release.xcconfig"; path = "Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F9FB8F5A8417B524A46A2131 /* Pods-MediYoga.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYoga.debug.xcconfig"; path = "Target Support Files/Pods-MediYoga/Pods-MediYoga.debug.xcconfig"; sourceTree = "<group>"; };
+		FA513AD305EC10D5F48867DD /* Pods_MediYoga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3CFB4CC77BA3E8FB7EE9984 /* Pods_MediYoga.framework in Frameworks */,
+				7C541B3FE85A709F24A722B6 /* Pods_MediYoga.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453F9F82ECCC12D2C73A7F44 /* Pods_MediYogaTests.framework in Frameworks */,
+				8A274245E8534C3902AB88C7 /* Pods_MediYogaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1E440F16BC1BDDE7563EA32 /* Pods_MediYoga_MediYogaUITests.framework in Frameworks */,
+				FF0481EE5A9934532B53AA81 /* Pods_MediYoga_MediYogaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +201,7 @@
 				210E88DF25186F0600C59A6E /* MediYogaUITests */,
 				210E88BC25186F0100C59A6E /* Products */,
 				BC0CFEEB5C83AAFB80AA27C0 /* Pods */,
-				882CE1EADEE3BD6A24572515 /* Frameworks */,
+				A081B5B99C60B0434891A66F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,6 +275,7 @@
 				212800D0252394ED00110A10 /* ComChatTableViewCell.xib */,
 				21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */,
 				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
+				21674E5A2530D579007D1D13 /* NOTESViewController.swift */,
 			);
 			path = MediYoga;
 			sourceTree = "<group>";
@@ -295,12 +298,12 @@
 			path = MediYogaUITests;
 			sourceTree = "<group>";
 		};
-		882CE1EADEE3BD6A24572515 /* Frameworks */ = {
+		A081B5B99C60B0434891A66F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				678EE7C9DC1C9FED92EAF122 /* Pods_MediYoga.framework */,
-				82C72EC84170159DDEB44762 /* Pods_MediYoga_MediYogaUITests.framework */,
-				A9DAC850BE3D0B7C15D985A2 /* Pods_MediYogaTests.framework */,
+				FA513AD305EC10D5F48867DD /* Pods_MediYoga.framework */,
+				3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */,
+				0EE56BF3C1DA5A2441C47788 /* Pods_MediYogaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -308,12 +311,12 @@
 		BC0CFEEB5C83AAFB80AA27C0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F324562BD0B17516539E9473 /* Pods-MediYoga.debug.xcconfig */,
-				8A1CDC35E8B8A3C2B8572235 /* Pods-MediYoga.release.xcconfig */,
-				591BC7C03F361DF74F6A00D1 /* Pods-MediYoga-MediYogaUITests.debug.xcconfig */,
-				461FC16EDEFD05F56100A1D0 /* Pods-MediYoga-MediYogaUITests.release.xcconfig */,
-				3950F9F9D33721CF20927A14 /* Pods-MediYogaTests.debug.xcconfig */,
-				73CAA6C8CC1D5B2FFFF35909 /* Pods-MediYogaTests.release.xcconfig */,
+				F9FB8F5A8417B524A46A2131 /* Pods-MediYoga.debug.xcconfig */,
+				A5963CC33E2B07701539209A /* Pods-MediYoga.release.xcconfig */,
+				AD24535125505DE8348DEBC9 /* Pods-MediYoga-MediYogaUITests.debug.xcconfig */,
+				BA9F4ECD12DBABC29B277A6D /* Pods-MediYoga-MediYogaUITests.release.xcconfig */,
+				5DCC6198E637FCEB39BDD7C8 /* Pods-MediYogaTests.debug.xcconfig */,
+				506500CD5534C269B507FCA1 /* Pods-MediYogaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -325,11 +328,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 210E88E525186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYoga" */;
 			buildPhases = (
-				2C8E70588EB06D36458045BE /* [CP] Check Pods Manifest.lock */,
+				F0EB39693AA3A64459E52E13 /* [CP] Check Pods Manifest.lock */,
 				210E88B725186F0100C59A6E /* Sources */,
 				210E88B825186F0100C59A6E /* Frameworks */,
 				210E88B925186F0100C59A6E /* Resources */,
-				87ABB7F6B415F620842F277E /* [CP] Embed Pods Frameworks */,
+				A474C7264D6E9EEAA8627B72 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -344,7 +347,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 210E88E825186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYogaTests" */;
 			buildPhases = (
-				685264A2716EEDFAAB011BCB /* [CP] Check Pods Manifest.lock */,
+				9145BFD14FAACFE5A4480AC6 /* [CP] Check Pods Manifest.lock */,
 				210E88CD25186F0600C59A6E /* Sources */,
 				210E88CE25186F0600C59A6E /* Frameworks */,
 				210E88CF25186F0600C59A6E /* Resources */,
@@ -363,11 +366,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 210E88EB25186F0600C59A6E /* Build configuration list for PBXNativeTarget "MediYogaUITests" */;
 			buildPhases = (
-				7D1C8F5850AB6D3AFE893485 /* [CP] Check Pods Manifest.lock */,
+				18DD78437705FA138310ECF7 /* [CP] Check Pods Manifest.lock */,
 				210E88D825186F0600C59A6E /* Sources */,
 				210E88D925186F0600C59A6E /* Frameworks */,
 				210E88DA25186F0600C59A6E /* Resources */,
-				2C3C50DA1C01F3AC157257E2 /* [CP] Embed Pods Frameworks */,
+				CA16AEA363B9D3CC3C5A148F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -468,68 +471,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2C3C50DA1C01F3AC157257E2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2C8E70588EB06D36458045BE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MediYoga-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		685264A2716EEDFAAB011BCB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MediYogaTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D1C8F5850AB6D3AFE893485 /* [CP] Check Pods Manifest.lock */ = {
+		18DD78437705FA138310ECF7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -551,7 +493,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		87ABB7F6B415F620842F277E /* [CP] Embed Pods Frameworks */ = {
+		9145BFD14FAACFE5A4480AC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MediYogaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A474C7264D6E9EEAA8627B72 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,6 +530,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MediYoga/Pods-MediYoga-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA16AEA363B9D3CC3C5A148F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MediYoga-MediYogaUITests/Pods-MediYoga-MediYogaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0EB39693AA3A64459E52E13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MediYoga-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -589,6 +592,7 @@
 				21F37A8F2524FD1D002AD530 /* AdminComTableViewCell.swift in Sources */,
 				21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */,
 				21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */,
+				21674E5B2530D579007D1D13 /* NOTESViewController.swift in Sources */,
 				212800CB2523906800110A10 /* ComChatViewController.swift in Sources */,
 				2176A8532518E3D3005979E9 /* SettingsTableViewCell_2.swift in Sources */,
 				2176A81B2518D56B005979E9 /* ApplicationTableViewCell.swift in Sources */,
@@ -781,7 +785,7 @@
 		};
 		210E88E625186F0600C59A6E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F324562BD0B17516539E9473 /* Pods-MediYoga.debug.xcconfig */;
+			baseConfigurationReference = F9FB8F5A8417B524A46A2131 /* Pods-MediYoga.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -801,7 +805,7 @@
 		};
 		210E88E725186F0600C59A6E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A1CDC35E8B8A3C2B8572235 /* Pods-MediYoga.release.xcconfig */;
+			baseConfigurationReference = A5963CC33E2B07701539209A /* Pods-MediYoga.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -821,7 +825,7 @@
 		};
 		210E88E925186F0600C59A6E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3950F9F9D33721CF20927A14 /* Pods-MediYogaTests.debug.xcconfig */;
+			baseConfigurationReference = 5DCC6198E637FCEB39BDD7C8 /* Pods-MediYogaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -844,7 +848,7 @@
 		};
 		210E88EA25186F0600C59A6E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73CAA6C8CC1D5B2FFFF35909 /* Pods-MediYogaTests.release.xcconfig */;
+			baseConfigurationReference = 506500CD5534C269B507FCA1 /* Pods-MediYogaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -867,7 +871,7 @@
 		};
 		210E88EC25186F0600C59A6E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 591BC7C03F361DF74F6A00D1 /* Pods-MediYoga-MediYogaUITests.debug.xcconfig */;
+			baseConfigurationReference = AD24535125505DE8348DEBC9 /* Pods-MediYoga-MediYogaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -888,7 +892,7 @@
 		};
 		210E88ED25186F0600C59A6E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 461FC16EDEFD05F56100A1D0 /* Pods-MediYoga-MediYogaUITests.release.xcconfig */;
+			baseConfigurationReference = BA9F4ECD12DBABC29B277A6D /* Pods-MediYoga-MediYogaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
