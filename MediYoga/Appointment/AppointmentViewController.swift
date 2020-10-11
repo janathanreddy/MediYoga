@@ -15,6 +15,7 @@ import FirebaseDatabase
 
 class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, TableViewCellDelegate{
     
+    
    
     @IBOutlet weak var TodayWeeklyView: UIView!
     @IBOutlet weak var Todaytoptitle: UIButton!
@@ -37,8 +38,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 92
-        TextViewField.layer.borderColor = UIColor.systemGray.cgColor
-        TextViewField.layer.borderWidth = 0.8
+//        TextViewField.layer.borderColor = UIColor.systemGray.cgColor
+//        TextViewField.layer.borderWidth = 0.8
         self.navigationItem.setHidesBackButton(true, animated: true)
         let date = Date()
         let format = DateFormatter()
@@ -117,7 +118,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //                cell.notesbtn.addTarget(self, action: #selector(cellbtntapped(sender:)), for: .touchUpInside)
                 return cell
 
-//        }
+        }
 //
         return UITableViewCell()
             
@@ -186,6 +187,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     @IBAction func Monthlyact(_ sender: Any) {
     }
     
+
 }
 extension AppointmentViewController: UISearchBarDelegate {
     
@@ -223,3 +225,4 @@ class filternames {
         self.patient_id = patient_id
     }
 }
+

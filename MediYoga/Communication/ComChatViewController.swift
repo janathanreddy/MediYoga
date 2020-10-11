@@ -39,7 +39,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var GroupName:String = ""
     var dateupdate: String?
     var timeupdate: String?
-    let imageCache = NSCache<AnyObject, AnyObject>()
 
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
@@ -217,7 +216,7 @@ return UITableViewCell()
                 self.tableView.scrollToRow(at: indexpath, at: .bottom, animated: true)
             }
         }
-
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -268,3 +267,4 @@ extension Date {
     
     
 }
+

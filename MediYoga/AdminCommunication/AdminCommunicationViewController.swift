@@ -7,7 +7,8 @@
 
 import UIKit
 
-class AdminCommunicationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class AdminCommunicationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
    
 
     @IBOutlet weak var tableView: UITableView!
@@ -45,8 +46,19 @@ class AdminCommunicationViewController: UIViewController, UITableViewDelegate, U
         cell.imagechat.image = UIImage(named: image[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "AdminSegue", sender: self)
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AdminSegue" {
+            let VC:AdminComViewController = segue.destination as! AdminComViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            VC.GroupName = "Admin Group"
+            VC.GroupImage = image[indexPath.row]
+
+        }
+
+                }
 
 }

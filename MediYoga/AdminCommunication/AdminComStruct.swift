@@ -8,7 +8,10 @@
 import Foundation
 
 struct MessageDataAdmin {
-    let text: String
-    let isFirstUser: Bool
-
+    var text : String
+    var time : String
+    var isFirstUser : Bool
+    var sendimagebool : Bool
+    var sentimage:UIImage?
+    var sentlabel:String
 }
