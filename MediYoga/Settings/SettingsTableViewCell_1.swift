@@ -11,7 +11,6 @@ class SettingsTableViewCell_1: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("hi")
         // Initialization code
     }
 

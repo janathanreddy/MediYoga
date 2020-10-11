@@ -12,16 +12,13 @@ import UIKit
 class SignupViewController: UIViewController,UITextViewDelegate {
 
     var validation = Validation()
-    @IBOutlet weak var ErrorLabel: UILabel!
+    
     @IBOutlet weak var NameField: UITextField!
-    
     @IBOutlet weak var MobileNumberField: UITextField!
-    
     @IBOutlet weak var PasswordField: UITextField!
-    
     @IBOutlet weak var ConfirmPasswordField: UITextField!
-    
     @IBOutlet weak var SignupButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         SignupButton.clipsToBounds = true

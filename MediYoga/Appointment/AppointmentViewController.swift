@@ -20,15 +20,10 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     @IBOutlet weak var Todaytoptitle: UIButton!
     @IBOutlet weak var TodayBtn: UIButton!
     @IBOutlet weak var monthlybtn: UIButton!
-    
     @IBOutlet weak var Weeklybtn: UIButton!
     @IBOutlet weak var namesearch: UISearchBar!
-    @IBOutlet weak var BlurEffect: UIView!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet var NotesView: UIView!
-    
-    @IBOutlet weak var TextViewField: UITextView!
     
     let db = Firestore.firestore()
     var searching = false
@@ -49,10 +44,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         let format = DateFormatter()
         format.dateFormat = "MMMM d, yyyy"
         let formattedDate = format.string(from: date)
-//        currentdate = formattedDate
-//        print(currentdate)
         tableView.showsVerticalScrollIndicator = false
-//        appenddata()
         TodayWeeklyView.isHidden = true
         db.collection("appointments").whereField("appointment_date", isEqualTo: formattedDate).order(by: "appointment_time").getDocuments(){ (querySnapshot, error) in
                             if  error == nil && querySnapshot != nil {
@@ -78,49 +70,18 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        tableView.reloadData()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        tableView.reloadData()
-
-    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
-    
-
-    private func appenddata() {
-        
-        
-//        name_1.append(filternames(name: documentData["patient_first_name"] as! String,image:"35",age:documentData["patient_age"] as! Int,time:documentData["appointment_time"] as! String,ccd:"CCD",at:"AT.png"))
-//        name_1.append(filternames(name: "Roamanson",image:"35",age:"32",time:"8:40AM-8.50AM",ccd:"CCD",at:"AT.png"))
-//        name_1.append(filternames(name: "Jonny",image:"36",age:"31",time:"8:50AM-9.00AM",ccd:"CDD",at:"FC.png"))
-//        name_1.append(filternames(name: "Anderson",image:"37",age:"36",time:"9:00AM-9.10AM",ccd:"LDD",at:"old.png"))
-//        name_1.append(filternames(name: "BikiDev",image:"38",age:"37",time:"9.10AM-9.20AM",ccd:"CCD/LDD",at:"MT.png"))
-//        name_1.append(filternames(name: "Assik",image:"39",age:"26",time:"9:20AM-9.40AM",ccd:"CCD",at:"N.png"))
-//        name_1.append(filternames(name: "Kaamil",image:"40",age:"28",time:"9:40AM-10.00AM",ccd:"CDD",at:"AT.png"))
-//        name_1.append(filternames(name: "Johnson",image:"31",age:"29",time:"10:00AM-10.10AM",ccd:"LDD",at:"FC.png"))
-//        name_1.append(filternames(name: "Maclarn",image:"32",age:"31",time:"10:10AM-10.20AM",ccd:"CCD/LDD",at:"old.png"))
-//        name_1.append(filternames(name: "Chuva",image:"33",age:"22",time:"10:20AM-10.30AM",ccd:"LDD",at:"N.png"))
-//        name_1.append(filternames(name: "Lee",image:"34",age:"21",time:"10:30AM-10.40AM",ccd:"CCD",at:"MT.png"))
-        
-        
-//        searchedname_1 = name_1
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        if searching {
-//            return searchedname_1.count
-//        } else {
+        if searching {
+            return searchedname_1.count
+        } else {
             return name_1.count
-//        }
+        }
         
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -131,17 +92,17 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AppointmentTableViewCell
-//        if searching {
-//            cell.NameField.text = searchedname_1[indexPath.row].name
-//            cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
-//            cell.AgeField.text = searchedname_1[indexPath.row].age
-//            cell.TimeField.text = searchedname_1[indexPath.row].time
-//            cell.ccdField.text = searchedname_1[indexPath.row].ccd
-//            cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
-//            return cell
-//
-//        } else {
-//        print(name_1[indexPath.row].name,name_1[indexPath.row].age,name_1[indexPath.row].time)
+        if searching {
+            cell.NameField.text = searchedname_1[indexPath.row].name
+            cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
+            cell.AgeField.text = searchedname_1[indexPath.row].age
+            cell.TimeField.text = searchedname_1[indexPath.row].time
+            cell.ccdField.text = searchedname_1[indexPath.row].ccd
+            cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
+            return cell
+
+        } else {
+        print(name_1[indexPath.row].name,name_1[indexPath.row].age,name_1[indexPath.row].time)
         
                 cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
                 cell.NameField.text = name_1[indexPath.row].name
@@ -158,7 +119,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 
 //        }
 //
-//        return UITableViewCell()
+        return UITableViewCell()
             
         
         
@@ -175,54 +136,13 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //
 //
 //    }
-//    func animateIn(desiredView:UIView){
-//
-//        let backgroundView = self.view
-//        backgroundView?.addSubview(desiredView)
-//        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-//        desiredView.alpha = 0
-//        desiredView.center = backgroundView?.center as! CGPoint
-//        UIView.animate(withDuration: 0.3, animations: {
-//            desiredView.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
-//            desiredView.alpha = 1
-//
-//        })
-//
-//    }
-    
-//    func  animatedismiss(desiredView:UIView){
-//        UIView.animate(withDuration: 0.3, animations: {
-//            desiredView.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
-//            desiredView.alpha = 0
-//        },completion: { _ in desiredView.removeFromSuperview()} )
-//    }
-
-//    @IBAction func NotesButtonAction(_ sender: Any) {
-////        animateIn(desiredView: NotesView)
-////        animateIn(desiredView: BlurEffect)
-//
-//        performSegue(withIdentifier: "NotesSegue", sender: self)
-//
-//
-//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        name_1 = name[indexPath.row]
-//        age_1 = age[indexPath.row]
-//        time_1 = time[indexPath.row]
-//        ccd_1 = ccd[indexPath.row]
-//        image_1 = image[indexPath.row]
+        
         performSegue(withIdentifier: "DeatailofPatient", sender: self)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
 
 
 
-    }
-    @IBAction func CancelNotes(_ sender: Any) {
-//        animatedismiss(desiredView: BlurEffect)
-//        animatedismiss(desiredView: NotesView)
-    }
-    
-    @IBAction func OkNotes(_ sender: Any) {
     }
     
     

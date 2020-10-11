@@ -6,22 +6,20 @@
 //
 
 import UIKit
-//import FirebaseAuth
-//import Firebase
+import FirebaseAuth
+import Firebase
 
 class ViewController: UIViewController,UITextFieldDelegate{
    
     
     @IBOutlet weak var txtbc: NSLayoutConstraint!
-    var validation = Validation()
-
-    @IBOutlet weak var ErrorLabel: UILabel!
-    
-    let button = UIButton(type: .custom)
-    
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var MobileNoTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
+    
+    var validation = Validation()
+    let button = UIButton(type: .custom)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         LoginButton.layer.cornerRadius = 10
@@ -128,29 +126,4 @@ class ViewController: UIViewController,UITextFieldDelegate{
             performSegue(withIdentifier: "LoginToTab", sender: self)
         }
     }
-    
-    
-    
-
-    @IBAction func done(_ sender: UITextField) {
-        sender.resignFirstResponder()
-    }
-    
-    
-//    func validateFields() -> String? {
-//        if MobileNoTextField.text?.trimmingCharacters(in:.whitespacesAndNewlines)==""||PasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)==""{
-//            return "Please Fill in all Fields"
-//        }
-//        let cleanpassword=PasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if ViewController.isPasswordValid(cleanpassword)==false{
-//            return "Please Make Sure Your Password is at least 8 Characters, Contains a Special Character and a Number"
-//        }
-//        return nil
-//    }
-//    static func isPasswordValid(_ password : String) -> Bool {
-//
-//        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
-//        return passwordTest.evaluate(with: password)
-//    }
 }
-

@@ -199,10 +199,10 @@
 				2110038F2533231800018E34 /* CaseHistory */,
 				211003902533237500018E34 /* Validation */,
 				2155B41B252BA04600148B92 /* GoogleService-Info.plist */,
+				210E88CC25186F0500C59A6E /* Info.plist */,
+				210E88C925186F0500C59A6E /* LaunchScreen.storyboard */,
 				210E88C425186F0100C59A6E /* Main.storyboard */,
 				210E88C725186F0500C59A6E /* Assets.xcassets */,
-				210E88C925186F0500C59A6E /* LaunchScreen.storyboard */,
-				210E88CC25186F0500C59A6E /* Info.plist */,
 			);
 			path = MediYoga;
 			sourceTree = "<group>";

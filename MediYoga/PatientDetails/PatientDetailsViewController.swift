@@ -40,11 +40,6 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     var time:String = ""
     var cdd:String = ""
     var image:String = ""
-//    var Symptom = [PatientSymptoms]()
-//    var duration: Int?
-//    var type: String = ""
-//    var symptoms: String = ""
-
     let db = Firestore.firestore()
 
     var Headers:[String] = ["Symtoms","Diagnosis","Prescription","Lab Request"]

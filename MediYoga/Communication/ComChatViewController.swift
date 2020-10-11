@@ -32,17 +32,13 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                                   messagedata(text: "Where are you", time: "9.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
                                   messagedata(text: "i am Chennai You", time: "9.30 PM", isFirstUser: false,sendimagebool: false,sentlabel:""),
                                   messagedata(text: "okay", time: "10.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:"")]
-//    var imagestuct:[imageStruct] = [imageStruct(image: UIImage(named: "32")!, labelStruct: "", imagestruct_1: false)]
-//    var selectedbut:Bool?
     @IBOutlet weak var camerabutton: UIButton!
     let picker = UIImagePickerController()
     var images = [UIImage]()
     var imagename:String = ""
     var GroupName:String = ""
     var dateupdate: String?
-//    var isFirstUser: Bool = true
     var timeupdate: String?
-//    var sendimage:Bool? = false
     let imageCache = NSCache<AnyObject, AnyObject>()
 
     @IBOutlet weak var profileimage: UIImageView!
@@ -56,8 +52,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         profileimage.layer.cornerRadius = 23
         profileimage.clipsToBounds = true
         self.picker.delegate=self
-//        tableView.layer.borderWidth = 0.3
-//        tableView.layer.borderColor = UIColor.black.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         TextField.layer.cornerRadius = 13.0
@@ -111,9 +105,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        TextField.borderStyle = UITextField.BorderStyle.roundedRect
-//    }
     func date(){
         let currentDateTime = Date()
 
@@ -209,8 +200,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             return ComImageTableViewCell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
-//                   cell.updateMessageCell(by: message[indexPath.row])
-//            cell.trailingConstraint.isActive = true
             cell.messageBackgroundView.layer.cornerRadius = 16
             cell.CellMessageLabel.text = message[indexPath.row].text
                    cell.ReadCheckLabel.text = "unread"
@@ -227,9 +216,6 @@ return UITableViewCell()
                 let indexpath = IndexPath(row: self.message.count - 1, section: 0)
                 self.tableView.scrollToRow(at: indexpath, at: .bottom, animated: true)
             }
-            } else {
-                //
-            }
         }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -241,8 +227,7 @@ return UITableViewCell()
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-//        TextField.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         date()
         time()
         var textFromField:String = TextField.text!
@@ -252,8 +237,9 @@ return UITableViewCell()
             tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
             tableView.endUpdates()
             tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
-//        isFirstUser = !isFirstUser
-            TextField.text = ""}
+            TextField.text = ""
+            
+        }
        return true
         tableView.reloadData()
     }
