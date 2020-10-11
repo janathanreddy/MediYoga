@@ -51,8 +51,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
                 cell.PriscriptionLabel.text = names[indexPath.row]
         }
 
-//        cell.checkbtn.addTarget(self, action: #selector(checkmarck(_:)), for: .touchUpInside)
-//        cell.favbtn.addTarget(self, action: #selector(favourite(_:)), for: .touchUpInside)
         cell.celldelegate = self
         return cell
     }
@@ -64,12 +62,7 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     func onClickCell_1(index: Int) {
         print(index)
     }
-//    @objc func checkmarck(_ sender: UIButton){
-//        UIButton.isSelected = !buttonOutlet.isSelected
-//
-//    }
-//    @objc func favourite(_ sender: UIButton){
-//        UIButton.isSelected = !buttonOutlet.isSelected
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedname = names.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
         
@@ -107,11 +100,9 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         prescriptionLabel.isHidden = true
 
     }
-    //
-//    }
+    
     @IBAction func backsegue(_ sender: Any) {
         
-
         dismiss(animated: true, completion: nil)
 
     }
