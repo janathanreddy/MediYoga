@@ -13,7 +13,8 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
-class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate{
+class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, TableViewCellDelegate{
+    
    
     @IBOutlet weak var TodayWeeklyView: UIView!
     @IBOutlet weak var Todaytoptitle: UIButton!
@@ -50,7 +51,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         let formattedDate = format.string(from: date)
 //        currentdate = formattedDate
 //        print(currentdate)
-        print("outer \(formattedDate)")
         tableView.showsVerticalScrollIndicator = false
 //        appenddata()
         TodayWeeklyView.isHidden = true
@@ -120,7 +120,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //            return searchedname_1.count
 //        } else {
             return name_1.count
-        print(name_1.count)
 //        }
         
     }
@@ -131,7 +130,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApplicationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AppointmentTableViewCell
 //        if searching {
 //            cell.NameField.text = searchedname_1[indexPath.row].name
 //            cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
@@ -150,26 +149,32 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                 cell.TimeField.text = name_1[indexPath.row].time
                 cell.ccdField.text = name_1[indexPath.row].ccd
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
-                cell.notesbtn.tag = indexPath.row
-                cell.notesbtn.addTarget(self, action: #selector(cellbtntapped(sender:)), for: .touchUpInside)
+                cell.delegate = self
+                cell.index = indexPath
+
+//                cell.notesbtn.tag = indexPath.row
+//                cell.notesbtn.addTarget(self, action: #selector(cellbtntapped(sender:)), for: .touchUpInside)
                 return cell
 
 //        }
 //
-//        cell.delegate = self
-//        cell.index = indexPath
 //        return UITableViewCell()
             
         
         
         
     }
-    @objc func cellbtntapped(sender:UIButton){
-        
-        selectindex = sender.tag
-        print(sender.tag)
-         
+    
+    func didSelect(_ cell: UITableViewCell, _ button: UIButton) {
+        performSegue(withIdentifier: "NotesSegue", sender: self)
     }
+
+//    @objc func cellbtntapped(sender:UIButton){
+//
+//        selectindex = sender.tag
+//
+//
+//    }
 //    func animateIn(desiredView:UIView){
 //
 //        let backgroundView = self.view
@@ -192,14 +197,14 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //        },completion: { _ in desiredView.removeFromSuperview()} )
 //    }
 
-    @IBAction func NotesButtonAction(_ sender: Any) {
-//        animateIn(desiredView: NotesView)
-//        animateIn(desiredView: BlurEffect)
-        
+//    @IBAction func NotesButtonAction(_ sender: Any) {
+////        animateIn(desiredView: NotesView)
+////        animateIn(desiredView: BlurEffect)
+//
 //        performSegue(withIdentifier: "NotesSegue", sender: self)
-
-
-    }
+//
+//
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        name_1 = name[indexPath.row]
 //        age_1 = age[indexPath.row]
@@ -207,6 +212,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 //        ccd_1 = ccd[indexPath.row]
 //        image_1 = image[indexPath.row]
         performSegue(withIdentifier: "DeatailofPatient", sender: self)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+
 
 
     }
@@ -221,22 +228,26 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DeatailofPatient" {
+        if segue.identifier == "NotesSegue"{
+           if let indexPath_Notes = self.tableView.indexPathForSelectedRow{
+           let Notes:NOTESViewController = segue.destination as! NOTESViewController
+           Notes.patient_id = self.name_1[indexPath_Notes.row].patient_id
+           }
+       }
+        else if segue.identifier == "DeatailofPatient" {
+            if let indexPath = self.tableView.indexPathForSelectedRow{
+
             let VC:PatientDetailsViewController = segue.destination as! PatientDetailsViewController
-            let indexPath = self.tableView.indexPathForSelectedRow
-            VC.name = self.name_1[indexPath!.row].name
-            VC.image = self.name_1[indexPath!.row].image
-            VC.time = self.name_1[indexPath!.row].time
-            VC.age = self.name_1[indexPath!.row].age
-            VC.cdd = self.name_1[indexPath!.row].ccd
-            VC.patient_id = self.name_1[indexPath!.row].patient_id
+//            let indexPath = self.tableView.indexPathForSelectedRow
+            VC.name = self.name_1[indexPath.row].name
+            VC.image = self.name_1[indexPath.row].image
+            VC.time = self.name_1[indexPath.row].time
+            VC.age = self.name_1[indexPath.row].age
+            VC.cdd = self.name_1[indexPath.row].ccd
+            VC.patient_id = self.name_1[indexPath.row].patient_id
+                
             }
-        else if segue.identifier == "NotesSegue"{
-            let Notes:NOTESViewController = segue.destination as! NOTESViewController
-            let indexPath = self.tableView.indexPathForSelectedRow
-            Notes.patient_id = self.name_1[indexPath!.row].patient_id
-        }
-        
+            }
     }
     
     @IBAction func actionTodayWeekly(_ sender: Any) {
@@ -272,10 +283,8 @@ extension AppointmentViewController: UISearchBarDelegate {
         namesearch.showsCancelButton = false
         tableView.reloadData()
     }
-    
-    
-    
 }
+
 class filternames {
     let name: String
     let image: String
@@ -293,8 +302,4 @@ class filternames {
         self.at = at
         self.patient_id = patient_id
     }
- 
-    
-   
-    
 }

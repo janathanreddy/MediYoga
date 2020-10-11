@@ -96,7 +96,6 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
                         DispatchQueue.main.async {
                             self.PatientCollectionView.reloadData()
                         }
-                        
                 }
             }
 
@@ -108,11 +107,13 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         
     }
     @IBAction func labrequestactionbtn(_ sender: Any) {
+        
         print("labrequestactionbtn")
         
     }
     
     @IBAction func prescriptionactionbtn(_ sender: Any) {
+        
         print("prescriptionactionbtn")
 
     }

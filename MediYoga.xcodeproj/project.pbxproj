@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */; };
-		21005DD9251BE3F90078E470 /* LabRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */; };
 		21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DDD251BE4210078E470 /* LabRequestViewController.swift */; };
 		210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */; };
 		210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88BE25186F0100C59A6E /* AppDelegate.swift */; };
@@ -21,15 +20,12 @@
 		210E88E125186F0600C59A6E /* MediYogaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88E025186F0600C59A6E /* MediYogaUITests.swift */; };
 		2116C528251BD1B700E7C6F2 /* PriscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */; };
 		2116C52E251BD27000E7C6F2 /* PriscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */; };
-		2116C52F251BD27000E7C6F2 /* PriscriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */; };
 		211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */; };
 		2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2120D49A2528C457003332EF /* ComImageTableViewCell.swift */; };
 		2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2120D49B2528C457003332EF /* ComImageTableViewCell.xib */; };
 		212800CB2523906800110A10 /* ComChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CA2523906800110A10 /* ComChatViewController.swift */; };
 		212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CF252394ED00110A10 /* ComChatTableViewCell.swift */; };
-		212800D2252394ED00110A10 /* ComChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212800D0252394ED00110A10 /* ComChatTableViewCell.xib */; };
 		2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */; };
-		21550D5C2521CAF1004A46B9 /* DropDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21550D5A2521CAF1004A46B9 /* DropDown.xib */; };
 		2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */; };
 		2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */; };
 		2155B41C252BA04600148B92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2155B41B252BA04600148B92 /* GoogleService-Info.plist */; };
@@ -38,33 +34,20 @@
 		2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8042518A059005979E9 /* AppointmentViewController.swift */; };
 		2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A80D2518C2B8005979E9 /* CommunicationViewController.swift */; };
 		2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8122518D542005979E9 /* CommunicationTableViewCell.swift */; };
-		2176A8152518D542005979E9 /* CommunicationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8132518D542005979E9 /* CommunicationTableViewCell.xib */; };
-		2176A81B2518D56B005979E9 /* ApplicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8192518D56B005979E9 /* ApplicationTableViewCell.swift */; };
-		2176A81C2518D56B005979E9 /* ApplicationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A81A2518D56B005979E9 /* ApplicationTableViewCell.xib */; };
+		2176A81B2518D56B005979E9 /* AppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8192518D56B005979E9 /* AppointmentTableViewCell.swift */; };
 		2176A8272518DC7D005979E9 /* AdminCommunicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8262518DC7D005979E9 /* AdminCommunicationViewController.swift */; };
 		2176A82D2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A82B2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift */; };
-		2176A82E2518DCA4005979E9 /* AdminCommunicationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A82C2518DCA4005979E9 /* AdminCommunicationTableViewCell.xib */; };
 		2176A83A2518E063005979E9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8382518E063005979E9 /* SettingsTableViewCell.swift */; };
-		2176A83B2518E063005979E9 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8392518E063005979E9 /* SettingsTableViewCell.xib */; };
 		2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A83F2518E08B005979E9 /* SettingsViewController.swift */; };
 		2176A8492518E3A9005979E9 /* SettingsTableViewCell_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8472518E3A9005979E9 /* SettingsTableViewCell_1.swift */; };
-		2176A84A2518E3A9005979E9 /* SettingsTableViewCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8482518E3A9005979E9 /* SettingsTableViewCell_1.xib */; };
 		2176A8532518E3D3005979E9 /* SettingsTableViewCell_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8512518E3D3005979E9 /* SettingsTableViewCell_2.swift */; };
-		2176A8542518E3D3005979E9 /* SettingsTableViewCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8522518E3D3005979E9 /* SettingsTableViewCell_2.xib */; };
 		2176A85A2518E3F3005979E9 /* SettingsTableViewCell_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */; };
-		2176A85B2518E3F3005979E9 /* SettingsTableViewCell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2176A8592518E3F3005979E9 /* SettingsTableViewCell_3.xib */; };
-		21822110251C6F6D0022AD65 /* AdminChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2182210E251C6F6D0022AD65 /* AdminChatMessageCell.xib */; };
 		219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */; };
-		219846382521133A00E35F26 /* check historyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219846362521133A00E35F26 /* check historyTableViewCell.xib */; };
 		219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */; };
 		219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */; };
 		21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEA26E25262ED80049B4F7 /* Validation.swift */; };
-		21F37A892524FCE1002AD530 /* AdminComViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37A882524FCE0002AD530 /* AdminComViewController.swift */; };
-		21F37A8F2524FD1D002AD530 /* AdminComTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */; };
-		21F37A902524FD1D002AD530 /* AdminComTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */; };
 		21F37A952524FEF2002AD530 /* AdminComStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37A942524FEF2002AD530 /* AdminComStruct.swift */; };
 		21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */; };
-		21FBA7F4251B542000466C3A /* PatientDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */; };
 		21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */; };
 		7C541B3FE85A709F24A722B6 /* Pods_MediYoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA513AD305EC10D5F48867DD /* Pods_MediYoga.framework */; };
 		8A274245E8534C3902AB88C7 /* Pods_MediYogaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE56BF3C1DA5A2441C47788 /* Pods_MediYogaTests.framework */; };
@@ -91,7 +74,6 @@
 /* Begin PBXFileReference section */
 		0EE56BF3C1DA5A2441C47788 /* Pods_MediYogaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYogaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestTableViewCell.swift; sourceTree = "<group>"; };
-		21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabRequestTableViewCell.xib; sourceTree = "<group>"; };
 		21005DDD251BE4210078E470 /* LabRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestViewController.swift; sourceTree = "<group>"; };
 		210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		210E88BB25186F0100C59A6E /* MediYoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediYoga.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,15 +92,12 @@
 		210E88E225186F0600C59A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionViewController.swift; sourceTree = "<group>"; };
 		2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriscriptionTableViewCell.swift; sourceTree = "<group>"; };
-		2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriscriptionTableViewCell.xib; sourceTree = "<group>"; };
 		211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsViewController.swift; sourceTree = "<group>"; };
 		2120D49A2528C457003332EF /* ComImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComImageTableViewCell.swift; sourceTree = "<group>"; };
 		2120D49B2528C457003332EF /* ComImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComImageTableViewCell.xib; sourceTree = "<group>"; };
 		212800CA2523906800110A10 /* ComChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatViewController.swift; sourceTree = "<group>"; };
 		212800CF252394ED00110A10 /* ComChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatTableViewCell.swift; sourceTree = "<group>"; };
-		212800D0252394ED00110A10 /* ComChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatTableViewCell.xib; sourceTree = "<group>"; };
 		2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseHistoryViewController.swift; sourceTree = "<group>"; };
-		21550D5A2521CAF1004A46B9 /* DropDown.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDown.xib; sourceTree = "<group>"; };
 		2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiverTableViewCell.xib; sourceTree = "<group>"; };
 		2155B41B252BA04600148B92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -127,33 +106,20 @@
 		2176A8042518A059005979E9 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
 		2176A80D2518C2B8005979E9 /* CommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationViewController.swift; sourceTree = "<group>"; };
 		2176A8122518D542005979E9 /* CommunicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationTableViewCell.swift; sourceTree = "<group>"; };
-		2176A8132518D542005979E9 /* CommunicationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunicationTableViewCell.xib; sourceTree = "<group>"; };
-		2176A8192518D56B005979E9 /* ApplicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTableViewCell.swift; sourceTree = "<group>"; };
-		2176A81A2518D56B005979E9 /* ApplicationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApplicationTableViewCell.xib; sourceTree = "<group>"; };
+		2176A8192518D56B005979E9 /* AppointmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentTableViewCell.swift; sourceTree = "<group>"; };
 		2176A8262518DC7D005979E9 /* AdminCommunicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCommunicationViewController.swift; sourceTree = "<group>"; };
 		2176A82B2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCommunicationTableViewCell.swift; sourceTree = "<group>"; };
-		2176A82C2518DCA4005979E9 /* AdminCommunicationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminCommunicationTableViewCell.xib; sourceTree = "<group>"; };
 		2176A8382518E063005979E9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		2176A8392518E063005979E9 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		2176A83F2518E08B005979E9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		2176A8472518E3A9005979E9 /* SettingsTableViewCell_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell_1.swift; sourceTree = "<group>"; };
-		2176A8482518E3A9005979E9 /* SettingsTableViewCell_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell_1.xib; sourceTree = "<group>"; };
 		2176A8512518E3D3005979E9 /* SettingsTableViewCell_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell_2.swift; sourceTree = "<group>"; };
-		2176A8522518E3D3005979E9 /* SettingsTableViewCell_2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell_2.xib; sourceTree = "<group>"; };
 		2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell_3.swift; sourceTree = "<group>"; };
-		2176A8592518E3F3005979E9 /* SettingsTableViewCell_3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell_3.xib; sourceTree = "<group>"; };
-		2182210E251C6F6D0022AD65 /* AdminChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminChatMessageCell.xib; sourceTree = "<group>"; };
 		219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkhistoryTableViewCell.swift; sourceTree = "<group>"; };
-		219846362521133A00E35F26 /* check historyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "check historyTableViewCell.xib"; sourceTree = "<group>"; };
 		219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = labxibTableViewCell.swift; sourceTree = "<group>"; };
 		219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = labxibTableViewCell.xib; sourceTree = "<group>"; };
 		21CEA26E25262ED80049B4F7 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
-		21F37A882524FCE0002AD530 /* AdminComViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminComViewController.swift; sourceTree = "<group>"; };
-		21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminComTableViewCell.swift; sourceTree = "<group>"; };
-		21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminComTableViewCell.xib; sourceTree = "<group>"; };
 		21F37A942524FEF2002AD530 /* AdminComStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminComStruct.swift; sourceTree = "<group>"; };
 		21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
-		21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
 		21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga_MediYogaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		506500CD5534C269B507FCA1 /* Pods-MediYogaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.release.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,64 +184,25 @@
 		210E88BD25186F0100C59A6E /* MediYoga */ = {
 			isa = PBXGroup;
 			children = (
-				2120D49A2528C457003332EF /* ComImageTableViewCell.swift */,
-				2120D49B2528C457003332EF /* ComImageTableViewCell.xib */,
 				210E88BE25186F0100C59A6E /* AppDelegate.swift */,
 				210E88C025186F0100C59A6E /* SceneDelegate.swift */,
-				216661F92519266A000373DA /* SignupViewController.swift */,
-				210E88C225186F0100C59A6E /* ViewController.swift */,
-				2176A8042518A059005979E9 /* AppointmentViewController.swift */,
-				2176A8192518D56B005979E9 /* ApplicationTableViewCell.swift */,
+				2110038225331F7500018E34 /* Signup_Page */,
+				2110038325331FB100018E34 /* Login_Page */,
+				21100388253320D300018E34 /* Communication */,
+				2110038425331FE100018E34 /* Appointment */,
+				211003892533217D00018E34 /* AdminCommunication */,
+				2110038A253321D200018E34 /* Settings */,
+				2110038B2533221000018E34 /* ResetPassword */,
+				2110038C2533223300018E34 /* PatientDetails */,
+				2110038D2533227700018E34 /* Priscription */,
+				2110038E2533229900018E34 /* LabRequest */,
+				2110038F2533231800018E34 /* CaseHistory */,
+				211003902533237500018E34 /* Validation */,
 				2155B41B252BA04600148B92 /* GoogleService-Info.plist */,
-				2176A80D2518C2B8005979E9 /* CommunicationViewController.swift */,
-				2176A8122518D542005979E9 /* CommunicationTableViewCell.swift */,
-				2176A8262518DC7D005979E9 /* AdminCommunicationViewController.swift */,
-				2176A82B2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift */,
-				2176A83F2518E08B005979E9 /* SettingsViewController.swift */,
-				2176A8382518E063005979E9 /* SettingsTableViewCell.swift */,
-				2176A8472518E3A9005979E9 /* SettingsTableViewCell_1.swift */,
-				2176A8512518E3D3005979E9 /* SettingsTableViewCell_2.swift */,
-				2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */,
-				210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */,
-				211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */,
-				21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */,
-				21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */,
-				2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */,
-				2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */,
-				21005DDD251BE4210078E470 /* LabRequestViewController.swift */,
-				21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */,
-				219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */,
-				2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */,
-				219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */,
-				212800CA2523906800110A10 /* ComChatViewController.swift */,
-				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
-				21F37A882524FCE0002AD530 /* AdminComViewController.swift */,
-				21F37A8D2524FD1D002AD530 /* AdminComTableViewCell.swift */,
-				21F37A942524FEF2002AD530 /* AdminComStruct.swift */,
-				21CEA26E25262ED80049B4F7 /* Validation.swift */,
-				2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */,
 				210E88C425186F0100C59A6E /* Main.storyboard */,
 				210E88C725186F0500C59A6E /* Assets.xcassets */,
 				210E88C925186F0500C59A6E /* LaunchScreen.storyboard */,
 				210E88CC25186F0500C59A6E /* Info.plist */,
-				2176A8132518D542005979E9 /* CommunicationTableViewCell.xib */,
-				2176A81A2518D56B005979E9 /* ApplicationTableViewCell.xib */,
-				2176A82C2518DCA4005979E9 /* AdminCommunicationTableViewCell.xib */,
-				2176A8392518E063005979E9 /* SettingsTableViewCell.xib */,
-				2176A8482518E3A9005979E9 /* SettingsTableViewCell_1.xib */,
-				2176A8522518E3D3005979E9 /* SettingsTableViewCell_2.xib */,
-				2176A8592518E3F3005979E9 /* SettingsTableViewCell_3.xib */,
-				21FBA7F2251B542000466C3A /* PatientDetailsCollectionViewCell.xib */,
-				2116C52D251BD27000E7C6F2 /* PriscriptionTableViewCell.xib */,
-				2182210E251C6F6D0022AD65 /* AdminChatMessageCell.xib */,
-				21005DD7251BE3F90078E470 /* LabRequestTableViewCell.xib */,
-				219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */,
-				21550D5A2521CAF1004A46B9 /* DropDown.xib */,
-				219846362521133A00E35F26 /* check historyTableViewCell.xib */,
-				212800D0252394ED00110A10 /* ComChatTableViewCell.xib */,
-				21F37A8E2524FD1D002AD530 /* AdminComTableViewCell.xib */,
-				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
-				21674E5A2530D579007D1D13 /* NOTESViewController.swift */,
 			);
 			path = MediYoga;
 			sourceTree = "<group>";
@@ -296,6 +223,124 @@
 				210E88E225186F0600C59A6E /* Info.plist */,
 			);
 			path = MediYogaUITests;
+			sourceTree = "<group>";
+		};
+		2110038225331F7500018E34 /* Signup_Page */ = {
+			isa = PBXGroup;
+			children = (
+				216661F92519266A000373DA /* SignupViewController.swift */,
+			);
+			path = Signup_Page;
+			sourceTree = "<group>";
+		};
+		2110038325331FB100018E34 /* Login_Page */ = {
+			isa = PBXGroup;
+			children = (
+				210E88C225186F0100C59A6E /* ViewController.swift */,
+			);
+			path = Login_Page;
+			sourceTree = "<group>";
+		};
+		2110038425331FE100018E34 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				21674E5A2530D579007D1D13 /* NOTESViewController.swift */,
+				2176A8042518A059005979E9 /* AppointmentViewController.swift */,
+				2176A8192518D56B005979E9 /* AppointmentTableViewCell.swift */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		21100388253320D300018E34 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				2120D49A2528C457003332EF /* ComImageTableViewCell.swift */,
+				2176A80D2518C2B8005979E9 /* CommunicationViewController.swift */,
+				2176A8122518D542005979E9 /* CommunicationTableViewCell.swift */,
+				212800CA2523906800110A10 /* ComChatViewController.swift */,
+				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
+				2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */,
+				2120D49B2528C457003332EF /* ComImageTableViewCell.xib */,
+				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
+			);
+			path = Communication;
+			sourceTree = "<group>";
+		};
+		211003892533217D00018E34 /* AdminCommunication */ = {
+			isa = PBXGroup;
+			children = (
+				21F37A942524FEF2002AD530 /* AdminComStruct.swift */,
+				2176A8262518DC7D005979E9 /* AdminCommunicationViewController.swift */,
+				2176A82B2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift */,
+			);
+			path = AdminCommunication;
+			sourceTree = "<group>";
+		};
+		2110038A253321D200018E34 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2176A83F2518E08B005979E9 /* SettingsViewController.swift */,
+				2176A8382518E063005979E9 /* SettingsTableViewCell.swift */,
+				2176A8472518E3A9005979E9 /* SettingsTableViewCell_1.swift */,
+				2176A8512518E3D3005979E9 /* SettingsTableViewCell_2.swift */,
+				2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2110038B2533221000018E34 /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */,
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
+		2110038C2533223300018E34 /* PatientDetails */ = {
+			isa = PBXGroup;
+			children = (
+				211E7501251B27F500BFB6DC /* PatientDetailsViewController.swift */,
+				21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */,
+				21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */,
+			);
+			path = PatientDetails;
+			sourceTree = "<group>";
+		};
+		2110038D2533227700018E34 /* Priscription */ = {
+			isa = PBXGroup;
+			children = (
+				2116C527251BD1B700E7C6F2 /* PriscriptionViewController.swift */,
+				2116C52C251BD27000E7C6F2 /* PriscriptionTableViewCell.swift */,
+			);
+			path = Priscription;
+			sourceTree = "<group>";
+		};
+		2110038E2533229900018E34 /* LabRequest */ = {
+			isa = PBXGroup;
+			children = (
+				219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */,
+				219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */,
+				21005DDD251BE4210078E470 /* LabRequestViewController.swift */,
+				21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */,
+			);
+			path = LabRequest;
+			sourceTree = "<group>";
+		};
+		2110038F2533231800018E34 /* CaseHistory */ = {
+			isa = PBXGroup;
+			children = (
+				2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */,
+				219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */,
+			);
+			path = CaseHistory;
+			sourceTree = "<group>";
+		};
+		211003902533237500018E34 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				21CEA26E25262ED80049B4F7 /* Validation.swift */,
+			);
+			path = Validation;
 			sourceTree = "<group>";
 		};
 		A081B5B99C60B0434891A66F /* Frameworks */ = {
@@ -429,27 +474,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2176A84A2518E3A9005979E9 /* SettingsTableViewCell_1.xib in Resources */,
-				2176A83B2518E063005979E9 /* SettingsTableViewCell.xib in Resources */,
-				2176A85B2518E3F3005979E9 /* SettingsTableViewCell_3.xib in Resources */,
-				21FBA7F4251B542000466C3A /* PatientDetailsCollectionViewCell.xib in Resources */,
 				2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */,
-				2176A8152518D542005979E9 /* CommunicationTableViewCell.xib in Resources */,
-				219846382521133A00E35F26 /* check historyTableViewCell.xib in Resources */,
 				210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */,
-				21822110251C6F6D0022AD65 /* AdminChatMessageCell.xib in Resources */,
-				2176A81C2518D56B005979E9 /* ApplicationTableViewCell.xib in Resources */,
 				2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */,
-				21550D5C2521CAF1004A46B9 /* DropDown.xib in Resources */,
-				212800D2252394ED00110A10 /* ComChatTableViewCell.xib in Resources */,
 				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
-				21F37A902524FD1D002AD530 /* AdminComTableViewCell.xib in Resources */,
-				2176A8542518E3D3005979E9 /* SettingsTableViewCell_2.xib in Resources */,
-				2176A82E2518DCA4005979E9 /* AdminCommunicationTableViewCell.xib in Resources */,
-				21005DD9251BE3F90078E470 /* LabRequestTableViewCell.xib in Resources */,
 				219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */,
 				2155B41C252BA04600148B92 /* GoogleService-Info.plist in Resources */,
-				2116C52F251BD27000E7C6F2 /* PriscriptionTableViewCell.xib in Resources */,
 				210E88C625186F0100C59A6E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -589,13 +619,12 @@
 				2116C528251BD1B700E7C6F2 /* PriscriptionViewController.swift in Sources */,
 				210E88C325186F0100C59A6E /* ViewController.swift in Sources */,
 				2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */,
-				21F37A8F2524FD1D002AD530 /* AdminComTableViewCell.swift in Sources */,
 				21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */,
 				21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */,
 				21674E5B2530D579007D1D13 /* NOTESViewController.swift in Sources */,
 				212800CB2523906800110A10 /* ComChatViewController.swift in Sources */,
 				2176A8532518E3D3005979E9 /* SettingsTableViewCell_2.swift in Sources */,
-				2176A81B2518D56B005979E9 /* ApplicationTableViewCell.swift in Sources */,
+				2176A81B2518D56B005979E9 /* AppointmentTableViewCell.swift in Sources */,
 				210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */,
 				210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */,
 				21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */,
@@ -612,7 +641,6 @@
 				219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */,
 				2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */,
 				2176A8272518DC7D005979E9 /* AdminCommunicationViewController.swift in Sources */,
-				21F37A892524FCE1002AD530 /* AdminComViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

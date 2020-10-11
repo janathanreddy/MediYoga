@@ -573,7 +573,7 @@
                                     <constraint firstAttribute="width" constant="414" id="FSj-s3-DJr"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="92" id="y6r-XX-KmY" customClass="ApplicationTableViewCell" customModule="MediYoga" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="92" id="y6r-XX-KmY" customClass="AppointmentTableViewCell" customModule="MediYoga" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y6r-XX-KmY" id="xc4-Y8-cJi">
@@ -648,7 +648,7 @@
                                                     <state key="normal" image="note"/>
                                                     <state key="selected" image="note"/>
                                                     <connections>
-                                                        <action selector="NotesButtonAction:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="ZAo-3A-mya"/>
+                                                        <action selector="NotesAction:" destination="y6r-XX-KmY" eventType="touchUpInside" id="bUo-Ej-0lt"/>
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AT" translatesAutoresizingMaskIntoConstraints="NO" id="1yi-7n-eaD">

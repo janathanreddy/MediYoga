@@ -13,10 +13,11 @@ class NOTESViewController: UIViewController, UITextViewDelegate {
     var patient_id:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         TextViewNotes.layer.borderColor = UIColor.systemGray4.cgColor
         TextViewNotes.layer.borderWidth = 0.8
         TextViewNotes.delegate = self
-        print(patient_id)
+        print("NOTESViewController patient_id :\(patient_id)")
         TextViewNotes.resignFirstResponder()
 
 

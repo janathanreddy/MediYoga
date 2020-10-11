@@ -11,9 +11,10 @@ protocol TableViewCellDelegate: class {
   func didSelect(_ cell: UITableViewCell ,_ button: UIButton)
 }
 
-class ApplicationTableViewCell: UITableViewCell {
-//    var index: IndexPath?
-//    weak var delegate: TableViewCellDelegate?
+
+class AppointmentTableViewCell: UITableViewCell {
+    var index: IndexPath?
+    weak var delegate: TableViewCellDelegate?
     @IBOutlet weak var appointmentimage: UIImageView!
     @IBOutlet weak var NameField: UILabel!
     @IBOutlet weak var AgeField: UILabel!
@@ -36,7 +37,7 @@ class ApplicationTableViewCell: UITableViewCell {
     }
     
     @IBAction func NotesAction(_ sender: Any) {
-//        delegate?.didSelect(self, sender as! UIButton)
+        delegate?.didSelect(self, sender as! UIButton)
     }
     
     
