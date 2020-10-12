@@ -6,21 +6,39 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCore
+import FirebaseABTesting
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 class NOTESViewController: UIViewController, UITextViewDelegate {
     
+    let db = Firestore.firestore()
     @IBOutlet weak var TextViewNotes: UITextView!
     var patient_id:String = ""
+    var documentID:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
         TextViewNotes.layer.borderColor = UIColor.systemGray4.cgColor
         TextViewNotes.layer.borderWidth = 0.8
-        TextViewNotes.delegate = self
-        print("NOTESViewController patient_id :\(patient_id)")
         TextViewNotes.resignFirstResponder()
-
-
+        TextViewNotes.delegate = self
+        
+        
+        db.collection("appointments").whereField("patient_id", isEqualTo: patient_id).getDocuments(){ (querySnapshot, error) in
+                            if  error == nil && querySnapshot != nil {
+                            for document in querySnapshot!.documents {
+                                
+                            let documentData = document.data()
+                            self.documentID = document.documentID
+                            self.TextViewNotes.text = documentData["notes"] as! String
+                            
+                            }
+                        }
+                        }
     }
     
 
@@ -30,6 +48,9 @@ class NOTESViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func OkayAct(_ sender: Any) {
+        
+        let newDocument = db.collection("appointments").document(documentID)
+        newDocument.updateData(["notes": TextViewNotes.text!])
         self.dismiss(animated: true, completion: nil)
 
     }

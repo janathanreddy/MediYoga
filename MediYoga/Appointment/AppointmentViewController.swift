@@ -13,10 +13,8 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
-class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, TableViewCellDelegate{
+class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, TableViewCellindex{
     
-    
-   
     @IBOutlet weak var TodayWeeklyView: UIView!
     @IBOutlet weak var Todaytoptitle: UIButton!
     @IBOutlet weak var TodayBtn: UIButton!
@@ -31,6 +29,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var name_1 = [filternames]()
     var searchedname_1 = [filternames]()
     var selectindex: Int = 0
+    var selectedpatient_id:String = ""
     var patient_id_notes:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +37,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 92
-//        TextViewField.layer.borderColor = UIColor.systemGray.cgColor
-//        TextViewField.layer.borderWidth = 0.8
         self.navigationItem.setHidesBackButton(true, animated: true)
         let date = Date()
         let format = DateFormatter()
@@ -94,32 +91,30 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AppointmentTableViewCell
         if searching {
+            
             cell.NameField.text = searchedname_1[indexPath.row].name
             cell.appointmentimage.image = UIImage(named: searchedname_1[indexPath.row].image)
             cell.AgeField.text = searchedname_1[indexPath.row].age
             cell.TimeField.text = searchedname_1[indexPath.row].time
             cell.ccdField.text = searchedname_1[indexPath.row].ccd
             cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
+            
             return cell
 
         } else {
-        print(name_1[indexPath.row].name,name_1[indexPath.row].age,name_1[indexPath.row].time)
-        
+            
                 cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
                 cell.NameField.text = name_1[indexPath.row].name
                 cell.AgeField.text = name_1[indexPath.row].age
                 cell.TimeField.text = name_1[indexPath.row].time
                 cell.ccdField.text = name_1[indexPath.row].ccd
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
-                cell.delegate = self
+                cell.celldelegate = self
                 cell.index = indexPath
-
-//                cell.notesbtn.tag = indexPath.row
-//                cell.notesbtn.addTarget(self, action: #selector(cellbtntapped(sender:)), for: .touchUpInside)
                 return cell
 
         }
-//
+
         return UITableViewCell()
             
         
@@ -127,22 +122,20 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         
     }
     
-    func didSelect(_ cell: UITableViewCell, _ button: UIButton) {
+    
+    func OnTouch(index: Int) {
+        
+        selectedpatient_id = name_1[index].patient_id
         performSegue(withIdentifier: "NotesSegue", sender: self)
+
     }
 
-//    @objc func cellbtntapped(sender:UIButton){
-//
-//        selectindex = sender.tag
-//
-//
-//    }
+    
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         performSegue(withIdentifier: "DeatailofPatient", sender: self)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-
-
 
     }
     
@@ -150,23 +143,22 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NotesSegue"{
-           if let indexPath_Notes = self.tableView.indexPathForSelectedRow{
+
            let Notes:NOTESViewController = segue.destination as! NOTESViewController
-           Notes.patient_id = self.name_1[indexPath_Notes.row].patient_id
-           }
+           Notes.patient_id = selectedpatient_id
+            
        }
         else if segue.identifier == "DeatailofPatient" {
             if let indexPath = self.tableView.indexPathForSelectedRow{
 
             let VC:PatientDetailsViewController = segue.destination as! PatientDetailsViewController
-//            let indexPath = self.tableView.indexPathForSelectedRow
             VC.name = self.name_1[indexPath.row].name
             VC.image = self.name_1[indexPath.row].image
             VC.time = self.name_1[indexPath.row].time
             VC.age = self.name_1[indexPath.row].age
             VC.cdd = self.name_1[indexPath.row].ccd
             VC.patient_id = self.name_1[indexPath.row].patient_id
-                
+
             }
             }
     }
@@ -225,4 +217,5 @@ class filternames {
         self.patient_id = patient_id
     }
 }
+
 

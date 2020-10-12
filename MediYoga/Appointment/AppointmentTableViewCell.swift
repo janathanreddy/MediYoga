@@ -7,14 +7,16 @@
 
 import UIKit
 
-protocol TableViewCellDelegate: class {
-  func didSelect(_ cell: UITableViewCell ,_ button: UIButton)
+protocol TableViewCellindex {
+    func OnTouch(index: Int)
 }
 
 
 class AppointmentTableViewCell: UITableViewCell {
+    
     var index: IndexPath?
-    weak var delegate: TableViewCellDelegate?
+    var celldelegate: TableViewCellindex?
+    
     @IBOutlet weak var appointmentimage: UIImageView!
     @IBOutlet weak var NameField: UILabel!
     @IBOutlet weak var AgeField: UILabel!
@@ -37,7 +39,7 @@ class AppointmentTableViewCell: UITableViewCell {
     }
     
     @IBAction func NotesAction(_ sender: Any) {
-        delegate?.didSelect(self, sender as! UIButton)
+        celldelegate?.OnTouch(index: index!.row)
     }
     
     
