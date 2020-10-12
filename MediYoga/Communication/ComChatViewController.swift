@@ -19,18 +19,15 @@ struct messagedata {
 }
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-     var messages = [messagedata]()
     
-    var trailingConstraint:NSLayoutConstraint!
-    var leadingConstraint:NSLayoutConstraint!
 
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
-    var message: [messagedata] = [messagedata(text: "Hi,Hello", time: "7.00 PM", isFirstUser: false, sendimagebool: false,sentlabel:""),
+    var message: [messagedata] = [messagedata(text: "Hi,Hello", time: "7.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
                                   messagedata(text: "How are you", time: "8.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "fine you", time: "8.30 PM", isFirstUser: false, sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "fine you", time: "8.30 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
                                   messagedata(text: "Where are you", time: "9.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "i am Chennai You", time: "9.30 PM", isFirstUser: false,sendimagebool: false,sentlabel:""),
+                                  messagedata(text: "i am Chennai You", time: "9.30 PM", isFirstUser: true ,sendimagebool: false,sentlabel:""),
                                   messagedata(text: "okay", time: "10.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:"")]
     @IBOutlet weak var camerabutton: UIButton!
     let picker = UIImagePickerController()
@@ -153,7 +150,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             scrollToBottom()
 
                 } else {
-                    print("something wrong in image picking")
+                    print("Check Image Code Error !!!")
                 }
                 
                 self.dismiss(animated: true, completion: nil)
@@ -174,7 +171,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
 
-//                   cell.updateMessageCell(by: message[indexPath.row])
             cell.messageBackgroundView.layer.cornerRadius = 16
             cell.CellMessageLabel.text = message[indexPath.row].text
                    cell.ReadCheckLabel.text = "unread"
@@ -197,7 +193,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
             }
             return ComImageTableViewCell
-        }else{
+        }
+            else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
             cell.messageBackgroundView.layer.cornerRadius = 16
             cell.CellMessageLabel.text = message[indexPath.row].text
@@ -209,6 +206,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
 return UITableViewCell()
 
     }
+    
     func scrollToBottom() {
             if message.count >= 5 {
             DispatchQueue.main.async {
@@ -217,6 +215,7 @@ return UITableViewCell()
             }
         }
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -245,26 +244,9 @@ return UITableViewCell()
 
     
 }
-extension Date {
-    static func dateFromCustomString(customString: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        return dateFormatter.date(from: customString) ?? Date()
-    }
-    
-    func reduceToMonthDayYear() -> Date {
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: self)
-        let day = calendar.component(.day, from: self)
-        let year = calendar.component(.year, from: self)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        return dateFormatter.date(from: "\(month)/\(day)/\(year)") ?? Date()
-    }
     
     
     
     
-    
-}
+
 

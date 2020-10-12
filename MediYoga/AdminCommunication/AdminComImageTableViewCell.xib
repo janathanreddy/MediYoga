@@ -20,35 +20,29 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIm-88-TWS">
                         <rect key="frame" x="154" y="15" width="240" height="157"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="za1-PE-AXJ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="za1-PE-AXJ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDx-wL-bzX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDx-wL-bzX">
                                 <rect key="frame" x="0.0" y="128" width="240" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="382-8u-cOO"/>
-                                    <constraint firstAttribute="height" constant="29" id="WKg-sd-tlQ"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="WDx-wL-bzX" secondAttribute="bottom" id="3Jy-ZK-TSa"/>
-                            <constraint firstAttribute="trailing" secondItem="za1-PE-AXJ" secondAttribute="trailing" id="47e-BZ-Oh6"/>
-                            <constraint firstItem="za1-PE-AXJ" firstAttribute="leading" secondItem="oIm-88-TWS" secondAttribute="leading" id="LAD-4D-Ayj"/>
-                            <constraint firstItem="WDx-wL-bzX" firstAttribute="leading" secondItem="oIm-88-TWS" secondAttribute="leading" id="LlZ-pF-OsA"/>
-                            <constraint firstItem="WDx-wL-bzX" firstAttribute="top" secondItem="za1-PE-AXJ" secondAttribute="bottom" id="bYh-HV-n6R"/>
-                            <constraint firstAttribute="trailing" secondItem="WDx-wL-bzX" secondAttribute="trailing" id="cDN-28-Jdf"/>
-                            <constraint firstItem="za1-PE-AXJ" firstAttribute="top" secondItem="oIm-88-TWS" secondAttribute="top" id="sT8-JE-NUr"/>
+                            <constraint firstAttribute="height" constant="157" id="3pD-pV-2Of"/>
+                            <constraint firstAttribute="width" constant="240" id="fib-ch-Pw4"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="oIm-88-TWS" secondAttribute="trailing" constant="20" id="39g-XX-2bL"/>
                     <constraint firstItem="oIm-88-TWS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="AUD-bV-M6z"/>
+                    <constraint firstItem="oIm-88-TWS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="154" id="GUA-IU-vXe"/>
                     <constraint firstAttribute="bottom" secondItem="oIm-88-TWS" secondAttribute="bottom" constant="15" id="Ted-9f-eRa"/>
                 </constraints>
             </tableViewCellContentView>
@@ -62,8 +56,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

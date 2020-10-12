@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class AdminCommunicationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
    
 
@@ -55,7 +54,7 @@ class AdminCommunicationViewController: UIViewController, UITableViewDelegate, U
             let VC:AdminComViewController = segue.destination as! AdminComViewController
             let indexPath = self.tableView.indexPathForSelectedRow
             VC.GroupName = "Admin Group"
-            VC.GroupImage = image[indexPath.row]
+            VC.GroupImage = image[indexPath!.row]
 
         }
 
