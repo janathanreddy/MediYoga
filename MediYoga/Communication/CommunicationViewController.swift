@@ -25,10 +25,9 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 70
-        self.navigationItem.setHidesBackButton(true, animated: true)
         NameSearch.delegate = self
         appenddata()
-        tableView.reloadData()
+        NameSearch.showsScopeBar = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +45,9 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching {
             return searchedname_1.count
-        }else{
-            return name_1.count}
     }
+
     private func appenddata() {
         name_1.append(filtername(name: "Roamanson",image:"35"))
         name_1.append(filtername(name: "Jonny",image:"36"))
@@ -59,45 +56,45 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         name_1.append(filtername(name: "Assik",image:"39"))
         name_1.append(filtername(name: "Kaamil",image:"40"))
         
-//        searchedname_1 = name_1
+        searchedname_1 = name_1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CommunicationTableViewCell
-        if searching{
-            cell.chatimage.image = UIImage(named: searchedname_1[indexPath.row].image)
-            cell.nameField.text = searchedname_1[indexPath.row].name
-            return cell
-
-        }else{
-            cell.chatimage.image = UIImage(named: name_1[indexPath.row].image)
-            cell.nameField.text = name_1[indexPath.row].name
-            return cell
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? CommunicationTableViewCell else {
+            return UITableViewCell()
         }
-        return UITableViewCell()
+        cell.nameField.text = searchedname_1[indexPath.row].name
+        cell.chatimage.image = UIImage(named:searchedname_1[indexPath.row].image)
+        return cell
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue!, sender: Any?){
-//
-//        let navVC = segue.destination as! UINavigationController
-//
-//        let tableVC = navVC.viewControllers.first as! CommunicationChatViewController
-//        var indexpath = self.tableView.indexPathForSelectedRow
-//        tableVC.GroupName = name_1[indexpath!.row].name
-//        tableVC.imagename = name_1[indexpath!.row].image
-//    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedname_1 = name_1.filter({$0.name.contains(searchText)})
-        searching = true
+        
+        searchedname_1 = name_1.filter({ filtername -> Bool in
+            switch searchBar.selectedScopeButtonIndex {
+            case 0:
+                if searchText.isEmpty { return true }
+                return filtername.name.lowercased().contains(searchText.lowercased())
+            default:
+                return false
+            }
+        })
         tableView.reloadData()
-
-       
     }
     
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        switch selectedScope {
+        case 0:
+            searchedname_1 = name_1
+        
+        default:
+            break
+        }
+        tableView.reloadData()
+    }
+
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         NameSearch.resignFirstResponder()
@@ -126,6 +123,8 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
                 }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
         performSegue(withIdentifier: "ComSegue_1", sender: self)
         return tableView.deselectRow(at: indexPath, animated: true)
     }

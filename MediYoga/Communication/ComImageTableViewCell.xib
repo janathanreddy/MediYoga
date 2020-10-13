@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComImageTableViewCell" rowHeight="187" id="KGk-i7-Jjw" customClass="ComImageTableViewCell" customModule="MediYoga" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="187"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="187"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -43,7 +43,7 @@
                 <constraints>
                     <constraint firstItem="8fN-0N-oIB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="EBo-eF-5Rj"/>
                     <constraint firstAttribute="bottom" secondItem="8fN-0N-oIB" secondAttribute="bottom" constant="15" id="KEY-77-bBK"/>
-                    <constraint firstAttribute="trailing" secondItem="8fN-0N-oIB" secondAttribute="trailing" constant="45" id="VH8-Dj-xuJ"/>
+                    <constraint firstAttribute="trailing" secondItem="8fN-0N-oIB" secondAttribute="trailing" constant="20" id="VH8-Dj-xuJ"/>
                     <constraint firstItem="8fN-0N-oIB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="154" id="z0S-Q0-0Tt"/>
                 </constraints>
             </tableViewCellContentView>

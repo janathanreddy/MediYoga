@@ -27,7 +27,6 @@ class NOTESViewController: UIViewController, UITextViewDelegate {
         TextViewNotes.resignFirstResponder()
         TextViewNotes.delegate = self
         
-        
         db.collection("appointments").whereField("patient_id", isEqualTo: patient_id).getDocuments(){ (querySnapshot, error) in
                             if  error == nil && querySnapshot != nil {
                             for document in querySnapshot!.documents {
@@ -41,6 +40,13 @@ class NOTESViewController: UIViewController, UITextViewDelegate {
                         }
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            TextViewNotes.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 
     @IBAction func CancelAct(_ sender: Any) {
         
