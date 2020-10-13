@@ -33,7 +33,7 @@ class NOTESViewController: UIViewController, UITextViewDelegate {
                                 
                             let documentData = document.data()
                             self.documentID = document.documentID
-                            self.TextViewNotes.text = documentData["notes"] as! String
+                                self.TextViewNotes.text = (documentData["notes"] as! String)
                             
                             }
                         }

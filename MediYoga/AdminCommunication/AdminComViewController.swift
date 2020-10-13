@@ -52,7 +52,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         View_Chat_Image.image = UIImage(named: GroupImage)
         View_Chat_Name.text = GroupName
         let tapRecognizer = UITapGestureRecognizer()
-        tapRecognizer.addTarget(self, action: "didTapView")
+        tapRecognizer.addTarget(self, action: #selector(self.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
         
         tableView.register(UINib(nibName: "AdminComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "AdminImageCell")
@@ -220,7 +220,7 @@ return UITableViewCell()
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         date()
         time()
-        var textFromField:String = ChatTextField.text!
+        let textFromField:String = ChatTextField.text!
         if ChatTextField != nil{
             message.append(MessageDataAdmin(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: ""))
             tableView.beginUpdates()

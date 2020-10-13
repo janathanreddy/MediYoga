@@ -45,7 +45,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        profileimage.layer.cornerRadius = 23
+        profileimage.layer.cornerRadius = 20
         profileimage.clipsToBounds = true
         self.picker.delegate=self
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -56,7 +56,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         profileimage.image = UIImage(named: imagename)
         MessageLabel.text = GroupName
         let tapRecognizer = UITapGestureRecognizer()
-        tapRecognizer.addTarget(self, action: "didTapView")
+        tapRecognizer.addTarget(self, action: #selector(self.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
         
         tableView.register(UINib(nibName: "ComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComImageTableViewCell")
@@ -82,7 +82,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
 
                 tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
                 contentInset.bottom = keyBoardRect!.height
-                let indexpath = NSIndexPath(row: 1, section: 0)
+                _ = NSIndexPath(row: 1, section: 0)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.view.layoutIfNeeded()
                 })
@@ -228,7 +228,7 @@ return UITableViewCell()
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         date()
         time()
-        var textFromField:String = TextField.text!
+        let textFromField:String = TextField.text!
         if TextField != nil{
             message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: ""))
             tableView.beginUpdates()

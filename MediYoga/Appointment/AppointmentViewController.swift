@@ -49,12 +49,12 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 
                             for document in querySnapshot!.documents {
                             let documentData = document.data()
-                            var patient_first_name = documentData["patient_first_name"] as! String
-                            var patient_id = documentData["patient_id"] as! String
-                            var patient_age = String(documentData["patient_age"] as! Int)
-                            var patient_gender = documentData["patient_gender"]as! String
-                            var appointment_time = documentData["appointment_time"] as! String
-                            var appointment_date = documentData["appointment_date"] as! String
+                            let patient_first_name = documentData["patient_first_name"] as! String
+                            let patient_id = documentData["patient_id"] as! String
+                            let patient_age = String(documentData["patient_age"] as! Int)
+                            let patient_gender = documentData["patient_gender"]as! String
+                            let appointment_time = documentData["appointment_time"] as! String
+                            let appointment_date = documentData["appointment_date"] as! String
                             
                                 self.name_1.append(filternames(name: patient_first_name,image:"35",age:patient_age,time:appointment_time,ccd:"CCD",at:"AT.png",patient_id:patient_id))
 

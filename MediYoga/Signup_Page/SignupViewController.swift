@@ -24,11 +24,11 @@ class SignupViewController: UIViewController,UITextViewDelegate {
         SignupButton.clipsToBounds = true
         SignupButton.layer.cornerRadius = 10
         
-        NameField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
-        MobileNumberField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        NameField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
+        MobileNumberField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
 
-        PasswordField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
-        ConfirmPasswordField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        PasswordField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
+        ConfirmPasswordField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
 
         
     }

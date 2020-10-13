@@ -31,8 +31,8 @@ class ViewController: UIViewController,UITextFieldDelegate{
         PasswordTextField.rightView = button
         PasswordTextField.rightViewMode = .always
         PasswordTextField.isSecureTextEntry = true
-        PasswordTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
-        MobileNoTextField.addTarget(nil, action:"firstResponderAction:", for:.editingDidEndOnExit)
+        PasswordTextField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
+        MobileNoTextField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
         MobileNoTextField.delegate = self
         PasswordTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCore
+import FirebaseABTesting
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 class CommunicationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
     
     
-    
+    let db = Firestore.firestore()
     @IBOutlet weak var SearchButton: UIButton!
     @IBOutlet weak var CommunicationLabel: UILabel!
     @IBOutlet weak var NameSearch: UISearchBar!
@@ -28,6 +34,18 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         NameSearch.delegate = self
         appenddata()
         NameSearch.showsScopeBar = false
+        
+        self.db.collection("patient_chat").getDocuments { (snapshot, err) in
+              if let err = err {
+                  print("Error getting documents: \(err)")
+              } else {
+                  for document in snapshot!.documents {
+                     let docId = document.documentID
+                     print(docId)
+                  }
+              }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +67,11 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     private func appenddata() {
+        
+        
+       
+        
+        
         name_1.append(filtername(name: "Roamanson",image:"35"))
         name_1.append(filtername(name: "Jonny",image:"36"))
         name_1.append(filtername(name: "Anderson",image:"37"))
