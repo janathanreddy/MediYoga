@@ -9,6 +9,7 @@ import UIKit
 
 class CommunicationTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ComDate: UILabel!
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var CountUnseen: UILabel!
     @IBOutlet weak var messageField: UILabel!

@@ -32,17 +32,33 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         tableView.rowHeight = 70
         NameSearch.delegate = self
-        appenddata()
         NameSearch.showsScopeBar = false
-        
         self.db.collection("patient_chat").getDocuments { (snapshot, err) in
               if let err = err {
                   print("Error getting documents: \(err)")
               } else {
                   for document in snapshot!.documents {
-                     let docId = document.documentID
-                     print(docId)
+                    let docId = document.documentID
+                    let documentData = document.data()
+                    let participant_name = documentData["jJU6FoDijkb3MOdu7Eeh"] as? [String:Any]
+                    let last_message = documentData["last_message"] as? String
+                    
+                    let last_message_time: Timestamp = documentData["last_message_time"] as! Timestamp
+                    let timeStamp = last_message_time.dateValue()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MMM yy"
+                    let firebasedate = dateFormatter.string(from: timeStamp)
+                    
+                    self.name_1.append(filtername(name: participant_name!["participant_name"] as! String, image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as! Int), date: firebasedate))
+
+                    self.searchedname_1 = self.name_1
+
+
                   }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+
               }
         }
         
@@ -66,21 +82,6 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
             return searchedname_1.count
     }
 
-    private func appenddata() {
-        
-        
-       
-        
-        
-        name_1.append(filtername(name: "Roamanson",image:"35"))
-        name_1.append(filtername(name: "Jonny",image:"36"))
-        name_1.append(filtername(name: "Anderson",image:"37"))
-        name_1.append(filtername(name: "BikiDev",image:"38"))
-        name_1.append(filtername(name: "Assik",image:"39"))
-        name_1.append(filtername(name: "Kaamil",image:"40"))
-        
-        searchedname_1 = name_1
-    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -89,6 +90,9 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         }
         cell.nameField.text = searchedname_1[indexPath.row].name
         cell.chatimage.image = UIImage(named:searchedname_1[indexPath.row].image)
+        cell.CountUnseen.text = searchedname_1[indexPath.row].unread
+        cell.messageField.text = searchedname_1[indexPath.row].message
+        cell.ComDate.text = searchedname_1[indexPath.row].date
         return cell
         
     }
@@ -165,8 +169,16 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
 class filtername {
     let name: String
     let image: String
-    init(name: String,image: String) {
+    let message: String
+    let unread: String
+    let date: String
+    init(name: String,image: String,message: String,unread: String,date: String) {
         self.name = name
         self.image = image
+        self.message  = message
+        self.unread = unread
+        self.date = date
     }
+    
+
 }
