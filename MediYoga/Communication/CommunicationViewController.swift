@@ -33,7 +33,7 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.rowHeight = 70
         NameSearch.delegate = self
         NameSearch.showsScopeBar = false
-        self.db.collection("patient_chat").getDocuments { (snapshot, err) in
+        self.db.collection("patient_chat").getDocuments { [self] (snapshot, err) in
               if let err = err {
                   print("Error getting documents: \(err)")
               } else {
@@ -42,18 +42,16 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
                     let documentData = document.data()
                     let participant_name = documentData["jJU6FoDijkb3MOdu7Eeh"] as? [String:Any]
                     let last_message = documentData["last_message"] as? String
-                    
+                    let ChatId = documentData["users"] as! [Any]
                     let last_message_time: Timestamp = documentData["last_message_time"] as! Timestamp
                     let timeStamp = last_message_time.dateValue()
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "MMM yy"
+                    dateFormatter.dateFormat = "MMM dd"
                     let firebasedate = dateFormatter.string(from: timeStamp)
+
+                    self.name_1.append(filtername(name: participant_name!["participant_name"] as! String, image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as! Int), date: firebasedate, UserId: ChatId[1] as! String, documentID: docId))
                     
-                    self.name_1.append(filtername(name: participant_name!["participant_name"] as! String, image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as! Int), date: firebasedate))
-
                     self.searchedname_1 = self.name_1
-
-
                   }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -65,17 +63,14 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,7 +89,6 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         cell.messageField.text = searchedname_1[indexPath.row].message
         cell.ComDate.text = searchedname_1[indexPath.row].date
         return cell
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -144,7 +138,8 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
             let indexPath = self.tableView.indexPathForSelectedRow
             VC.GroupName = name_1[indexPath!.row].name
             VC.imagename = name_1[indexPath!.row].image
-
+            VC.UserId = name_1[indexPath!.row].UserId
+            VC.documentID = name_1[indexPath!.row].documentID
         }
 
                 }
@@ -172,12 +167,16 @@ class filtername {
     let message: String
     let unread: String
     let date: String
-    init(name: String,image: String,message: String,unread: String,date: String) {
+    let UserId:String
+    let documentID:String
+    init(name: String,image: String,message: String,unread: String,date: String,UserId: String,documentID: String) {
         self.name = name
         self.image = image
         self.message  = message
         self.unread = unread
         self.date = date
+        self.UserId = UserId
+        self.documentID = documentID
     }
     
 

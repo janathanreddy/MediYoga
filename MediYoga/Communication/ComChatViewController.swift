@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 struct messagedata {
@@ -15,27 +16,23 @@ struct messagedata {
     var sendimagebool : Bool
     var sentimage:UIImage?
     var sentlabel:String
-
 }
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-
+    let db = Firestore.firestore()
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
-    var message: [messagedata] = [messagedata(text: "Hi,Hello", time: "7.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "How are you", time: "8.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "fine you", time: "8.30 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "Where are you", time: "9.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "i am Chennai You", time: "9.30 PM", isFirstUser: true ,sendimagebool: false,sentlabel:""),
-                                  messagedata(text: "okay", time: "10.00 PM", isFirstUser: true, sendimagebool: false,sentlabel:"")]
+    var message = [messagedata]()
     @IBOutlet weak var camerabutton: UIButton!
     let picker = UIImagePickerController()
     var images = [UIImage]()
     var imagename:String = ""
     var GroupName:String = ""
+    var UserId:String = ""
     var dateupdate: String?
     var timeupdate: String?
+    var documentID: String = ""
 
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
@@ -43,6 +40,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var MessageLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        messages()
+        print("UserId: \(UserId) , documentID: \(documentID)")
         tableView.delegate = self
         tableView.dataSource = self
         profileimage.layer.cornerRadius = 20
@@ -75,11 +74,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             let keyBoardRect = frame?.cgRectValue
             if let keyBoardHeight = keyBoardRect?.height {
                 self.ButtomSpace.constant = keyBoardHeight
-
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
-
                 self.tableView.contentInset = contentInset
-
                 tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
                 contentInset.bottom = keyBoardRect!.height
                 _ = NSIndexPath(row: 1, section: 0)
@@ -143,8 +139,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         date()
         time()
+        
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
             message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!))
+            
+            
             TextField.text = ""
             tableView.reloadData()
             scrollToBottom()
@@ -173,7 +172,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             cell.messageBackgroundView.layer.cornerRadius = 16
             cell.CellMessageLabel.text = message[indexPath.row].text
-                   cell.ReadCheckLabel.text = "unread"
+                   cell.ReadCheckLabel.text = "unread_1"
             cell.timeLabel.text = message[indexPath.row].time
                        return cell
         }
@@ -230,6 +229,12 @@ return UITableViewCell()
         time()
         let textFromField:String = TextField.text!
         if TextField != nil{
+            
+            db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": UserId,"sender_name": GroupName,"text": textFromField,"time_stamp": FieldValue.serverTimestamp(),"type": 0])
+            let newDocument = db.collection("patient_chat").document(documentID)
+            newDocument.updateData(["last_message": textFromField])
+
+            print(FieldValue.serverTimestamp())
             message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: ""))
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
@@ -242,7 +247,38 @@ return UITableViewCell()
         tableView.reloadData()
     }
 
+    func messages(){
     
+        db.collection("patient_chat").document(documentID).collection("messages").order(by: "time_stamp").getDocuments(){ [self] (snapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in snapshot!.documents {
+                    
+                  let docId = document.documentID
+                  let documentData = document.data()
+                  let time_Stamp = documentData["time_stamp"] as! Timestamp
+                  let timeStamp = time_Stamp.dateValue()
+                  let dateFormatter = DateFormatter()
+                  dateFormatter.amSymbol = "AM"
+                  dateFormatter.pmSymbol = "PM"
+                  dateFormatter.dateFormat = "hh:mm a"
+                  let ChatTime = dateFormatter.string(from: timeStamp)
+                let sender_id = documentData["sender_id"] as! String
+                    if sender_id == UserId {
+                        message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true, sendimagebool: false, sentlabel: ""))
+
+                    }
+                    
+                }
+              DispatchQueue.main.async {
+                  self.tableView.reloadData()
+              }
+
+            }
+      }
+        
+    }
 }
     
     
