@@ -232,7 +232,7 @@ return UITableViewCell()
             
             db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": UserId,"sender_name": GroupName,"text": textFromField,"time_stamp": FieldValue.serverTimestamp(),"type": 0])
             let newDocument = db.collection("patient_chat").document(documentID)
-            newDocument.updateData(["last_message": textFromField])
+            newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
             print(FieldValue.serverTimestamp())
             message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: ""))
