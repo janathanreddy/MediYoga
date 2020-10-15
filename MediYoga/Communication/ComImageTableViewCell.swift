@@ -12,6 +12,9 @@ class ComImageTableViewCell: UITableViewCell {
     @IBOutlet weak var sendimageview: UIView!
     @IBOutlet weak var sendimage: UIImageView!
     @IBOutlet weak var sendlabel: UILabel!
+    @IBOutlet weak var ReadCheck: UILabel!
+    @IBOutlet weak var ImageTime: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

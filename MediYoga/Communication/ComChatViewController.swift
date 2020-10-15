@@ -16,10 +16,15 @@ struct messagedata {
     var sendimagebool : Bool
     var sentimage:UIImage?
     var sentlabel:String
+    var url:String
 }
+
+
+
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    @IBOutlet weak var SelectedImageView: UIImageView!
     let db = Firestore.firestore()
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
@@ -33,6 +38,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var dateupdate: String?
     var timeupdate: String?
     var documentID: String = ""
+    var DoctorId: String = ""
+    var DoctorName: String = ""
 
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
@@ -40,8 +47,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var MessageLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        messages()
-        print("UserId: \(UserId) , documentID: \(documentID)")
+        print("UserId: \(DoctorId) , documentID: \(documentID)")
         tableView.delegate = self
         tableView.dataSource = self
         profileimage.layer.cornerRadius = 20
@@ -59,6 +65,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view.addGestureRecognizer(tapRecognizer)
         
         tableView.register(UINib(nibName: "ComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComImageTableViewCell")
+        
+        tableView.register(UINib(nibName:"ComChatReceiverTableViewCell", bundle: nil), forCellReuseIdentifier: "ComChatReceiverTableViewCell")
+        
+        messages()
 
         tableView.rowHeight = UITableView.automaticDimension
         scrollToBottom()
@@ -77,6 +87,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
                 self.tableView.contentInset = contentInset
                 tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
+
                 contentInset.bottom = keyBoardRect!.height
                 _ = NSIndexPath(row: 1, section: 0)
                 UIView.animate(withDuration: 0.5, animations: {
@@ -98,8 +109,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func date(){
+        
         let currentDateTime = Date()
-
         let formatter = DateFormatter()
         formatter.timeStyle = .none
         formatter.dateStyle = .medium
@@ -141,7 +152,38 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         time()
         
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
-            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!))
+            
+            SelectedImageView.image = images as! UIImage
+            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: ""))
+
+                let randomid = UUID.init().uuidString
+                let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/\(randomid).jpg")
+            guard let imagedata = self.SelectedImageView?.image?.jpegData(compressionQuality: 0.3) else {
+                    return
+                }
+                let uploadMetadata = StorageMetadata.init()
+                uploadref.putData(imagedata, metadata: uploadMetadata){(downloadMetaData,error) in
+                    if error != nil{
+                        print("error path meta uploaddata 1\(error?.localizedDescription)")
+                    return
+                    }
+                    print("\(String(describing: downloadMetaData))")
+
+                    uploadref.downloadURL(completion:  { [self] (url,error) in
+                        if error != nil
+                        {
+                            print("doewloadurl error msg \(error?.localizedDescription)")
+                            return
+                        }
+                        if url != nil {
+                            
+                            let url = url!.absoluteString
+                            db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "image","time_stamp": FieldValue.serverTimestamp(),"type": 1,"content_url": url])
+
+                        }
+                })
+                }
+            
             
             
             TextField.text = ""
@@ -149,42 +191,66 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             scrollToBottom()
 
                 } else {
-                    print("Check Image Code Error !!!")
+                    print("Check Image Code Error...!!!")
                 }
                 
                 self.dismiss(animated: true, completion: nil)
-        
-        
          }
     
-
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return message.count
+            return message.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if message[indexPath.row].isFirstUser == false{
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
-
-            cell.messageBackgroundView.layer.cornerRadius = 16
-            cell.CellMessageLabel.text = message[indexPath.row].text
-                   cell.ReadCheckLabel.text = "unread_1"
-            cell.timeLabel.text = message[indexPath.row].time
-                       return cell
+            let ComChatReceiverTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComChatReceiverTableViewCell", for: indexPath) as! ComChatReceiverTableViewCell
+            ComChatReceiverTableViewCell.ReceiverView.layer.cornerRadius = 16
+            ComChatReceiverTableViewCell.ReceiverLabel.text = message[indexPath.row].text
+            ComChatReceiverTableViewCell.ReadCheck.text = "unread"
+            ComChatReceiverTableViewCell.ReceiverTime.text = message[indexPath.row].time
+            return ComChatReceiverTableViewCell
         }
        
-        else if message[indexPath.row].sentimage != nil{
-                let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
+        else if message[indexPath.row].sendimagebool == true{
+            if message[indexPath.row].sentimage != nil{
+            let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
             ComImageTableViewCell.sendimageview.layer.cornerRadius = 10
             ComImageTableViewCell.sendimageview.clipsToBounds = true
             ComImageTableViewCell.sendimage.layer.cornerRadius = 10
             ComImageTableViewCell.sendimage.clipsToBounds = true
-
+            ComImageTableViewCell.ImageTime.text = message[indexPath.row].time
             ComImageTableViewCell.sendimage.image = message[indexPath.row].sentimage
+
+                if message[indexPath.row].sentlabel == ""{
+                    ComImageTableViewCell.sendlabel.isHidden = true
+                }else{
+                    ComImageTableViewCell.sendlabel.isHidden = false
+                    ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
+                }
+                return ComImageTableViewCell
+            }
+            let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
+            ComImageTableViewCell.sendimageview.layer.cornerRadius = 10
+            ComImageTableViewCell.sendimageview.clipsToBounds = true
+            ComImageTableViewCell.sendimage.layer.cornerRadius = 10
+            ComImageTableViewCell.sendimage.clipsToBounds = true
+            ComImageTableViewCell.ImageTime.text = message[indexPath.row].time
+            let storageref = Storage.storage().reference(forURL: message[indexPath.row].url)
+            
+            let fetchref = storageref.getData(maxSize: 4*1024*1024)
+            { data, error in
+                if error != nil {
+                    print("image Upload Error")
+             } else {
+
+                ComImageTableViewCell.sendimage.image = UIImage(data: data!)
+               self.reloadInputViews()
+             }
+            }
+//            ComImageTableViewCell.sendimage.image = message[indexPath.row].sentimage
             if message[indexPath.row].sentlabel == ""{
                 ComImageTableViewCell.sendlabel.isHidden = true
             }else{
@@ -230,12 +296,12 @@ return UITableViewCell()
         let textFromField:String = TextField.text!
         if TextField != nil{
             
-            db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": UserId,"sender_name": GroupName,"text": textFromField,"time_stamp": FieldValue.serverTimestamp(),"type": 0])
+            db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": textFromField,"time_stamp": FieldValue.serverTimestamp(),"type": 0])
             let newDocument = db.collection("patient_chat").document(documentID)
             newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
             print(FieldValue.serverTimestamp())
-            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: ""))
+            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: ""))
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
             tableView.endUpdates()
@@ -264,9 +330,28 @@ return UITableViewCell()
                   dateFormatter.pmSymbol = "PM"
                   dateFormatter.dateFormat = "hh:mm a"
                   let ChatTime = dateFormatter.string(from: timeStamp)
-                let sender_id = documentData["sender_id"] as! String
-                    if sender_id == UserId {
-                        message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true, sendimagebool: false, sentlabel: ""))
+                  let sender_id = documentData["sender_id"] as! String
+//                 print(documentData["type"] as! Int)
+                    
+                    if sender_id == DoctorId {
+//                        print("Doctor : \(documentData["text"] as! String)")
+                        if documentData["type"] as! Int == 0{
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: ""))
+                            
+                        }
+                        else if documentData["type"] as! Int == 1{
+                            
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String))
+
+                            print(documentData["text"] as! String)
+                            
+                        }
+
+                    }
+                    else if sender_id != DoctorId{
+//                        print("Patient : \(documentData["text"] as! String)")
+                        
+                        message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: ""))
 
                     }
                     
@@ -276,6 +361,7 @@ return UITableViewCell()
               }
 
             }
+            
       }
         
     }

@@ -9,6 +9,10 @@ import UIKit
 
 class ComChatReceiverTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ReceiverLabel: UILabel!
+    @IBOutlet weak var ReceiverView: UIView!
+    @IBOutlet weak var ReceiverTime: UILabel!
+    @IBOutlet weak var ReadCheck: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

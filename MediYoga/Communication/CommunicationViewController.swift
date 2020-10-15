@@ -17,9 +17,11 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     let db = Firestore.firestore()
+    
     @IBOutlet weak var SearchButton: UIButton!
     @IBOutlet weak var CommunicationLabel: UILabel!
     @IBOutlet weak var NameSearch: UISearchBar!
+    
     var searching = false
     
     var name_1 = [filtername]()
@@ -48,8 +50,7 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "MMM dd"
                     let firebasedate = dateFormatter.string(from: timeStamp)
-
-                    self.name_1.append(filtername(name: participant_name!["participant_name"] as! String, image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as! Int), date: firebasedate, UserId: ChatId[1] as! String, documentID: docId))
+                    self.name_1.append(filtername(name: participant_name!["participant_name"] as! String, image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as! Int), date: firebasedate, UserId: ChatId[1] as! String, documentID: docId, DoctorName: participant_name!["name"] as! String, DoctorId: ChatId[0] as! String ))
                     
                     self.searchedname_1 = self.name_1
                   }
@@ -140,8 +141,10 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
             VC.imagename = name_1[indexPath!.row].image
             VC.UserId = name_1[indexPath!.row].UserId
             VC.documentID = name_1[indexPath!.row].documentID
+            VC.DoctorId = name_1[indexPath!.row].DoctorId
+            VC.DoctorName = name_1[indexPath!.row].DoctorName
         }
-
+        
                 }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -169,7 +172,9 @@ class filtername {
     let date: String
     let UserId:String
     let documentID:String
-    init(name: String,image: String,message: String,unread: String,date: String,UserId: String,documentID: String) {
+    let DoctorName:String
+    let DoctorId:String
+    init(name: String,image: String,message: String,unread: String,date: String,UserId: String,documentID: String,DoctorName: String,DoctorId:String) {
         self.name = name
         self.image = image
         self.message  = message
@@ -177,6 +182,8 @@ class filtername {
         self.date = date
         self.UserId = UserId
         self.documentID = documentID
+        self.DoctorName = DoctorName
+        self.DoctorId = DoctorId
     }
     
 
