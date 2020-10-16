@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sg3-Kz-B2a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ukh-c8-hsh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -390,7 +390,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="ogR-Lk-V6f" customClass="AppointmentViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kPQ-vy-Zbt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search Appointment" translatesAutoresizingMaskIntoConstraints="NO" id="tKe-Ta-vEz">
@@ -1398,7 +1398,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="sPE-nm-AvD" customClass="AdminCommunicationViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dWL-SQ-OK6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yup-fM-6K6">
@@ -1533,7 +1533,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="WHW-eY-ysj" customClass="SettingsViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A5O-zw-q5t">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9pt-1v-PF8">
@@ -1873,7 +1873,7 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="UYI-Qa-4iX" customClass="NOTESViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TZY-sT-pPa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLh-JB-gHc">
@@ -1966,7 +1966,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="ukh-c8-hsh" customClass="CommunicationViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abf-lL-bEB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kva-sx-1a3">
@@ -2615,9 +2615,6 @@
                                         <rect key="frame" x="87" y="-20" width="240" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="32" translatesAutoresizingMaskIntoConstraints="NO" id="HSc-Xr-2B1">
-                                        <rect key="frame" x="53" y="-156" width="50" height="400"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtG-Fd-LRt">
                                         <rect key="frame" x="368" y="29" width="30" height="30"/>
                                         <state key="normal" image="call"/>
@@ -2644,14 +2641,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="32" translatesAutoresizingMaskIntoConstraints="NO" id="HSc-Xr-2B1">
+                                        <rect key="frame" x="54" y="19" width="50" height="51"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstItem="VYb-5g-PHf" firstAttribute="top" secondItem="Unk-lg-2MO" secondAttribute="top" id="4rs-n1-aVz"/>
                                     <constraint firstItem="VYb-5g-PHf" firstAttribute="top" secondItem="RtG-Fd-LRt" secondAttribute="top" id="BDH-oJ-XiF"/>
-                                    <constraint firstItem="HSc-Xr-2B1" firstAttribute="leading" secondItem="Unk-lg-2MO" secondAttribute="trailing" constant="7" id="Bat-p2-Iyf"/>
+                                    <constraint firstItem="HSc-Xr-2B1" firstAttribute="leading" secondItem="Unk-lg-2MO" secondAttribute="trailing" constant="8" id="Bat-p2-Iyf"/>
                                     <constraint firstItem="VYb-5g-PHf" firstAttribute="leading" secondItem="l1k-EI-jOO" secondAttribute="leading" constant="124" id="Bn3-cL-aac"/>
-                                    <constraint firstItem="VYb-5g-PHf" firstAttribute="leading" secondItem="HSc-Xr-2B1" secondAttribute="trailing" constant="21" id="KIu-aL-Dff"/>
+                                    <constraint firstItem="HSc-Xr-2B1" firstAttribute="top" secondItem="l1k-EI-jOO" secondAttribute="top" constant="19" id="Cby-S6-xkD"/>
+                                    <constraint firstItem="VYb-5g-PHf" firstAttribute="leading" secondItem="HSc-Xr-2B1" secondAttribute="trailing" constant="20" id="KIu-aL-Dff"/>
                                     <constraint firstItem="RtG-Fd-LRt" firstAttribute="leading" secondItem="VYb-5g-PHf" secondAttribute="trailing" constant="32" id="MH8-fj-lg6"/>
                                     <constraint firstAttribute="width" constant="414" id="Qim-ue-aml"/>
                                     <constraint firstItem="VYb-5g-PHf" firstAttribute="centerY" secondItem="HSc-Xr-2B1" secondAttribute="centerY" id="VKO-7j-g1o"/>

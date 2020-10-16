@@ -50,6 +50,8 @@
 		219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */; };
 		219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */; };
 		21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEA26E25262ED80049B4F7 /* Validation.swift */; };
+		21EB295A25398AA700D26F6F /* ComChatReceiveimageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */; };
+		21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */; };
 		21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */; };
 		21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */; };
 		7C541B3FE85A709F24A722B6 /* Pods_MediYoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA513AD305EC10D5F48867DD /* Pods_MediYoga.framework */; };
@@ -125,6 +127,8 @@
 		219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = labxibTableViewCell.swift; sourceTree = "<group>"; };
 		219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = labxibTableViewCell.xib; sourceTree = "<group>"; };
 		21CEA26E25262ED80049B4F7 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiveimageTableViewCell.swift; sourceTree = "<group>"; };
+		21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiveimageTableViewCell.xib; sourceTree = "<group>"; };
 		21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga_MediYogaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,6 +270,8 @@
 				212800CA2523906800110A10 /* ComChatViewController.swift */,
 				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
 				2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */,
+				21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */,
+				21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */,
 				2120D49B2528C457003332EF /* ComImageTableViewCell.xib */,
 				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
 			);
@@ -489,6 +495,7 @@
 				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
 				219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */,
 				211003A52533588400018E34 /* AdminComImageTableViewCell.xib in Resources */,
+				21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */,
 				2155B41C252BA04600148B92 /* GoogleService-Info.plist in Resources */,
 				210E88C625186F0100C59A6E /* Main.storyboard in Resources */,
 			);
@@ -639,6 +646,7 @@
 				210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */,
 				210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */,
 				21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */,
+				21EB295A25398AA700D26F6F /* ComChatReceiveimageTableViewCell.swift in Sources */,
 				211003A42533588400018E34 /* AdminComImageTableViewCell.swift in Sources */,
 				2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */,
 				2176A8492518E3A9005979E9 /* SettingsTableViewCell_1.swift in Sources */,
