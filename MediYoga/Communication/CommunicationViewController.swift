@@ -7,11 +7,6 @@
 
 import UIKit
 import Firebase
-import FirebaseCore
-import FirebaseABTesting
-import FirebaseAuth
-import FirebaseStorage
-import FirebaseDatabase
 
 class CommunicationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
     

@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 
 struct messagedata {
@@ -23,8 +24,13 @@ struct messagedata {
 
 
 
-class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
+    var soundRecorder : AVAudioRecorder!
+    var soundPlayer : AVAudioPlayer!
+    var fileName: String = "audioFile.m4a"
+
+    @IBOutlet weak var playNxt: UIButton!
     @IBOutlet weak var SelectedImageView: UIImageView!
     let db = Firestore.firestore()
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
@@ -74,6 +80,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         messages()
 
         tableView.rowHeight = UITableView.automaticDimension
+        
+        setupRecorder()
+        playNxt.isEnabled = false
+
         scrollToBottom()
     }
     
@@ -140,6 +150,12 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    @IBAction func mic(_ sender: Any) {
+        
+        
+        
+        
+    }
     @IBAction func CameraAction(_ sender: AnyObject) {
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
         picker.allowsEditing = true
@@ -147,6 +163,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         present(picker,animated: true,completion: nil)
 
     }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
              tableView.reloadData()
          }
@@ -267,8 +285,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComChatReceiveimageTableViewCell.ReceiverImage.layer.cornerRadius = 10
             ComChatReceiveimageTableViewCell.ReceiverImage.clipsToBounds = true
             ComChatReceiveimageTableViewCell.ReceiverTime.text = message[indexPath.row].time
-            print(message[indexPath.row].time)
-            print(message[indexPath.row].url)
             let storageref = Storage.storage().reference(forURL: message[indexPath.row].url)
             
             let fetchref = storageref.getData(maxSize: 4*1024*1024)
@@ -399,6 +415,54 @@ return UITableViewCell()
       }
         
     }
+    
+    
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func setupRecorder() {
+        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
+        let recordSetting = [ AVFormatIDKey : kAudioFormatAppleLossless,
+                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
+                              AVEncoderBitRateKey : 320000,
+                              AVNumberOfChannelsKey : 2,
+                              AVSampleRateKey : 44100.2] as [String : Any]
+        
+        do {
+            soundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting )
+            soundRecorder.delegate = self
+            soundRecorder.prepareToRecord()
+        } catch {
+            print(error)
+        }
+    }
+    
+    func setupPlayer() {
+        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: audioFilename)
+            soundPlayer.delegate = self
+            soundPlayer.prepareToPlay()
+            soundPlayer.volume = 1.0
+        } catch {
+            print(error)
+        }
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        playNxt.isEnabled = true
+    }
+    
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+//        recordBTN.isEnabled = true
+        playNxt.setTitle("Play", for: .normal)
+    }
+    
+    
 }
     
     
