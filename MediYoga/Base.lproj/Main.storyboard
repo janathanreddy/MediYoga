@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sg3-Kz-B2a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ukh-c8-hsh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -390,7 +390,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="ogR-Lk-V6f" customClass="AppointmentViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kPQ-vy-Zbt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search Appointment" translatesAutoresizingMaskIntoConstraints="NO" id="tKe-Ta-vEz">
@@ -1398,7 +1398,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="sPE-nm-AvD" customClass="AdminCommunicationViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dWL-SQ-OK6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yup-fM-6K6">
@@ -1533,7 +1533,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="WHW-eY-ysj" customClass="SettingsViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A5O-zw-q5t">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9pt-1v-PF8">
@@ -1873,7 +1873,7 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="UYI-Qa-4iX" customClass="NOTESViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TZY-sT-pPa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLh-JB-gHc">
@@ -1966,7 +1966,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="ukh-c8-hsh" customClass="CommunicationViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abf-lL-bEB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kva-sx-1a3">
@@ -2678,22 +2678,18 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEq-6A-v13">
-                                        <rect key="frame" x="371" y="23" width="25" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="5jV-X5-Qpc"/>
-                                            <constraint firstAttribute="height" constant="25" id="oIN-KW-yaf"/>
-                                        </constraints>
+                                        <rect key="frame" x="376" y="22" width="30" height="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
                                         <state key="normal" image="mic.circle.fill" catalog="system"/>
                                         <connections>
-                                            <action selector="mic:" destination="r2P-Po-8kl" eventType="touchUpInside" id="vrw-wp-1XF"/>
+                                            <action selector="mic:" destination="r2P-Po-8kl" eventType="touchUpInside" id="hWf-jU-25E"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kbo-xO-Suu">
-                                        <rect key="frame" x="50" y="20" width="351" height="34"/>
+                                        <rect key="frame" x="50" y="20" width="324" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="abE-nl-eEM"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="351" id="yut-Z9-4X6"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="324" id="yut-Z9-4X6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -2701,17 +2697,30 @@
                                             <outlet property="delegate" destination="r2P-Po-8kl" id="cbm-0Q-DNF"/>
                                         </connections>
                                     </textField>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDc-K6-DNk">
+                                        <rect key="frame" x="376" y="22" width="30" height="30"/>
+                                        <state key="normal" image="stop.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="stopbtn:" destination="r2P-Po-8kl" eventType="touchUpInside" id="pwX-Be-fxC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="WEq-6A-v13" secondAttribute="trailing" constant="18" id="7OW-u8-ORv"/>
                                     <constraint firstItem="Bx2-qT-yLx" firstAttribute="leading" secondItem="ED1-33-LxD" secondAttribute="leading" constant="8" id="9BQ-D9-pUR"/>
-                                    <constraint firstAttribute="trailing" secondItem="Kbo-xO-Suu" secondAttribute="trailing" constant="13" id="CaO-pc-eie"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kbo-xO-Suu" secondAttribute="trailing" constant="40" id="CaO-pc-eie"/>
+                                    <constraint firstAttribute="bottom" secondItem="WEq-6A-v13" secondAttribute="bottom" constant="22" id="CvX-Q2-QhX"/>
                                     <constraint firstItem="Kbo-xO-Suu" firstAttribute="leading" secondItem="Bx2-qT-yLx" secondAttribute="trailing" constant="8" symbolic="YES" id="ESW-eE-BlJ"/>
                                     <constraint firstItem="Kbo-xO-Suu" firstAttribute="top" secondItem="ED1-33-LxD" secondAttribute="top" constant="20" symbolic="YES" id="GUr-Yw-v4a"/>
+                                    <constraint firstItem="WEq-6A-v13" firstAttribute="top" secondItem="ED1-33-LxD" secondAttribute="top" constant="22" id="MS3-xH-EHj"/>
                                     <constraint firstAttribute="bottom" secondItem="Bx2-qT-yLx" secondAttribute="bottom" constant="20" symbolic="YES" id="Mrr-2J-pla"/>
+                                    <constraint firstAttribute="trailing" secondItem="WEq-6A-v13" secondAttribute="trailing" constant="8" id="PBW-Ef-BAv"/>
+                                    <constraint firstItem="jDc-K6-DNk" firstAttribute="leading" secondItem="Kbo-xO-Suu" secondAttribute="trailing" constant="2" id="StA-0R-dQx"/>
                                     <constraint firstAttribute="bottom" secondItem="Kbo-xO-Suu" secondAttribute="bottom" constant="20" symbolic="YES" id="U37-Mc-ref"/>
-                                    <constraint firstItem="WEq-6A-v13" firstAttribute="top" secondItem="ED1-33-LxD" secondAttribute="top" constant="23" id="fnS-13-uYX"/>
+                                    <constraint firstItem="WEq-6A-v13" firstAttribute="leading" secondItem="Kbo-xO-Suu" secondAttribute="trailing" constant="2" id="dgW-iC-n4M"/>
+                                    <constraint firstAttribute="bottom" secondItem="jDc-K6-DNk" secondAttribute="bottom" constant="22" id="hbu-4e-ZnH"/>
+                                    <constraint firstAttribute="trailing" secondItem="jDc-K6-DNk" secondAttribute="trailing" constant="8" id="mE3-GF-K0g"/>
+                                    <constraint firstItem="jDc-K6-DNk" firstAttribute="top" secondItem="ED1-33-LxD" secondAttribute="top" constant="22" id="w3b-n0-IFT"/>
                                     <constraint firstItem="Bx2-qT-yLx" firstAttribute="top" secondItem="ED1-33-LxD" secondAttribute="top" constant="20" symbolic="YES" id="xGn-LJ-Lty"/>
                                 </constraints>
                             </view>
@@ -2740,10 +2749,11 @@
                     <connections>
                         <outlet property="ButtomSpace" destination="SDB-RF-TWw" id="AcC-wG-5Q4"/>
                         <outlet property="MessageLabel" destination="VYb-5g-PHf" id="UJi-0L-zP7"/>
+                        <outlet property="MicBtn" destination="WEq-6A-v13" id="nhu-yD-ZXR"/>
                         <outlet property="SelectedImageView" destination="LLT-iu-UKv" id="RNe-Mp-YVs"/>
+                        <outlet property="StopButton" destination="jDc-K6-DNk" id="XW6-9w-oUz"/>
                         <outlet property="TextField" destination="Kbo-xO-Suu" id="XjS-j8-bkp"/>
                         <outlet property="camerabutton" destination="Bx2-qT-yLx" id="QYV-5G-EW7"/>
-                        <outlet property="playNxt" destination="WEq-6A-v13" id="S1H-4o-kET"/>
                         <outlet property="profileimage" destination="HSc-Xr-2B1" id="RTb-qX-IgO"/>
                         <outlet property="tableView" destination="gAo-kw-Dkq" id="519-j4-lYD"/>
                     </connections>
@@ -2788,6 +2798,7 @@
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="search 1" width="30" height="30"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="stop.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -117,7 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Print full message.
         print(userInfo)
 
-        // Change this to your preferred presentation option
         completionHandler([[.alert, .sound, .badge]])
       }
 
@@ -125,15 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                   didReceive response: UNNotificationResponse,
                                   withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
           print("Message ID: \(messageID)")
         }
 
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
 
-        // Print full message.
         print(userInfo)
 
         completionHandler()

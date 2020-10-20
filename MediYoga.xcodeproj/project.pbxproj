@@ -29,6 +29,10 @@
 		2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2120D49B2528C457003332EF /* ComImageTableViewCell.xib */; };
 		212800CB2523906800110A10 /* ComChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CA2523906800110A10 /* ComChatViewController.swift */; };
 		212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212800CF252394ED00110A10 /* ComChatTableViewCell.swift */; };
+		212FF9E2253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FF9E0253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift */; };
+		212FF9E3253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */; };
+		212FF9EC253D534500E6BD8D /* AudioFilePatientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */; };
+		212FF9ED253D534500E6BD8D /* AudioFilePatientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */; };
 		2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */; };
 		2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */; };
 		2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */; };
@@ -106,6 +110,10 @@
 		2120D49B2528C457003332EF /* ComImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComImageTableViewCell.xib; sourceTree = "<group>"; };
 		212800CA2523906800110A10 /* ComChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatViewController.swift; sourceTree = "<group>"; };
 		212800CF252394ED00110A10 /* ComChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatTableViewCell.swift; sourceTree = "<group>"; };
+		212FF9E0253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileDoctorTableViewCell.swift; sourceTree = "<group>"; };
+		212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioFileDoctorTableViewCell.xib; sourceTree = "<group>"; };
+		212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFilePatientTableViewCell.swift; sourceTree = "<group>"; };
+		212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioFilePatientTableViewCell.xib; sourceTree = "<group>"; };
 		2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseHistoryViewController.swift; sourceTree = "<group>"; };
 		2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiverTableViewCell.xib; sourceTree = "<group>"; };
@@ -271,6 +279,10 @@
 				212800CF252394ED00110A10 /* ComChatTableViewCell.swift */,
 				2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */,
 				21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */,
+				212FF9E0253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift */,
+				212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */,
+				212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */,
+				212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */,
 				21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */,
 				2120D49B2528C457003332EF /* ComImageTableViewCell.xib */,
 				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
@@ -493,6 +505,8 @@
 				210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */,
 				2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */,
 				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
+				212FF9E3253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib in Resources */,
+				212FF9ED253D534500E6BD8D /* AudioFilePatientTableViewCell.xib in Resources */,
 				219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */,
 				211003A52533588400018E34 /* AdminComImageTableViewCell.xib in Resources */,
 				21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */,
@@ -627,6 +641,7 @@
 			files = (
 				2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */,
 				219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */,
+				212FF9E2253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift in Sources */,
 				2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */,
 				21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */,
 				2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */,
@@ -650,6 +665,7 @@
 				211003A42533588400018E34 /* AdminComImageTableViewCell.swift in Sources */,
 				2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */,
 				2176A8492518E3A9005979E9 /* SettingsTableViewCell_1.swift in Sources */,
+				212FF9EC253D534500E6BD8D /* AudioFilePatientTableViewCell.swift in Sources */,
 				216661FA2519266A000373DA /* SignupViewController.swift in Sources */,
 				2176A82D2518DCA4005979E9 /* AdminCommunicationTableViewCell.swift in Sources */,
 				2176A83A2518E063005979E9 /* SettingsTableViewCell.swift in Sources */,

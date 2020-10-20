@@ -19,6 +19,10 @@ struct messagedata {
     var sentlabel:String
     var url:String
     var ReceiverImageBool: Bool
+    var doctoraudio: Bool
+    var patientaudio: Bool
+    var DoctorRecordLabel: String
+    
 }
 
 
@@ -26,11 +30,15 @@ struct messagedata {
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
-    var soundRecorder : AVAudioRecorder!
-    var soundPlayer : AVAudioPlayer!
+    var recorder: AVAudioRecorder!
+    var player: AVAudioPlayer!
+    var meterTimer: Timer!
+    var soundFileURL: URL!
+
+    @IBOutlet weak var StopButton: UIButton!
     var fileName: String = "audioFile.m4a"
 
-    @IBOutlet weak var playNxt: UIButton!
+    @IBOutlet weak var MicBtn: UIButton!
     @IBOutlet weak var SelectedImageView: UIImageView!
     let db = Firestore.firestore()
     @IBOutlet weak var ButtomSpace: NSLayoutConstraint!
@@ -54,6 +62,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var MessageLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setSessionPlayback()
+        askForNotifications()
+        checkHeadphones()
+
         print("UserId: \(DoctorId) , documentID: \(documentID)")
         tableView.delegate = self
         tableView.dataSource = self
@@ -80,10 +93,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         messages()
 
         tableView.rowHeight = UITableView.automaticDimension
-        
-        setupRecorder()
-        playNxt.isEnabled = false
-
         scrollToBottom()
     }
     
@@ -152,10 +161,172 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func mic(_ sender: Any) {
         
+        print("\(#function)")
+        print("Button Tapped")
+        if player != nil && player.isPlaying {
+            print("stopping")
+            player.stop()
+        }
         
+        if recorder == nil {
+            print("recording. recorder nil")
+//            MicBtn.tintColor = UIColor.systemGreen
+//            playButton.isEnabled = false
+            StopButton.isEnabled = true
+            StopButton.isHidden = false
+            recordWithPermission(true)
+            return
+        }
+        
+        if recorder != nil && recorder.isRecording {
+            print("pausing")
+            recorder.pause()
+//            MicBtn.setTitle("Continue", for: .normal)
+            MicBtn.imageView?.image = UIImage(systemName: "pause.cicle.fill")
+            
+        } else {
+            print("recording")
+//            MicBtn.setTitle("Pause", for: .normal)
+            MicBtn.imageView?.image = UIImage(systemName: "mic.circle.fill")
+//            playButton.isEnabled = false
+//            stopButton.isEnabled = true
+            recordWithPermission(false)
+        }
         
         
     }
+    
+    
+    
+    func recordWithPermission(_ setup: Bool) {
+        print("\(#function)")
+        
+        AVAudioSession.sharedInstance().requestRecordPermission {
+            [unowned self] granted in
+            if granted {
+                
+                DispatchQueue.main.async {
+                    print("Permission to record granted")
+                    self.setSessionPlayAndRecord()
+                    if setup {
+                        self.setupRecorder()
+                    }
+                    self.recorder.record()
+                    
+                    self.meterTimer = Timer.scheduledTimer(timeInterval: 0.1,
+                                                           target: self,
+                                                           selector: #selector(self.updateAudioMeter(_:)),
+                                                           userInfo: nil,
+                                                           repeats: true)
+                }
+            } else {
+                print("Permission to record not granted")
+            }
+        }
+        
+        if AVAudioSession.sharedInstance().recordPermission == .denied {
+            print("permission denied")
+        }
+    }
+    
+    @objc func updateAudioMeter(_ timer: Timer) {
+        
+        if let recorder = self.recorder {
+            if recorder.isRecording {
+                let min = Int(recorder.currentTime / 60)
+                let sec = Int(recorder.currentTime.truncatingRemainder(dividingBy: 60))
+                let s = String(format: "%02d:%02d", min, sec)
+//                statusLabel.text = s
+                recorder.updateMeters()
+            }
+        }
+    }
+    
+    func setSessionPlayAndRecord() {
+        print("\(#function)")
+        
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
+        } catch {
+            print("could not set session category")
+            print(error.localizedDescription)
+        }
+        
+        do {
+            try session.setActive(true)
+        } catch {
+            print("could not make session active")
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    func setupRecorder() {
+        print("\(#function)")
+        
+        let format = DateFormatter()
+        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+        let randomid = UUID.init().uuidString
+
+        let currentFileName = "\(randomid).m4a"
+        print(currentFileName)
+        let data = Data()
+//        message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "\(currentFileName)",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "Audio Record Doctor"))
+
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        self.soundFileURL = documentsDirectory.appendingPathComponent(currentFileName)
+        print("writing to soundfile url: '\(soundFileURL!)'")
+        
+        
+        let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/audio/\(randomid).\(self.soundFileURL)")
+     
+         let uploadMetadata = StorageMetadata.init()
+         uploadref.putData(data, metadata: uploadMetadata){(downloadMetaData,error) in
+             if error != nil{
+                 print("error path meta uploaddata 1\(error?.localizedDescription)")
+             return
+             }
+             print("\(String(describing: downloadMetaData))")
+
+             uploadref.downloadURL(completion:  { [self] (url,error) in
+                 if error != nil
+                 {
+                     print("doewloadurl error msg \(error?.localizedDescription)")
+                     return
+                 }
+                 if url != nil {
+                     let url = url!.absoluteString
+                     db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "audio","time_stamp": FieldValue.serverTimestamp(),"type": 2,"content_url": url])
+                 }
+         })
+         }
+        if FileManager.default.fileExists(atPath: soundFileURL.absoluteString) {
+            // probably won't happen. want to do something about it?
+            print("soundfile \(soundFileURL.absoluteString) exists")
+        }
+        
+        let recordSettings: [String: Any] = [
+            AVFormatIDKey: kAudioFormatAppleLossless,
+            AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue,
+            AVEncoderBitRateKey: 32000,
+            AVNumberOfChannelsKey: 2,
+            AVSampleRateKey: 44100.0
+        ]
+        
+        
+        do {
+            recorder = try AVAudioRecorder(url: soundFileURL, settings: recordSettings)
+            recorder.delegate = self
+            recorder.isMeteringEnabled = true
+            recorder.prepareToRecord() // creates/overwrites the file at soundFileURL
+        } catch {
+            recorder = nil
+            print(error.localizedDescription)
+        }
+        
+    }
+    
     @IBAction func CameraAction(_ sender: AnyObject) {
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
         picker.allowsEditing = true
@@ -175,7 +346,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
             
             SelectedImageView.image = images as! UIImage
-            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false))
+            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: ""))
 
                 let randomid = UUID.init().uuidString
                 let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/\(randomid).jpg")
@@ -269,7 +440,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                self.reloadInputViews()
              }
             }
-//            ComImageTableViewCell.sendimage.image = message[indexPath.row].sentimage
             if message[indexPath.row].sentlabel == ""{
                 ComImageTableViewCell.sendlabel.isHidden = true
             }else{
@@ -348,7 +518,7 @@ return UITableViewCell()
             let newDocument = db.collection("patient_chat").document(documentID)
             newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
-            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false))
+            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
             tableView.endUpdates()
@@ -381,12 +551,12 @@ return UITableViewCell()
                     
                     if sender_id == DoctorId {
                         if documentData["type"] as! Int == 0{
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false))
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
                             
                         }
                         else if documentData["type"] as! Int == 1{
             
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false))
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
 
                             
                         }
@@ -395,10 +565,10 @@ return UITableViewCell()
                     else if sender_id != DoctorId{
 //                        print("Patient : \(documentData["text"] as! String)")
                         if documentData["type"] as! Int == 0{
-                        message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false))
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
                         }
                         else if documentData["type"] as! Int == 1{
-                        message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true))
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
 
 
                         }
@@ -418,51 +588,297 @@ return UITableViewCell()
     
     
     
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
     
-    func setupRecorder() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
-        let recordSetting = [ AVFormatIDKey : kAudioFormatAppleLossless,
-                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
-                              AVEncoderBitRateKey : 320000,
-                              AVNumberOfChannelsKey : 2,
-                              AVSampleRateKey : 44100.2] as [String : Any]
+    
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        recorder = nil
+        player = nil
+    }
+
+    
+    
+    func play() {
+        print("\(#function)")
+        
+        
+        var url: URL?
+        if self.recorder != nil {
+            url = self.recorder.url
+        } else {
+            url = self.soundFileURL!
+        }
+        print("playing \(String(describing: url))")
         
         do {
-            soundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting )
-            soundRecorder.delegate = self
-            soundRecorder.prepareToRecord()
+            self.player = try AVAudioPlayer(contentsOf: url!)
+            StopButton.isEnabled = true
+            player.delegate = self
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.play()
         } catch {
-            print(error)
+            self.player = nil
+            print(error.localizedDescription)
         }
     }
     
-    func setupPlayer() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
+ 
+    @IBAction func stopbtn(_ sender: Any) {
+        
+        print("\(#function)")
+        
+        recorder?.stop()
+        player?.stop()
+        
+        meterTimer.invalidate()
+        
+        MicBtn.setTitle("", for: .normal)
+        MicBtn.imageView?.image = UIImage(systemName: "mic.circle.fill")
+        let session = AVAudioSession.sharedInstance()
         do {
-            soundPlayer = try AVAudioPlayer(contentsOf: audioFilename)
-            soundPlayer.delegate = self
-            soundPlayer.prepareToPlay()
-            soundPlayer.volume = 1.0
+            try session.setActive(false)
+//            playButton.isEnabled = true
+            StopButton.isEnabled = false
+            StopButton.isHidden = true
+            MicBtn.isEnabled = true
         } catch {
-            print(error)
+            print("could not make session inactive")
+            print(error.localizedDescription)
         }
-    }
-    
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        playNxt.isEnabled = true
+        
+        
     }
     
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-//        recordBTN.isEnabled = true
-        playNxt.setTitle("Play", for: .normal)
+        print("\(#function)")
+        
+        print("finished playing \(flag)")
+        MicBtn.isEnabled = true
+        StopButton.isEnabled = false
+        StopButton.isHidden = true
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print("\(#function)")
+        
+        if let e = error {
+            print("\(e.localizedDescription)")
+        }
+        
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder,
+                                         successfully flag: Bool) {
+        
+        print("\(#function)")
+        
+        print("finished recording \(flag)")
+        StopButton.isEnabled = false
+//        playButton.isEnabled = true
+        MicBtn.setTitle("", for: UIControl.State())
+        MicBtn.imageView?.image = UIImage(systemName: "mic.circle.fill")
+        
+        let alert = UIAlertController(title: "Recorder",
+                                      message: "Finished Recording",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Send", style: .default) {[unowned self] _ in
+            print("keep was tapped")
+            self.recorder = nil
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default) {[unowned self] _ in
+            print("delete was tapped")
+            self.recorder.deleteRecording()
+        })
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder,
+                                          error: Error?) {
+        print("\(#function)")
+        
+        if let e = error {
+            print("\(e.localizedDescription)")
+        }
     }
     
     
+    
+    func setSessionPlayback() {
+        print("\(#function)")
+        
+        let session = AVAudioSession.sharedInstance()
+        
+        do {
+            try session.setCategory(AVAudioSession.Category.playback, options: .defaultToSpeaker)
+            
+        } catch {
+            print("could not set session category")
+            print(error.localizedDescription)
+        }
+        
+        do {
+            try session.setActive(true)
+        } catch {
+            print("could not make session active")
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    func askForNotifications() {
+        print("\(#function)")
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ComChatViewController.background(_:)),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ComChatViewController.foreground(_:)),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ComChatViewController.routeChange(_:)),
+                                               name: AVAudioSession.interruptionNotification,
+                                               object: nil)
+
+    }
+    
+    @objc func background(_ notification: Notification) {
+        print("\(#function)")
+        
+    }
+    
+    
+    @objc func foreground(_ notification: Notification) {
+        print("\(#function)")
+        
+    }
+    
+    
+    @objc func routeChange(_ notification: Notification) {
+        print("\(#function)")
+        
+        if let userInfo = (notification as NSNotification).userInfo {
+            print("routeChange \(userInfo)")
+            
+            //print("userInfo \(userInfo)")
+            if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt {
+                //print("reason \(reason)")
+                switch AVAudioSession.RouteChangeReason(rawValue: reason)! {
+                case AVAudioSessionRouteChangeReason.newDeviceAvailable:
+                    print("NewDeviceAvailable")
+                    print("did you plug in headphones?")
+                    checkHeadphones()
+                case AVAudioSessionRouteChangeReason.oldDeviceUnavailable:
+                    print("OldDeviceUnavailable")
+                    print("did you unplug headphones?")
+                    checkHeadphones()
+                case AVAudioSessionRouteChangeReason.categoryChange:
+                    print("CategoryChange")
+                case AVAudioSessionRouteChangeReason.override:
+                    print("Override")
+                case AVAudioSessionRouteChangeReason.wakeFromSleep:
+                    print("WakeFromSleep")
+                case AVAudioSessionRouteChangeReason.unknown:
+                    print("Unknown")
+                case AVAudioSessionRouteChangeReason.noSuitableRouteForCategory:
+                    print("NoSuitableRouteForCategory")
+                case AVAudioSessionRouteChangeReason.routeConfigurationChange:
+                    print("RouteConfigurationChange")
+                    
+                }
+            }
+        }
+        
+       
+    }
+    
+    func checkHeadphones() {
+        print("\(#function)")
+        
+        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+        if !currentRoute.outputs.isEmpty {
+            for description in currentRoute.outputs {
+                if description.portType == AVAudioSession.Port.headphones {
+                    print("headphones are plugged in")
+                    break
+                } else {
+                    print("headphones are unplugged")
+                }
+            }
+        } else {
+            print("checking headphones requires a connection to a device")
+        }
+    }
+    
+//
+//    func exportAsset(_ asset: AVAsset, fileName: String) {
+//        print("\(#function)")
+//
+//        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        let trimmedSoundFileURL = documentsDirectory.appendingPathComponent(fileName)
+//        print("saving to \(trimmedSoundFileURL.absoluteString)")
+//
+//
+//
+//        if FileManager.default.fileExists(atPath: trimmedSoundFileURL.absoluteString) {
+//            print("sound exists, removing \(trimmedSoundFileURL.absoluteString)")
+//            do {
+//                if try trimmedSoundFileURL.checkResourceIsReachable() {
+//                    print("is reachable")
+//                }
+//
+//                try FileManager.default.removeItem(atPath: trimmedSoundFileURL.absoluteString)
+//            } catch {
+//                print("could not remove \(trimmedSoundFileURL)")
+//                print(error.localizedDescription)
+//            }
+//
+//        }
+//
+//        print("creating export session for \(asset)")
+//
+//        if let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) {
+//            exporter.outputFileType = AVFileType.m4a
+//            exporter.outputURL = trimmedSoundFileURL
+//
+//            let duration = CMTimeGetSeconds(asset.duration)
+//            if duration < 5.0 {
+//                print("sound is not long enough")
+//                return
+//            }
+//            let startTime = CMTimeMake(value: 0, timescale: 1)
+//            let stopTime = CMTimeMake(value: 5, timescale: 1)
+//            exporter.timeRange = CMTimeRangeFromTimeToTime(start: startTime, end: stopTime)
+//
+//            exporter.exportAsynchronously(completionHandler: {
+//                print("export complete \(exporter.status)")
+//
+//                switch exporter.status {
+//                case  AVAssetExportSessionStatus.failed:
+//
+//                    if let e = exporter.error {
+//                        print("export failed \(e)")
+//                    }
+//
+//                case AVAssetExportSessionStatus.cancelled:
+//                    print("export cancelled \(String(describing: exporter.error))")
+//                default:
+//                    print("export complete")
+//                }
+//            })
+//        } else {
+//            print("cannot create AVAssetExportSession for asset \(asset)")
+//        }
+//
+//    }
 }
     
     
