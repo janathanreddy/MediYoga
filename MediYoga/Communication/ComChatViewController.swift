@@ -28,7 +28,10 @@ struct messagedata {
 
 
 
-class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay {
+   
+ 
+    
     
     var recorder: AVAudioRecorder!
     var player: AVAudioPlayer!
@@ -89,6 +92,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(UINib(nibName:"ComChatReceiverTableViewCell", bundle: nil), forCellReuseIdentifier: "ComChatReceiverTableViewCell")
         
         tableView.register(UINib(nibName: "ComChatReceiveimageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComChatReceiveimageTableViewCell")
+        
+        tableView.register(UINib(nibName: "AudioFileDoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioFileDoctorTableViewCell")
+        
+        tableView.register(UINib(nibName: "AudioFilePatientTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioFilePatientTableViewCell")
         
         messages()
 
@@ -271,12 +278,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         let currentFileName = "audio.m4a"
         print(currentFileName)
         let data = Data()
-//        message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "\(currentFileName)",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "Audio Record Doctor"))
 
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         self.soundFileURL = documentsDirectory.appendingPathComponent(currentFileName)
         print("writing to soundfile url: '\(soundFileURL!)'")
-        
         
         if FileManager.default.fileExists(atPath: soundFileURL.absoluteString) {
             // probably won't happen. want to do something about it?
@@ -372,7 +377,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if message[indexPath.row].isFirstUser == false && message[indexPath.row].ReceiverImageBool == false {
+        
+        if message[indexPath.row].isFirstUser == false && message[indexPath.row].ReceiverImageBool == false && message[indexPath.row].patientaudio == false{
             let ComChatReceiverTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComChatReceiverTableViewCell", for: indexPath) as! ComChatReceiverTableViewCell
             ComChatReceiverTableViewCell.ReceiverView.layer.cornerRadius = 16
             ComChatReceiverTableViewCell.ReceiverLabel.text = message[indexPath.row].text
@@ -452,7 +458,37 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             return ComChatReceiveimageTableViewCell
         }
+        else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true{
             
+            
+                let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
+            AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
+            AudioFileDoctorTableViewCell.recordView.clipsToBounds = true
+            AudioFileDoctorTableViewCell.recordLabel.text = message[indexPath.row].DoctorRecordLabel
+            AudioFileDoctorTableViewCell.celldelegate = self
+            AudioFileDoctorTableViewCell.index = indexPath
+
+
+            
+            return AudioFileDoctorTableViewCell
+            
+        }
+        
+        else if message[indexPath.row].patientaudio == true && message[indexPath.row].isFirstUser == false && message[indexPath.row].doctoraudio == false{
+            
+            
+                let AudioFilePatientTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFilePatientTableViewCell", for: indexPath) as! AudioFilePatientTableViewCell
+            AudioFilePatientTableViewCell.recordView.layer.cornerRadius = 10
+            AudioFilePatientTableViewCell.recordView.clipsToBounds = true
+            AudioFilePatientTableViewCell.recordlabel.text = "Patient Audio Record"
+            
+            AudioFilePatientTableViewCell.celldelegate = self
+            AudioFilePatientTableViewCell.index = indexPath
+
+            
+            return AudioFilePatientTableViewCell
+            
+        }
         
             else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
@@ -462,6 +498,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.timeLabel.text = message[indexPath.row].time
                        return cell
         }
+        
 
 return UITableViewCell()
 
@@ -537,6 +574,10 @@ return UITableViewCell()
 
                             
                         }
+                        
+                        else if documentData["type"] as! Int == 3{
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record"))
+                        }
 
                     }
                     else if sender_id != DoctorId{
@@ -549,9 +590,15 @@ return UITableViewCell()
 
 
                         }
+                        else if documentData["type"] as! Int == 3{
+                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: ""))
+
+
+                        }
                         
 
                     }
+                    
                 }
               DispatchQueue.main.async {
                   self.tableView.reloadData()
@@ -666,6 +713,10 @@ return UITableViewCell()
         alert.addAction(UIAlertAction(title: "Send", style: .default) {[unowned self] _ in
             print("keep was tapped")
             self.recorder = nil
+            
+            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: false, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: true,patientaudio: false,DoctorRecordLabel: "Audio Record"))
+
+            
             
             let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/recordings/\(randomid).m4a")
          print(uploadref)
@@ -822,67 +873,53 @@ return UITableViewCell()
         }
     }
     
-//
-//    func exportAsset(_ asset: AVAsset, fileName: String) {
-//        print("\(#function)")
-//
-//        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-//        let trimmedSoundFileURL = documentsDirectory.appendingPathComponent(fileName)
-//        print("saving to \(trimmedSoundFileURL.absoluteString)")
-//
-//
-//
-//        if FileManager.default.fileExists(atPath: trimmedSoundFileURL.absoluteString) {
-//            print("sound exists, removing \(trimmedSoundFileURL.absoluteString)")
-//            do {
-//                if try trimmedSoundFileURL.checkResourceIsReachable() {
-//                    print("is reachable")
-//                }
-//
-//                try FileManager.default.removeItem(atPath: trimmedSoundFileURL.absoluteString)
-//            } catch {
-//                print("could not remove \(trimmedSoundFileURL)")
-//                print(error.localizedDescription)
-//            }
-//
-//        }
-//
-//        print("creating export session for \(asset)")
-//
-//        if let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) {
-//            exporter.outputFileType = AVFileType.m4a
-//            exporter.outputURL = trimmedSoundFileURL
-//
-//            let duration = CMTimeGetSeconds(asset.duration)
-//            if duration < 5.0 {
-//                print("sound is not long enough")
-//                return
-//            }
-//            let startTime = CMTimeMake(value: 0, timescale: 1)
-//            let stopTime = CMTimeMake(value: 5, timescale: 1)
-//            exporter.timeRange = CMTimeRangeFromTimeToTime(start: startTime, end: stopTime)
-//
-//            exporter.exportAsynchronously(completionHandler: {
-//                print("export complete \(exporter.status)")
-//
-//                switch exporter.status {
-//                case  AVAssetExportSessionStatus.failed:
-//
-//                    if let e = exporter.error {
-//                        print("export failed \(e)")
-//                    }
-//
-//                case AVAssetExportSessionStatus.cancelled:
-//                    print("export cancelled \(String(describing: exporter.error))")
-//                default:
-//                    print("export complete")
-//                }
-//            })
-//        } else {
-//            print("cannot create AVAssetExportSession for asset \(asset)")
-//        }
-//
-//    }
+    func OnTouchDoctor(index: Int) {
+    print(message[index].url)
+        let storageref = Storage.storage().reference(forURL: message[index].url)
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
+        storageref.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    if let d = data {
+                        do {
+                            try d.write(to: fileURL)
+                            self.player = try AVAudioPlayer(contentsOf: fileURL)
+                            self.player.play()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+        
+    }
+    
+    func OnTouchPatient(index: Int) {
+        
+        print(message[index].url)
+        let storageref = Storage.storage().reference(forURL: message[index].url)
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("patient.m4a")
+        storageref.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    if let d = data {
+                        do {
+                            try d.write(to: fileURL)
+                            self.player = try AVAudioPlayer(contentsOf: fileURL)
+                            self.player.play()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+        
+    }
+    
+    
+
 }
     
     

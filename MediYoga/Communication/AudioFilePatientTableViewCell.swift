@@ -7,8 +7,14 @@
 
 import UIKit
 
-class AudioFilePatientTableViewCell: UITableViewCell {
+protocol PatientPlay {
+    func OnTouchPatient(index: Int)
+}
 
+
+class AudioFilePatientTableViewCell: UITableViewCell {
+    var index: IndexPath?
+    var celldelegate: PatientPlay?
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var recordlabel: UILabel!
     @IBOutlet weak var recordbtn: UIButton!
@@ -24,5 +30,13 @@ class AudioFilePatientTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func PlayAction(_ sender: Any) {
+        
+        celldelegate?.OnTouchPatient(index: index!.row)
+
+        
+    }
+    
     
 }

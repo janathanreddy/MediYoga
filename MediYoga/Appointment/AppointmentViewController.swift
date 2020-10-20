@@ -111,6 +111,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
                 cell.celldelegate = self
                 cell.index = indexPath
+            
                 return cell
 
         }

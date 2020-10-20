@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol Doctorplay {
+    func OnTouchDoctor(index: Int)
+}
+
+
 class AudioFileDoctorTableViewCell: UITableViewCell {
+    
+    var index: IndexPath?
+    var celldelegate: Doctorplay?
     
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var recordtimer: UILabel!
@@ -22,6 +30,11 @@ class AudioFileDoctorTableViewCell: UITableViewCell {
 
     }
     
+    @IBAction func DoctorActionPlay(_ sender: Any) {
+        
+        celldelegate?.OnTouchDoctor(index: index!.row)
+
+    }
     
     
     
