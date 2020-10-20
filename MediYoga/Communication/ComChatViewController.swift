@@ -261,15 +261,14 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    
+     
     func setupRecorder() {
         print("\(#function)")
         
         let format = DateFormatter()
         format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        let randomid = UUID.init().uuidString
 
-        let currentFileName = "\(randomid).m4a"
+        let currentFileName = "audio.m4a"
         print(currentFileName)
         let data = Data()
 //        message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "\(currentFileName)",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "Audio Record Doctor"))
@@ -279,28 +278,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         print("writing to soundfile url: '\(soundFileURL!)'")
         
         
-        let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/audio/\(randomid).\(self.soundFileURL)")
-     
-         let uploadMetadata = StorageMetadata.init()
-         uploadref.putData(data, metadata: uploadMetadata){(downloadMetaData,error) in
-             if error != nil{
-                 print("error path meta uploaddata 1\(error?.localizedDescription)")
-             return
-             }
-             print("\(String(describing: downloadMetaData))")
-
-             uploadref.downloadURL(completion:  { [self] (url,error) in
-                 if error != nil
-                 {
-                     print("doewloadurl error msg \(error?.localizedDescription)")
-                     return
-                 }
-                 if url != nil {
-                     let url = url!.absoluteString
-                     db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "audio","time_stamp": FieldValue.serverTimestamp(),"type": 2,"content_url": url])
-                 }
-         })
-         }
         if FileManager.default.fileExists(atPath: soundFileURL.absoluteString) {
             // probably won't happen. want to do something about it?
             print("soundfile \(soundFileURL.absoluteString) exists")
@@ -675,7 +652,8 @@ return UITableViewCell()
                                          successfully flag: Bool) {
         
         print("\(#function)")
-        
+        let randomid = NSUUID().uuidString
+
         print("finished recording \(flag)")
         StopButton.isEnabled = false
 //        playButton.isEnabled = true
@@ -688,6 +666,32 @@ return UITableViewCell()
         alert.addAction(UIAlertAction(title: "Send", style: .default) {[unowned self] _ in
             print("keep was tapped")
             self.recorder = nil
+            
+            let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/recordings/\(randomid).m4a")
+         print(uploadref)
+             let uploadMetadata = StorageMetadata()
+            uploadMetadata.contentType = "audio/m4a"
+
+            uploadref.putFile(from: soundFileURL, metadata: uploadMetadata){(downloadMetaData,error) in
+                 if error != nil{
+                     print("error path meta uploaddata 1 : \(error?.localizedDescription)")
+                 return
+                 }
+                
+                 print("\(String(describing: downloadMetaData))")
+                 uploadref.downloadURL(completion:  { [self] (url,error) in
+                     if error != nil
+                     {
+                         print("doewloadurl error msg \(error?.localizedDescription)")
+                         return
+                     }
+                     if url != nil {
+                         let url = url!.absoluteString
+                        print("url: \(url)")
+                         db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "audio","time_stamp": FieldValue.serverTimestamp(),"type": 3,"content_url": url])
+                     }
+             })
+             }
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .default) {[unowned self] _ in
             print("delete was tapped")
