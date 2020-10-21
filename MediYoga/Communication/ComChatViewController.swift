@@ -39,7 +39,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var soundFileURL: URL!
 
     @IBOutlet weak var StopButton: UIButton!
-    var fileName: String = "audioFile.m4a"
 
     @IBOutlet weak var MicBtn: UIButton!
     @IBOutlet weak var SelectedImageView: UIImageView!

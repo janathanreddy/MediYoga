@@ -53,6 +53,14 @@
 		219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */; };
 		219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */; };
 		219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */; };
+		21A175A625400D3A008950AB /* AdminAudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A175A425400D3A008950AB /* AdminAudioTableViewCell.swift */; };
+		21A175A725400D3A008950AB /* AdminAudioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175A525400D3A008950AB /* AdminAudioTableViewCell.xib */; };
+		21A175B025400D6A008950AB /* DoctorAudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A175AE25400D6A008950AB /* DoctorAudioTableViewCell.swift */; };
+		21A175B125400D6A008950AB /* DoctorAudioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175AF25400D6A008950AB /* DoctorAudioTableViewCell.xib */; };
+		21A175BA25400D88008950AB /* DoctorImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A175B825400D87008950AB /* DoctorImageTableViewCell.swift */; };
+		21A175BB25400D88008950AB /* DoctorImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175B925400D88008950AB /* DoctorImageTableViewCell.xib */; };
+		21A175C425400DA1008950AB /* AdminTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */; };
+		21A175C525400DA1008950AB /* AdminTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */; };
 		21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEA26E25262ED80049B4F7 /* Validation.swift */; };
 		21EB295A25398AA700D26F6F /* ComChatReceiveimageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */; };
 		21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */; };
@@ -134,6 +142,14 @@
 		219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkhistoryTableViewCell.swift; sourceTree = "<group>"; };
 		219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = labxibTableViewCell.swift; sourceTree = "<group>"; };
 		219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = labxibTableViewCell.xib; sourceTree = "<group>"; };
+		21A175A425400D3A008950AB /* AdminAudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAudioTableViewCell.swift; sourceTree = "<group>"; };
+		21A175A525400D3A008950AB /* AdminAudioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminAudioTableViewCell.xib; sourceTree = "<group>"; };
+		21A175AE25400D6A008950AB /* DoctorAudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAudioTableViewCell.swift; sourceTree = "<group>"; };
+		21A175AF25400D6A008950AB /* DoctorAudioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoctorAudioTableViewCell.xib; sourceTree = "<group>"; };
+		21A175B825400D87008950AB /* DoctorImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorImageTableViewCell.swift; sourceTree = "<group>"; };
+		21A175B925400D88008950AB /* DoctorImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoctorImageTableViewCell.xib; sourceTree = "<group>"; };
+		21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTextTableViewCell.swift; sourceTree = "<group>"; };
+		21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminTextTableViewCell.xib; sourceTree = "<group>"; };
 		21CEA26E25262ED80049B4F7 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiveimageTableViewCell.swift; sourceTree = "<group>"; };
 		21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiveimageTableViewCell.xib; sourceTree = "<group>"; };
@@ -298,7 +314,15 @@
 				211003982533582100018E34 /* AdminComViewController.swift */,
 				2110039D2533585F00018E34 /* AdminComTableViewCell.swift */,
 				211003A22533588400018E34 /* AdminComImageTableViewCell.swift */,
+				21A175A425400D3A008950AB /* AdminAudioTableViewCell.swift */,
+				21A175AE25400D6A008950AB /* DoctorAudioTableViewCell.swift */,
+				21A175B825400D87008950AB /* DoctorImageTableViewCell.swift */,
+				21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */,
 				211003A32533588400018E34 /* AdminComImageTableViewCell.xib */,
+				21A175A525400D3A008950AB /* AdminAudioTableViewCell.xib */,
+				21A175AF25400D6A008950AB /* DoctorAudioTableViewCell.xib */,
+				21A175B925400D88008950AB /* DoctorImageTableViewCell.xib */,
+				21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */,
 			);
 			path = AdminCommunication;
 			sourceTree = "<group>";
@@ -503,10 +527,14 @@
 			files = (
 				2120D49D2528C457003332EF /* ComImageTableViewCell.xib in Resources */,
 				210E88CB25186F0500C59A6E /* LaunchScreen.storyboard in Resources */,
+				21A175A725400D3A008950AB /* AdminAudioTableViewCell.xib in Resources */,
 				2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */,
 				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
+				21A175B125400D6A008950AB /* DoctorAudioTableViewCell.xib in Resources */,
+				21A175BB25400D88008950AB /* DoctorImageTableViewCell.xib in Resources */,
 				212FF9E3253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib in Resources */,
 				212FF9ED253D534500E6BD8D /* AudioFilePatientTableViewCell.xib in Resources */,
+				21A175C525400DA1008950AB /* AdminTextTableViewCell.xib in Resources */,
 				219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */,
 				211003A52533588400018E34 /* AdminComImageTableViewCell.xib in Resources */,
 				21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */,
@@ -640,14 +668,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */,
+				21A175B025400D6A008950AB /* DoctorAudioTableViewCell.swift in Sources */,
 				219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */,
 				212FF9E2253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift in Sources */,
 				2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */,
 				21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */,
 				2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */,
+				21A175BA25400D88008950AB /* DoctorImageTableViewCell.swift in Sources */,
 				211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */,
 				2116C52E251BD27000E7C6F2 /* PriscriptionTableViewCell.swift in Sources */,
 				2116C528251BD1B700E7C6F2 /* PriscriptionViewController.swift in Sources */,
+				21A175A625400D3A008950AB /* AdminAudioTableViewCell.swift in Sources */,
 				210E88C325186F0100C59A6E /* ViewController.swift in Sources */,
 				2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */,
 				21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */,
@@ -661,6 +692,7 @@
 				210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */,
 				210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */,
 				21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */,
+				21A175C425400DA1008950AB /* AdminTextTableViewCell.swift in Sources */,
 				21EB295A25398AA700D26F6F /* ComChatReceiveimageTableViewCell.swift in Sources */,
 				211003A42533588400018E34 /* AdminComImageTableViewCell.swift in Sources */,
 				2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */,

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIm-88-TWS">
-                        <rect key="frame" x="154" y="15" width="240" height="157"/>
+                        <rect key="frame" x="20" y="15" width="240" height="157"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="za1-PE-AXJ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -40,10 +40,10 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="oIm-88-TWS" secondAttribute="trailing" constant="20" id="39g-XX-2bL"/>
                     <constraint firstItem="oIm-88-TWS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="AUD-bV-M6z"/>
-                    <constraint firstItem="oIm-88-TWS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="154" id="GUA-IU-vXe"/>
+                    <constraint firstAttribute="trailing" secondItem="oIm-88-TWS" secondAttribute="trailing" constant="154" id="BL9-aE-0e0"/>
                     <constraint firstAttribute="bottom" secondItem="oIm-88-TWS" secondAttribute="bottom" constant="15" id="Ted-9f-eRa"/>
+                    <constraint firstItem="oIm-88-TWS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="hJh-ZG-qhk"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

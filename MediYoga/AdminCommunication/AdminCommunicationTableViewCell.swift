@@ -9,6 +9,9 @@ import UIKit
 
 class AdminCommunicationTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var Group_Name: UILabel!
+    @IBOutlet weak var Time: UILabel!
+    @IBOutlet weak var Last_Message: UILabel!
     @IBOutlet weak var imagechat: UIImageView!
     @IBOutlet weak var UnseenCount: UILabel!
     override func awakeFromNib() {
