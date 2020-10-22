@@ -23,6 +23,7 @@ struct messagedata {
     var patientaudio: Bool
     var DoctorRecordLabel: String
     
+    
 }
 
 
@@ -65,10 +66,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setSessionPlayback()
         askForNotifications()
-        checkHeadphones()
-
         print("UserId: \(DoctorId) , documentID: \(documentID)")
         tableView.delegate = self
         tableView.dataSource = self
@@ -271,9 +269,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setupRecorder() {
         print("\(#function)")
         
-        let format = DateFormatter()
-        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-
         let currentFileName = "audio.m4a"
         print(currentFileName)
         let data = Data()
@@ -281,7 +276,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         self.soundFileURL = documentsDirectory.appendingPathComponent(currentFileName)
         print("writing to soundfile url: '\(soundFileURL!)'")
-        
+
+
         if FileManager.default.fileExists(atPath: soundFileURL.absoluteString) {
             // probably won't happen. want to do something about it?
             print("soundfile \(soundFileURL.absoluteString) exists")
@@ -305,7 +301,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             recorder = nil
             print(error.localizedDescription)
         }
-        
+        message.append(messagedata(text: "",time: "",isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record"))
+
+        tableView.reloadData()
+
     }
     
     @IBAction func CameraAction(_ sender: AnyObject) {
@@ -463,7 +462,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
             AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
             AudioFileDoctorTableViewCell.recordView.clipsToBounds = true
-            AudioFileDoctorTableViewCell.recordLabel.text = message[indexPath.row].DoctorRecordLabel
+            AudioFileDoctorTableViewCell.recordLabel.text = "Dotor Audio Record"
             AudioFileDoctorTableViewCell.celldelegate = self
             AudioFileDoctorTableViewCell.index = indexPath
 
@@ -623,29 +622,20 @@ return UITableViewCell()
 
     
     
-    func play() {
-        print("\(#function)")
-        
-        
-        var url: URL?
-        if self.recorder != nil {
-            url = self.recorder.url
-        } else {
-            url = self.soundFileURL!
-        }
-        print("playing \(String(describing: url))")
-        
+    func play(_ url: URL) {
+        print("playing \(url)")
+
         do {
-            self.player = try AVAudioPlayer(contentsOf: url!)
-            StopButton.isEnabled = true
-            player.delegate = self
+            self.player = try AVAudioPlayer(contentsOf: url)
             player.prepareToPlay()
             player.volume = 1.0
             player.play()
         } catch {
             self.player = nil
             print(error.localizedDescription)
+            print("AVAudioPlayer init failed")
         }
+        
     }
     
  
@@ -713,7 +703,8 @@ return UITableViewCell()
             print("keep was tapped")
             self.recorder = nil
             
-            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: false, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: true,patientaudio: false,DoctorRecordLabel: "Audio Record"))
+            
+
 
             
             
@@ -743,6 +734,7 @@ return UITableViewCell()
              })
              }
         })
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .default) {[unowned self] _ in
             print("delete was tapped")
             self.recorder.deleteRecording()
@@ -751,37 +743,9 @@ return UITableViewCell()
         self.present(alert, animated: true, completion: nil)
     }
     
-    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder,
-                                          error: Error?) {
-        print("\(#function)")
-        
-        if let e = error {
-            print("\(e.localizedDescription)")
-        }
-    }
     
     
     
-    func setSessionPlayback() {
-        print("\(#function)")
-        
-        let session = AVAudioSession.sharedInstance()
-        
-        do {
-            try session.setCategory(AVAudioSession.Category.playback, options: .defaultToSpeaker)
-            
-        } catch {
-            print("could not set session category")
-            print(error.localizedDescription)
-        }
-        
-        do {
-            try session.setActive(true)
-        } catch {
-            print("could not make session active")
-            print(error.localizedDescription)
-        }
-    }
     
     
     func askForNotifications() {
@@ -792,15 +756,7 @@ return UITableViewCell()
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ComChatViewController.foreground(_:)),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ComChatViewController.routeChange(_:)),
-                                               name: AVAudioSession.interruptionNotification,
-                                               object: nil)
+       
 
     }
     
@@ -810,67 +766,8 @@ return UITableViewCell()
     }
     
     
-    @objc func foreground(_ notification: Notification) {
-        print("\(#function)")
-        
-    }
     
     
-    @objc func routeChange(_ notification: Notification) {
-        print("\(#function)")
-        
-        if let userInfo = (notification as NSNotification).userInfo {
-            print("routeChange \(userInfo)")
-            
-            //print("userInfo \(userInfo)")
-            if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt {
-                //print("reason \(reason)")
-                switch AVAudioSession.RouteChangeReason(rawValue: reason)! {
-                case AVAudioSessionRouteChangeReason.newDeviceAvailable:
-                    print("NewDeviceAvailable")
-                    print("did you plug in headphones?")
-                    checkHeadphones()
-                case AVAudioSessionRouteChangeReason.oldDeviceUnavailable:
-                    print("OldDeviceUnavailable")
-                    print("did you unplug headphones?")
-                    checkHeadphones()
-                case AVAudioSessionRouteChangeReason.categoryChange:
-                    print("CategoryChange")
-                case AVAudioSessionRouteChangeReason.override:
-                    print("Override")
-                case AVAudioSessionRouteChangeReason.wakeFromSleep:
-                    print("WakeFromSleep")
-                case AVAudioSessionRouteChangeReason.unknown:
-                    print("Unknown")
-                case AVAudioSessionRouteChangeReason.noSuitableRouteForCategory:
-                    print("NoSuitableRouteForCategory")
-                case AVAudioSessionRouteChangeReason.routeConfigurationChange:
-                    print("RouteConfigurationChange")
-                    
-                }
-            }
-        }
-        
-       
-    }
-    
-    func checkHeadphones() {
-        print("\(#function)")
-        
-        let currentRoute = AVAudioSession.sharedInstance().currentRoute
-        if !currentRoute.outputs.isEmpty {
-            for description in currentRoute.outputs {
-                if description.portType == AVAudioSession.Port.headphones {
-                    print("headphones are plugged in")
-                    break
-                } else {
-                    print("headphones are unplugged")
-                }
-            }
-        } else {
-            print("checking headphones requires a connection to a device")
-        }
-    }
     
     func OnTouchDoctor(index: Int) {
     print(message[index].url)
@@ -918,7 +815,7 @@ return UITableViewCell()
     }
     
     
-
+    
 }
     
     

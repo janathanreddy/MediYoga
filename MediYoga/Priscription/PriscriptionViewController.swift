@@ -45,13 +45,18 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PriscriptionTableViewCell
         if searching{
         
-            cell.PriscriptionLabel.text = searchedname[indexPath.row] }
+            cell.PriscriptionLabel.text = searchedname[indexPath.row]
+            cell.celldelegate = self
+            cell.index = indexPath
+        }
         else{
             
                 cell.PriscriptionLabel.text = names[indexPath.row]
+            cell.celldelegate = self
+            cell.index = indexPath
+
         }
 
-        cell.celldelegate = self
         return cell
     }
 

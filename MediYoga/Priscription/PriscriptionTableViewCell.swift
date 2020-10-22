@@ -31,9 +31,9 @@ class PriscriptionTableViewCell: UITableViewCell {
     }
     
     @IBAction func favbtnaction(_ sender: Any) {
-        
-//        celldelegate?.onClickCell(index: index!.row)
         favbtn.isSelected = !favbtn.isSelected
+
+        celldelegate?.onClickCell(index: index!.row)
 
 
     }
@@ -41,8 +41,9 @@ class PriscriptionTableViewCell: UITableViewCell {
     
     @IBAction func checkmarkaction(_ sender: Any) {
         
-//        celldelegate?.onClickCell_1(index: index!.row)
         checkbtn.isSelected = !checkbtn.isSelected
+
+        celldelegate?.onClickCell_1(index: index!.row)
 
     }
     
