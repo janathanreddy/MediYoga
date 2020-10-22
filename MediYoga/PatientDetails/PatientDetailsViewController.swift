@@ -61,7 +61,6 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         labrequestbtn.layer.borderColor = UIColor.systemBlue.cgColor
         PatientCollectionView.delegate = self
         PatientCollectionView.dataSource = self
-        
         patientimage.image = UIImage(named: image)
         patientname.text = name
         patientage.text = age
@@ -108,9 +107,8 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     }
     
     @IBAction func prescriptionactionbtn(_ sender: Any) {
-        
-        print("prescriptionactionbtn")
-
+        print("patient_id from Details : \(patient_id) ")
+        performSegue(withIdentifier: "Prescription", sender: self)
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Headers.count
@@ -147,6 +145,16 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         return UICollectionReusableView()
 }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Prescription"
+        {
+            let Prescription:PriscriptionViewController = segue.destination as! PriscriptionViewController
+            Prescription.patient_id = patient_id
+            
+        }
+    }
+    
+    
 }
 
 

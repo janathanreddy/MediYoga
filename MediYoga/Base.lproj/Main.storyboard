@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ogR-Lk-V6f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sg3-Kz-B2a">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -960,7 +960,6 @@
                                         </state>
                                         <connections>
                                             <action selector="prescriptionactionbtn:" destination="pvG-Fb-cwZ" eventType="touchUpInside" id="d5S-Fn-wkG"/>
-                                            <segue destination="T4A-CA-txJ" kind="show" identifier="Prescription" id="PvD-q0-r34"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1003,6 +1002,7 @@
                         <outlet property="patientname" destination="a9D-RO-nAV" id="Ona-2h-V3L"/>
                         <outlet property="patinetappointtime" destination="nVU-Wb-nKw" id="zVg-u3-3vS"/>
                         <outlet property="prescriptionbtn" destination="bcH-sy-zH2" id="I2x-Ze-jri"/>
+                        <segue destination="T4A-CA-txJ" kind="show" identifier="Prescription" animates="NO" id="knp-5J-iGu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXC-QC-dd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1174,6 +1174,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="SaveAct:" destination="T4A-CA-txJ" eventType="touchUpInside" id="utX-z1-Iiv"/>
+                                </connections>
                             </button>
                             <searchBar hidden="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Search Drug list" translatesAutoresizingMaskIntoConstraints="NO" id="ovz-2C-YnA">
                                 <rect key="frame" x="0.0" y="54" width="414" height="44"/>
@@ -2772,6 +2775,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Rne-kA-T2P"/>
         <segue reference="xj4-rx-EOT"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -6,18 +6,19 @@
 //
 
 import UIKit
+import Firebase
 
 class PriscriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewNew, UISearchBarDelegate {
     
     
     @IBOutlet var NameSearch: UISearchBar!
-    
+    let db = Firestore.firestore()
     @IBOutlet weak var SearchButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    var names:[String] = ["Tylenol","Celecoxib","Meloxicam","Nabumetone","ibuprofen"]
+    var patient_id:String = ""
+    var names = [String]()
     var searching = false
     var searchedname = [String]()
-
     @IBOutlet weak var prescriptionLabel: UILabel!
     @IBOutlet weak var SaveBtn: UIButton!
     
@@ -31,6 +32,10 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         SaveBtn.layer.cornerRadius = 10
         NameSearch.delegate = self
+        TextFieldDescription.textAlignment = .left
+        TextFieldDescription.contentVerticalAlignment = .top
+        messages()
+        print("patient_id from Priscription : \(patient_id) ")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,7 +117,37 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
 
     }
     
+    func messages(){
+        
+        
+        db.collection("patient_prescriptions").document(patient_id).getDocument() { [self] (snapshot, err) in
+              if let err = err {
+                  print("Error getting documents: \(err)")
+              } else {
+                for document in snapshot!.data()! as [String:Any] {
+                    for documents in document.value as! [[String:Any]]{
+                        TextFieldDescription.text = documents["prescription_notes"] as! String
+                        for DrugList in documents["drugs"] as! [[String:Any]]{
+                            names.append(DrugList["drug_name"] as! String)
+                        }
+                    }
+                    
+                    
+                  }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+
+              }
+        }
+    }
     
+    @IBAction func SaveAct(_ sender: Any) {
+        
+        
+    }
     
 }
+
+
 
