@@ -19,9 +19,9 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     var names = [String]()
     var searching = false
     var searchedname = [String]()
+    
     @IBOutlet weak var prescriptionLabel: UILabel!
     @IBOutlet weak var SaveBtn: UIButton!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var TextFieldDescription: UITextField!
     
@@ -120,19 +120,14 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     func messages(){
         
         
-        db.collection("patient_prescriptions").document(patient_id).getDocument() { [self] (snapshot, err) in
+        db.collection("prescription").document("drug_document").getDocument() { [self] (snapshot, err) in
               if let err = err {
                   print("Error getting documents: \(err)")
               } else {
                 for document in snapshot!.data()! as [String:Any] {
                     for documents in document.value as! [[String:Any]]{
-                        TextFieldDescription.text = documents["prescription_notes"] as! String
-                        for DrugList in documents["drugs"] as! [[String:Any]]{
-                            names.append(DrugList["drug_name"] as! String)
-                        }
+                        names.append(documents["drug_name"] as! String)
                     }
-                    
-                    
                   }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

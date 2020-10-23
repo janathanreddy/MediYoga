@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sg3-Kz-B2a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ogR-Lk-V6f">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -876,26 +876,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eit-Ec-AKb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="87"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="34" id="6nX-P2-WOw"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <rect key="frame" x="8" y="8" width="168.5" height="71"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="top" secondItem="QHP-do-pby" secondAttribute="top" id="4td-FQ-yw0"/>
-                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="width" secondItem="QHP-do-pby" secondAttribute="width" id="5Ab-Dm-RQv"/>
-                                                <constraint firstAttribute="trailing" secondItem="Eit-Ec-AKb" secondAttribute="trailing" id="Cfz-Cx-UPZ"/>
-                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="top" secondItem="QHP-do-pby" secondAttribute="top" id="IwD-yO-S0b"/>
-                                                <constraint firstAttribute="bottom" secondItem="Eit-Ec-AKb" secondAttribute="bottom" id="gmx-1H-cdD"/>
-                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="leading" secondItem="QHP-do-pby" secondAttribute="leading" id="jqh-lU-wUs"/>
-                                                <constraint firstAttribute="bottom" secondItem="Eit-Ec-AKb" secondAttribute="bottom" id="r4T-qd-uzJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Eit-Ec-AKb" secondAttribute="bottom" constant="8" id="CwE-wJ-Pqt"/>
+                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="leading" secondItem="QHP-do-pby" secondAttribute="leading" constant="8" id="HCm-wg-lyl"/>
+                                                <constraint firstAttribute="trailing" secondItem="Eit-Ec-AKb" secondAttribute="trailing" constant="8" id="Yen-Pk-syG"/>
+                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="width" secondItem="QHP-do-pby" secondAttribute="width" multiplier="0.9" placeholder="YES" id="o2m-5e-6Qn"/>
+                                                <constraint firstItem="Eit-Ec-AKb" firstAttribute="top" secondItem="QHP-do-pby" secondAttribute="top" constant="8" id="qNp-xs-QCr"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <size key="customSize" width="187" height="87"/>
                                         <connections>
                                             <outlet property="Patientdetails" destination="Eit-Ec-AKb" id="pIW-Rx-fV0"/>
@@ -2775,7 +2770,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rne-kA-T2P"/>
         <segue reference="xj4-rx-EOT"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2825,6 +2819,9 @@
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

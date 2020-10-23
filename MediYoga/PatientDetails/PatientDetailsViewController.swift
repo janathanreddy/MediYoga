@@ -41,14 +41,15 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     var cdd:String = ""
     var image:String = ""
     let db = Firestore.firestore()
-
+    var CurrentDate:String = ""
     var Headers:[String] = ["Symtoms","Diagnosis","Prescription","Lab Request"]
-    var Description = [[String](),[String](),["ACECLO PLUS","BACTRIM DS","CYCLOPAM","GRAVEL","SNEPDOL"],["X-RAY LS SPINE AP & LAT VIEW","X-RAY DORSAL SPINE P & LAT VIEW"]]
+    var Description = [[String](),[String](),[String](),[String]()]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(name)
+        date()
+        print("patient_id: \(patient_id)")
         casehistory.layer.cornerRadius = 10
         casehistory.clipsToBounds = true
         patientimage.clipsToBounds = true
@@ -67,32 +68,9 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         patinetappointtime.text = time
         patientage.text = age
         
-        db.collection("appointments").whereField("patient_id", isEqualTo: patient_id).getDocuments(){ [self] (querySnapshot, error) in
-                            if  error == nil && querySnapshot != nil {
-
-                            for document in querySnapshot!.documents {
-                                
-                            let documentData = document.data()
-                            let patient_symptoms = documentData["patient_symptoms"] as! [[String:Any]]
-                            for Symptoms in patient_symptoms{
-                            
-                                Description[0].append("\(Symptoms["symptoms"] as! String) - \(Symptoms["duration"] as! String)\(Symptoms["type"] as! String)")
-                                
-                                }
-                                let patient_diagnosis = documentData["diagnosis"] as! [[String:Any]]
-
-                                for diagnosis in patient_diagnosis{
-                                    
-                                    Description[1].append("\(diagnosis["diagnosis_name"] as! String)")
-                                    
-                                }
-                    }
-                        DispatchQueue.main.async {
-                            self.PatientCollectionView.reloadData()
-                        }
-                }
-            }
-
+        Symptoms_Diagnosis()
+        prescription()
+        lab_requests()
     }
     
     @IBAction func Backsegue(_ sender: Any) {
@@ -123,8 +101,9 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
 
         cell.Patientdetails.preferredMaxLayoutWidth = PatientCollectionView.frame.width
         cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.systemGray6.cgColor
-        cell.layer.cornerRadius = 10
+        
+        cell.layer.borderColor = UIColor.systemGray5.cgColor
+        cell.layer.cornerRadius = 8
         return cell
     }
     
@@ -154,8 +133,108 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         }
     }
     
+    func Symptoms_Diagnosis(){
+        
+        db.collection("appointments").whereField("patient_id", isEqualTo: patient_id).getDocuments(){ [self] (querySnapshot, error) in
+                            if  error == nil && querySnapshot != nil {
+
+                            for document in querySnapshot!.documents {
+                                
+                            let documentData = document.data()
+                            let patient_symptoms = documentData["patient_symptoms"] as! [[String:Any]]
+                            for Symptoms in patient_symptoms{
+                            
+                                Description[0].append("\(Symptoms["symptoms"] as! String) - \(Symptoms["duration"] as! String)\(Symptoms["type"] as! String)")
+                                
+                                }
+                                let patient_diagnosis = documentData["diagnosis"] as! [[String:Any]]
+
+                                for diagnosis in patient_diagnosis{
+                                    Description[1].append("\(diagnosis["diagnosis_name"] as! String)")
+                                    
+                                }
+                    }
+                        DispatchQueue.main.async {
+                            self.PatientCollectionView.reloadData()
+                        }
+                }
+            }
+    }
     
+    func prescription(){
+        
+        
+        db.collection("patient_prescriptions").document(patient_id).getDocument() { [self] (snapshot, err) in
+              if let err = err {
+                  print("Error getting documents: \(err)")
+              } else {
+                for document in snapshot!.data()! as [String:Any] {
+                    for documents in document.value as! [[String:Any]]{
+                        let time_Stamp = documents["date"] as! Timestamp
+                        let timeStamp = time_Stamp.dateValue()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMM dd,yyyy"
+                        let ChatTime = dateFormatter.string(from: timeStamp)
+                        if ChatTime == CurrentDate {
+                        for DrugList in documents["drugs"] as! [[String:Any]]{
+                            Description[2].append(DrugList["drug_name"] as! String)}
+                        }
+                    }
+                  }
+                DispatchQueue.main.async {
+                    self.PatientCollectionView.reloadData()
+                }
+
+              }
+        }
+        
+    }
+    
+    func lab_requests(){
+        
+        
+        db.collection("patient_lab_requests").document(patient_id).getDocument() { [self] (snapshot, err) in
+              if let err = err {
+                  print("Error getting documents: \(err)")
+              } else {
+                for document in snapshot!.data()! as [String:Any] {
+                    for documents in document.value as! [[String:Any]]{
+                        
+                        let time_Stamp = documents["date"] as! Timestamp
+                        let timeStamp = time_Stamp.dateValue()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMM dd,yyyy"
+                        let ChatTime = dateFormatter.string(from: timeStamp)
+                        if ChatTime == CurrentDate {
+                        for requests in documents["requests"] as! [Any]{
+                            
+                            Description[3].append(requests as! String)
+                            
+                        }
+                        
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.PatientCollectionView.reloadData()
+                }
+
+              }
+        }
+        
+    }
+    }
+    
+    
+    func date(){
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd,yyyy"
+        CurrentDate = dateFormatter.string(from: date)
+        
+        
+    }
 }
+
 
 
 
