@@ -19,13 +19,14 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     var names = [String]()
     var searching = false
     var searchedname = [String]()
-    
+    var selectedElement = [String]()
     @IBOutlet weak var prescriptionLabel: UILabel!
     @IBOutlet weak var SaveBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var TextFieldDescription: UITextField!
     
-    
+    var selecteddrugs = [String]()
+    var Favouritedrugs = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -56,7 +57,8 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         }
         else{
             
-                cell.PriscriptionLabel.text = names[indexPath.row]
+           
+            cell.PriscriptionLabel.text = names[indexPath.row]
             cell.celldelegate = self
             cell.index = indexPath
 
@@ -65,13 +67,38 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
 
-    func onClickCell(index: Int) {
-        print(index)
-    }
     
-    func onClickCell_1(index: Int) {
-        print(index)
-    }
+    
+//    func onClickCell(index: Int) {
+//
+//        print(names[index])
+//
+//    }
+    
+//    func onClickCell_1(index: Int) {
+//
+//        print(names[index])
+//
+//    }
+    
+    func Favourite(cell: PriscriptionTableViewCell, didTappedThe button: UIButton?) {
+        if button?.isSelected != true{
+            guard let indexPath = tableView.indexPath(for: cell) else  { return }
+            Favouritedrugs = Favouritedrugs.filter() { $0 != "\(names[indexPath.row])" }
+
+        }else if button?.isSelected != false{
+           guard let indexPath = tableView.indexPath(for: cell) else  { return }
+            Favouritedrugs.append(names[indexPath.row])
+       }
+    
+    func Check(cell: PriscriptionTableViewCell, didTappedThe button: UIButton?) {
+        if button?.isSelected != true{
+            guard let indexPath = tableView.indexPath(for: cell) else  { return }
+            selecteddrugs = selecteddrugs.filter() { $0 != "\(names[indexPath.row])" }
+        }else if button?.isSelected != false{
+           guard let indexPath = tableView.indexPath(for: cell) else  { return }
+            selecteddrugs.append(names[indexPath.row])
+       }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedname = names.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
@@ -141,6 +168,8 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         
         
     }
+    
+    
     
 }
 

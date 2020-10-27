@@ -66,7 +66,7 @@
 		21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */; };
 		21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */; };
 		21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */; };
-		21FDDEB6254741DC0022AE94 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FDDEB5254741DC0022AE94 /* Connectivity.swift */; };
+		21FDDEB6254741DC0022AE94 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FDDEB5254741DC0022AE94 /* Reachability.swift */; };
 		7C541B3FE85A709F24A722B6 /* Pods_MediYoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA513AD305EC10D5F48867DD /* Pods_MediYoga.framework */; };
 		8A274245E8534C3902AB88C7 /* Pods_MediYogaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE56BF3C1DA5A2441C47788 /* Pods_MediYogaTests.framework */; };
 		FF0481EE5A9934532B53AA81 /* Pods_MediYoga_MediYogaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */; };
@@ -156,7 +156,7 @@
 		21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiveimageTableViewCell.xib; sourceTree = "<group>"; };
 		21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		21FBA7FC251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		21FDDEB5254741DC0022AE94 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		21FDDEB5254741DC0022AE94 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3BD2C73339AAD72C770D0128 /* Pods_MediYoga_MediYogaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediYoga_MediYogaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		506500CD5534C269B507FCA1 /* Pods-MediYogaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.release.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.release.xcconfig"; sourceTree = "<group>"; };
 		5DCC6198E637FCEB39BDD7C8 /* Pods-MediYogaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.debug.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 				210E88C925186F0500C59A6E /* LaunchScreen.storyboard */,
 				210E88C425186F0100C59A6E /* Main.storyboard */,
 				210E88C725186F0500C59A6E /* Assets.xcassets */,
-				21FDDEB5254741DC0022AE94 /* Connectivity.swift */,
+				21FDDEB5254741DC0022AE94 /* Reachability.swift */,
 			);
 			path = MediYoga;
 			sourceTree = "<group>";
@@ -711,7 +711,7 @@
 				2176A85A2518E3F3005979E9 /* SettingsTableViewCell_3.swift in Sources */,
 				219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */,
 				2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */,
-				21FDDEB6254741DC0022AE94 /* Connectivity.swift in Sources */,
+				21FDDEB6254741DC0022AE94 /* Reachability.swift in Sources */,
 				2176A8272518DC7D005979E9 /* AdminCommunicationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
