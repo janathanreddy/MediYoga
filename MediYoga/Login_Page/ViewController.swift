@@ -44,6 +44,16 @@ class ViewController: UIViewController,UITextFieldDelegate{
     override func viewDidAppear(_ animated: Bool) {
         MobileNoTextField.borderStyle = UITextField.BorderStyle.roundedRect
         PasswordTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        if CheckInternet.Connection(){
+            
+            self.Alert(Message: "Connected")
+            
+        }
+        
+        else{
+            
+            self.Alert(Message: "Your Device is not connected with internet")
+        }
 
     }
     
@@ -126,4 +136,14 @@ class ViewController: UIViewController,UITextFieldDelegate{
             performSegue(withIdentifier: "LoginToTab", sender: self)
         }
     }
+    
+    func Alert (Message: String){
+        
+        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
+
 }

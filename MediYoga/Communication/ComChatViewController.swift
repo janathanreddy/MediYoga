@@ -702,12 +702,6 @@ return UITableViewCell()
         alert.addAction(UIAlertAction(title: "Send", style: .default) {[unowned self] _ in
             print("keep was tapped")
             self.recorder = nil
-            
-            
-
-
-            
-            
             let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/recordings/\(randomid).m4a")
          print(uploadref)
              let uploadMetadata = StorageMetadata()
@@ -756,8 +750,6 @@ return UITableViewCell()
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         
-       
-
     }
     
     @objc func background(_ notification: Notification) {
@@ -814,7 +806,11 @@ return UITableViewCell()
         
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+    }
     
 }
     
