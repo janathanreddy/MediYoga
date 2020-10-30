@@ -578,10 +578,15 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="orc-lQ-Baq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Today"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Today">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="selected" title="Today">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="TodayAct:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="TU2-Bq-diC"/>
-                                            <action selector="TodayAct:" destination="kPQ-vy-Zbt" eventType="touchUpInside" id="iWc-3h-xp0"/>
+                                            <action selector="TodayAct:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="tgL-cj-vhN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKT-QK-974">
@@ -591,7 +596,13 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="47" id="bft-et-3qB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Weekly"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Weekly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="selected" title="Weekly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="Weeklyact:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="h9G-V5-ond"/>
                                         </connections>
@@ -603,7 +614,13 @@
                                             <constraint firstAttribute="height" constant="29" id="gWF-vu-lL3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Monthly"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Monthly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="selected" title="Monthly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="Monthlyact:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="hz5-l3-ejV"/>
                                         </connections>
@@ -622,18 +639,28 @@
                                     <constraint firstItem="NLx-U5-jZQ" firstAttribute="centerX" secondItem="o9i-Uu-m7F" secondAttribute="centerX" id="pYh-yB-Jkr"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-M7-AcE">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-M7-AcE">
                                 <rect key="frame" x="300" y="32" width="88" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WYE-95-wRr"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="dez-7x-21c"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Today">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <state key="selected" title="Today">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="actionTodayWeekly:" destination="kPQ-vy-Zbt" eventType="touchUpInside" id="2vi-5s-eKj"/>
-                                    <action selector="actionTodayWeekly:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="xXX-ru-Itk"/>
+                                    <action selector="actionTodayWeekly:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="6aQ-0D-RZZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-Re-Ygw">
+                                <rect key="frame" x="369" y="36" width="19" height="23"/>
+                                <state key="normal" image="dropdown"/>
+                                <connections>
+                                    <action selector="actionTodayWeekly:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="YwQ-9a-BTU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -644,25 +671,30 @@
                             <constraint firstItem="qZf-M7-AcE" firstAttribute="leading" secondItem="OrW-Mf-kgD" secondAttribute="trailing" constant="8" symbolic="YES" id="7NZ-VH-wfV"/>
                             <constraint firstItem="LWl-OZ-Ycw" firstAttribute="top" secondItem="tKe-Ta-vEz" secondAttribute="bottom" constant="12" id="9OM-zQ-YLO"/>
                             <constraint firstItem="tKe-Ta-vEz" firstAttribute="top" secondItem="OrW-Mf-kgD" secondAttribute="bottom" constant="15" id="ExY-m0-WR9"/>
+                            <constraint firstItem="tKe-Ta-vEz" firstAttribute="top" secondItem="Xd5-Re-Ygw" secondAttribute="bottom" constant="18" id="HS2-vH-ffM"/>
                             <constraint firstItem="tKe-Ta-vEz" firstAttribute="leading" secondItem="x9Z-dL-6dV" secondAttribute="leading" constant="14" id="NTA-jc-eiP"/>
                             <constraint firstItem="x9Z-dL-6dV" firstAttribute="trailing" secondItem="o9i-Uu-m7F" secondAttribute="trailing" constant="20" id="NjP-Xb-cW9"/>
                             <constraint firstItem="h2G-JD-BG6" firstAttribute="top" secondItem="x9Z-dL-6dV" secondAttribute="top" constant="25" id="OIX-p1-rvt"/>
-                            <constraint firstItem="x9Z-dL-6dV" firstAttribute="trailing" secondItem="qZf-M7-AcE" secondAttribute="trailing" constant="26" id="Und-5P-4OK"/>
+                            <constraint firstItem="Xd5-Re-Ygw" firstAttribute="leading" secondItem="qZf-M7-AcE" secondAttribute="trailing" constant="-19" id="Ve7-N1-Xk8"/>
+                            <constraint firstItem="x9Z-dL-6dV" firstAttribute="trailing" secondItem="qZf-M7-AcE" secondAttribute="trailing" constant="26" id="XRE-Ab-FNf"/>
                             <constraint firstItem="o9i-Uu-m7F" firstAttribute="top" secondItem="qZf-M7-AcE" secondAttribute="bottom" constant="15" id="auO-ro-MBp"/>
                             <constraint firstItem="OrW-Mf-kgD" firstAttribute="top" secondItem="x9Z-dL-6dV" secondAttribute="top" constant="32" id="bcj-Mb-eN0"/>
                             <constraint firstItem="LWl-OZ-Ycw" firstAttribute="leading" secondItem="x9Z-dL-6dV" secondAttribute="leading" id="bwc-lM-wU5"/>
                             <constraint firstItem="tKe-Ta-vEz" firstAttribute="top" secondItem="h2G-JD-BG6" secondAttribute="bottom" constant="7.5" id="ehq-BO-Gtb"/>
                             <constraint firstItem="x9Z-dL-6dV" firstAttribute="trailing" secondItem="tKe-Ta-vEz" secondAttribute="trailing" constant="26" id="f3V-Ga-qCU"/>
+                            <constraint firstItem="x9Z-dL-6dV" firstAttribute="trailing" secondItem="Xd5-Re-Ygw" secondAttribute="trailing" constant="26" id="hcB-mM-79a"/>
                             <constraint firstItem="h2G-JD-BG6" firstAttribute="leading" secondItem="x9Z-dL-6dV" secondAttribute="leading" constant="14" id="lss-aQ-ONK"/>
                             <constraint firstItem="LWl-OZ-Ycw" firstAttribute="bottom" secondItem="x9Z-dL-6dV" secondAttribute="bottom" id="osQ-Fj-rnF"/>
                             <constraint firstItem="OrW-Mf-kgD" firstAttribute="leading" secondItem="h2G-JD-BG6" secondAttribute="trailing" constant="28" id="qN7-ca-w55"/>
                             <constraint firstItem="qZf-M7-AcE" firstAttribute="top" secondItem="x9Z-dL-6dV" secondAttribute="top" constant="32" id="unb-vL-3zE"/>
+                            <constraint firstItem="Xd5-Re-Ygw" firstAttribute="top" secondItem="x9Z-dL-6dV" secondAttribute="top" constant="36" id="v0G-pB-Fu4"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Appointment" image="Appointment off" landscapeImage="Appointment off" selectedImage="Appointment" id="hXu-pZ-XSf"/>
                     <navigationItem key="navigationItem" id="flI-Ay-L3Y"/>
                     <connections>
-                        <outlet property="TodayBtn" destination="NLx-U5-jZQ" id="hbp-2O-sIp"/>
+                        <outlet property="DownArrow" destination="Xd5-Re-Ygw" id="Gi1-K0-oax"/>
+                        <outlet property="TodayBtn" destination="NLx-U5-jZQ" id="IGP-bo-m87"/>
                         <outlet property="TodayWeeklyView" destination="o9i-Uu-m7F" id="jbx-CX-NaF"/>
                         <outlet property="Todaytoptitle" destination="qZf-M7-AcE" id="5wS-TS-uJv"/>
                         <outlet property="Weeklybtn" destination="DKT-QK-974" id="t7g-HJ-1jJ"/>
@@ -674,6 +706,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE4-8l-SeP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="duO-69-eFi">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="683"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <viewLayoutGuide key="safeArea" id="rJA-ul-jcJ"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2802.898550724638" y="-59.598214285714285"/>
         </scene>
@@ -2771,7 +2809,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rne-kA-T2P"/>
         <segue reference="xj4-rx-EOT"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2797,6 +2834,7 @@
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="check off" width="30" height="30"/>
         <image name="check on" width="30" height="30"/>
+        <image name="dropdown" width="30" height="30"/>
         <image name="favourite" width="24" height="24"/>
         <image name="logo" width="243" height="59"/>
         <image name="mic.circle.fill" catalog="system" width="128" height="121"/>

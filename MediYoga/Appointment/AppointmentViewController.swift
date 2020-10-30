@@ -15,6 +15,7 @@ import FirebaseDatabase
 
 class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, TableViewCellindex{
     
+    @IBOutlet weak var DownArrow: UIButton!
     @IBOutlet weak var TodayWeeklyView: UIView!
     @IBOutlet weak var Todaytoptitle: UIButton!
     @IBOutlet weak var TodayBtn: UIButton!
@@ -33,6 +34,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var patient_id_notes:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        DownArrow.isUserInteractionEnabled = true
         namesearch.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -98,11 +100,9 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             cell.TimeField.text = searchedname_1[indexPath.row].time
             cell.ccdField.text = searchedname_1[indexPath.row].ccd
             cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
-            
             return cell
 
         } else {
-            
                 cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
                 cell.NameField.text = name_1[indexPath.row].name
                 cell.AgeField.text = name_1[indexPath.row].age
@@ -111,16 +111,9 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
                 cell.celldelegate = self
                 cell.index = indexPath
-            
                 return cell
-
         }
-
         return UITableViewCell()
-            
-        
-        
-        
     }
     
     
@@ -163,21 +156,36 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             }
             }
     }
-    
+
     @IBAction func actionTodayWeekly(_ sender: Any) {
-        
-        TodayWeeklyView.isHidden = false
+        DownArrow.isSelected = !DownArrow.isSelected
+        Todaytoptitle.isSelected = !Todaytoptitle.isSelected
+       if Todaytoptitle.isSelected == true || DownArrow.isSelected == true{
+            self.TodayWeeklyView.isHidden = false
+       
+       }else{
+        self.TodayWeeklyView.isHidden = true
+       }
+        reloadInputViews()
 
     }
     
     @IBAction func TodayAct(_ sender: Any) {
+        Todaytoptitle.setTitle("Today", for: .normal)
+        TodayWeeklyView.isHidden = true
     }
     
     
     @IBAction func Weeklyact(_ sender: Any) {
+        TodayWeeklyView.isHidden = true
+        Todaytoptitle.setTitle("Weekly", for: .normal)
+
     }
     
     @IBAction func Monthlyact(_ sender: Any) {
+        Todaytoptitle.setTitle("Weekly", for: .normal)
+        TodayWeeklyView.isHidden = true
+
     }
     
 

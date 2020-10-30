@@ -85,8 +85,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
             cell.PriscriptionLabel.text = names[indexPath.row]
             cell.celldelegate = self
             cell.index = indexPath
-
-
             return cell
 
         }
@@ -223,8 +221,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
                                 let array = Array(NSOrderedSet(array: RetFav_Index))
                                 print("RetFavIndex : \(array)")
                                 db.collection("doctors").document("jJU6FoDijkb3MOdu7Eeh").setData(["favourite_drugs": array])
-
-            
                             }
                         }
 
@@ -236,8 +232,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
 
               }
         }
-        selecteddruglist()
-        indexselect()
         
     }
     
