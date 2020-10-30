@@ -7,12 +7,9 @@
 
 import UIKit
 protocol TableViewNew {
-//       func onClickCell(index:Int)
-//       func onClickCell_1(index:Int)
+    
     func Favourite(cell:PriscriptionTableViewCell, didTappedThe button:UIButton?)
     func Check(cell:PriscriptionTableViewCell, didTappedThe button:UIButton?)
-
-
 
    }
 
@@ -36,8 +33,6 @@ class PriscriptionTableViewCell: UITableViewCell {
     
     @IBAction func favbtnaction(_ sender: Any) {
         
-        favbtn.isSelected = !favbtn.isSelected
-//        celldelegate?.onClickCell(index: index!.row)
         celldelegate?.Favourite(cell: self, didTappedThe: sender as?UIButton)
 
     }
@@ -45,10 +40,8 @@ class PriscriptionTableViewCell: UITableViewCell {
     
     @IBAction func checkmarkaction(_ sender: Any) {
         
-        checkbtn.isSelected = !checkbtn.isSelected
         celldelegate?.Check(cell: self, didTappedThe: sender as?UIButton)
 
-//        celldelegate?.onClickCell_1(index: index!.row)
 
     }
     

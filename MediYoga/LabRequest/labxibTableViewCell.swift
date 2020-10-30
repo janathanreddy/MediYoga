@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol LabRequest_Xrays {
+    func X_rays(cell:labxibTableViewCell, didTappedThe button:UIButton?)
+   }
+
 class labxibTableViewCell: UITableViewCell {
 
+    var CellDelegate:LabRequest_Xrays!
     var indexPath: IndexPath!
 
     @IBOutlet weak var dropdownlabel: UILabel!
@@ -25,6 +30,8 @@ class labxibTableViewCell: UITableViewCell {
     
     @IBAction func dropdownaction(_ sender: Any) {
         btncheck.isSelected = !btncheck.isSelected
+        CellDelegate?.X_rays(cell: self, didTappedThe: sender as?UIButton)
+
 
     }
     

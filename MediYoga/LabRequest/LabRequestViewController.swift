@@ -16,7 +16,9 @@ struct cellData {
     
 }
 
-class LabRequestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class LabRequestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,LabRequest_Xrays {
+    
+    
     
     var db = Firestore.firestore()
     var xibindexpath:IndexPath?
@@ -27,6 +29,7 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
     var xrays:[String] = ["X-ray PNS","X-Ray face with PNS","CT PNS","CT face PNS","CT Brains"]
     var pain = [String]()
     var touch:Int?
+    var Selected_Xrays = [String]()
     
     @IBOutlet weak var Descriptionlab: UITextField!
     
@@ -75,6 +78,9 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
             tableView.separatorStyle = .none
             tableView.showsVerticalScrollIndicator = false
             xibcell.dropdownlabel.text = tableviewdata[indexPath.section].sectiondata[indexPath.row - 1]
+            xibcell.CellDelegate = self
+            xibcell.indexPath = indexPath
+
             return xibcell
         }
     }
@@ -98,6 +104,9 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     @IBAction func saveAction(_ sender: Any) {
+        
+        
+        
     }
     
     func LabRequest(){
@@ -118,6 +127,21 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
               }
         }
         
+    }
+    
+    func X_rays(cell: labxibTableViewCell, didTappedThe button: UIButton?) {
+        if button?.isSelected != true{
+            guard let indexPath = tableView.indexPath(for: cell) else  { return }
+            Selected_Xrays = Selected_Xrays.filter() { $0 != "\(tableviewdata[indexPath.section].sectiondata[indexPath.row - 1])"
+            }
+            print("Title : \(tableviewdata[indexPath.section].title) \n Deselected Selected_Xrays : \(tableviewdata[indexPath.section].title) \(Selected_Xrays)")
+
+        }else if button?.isSelected != false{
+           guard let indexPath = tableView.indexPath(for: cell) else  { return }
+            Selected_Xrays.append(tableviewdata[indexPath.section].sectiondata[indexPath.row - 1])
+            print("Title : \(tableviewdata[indexPath.section].title) \n Seleceted Selected_Xrays : \(Selected_Xrays)")
+            
+        }
     }
 }
     

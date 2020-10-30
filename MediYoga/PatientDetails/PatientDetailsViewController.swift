@@ -71,6 +71,7 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         Symptoms_Diagnosis()
         prescription()
         lab_requests()
+        
     }
     
     @IBAction func Backsegue(_ sender: Any) {
