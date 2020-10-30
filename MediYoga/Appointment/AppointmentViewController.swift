@@ -34,6 +34,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var patient_id_notes:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+
         DownArrow.isUserInteractionEnabled = true
         namesearch.delegate = self
         tableView.delegate = self
@@ -154,7 +155,9 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             VC.patient_id = self.name_1[indexPath.row].patient_id
 
             }
-            }
+        }else if segue.identifier == "WeeklyViewController"{
+            
+        }
     }
 
     @IBAction func actionTodayWeekly(_ sender: Any) {
@@ -162,32 +165,53 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         Todaytoptitle.isSelected = !Todaytoptitle.isSelected
        if Todaytoptitle.isSelected == true || DownArrow.isSelected == true{
             self.TodayWeeklyView.isHidden = false
-       
+        UIView.animate(withDuration: 0.5, animations: {
+            self.DownArrow.imageView!.transform = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
+        })
+
+        
        }else{
         self.TodayWeeklyView.isHidden = true
        }
-        reloadInputViews()
 
     }
     
     @IBAction func TodayAct(_ sender: Any) {
-        Todaytoptitle.setTitle("Today", for: .normal)
         TodayWeeklyView.isHidden = true
+        Todaytoptitle.setTitle("Today", for: .normal)
+        UIView.animate(withDuration: 0.5, animations: {
+              self.DownArrow.imageView!.transform = CGAffineTransform.identity
+        })
+
+
     }
     
     
     @IBAction func Weeklyact(_ sender: Any) {
+//        TodayWeeklyView.isHidden = true
+//        Todaytoptitle.setTitle("Weekly", for: .normal)
+//        UIView.animate(withDuration: 0.5, animations: {
+//              self.DownArrow.imageView!.transform = CGAffineTransform.identity
+//        })
         TodayWeeklyView.isHidden = true
-        Todaytoptitle.setTitle("Weekly", for: .normal)
+        UIView.animate(withDuration: 0.5, animations: {
+              self.DownArrow.imageView!.transform = CGAffineTransform.identity
+        })
+        performSegue(withIdentifier: "WeeklyViewController", sender: self)
 
     }
     
     @IBAction func Monthlyact(_ sender: Any) {
-        Todaytoptitle.setTitle("Weekly", for: .normal)
         TodayWeeklyView.isHidden = true
+        Todaytoptitle.setTitle("Monthly", for: .normal)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+              self.DownArrow.imageView!.transform = CGAffineTransform.identity
+        })
+
 
     }
-    
+   
 
 }
 extension AppointmentViewController: UISearchBarDelegate {
@@ -207,6 +231,12 @@ extension AppointmentViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+    
+    
+    
+
+
+
 
 class filternames {
     let name: String
