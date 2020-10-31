@@ -2634,52 +2634,48 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q27-pw-EPV">
-                                <rect key="frame" x="0.0" y="112" width="414" height="682"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="644"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVU-QQ-Ed5">
+                                <rect key="frame" x="299" y="96" width="94" height="54"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVU-QQ-Ed5">
-                                        <rect key="frame" x="286" y="0.0" width="94" height="100"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jky-vb-c71">
-                                                <rect key="frame" x="8" y="51" width="78" height="29"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="b5z-jg-75t"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="Monthly">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="MontlyAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="eyh-KI-hau"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuO-cr-o6d">
-                                                <rect key="frame" x="8" y="8" width="78" height="29"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="clP-Zw-oWT"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="Today">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="TodayAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="XVo-Wl-aKz"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuO-cr-o6d">
+                                        <rect key="frame" x="8" y="2" width="78" height="17"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="94" id="3sI-hT-3Nt"/>
-                                            <constraint firstItem="jky-vb-c71" firstAttribute="top" secondItem="HuO-cr-o6d" secondAttribute="bottom" constant="14" id="E8G-kt-qjf"/>
-                                            <constraint firstAttribute="bottom" secondItem="jky-vb-c71" secondAttribute="bottom" constant="20" symbolic="YES" id="RMb-oq-yHO"/>
-                                            <constraint firstAttribute="height" constant="100" id="eyE-ac-Otf"/>
-                                            <constraint firstItem="HuO-cr-o6d" firstAttribute="top" secondItem="gVU-QQ-Ed5" secondAttribute="top" constant="8" id="oCC-vI-b5p"/>
-                                            <constraint firstItem="HuO-cr-o6d" firstAttribute="centerX" secondItem="gVU-QQ-Ed5" secondAttribute="centerX" id="u5L-Uq-L9g"/>
-                                            <constraint firstItem="jky-vb-c71" firstAttribute="centerX" secondItem="gVU-QQ-Ed5" secondAttribute="centerX" id="veM-e7-i1W"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="clP-Zw-oWT"/>
+                                            <constraint firstAttribute="height" constant="17" id="zYg-Bu-5b9"/>
                                         </constraints>
-                                    </view>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Today">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="TodayAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="XVo-Wl-aKz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jky-vb-c71">
+                                        <rect key="frame" x="8" y="27" width="78" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="Fqb-el-86D"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="b5z-jg-75t"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Monthly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="MontlyAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="eyh-KI-hau"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gVU-QQ-Ed5" secondAttribute="trailing" constant="34" id="5XO-dB-dgD"/>
+                                    <constraint firstAttribute="width" constant="94" id="3sI-hT-3Nt"/>
+                                    <constraint firstAttribute="height" constant="54" id="CfE-d6-JhP"/>
+                                    <constraint firstItem="HuO-cr-o6d" firstAttribute="centerX" secondItem="gVU-QQ-Ed5" secondAttribute="centerX" id="Kha-nf-8gj"/>
+                                    <constraint firstItem="jky-vb-c71" firstAttribute="top" secondItem="HuO-cr-o6d" secondAttribute="bottom" constant="8" symbolic="YES" id="U1d-RE-3u0"/>
+                                    <constraint firstItem="HuO-cr-o6d" firstAttribute="top" secondItem="gVU-QQ-Ed5" secondAttribute="top" constant="2" id="uTU-lX-ROw"/>
+                                    <constraint firstItem="jky-vb-c71" firstAttribute="centerX" secondItem="gVU-QQ-Ed5" secondAttribute="centerX" id="veM-e7-i1W"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2690,10 +2686,11 @@
                             <constraint firstItem="q27-pw-EPV" firstAttribute="centerX" secondItem="YKU-mN-Hxw" secondAttribute="centerX" id="EqK-Y4-cxX"/>
                             <constraint firstItem="q27-pw-EPV" firstAttribute="leading" secondItem="X25-yL-emh" secondAttribute="leading" id="O48-MK-l69"/>
                             <constraint firstItem="YKU-mN-Hxw" firstAttribute="top" secondItem="Shu-kY-I5N" secondAttribute="top" id="QgX-g2-sEQ"/>
-                            <constraint firstItem="gVU-QQ-Ed5" firstAttribute="top" secondItem="YKU-mN-Hxw" secondAttribute="bottom" constant="23.5" id="bUr-Nd-j4J"/>
+                            <constraint firstAttribute="trailing" secondItem="gVU-QQ-Ed5" secondAttribute="trailing" constant="21" id="V3D-oJ-oZL"/>
                             <constraint firstItem="Shu-kY-I5N" firstAttribute="trailing" secondItem="DJd-7e-jFy" secondAttribute="trailing" constant="21" id="kY3-ts-eLN"/>
                             <constraint firstItem="YKU-mN-Hxw" firstAttribute="centerX" secondItem="X25-yL-emh" secondAttribute="centerX" id="lR0-g3-Usu"/>
-                            <constraint firstItem="q27-pw-EPV" firstAttribute="top" secondItem="YKU-mN-Hxw" secondAttribute="bottom" constant="23.5" id="nHh-H4-WEF"/>
+                            <constraint firstItem="gVU-QQ-Ed5" firstAttribute="top" secondItem="YKU-mN-Hxw" secondAttribute="bottom" constant="7.5" id="u3Z-Ao-vVf"/>
+                            <constraint firstItem="q27-pw-EPV" firstAttribute="top" secondItem="gVU-QQ-Ed5" secondAttribute="bottom" id="yor-xi-kMO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wZ0-qb-INk"/>
@@ -2702,6 +2699,7 @@
                         <outlet property="MonthlyBtn" destination="jky-vb-c71" id="cR6-Db-0iU"/>
                         <outlet property="Todaybtn" destination="HuO-cr-o6d" id="Qi9-pp-7QR"/>
                         <outlet property="WeeklyBtn" destination="Tk7-Km-1ty" id="xLO-BO-Ubn"/>
+                        <outlet property="WeeklyView" destination="q27-pw-EPV" id="37l-eI-BHT"/>
                         <outlet property="dropDown" destination="DJd-7e-jFy" id="uOp-jn-z3J"/>
                     </connections>
                 </viewController>
