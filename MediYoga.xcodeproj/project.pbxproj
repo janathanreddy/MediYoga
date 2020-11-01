@@ -64,6 +64,9 @@
 		21A175C425400DA1008950AB /* AdminTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */; };
 		21A175C525400DA1008950AB /* AdminTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */; };
 		21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEA26E25262ED80049B4F7 /* Validation.swift */; };
+		21EAC39D254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EAC39C254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift */; };
+		21EAC3A3254F2BA80085F9B9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EAC3A1254F2BA80085F9B9 /* CollectionViewCell.swift */; };
+		21EAC3A4254F2BA80085F9B9 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21EAC3A2254F2BA80085F9B9 /* CollectionViewCell.xib */; };
 		21EB295A25398AA700D26F6F /* ComChatReceiveimageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */; };
 		21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */; };
 		21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */; };
@@ -155,6 +158,9 @@
 		21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTextTableViewCell.swift; sourceTree = "<group>"; };
 		21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminTextTableViewCell.xib; sourceTree = "<group>"; };
 		21CEA26E25262ED80049B4F7 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		21EAC39C254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyGrid_CollectionViewLayout.swift; sourceTree = "<group>"; };
+		21EAC3A1254F2BA80085F9B9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		21EAC3A2254F2BA80085F9B9 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		21EB295825398AA600D26F6F /* ComChatReceiveimageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiveimageTableViewCell.swift; sourceTree = "<group>"; };
 		21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiveimageTableViewCell.xib; sourceTree = "<group>"; };
 		21FBA7F1251B542000466C3A /* PatientDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -287,6 +293,9 @@
 				2176A8042518A059005979E9 /* AppointmentViewController.swift */,
 				2176A8192518D56B005979E9 /* AppointmentTableViewCell.swift */,
 				218AD761254C9CC500E169E4 /* WeeklyViewController.swift */,
+				21EAC39C254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift */,
+				21EAC3A1254F2BA80085F9B9 /* CollectionViewCell.swift */,
+				21EAC3A2254F2BA80085F9B9 /* CollectionViewCell.xib */,
 			);
 			path = Appointment;
 			sourceTree = "<group>";
@@ -545,6 +554,7 @@
 				211003A52533588400018E34 /* AdminComImageTableViewCell.xib in Resources */,
 				21EB295B25398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib in Resources */,
 				2155B41C252BA04600148B92 /* GoogleService-Info.plist in Resources */,
+				21EAC3A4254F2BA80085F9B9 /* CollectionViewCell.xib in Resources */,
 				210E88C625186F0100C59A6E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,10 +684,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */,
+				21EAC39D254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift in Sources */,
 				21A175B025400D6A008950AB /* DoctorAudioTableViewCell.swift in Sources */,
 				219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */,
 				212FF9E2253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift in Sources */,
 				2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */,
+				21EAC3A3254F2BA80085F9B9 /* CollectionViewCell.swift in Sources */,
 				21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */,
 				2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */,
 				21A175BA25400D88008950AB /* DoctorImageTableViewCell.swift in Sources */,
