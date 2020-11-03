@@ -43,7 +43,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         self.navigationItem.setHidesBackButton(true, animated: true)
         let date = Date()
         let format = DateFormatter()
-        format.dateFormat = "MMMM d, yyyy"
+        format.dateFormat = "MMMM dd, yyyy"
         let formattedDate = format.string(from: date)
         tableView.showsVerticalScrollIndicator = false
         TodayWeeklyView.isHidden = true

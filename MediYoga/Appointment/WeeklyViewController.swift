@@ -7,14 +7,23 @@
 
 import UIKit
 import Firebase
-
+struct appointment_time {
+    var Name: String
+    var Date: String
+    var appointmenttime: String
+    var weekday:String
+    init(Name: String,Date: String,appointmenttime: String,weekday:String) {
+            self.Name = Name
+            self.Date = Date
+            self.appointmenttime =  appointmenttime
+        self.weekday = weekday
+        }
+}
 class WeeklyViewController: UIViewController{
     let db = Firestore.firestore()
     var TimeAppointment = [appointment_time]()
-    var week = [String]()
-    var Time = [String]()
-    var name = [String]()
-    var weekday = [String]()
+    var Time:[String] = ["08:00AM - 08:15AM","08:15AM - 08:30AM","08:30AM - 08:45AM","08:45AM - 09:00AM","09:00AM - 09:15AM","09:15AM - 09:30AM","09:30AM - 09:45AM","09:45AM - 10:00AM","10:00AM - 10:15AM","10:15AM - 10:30AM","10:30AM - 10:45AM"]
+    var week:[String] = ["Time"]
     @IBOutlet weak var grid_CollectionView: UICollectionView! {
         didSet {
             grid_CollectionView.bounces = false
@@ -41,7 +50,9 @@ class WeeklyViewController: UIViewController{
         super.viewDidLoad()
         DoctorAppointments()
         currentweekdays()
-        self.grid_CollectionView.reloadData()        
+        grid_CollectionView.showsHorizontalScrollIndicator = false
+        grid_CollectionView.showsVerticalScrollIndicator = false
+
     }
     func currentweekdays(){
         let calendar = Calendar.current
@@ -101,25 +112,15 @@ class WeeklyViewController: UIViewController{
 
             for document in querySnapshot!.documents {
             let documentData = document.data()
-                Time.append(documentData["appointment_time"] as! String)
-                name.append(documentData["patient_first_name"] as! String)
-                print(name)
-                print(Time)
-            TimeAppointment.append(appointment_time(Name: "\(documentData["patient_first_name"] as! String) \(documentData["patient_last_name"] as! String)", Date: documentData["appointment_date"] as! String, Time: documentData["appointment_time"] as! String, check: true))
-                print("TimeAppointment : \(documentData["appointment_time"] as! String) \(Time.count)")
-                print("Name : \(documentData["patient_first_name"] as! String) \(Time.count)")
                 let isoDate = documentData["appointment_date"] as! String
-
                 let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale(identifier: "en_IN") // set locale to reliable US_POSIX
+                dateFormatter.locale = Locale(identifier: "en_IN")
                 dateFormatter.dateFormat = "MMM dd, yyyy"
                 let date = dateFormatter.date(from:isoDate)
                 let dayformate = DateFormatter()
                 dayformate.dateFormat = "dd,EEE"
-                var day = dayformate.string(from: date!)
-                weekday.append(day)
-                print(TimeAppointment)
-                
+                let day = dayformate.string(from: date!)
+                TimeAppointment.append(appointment_time(Name: documentData["patient_first_name"] as! String, Date: documentData["appointment_date"] as! String, appointmenttime: documentData["appointment_time"] as! String, weekday: day))
     }
         DispatchQueue.main.async {
             self.grid_CollectionView.reloadData()
@@ -154,58 +155,52 @@ extension WeeklyViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
+
         if indexPath.section == 0{
-            cell.backgroundColor = gridLayout.isItemSticky(at: indexPath) ? .groupTableViewBackground : .gray
 
-            if indexPath == [0,0]{
-                
-                cell.title_Label.text = "Time"
-                
-            }else{
                 cell.title_Label.text = week[indexPath.row]
-                
-            }
-            
-        }
-        else if indexPath.row == 0{
+                cell.title_Label.textColor = UIColor.black
+                cell.title_Label.font = cell.title_Label.font.withSize(16)
 
-            if indexPath == [0,0]{
-                
-                cell.title_Label.text = "Time"
-
-                
-            }else{
-                cell.title_Label.text = Time[indexPath.row]
                 
             }
 
-        }
+        else if indexPath.row == 0 && indexPath.section >= 1{
+            cell.title_Label.text = Time[indexPath.section]
+            cell.title_Label.textColor = UIColor.black
+            cell.title_Label.font = cell.title_Label.font.withSize(16)
+            cell.title_Label.alpha = 0.6
 
+        }
         else{
+            let redvalue = CGFloat(drand48())
+            let greenvalue = CGFloat(drand48())
+            let bluevalue = CGFloat(drand48())
             
-            cell.title_Label.text = name[indexPath.row]
+            cell.title_Label.text = "\(indexPath)"
+            cell.title_Label.font = cell.title_Label.font.withSize(15)
+            cell.title_Label.textColor = UIColor(red: redvalue, green: greenvalue, blue: bluevalue, alpha: 1)
+            
 
         }
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.gray.cgColor
-        cell.backgroundColor = gridLayout.isItemSticky(at: indexPath) ? .groupTableViewBackground : .white
+        
+
+        cell.layer.borderWidth = 0.8
+        cell.layer.borderColor = UIColor.systemGray5.cgColor
+        if indexPath.section == 0 {
+            cell.backgroundColor = gridLayout.isItemSticky(at: indexPath) ? .systemTeal : .white
+        }else {
+            cell.backgroundColor = gridLayout.isItemSticky(at: indexPath) ? .white : .white
+
+        }
 
         return cell
     }
-    
-    
-}
-class appointment_time {
-    let Name: String
-    let Date: String
-    let Time: String
-    let check: Bool
-    init(Name: String,Date: String,Time: String
-,check: Bool) {
-        self.Name = Name
-        self.Date = Date
-        self.Time =  Time
-        self.check = check
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(indexPath.section): \(Time[indexPath.section]),\(indexPath.row): \(week[indexPath.row])")
     }
+    
 }
+
+
 
