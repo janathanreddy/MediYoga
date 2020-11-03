@@ -95,7 +95,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(UINib(nibName: "AudioFilePatientTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioFilePatientTableViewCell")
         
         messages()
-
         tableView.rowHeight = UITableView.automaticDimension
         scrollToBottom()
     }
@@ -564,6 +563,7 @@ return UITableViewCell()
                     if sender_id == DoctorId {
                         if documentData["type"] as! Int == 0{
                             message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
+
                             
                         }
                         else if documentData["type"] as! Int == 1{

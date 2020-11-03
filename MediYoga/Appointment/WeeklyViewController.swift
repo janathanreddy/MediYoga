@@ -21,9 +21,12 @@ struct appointment_time {
 }
 class WeeklyViewController: UIViewController{
     let db = Firestore.firestore()
-    var TimeAppointment = [appointment_time]()
-    var Time:[String] = ["08:00AM - 08:15AM","08:15AM - 08:30AM","08:30AM - 08:45AM","08:45AM - 09:00AM","09:00AM - 09:15AM","09:15AM - 09:30AM","09:30AM - 09:45AM","09:45AM - 10:00AM","10:00AM - 10:15AM","10:15AM - 10:30AM","10:30AM - 10:45AM"]
+    var Time = [String]()
     var week:[String] = ["Time"]
+    var TimeAppointment = [appointment_time]()
+//    var Name = [String]()
+//    var appointmenttime = [String]()
+//    var weekday = [String]()
     @IBOutlet weak var grid_CollectionView: UICollectionView! {
         didSet {
             grid_CollectionView.bounces = false
@@ -50,8 +53,11 @@ class WeeklyViewController: UIViewController{
         super.viewDidLoad()
         DoctorAppointments()
         currentweekdays()
+        Weeek_Day()
         grid_CollectionView.showsHorizontalScrollIndicator = false
         grid_CollectionView.showsVerticalScrollIndicator = false
+        self.grid_CollectionView.reloadData()
+
 
     }
     func currentweekdays(){
@@ -121,6 +127,10 @@ class WeeklyViewController: UIViewController{
                 dayformate.dateFormat = "dd,EEE"
                 let day = dayformate.string(from: date!)
                 TimeAppointment.append(appointment_time(Name: documentData["patient_first_name"] as! String, Date: documentData["appointment_date"] as! String, appointmenttime: documentData["appointment_time"] as! String, weekday: day))
+//                Name.append(documentData["patient_first_name"] as! String)
+//                appointmenttime.append(documentData["appointment_time"] as! String)
+//                weekday.append(day)
+                
     }
         DispatchQueue.main.async {
             self.grid_CollectionView.reloadData()
@@ -150,11 +160,10 @@ extension WeeklyViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return week.count
     }
+    
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as? CollectionViewCell else {
-            return UICollectionViewCell()
-        }
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as! CollectionViewCell
 
         if indexPath.section == 0{
 
@@ -162,7 +171,6 @@ extension WeeklyViewController: UICollectionViewDataSource {
                 cell.title_Label.textColor = UIColor.black
                 cell.title_Label.font = cell.title_Label.font.withSize(16)
 
-                
             }
 
         else if indexPath.row == 0 && indexPath.section >= 1{
@@ -172,18 +180,89 @@ extension WeeklyViewController: UICollectionViewDataSource {
             cell.title_Label.alpha = 0.6
 
         }
-        else{
-            let redvalue = CGFloat(drand48())
-            let greenvalue = CGFloat(drand48())
-            let bluevalue = CGFloat(drand48())
+        else if indexPath.item == 1 && indexPath.section >= 1 {
             
-            cell.title_Label.text = "\(indexPath)"
-            cell.title_Label.font = cell.title_Label.font.withSize(15)
-            cell.title_Label.textColor = UIColor(red: redvalue, green: greenvalue, blue: bluevalue, alpha: 1)
+            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
+            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
+            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
+                print(TimeAppointment[indexPath.row].Name)
+                cell.title_Label.text = TimeAppointment[indexPath.row].Name
+                cell.title_Label.font = cell.title_Label.font.withSize(15)
             
+                  }
+            else{
 
+                    cell.title_Label.text = " "
+            }
         }
         
+        
+        
+        else if indexPath.item == 2 && indexPath.section > 1 {
+            
+            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
+            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
+            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
+                print(TimeAppointment[indexPath.row].Name)
+                cell.title_Label.text = TimeAppointment[indexPath.row].Name
+                cell.title_Label.font = cell.title_Label.font.withSize(15)
+            
+                  }
+            else{
+
+                    cell.title_Label.text = " "
+            }
+        }
+        else if indexPath.item == 3 && indexPath.section > 1 {
+            
+            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
+            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
+            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
+                print(TimeAppointment[indexPath.row].Name)
+                cell.title_Label.text = TimeAppointment[indexPath.row].Name
+                cell.title_Label.font = cell.title_Label.font.withSize(15)
+            
+                  }
+            else{
+
+                    cell.title_Label.text = " "
+            }
+        }
+        else if indexPath.item == 4 && indexPath.section > 1 {
+            
+            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
+            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
+            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
+                print(TimeAppointment[indexPath.row].Name)
+                cell.title_Label.text = TimeAppointment[indexPath.row].Name
+                cell.title_Label.font = cell.title_Label.font.withSize(15)
+            
+                  }
+            else{
+
+                    cell.title_Label.text = " "
+            }
+        }
+        else if indexPath.item == 5 && indexPath.section > 1 {
+            
+            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
+            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
+            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
+                print(TimeAppointment[indexPath.row].Name)
+                cell.title_Label.text = TimeAppointment[indexPath.row].Name
+                cell.title_Label.font = cell.title_Label.font.withSize(15)
+            
+                  }
+            else{
+
+                    cell.title_Label.text = " "
+            }
+        }
+
+        else{
+            cell.title_Label.text = " "
+    }
+
 
         cell.layer.borderWidth = 0.8
         cell.layer.borderColor = UIColor.systemGray5.cgColor
@@ -200,6 +279,22 @@ extension WeeklyViewController: UICollectionViewDataSource {
         print("\(indexPath.section): \(Time[indexPath.section]),\(indexPath.row): \(week[indexPath.row])")
     }
     
+    
+    func Weeek_Day(){
+    db.collection("week_slot").getDocuments(){ [self] (querySnapshot, error) in
+                        if  error == nil && querySnapshot != nil {
+                        for document in querySnapshot!.documents {
+                        let documentData = document.data()
+                            for Documents in documentData.values{
+                                for time in Documents as! [[String:Any]]{
+                                    Time.append(time["time"] as! String)
+                                }
+                            }
+                        
+                        }
+                    }
+                    }
+    }
 }
 
 

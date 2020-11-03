@@ -14,6 +14,14 @@ class CollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let redvalue = CGFloat(drand48())
+        let greenvalue = CGFloat(drand48())
+        let bluevalue = CGFloat(drand48())
+
+        title_Label.textColor = UIColor(red: redvalue, green: greenvalue, blue: bluevalue, alpha: 1)
+
+
+        
     }
 
 }
