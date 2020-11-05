@@ -8,7 +8,7 @@
 import UIKit
 
 class StickyGrid_CollectionViewLayout: UICollectionViewFlowLayout {
-
+    
     var stickyRowsCount = 0 {
         didSet {
             invalidateLayout()

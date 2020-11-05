@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SAp-qX-NGn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sg3-Kz-B2a">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -714,7 +714,7 @@
         <scene sceneID="G0G-ta-Jka">
             <objects>
                 <viewController storyboardIdentifier="PatientDetailsViewController" modalPresentationStyle="fullScreen" id="pvG-Fb-cwZ" customClass="PatientDetailsViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hmg-Pq-Lg6">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Hmg-Pq-Lg6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -887,7 +887,7 @@
                                     <constraint firstAttribute="bottom" secondItem="bwI-Ri-sM7" secondAttribute="bottom" id="gaq-eE-BG6"/>
                                 </constraints>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dQf-as-tgJ">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dQf-as-tgJ">
                                 <rect key="frame" x="0.0" y="180" width="414" height="598"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -960,7 +960,7 @@
                                     <outlet property="delegate" destination="pvG-Fb-cwZ" id="t2Q-7F-35o"/>
                                 </connections>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-AX-nKU">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-AX-nKU">
                                 <rect key="frame" x="32" y="786" width="350" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE4-yx-M2R">
@@ -2648,7 +2648,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yG-rM-8Q8">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yG-rM-8Q8">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
@@ -2723,11 +2723,54 @@
                                     <constraint firstItem="jky-vb-c71" firstAttribute="centerX" secondItem="gVU-QQ-Ed5" secondAttribute="centerX" id="veM-e7-i1W"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="URo-F5-sJF">
+                                <rect key="frame" x="138" y="112" width="138" height="22"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anX-vP-wmI">
+                                        <rect key="frame" x="0.0" y="0.0" width="18" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="EKa-33-HJl"/>
+                                            <constraint firstAttribute="width" constant="18" id="fdv-hk-afN"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="arrowtriangle.backward" catalog="system"/>
+                                        <state key="selected" image="arrowtriangle.backward.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="PreviousWeekAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="ByY-SF-P2i"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGd-hY-3mP">
+                                        <rect key="frame" x="32" y="0.0" width="74" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="74" id="0PK-MO-Zcj"/>
+                                            <constraint firstAttribute="height" constant="22" id="ezJ-Tb-Vq8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeA-ts-yau">
+                                        <rect key="frame" x="120" y="0.0" width="18" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="4iW-pK-L0e"/>
+                                            <constraint firstAttribute="height" constant="22" id="GMK-UU-3Rp"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="arrowtriangle.right" catalog="system"/>
+                                        <state key="selected" image="arrowtriangle.right.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="NextWeekAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="1qw-4p-VKZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Shu-kY-I5N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="URo-F5-sJF" firstAttribute="centerX" secondItem="X25-yL-emh" secondAttribute="centerX" id="0g4-5E-hny"/>
                             <constraint firstItem="Shu-kY-I5N" firstAttribute="bottom" secondItem="q27-pw-EPV" secondAttribute="bottom" constant="68" id="319-00-FwI"/>
+                            <constraint firstItem="URo-F5-sJF" firstAttribute="top" secondItem="YKU-mN-Hxw" secondAttribute="bottom" constant="23.5" id="BDO-iK-Qrp"/>
                             <constraint firstItem="q27-pw-EPV" firstAttribute="centerX" secondItem="YKU-mN-Hxw" secondAttribute="centerX" id="EqK-Y4-cxX"/>
                             <constraint firstItem="q27-pw-EPV" firstAttribute="leading" secondItem="X25-yL-emh" secondAttribute="leading" id="O48-MK-l69"/>
                             <constraint firstItem="YKU-mN-Hxw" firstAttribute="top" secondItem="Shu-kY-I5N" secondAttribute="top" id="QgX-g2-sEQ"/>
@@ -2735,6 +2778,7 @@
                             <constraint firstItem="Shu-kY-I5N" firstAttribute="trailing" secondItem="DJd-7e-jFy" secondAttribute="trailing" constant="21" id="kY3-ts-eLN"/>
                             <constraint firstItem="YKU-mN-Hxw" firstAttribute="centerX" secondItem="X25-yL-emh" secondAttribute="centerX" id="lR0-g3-Usu"/>
                             <constraint firstItem="gVU-QQ-Ed5" firstAttribute="top" secondItem="YKU-mN-Hxw" secondAttribute="bottom" constant="7.5" id="u3Z-Ao-vVf"/>
+                            <constraint firstItem="Tbk-c3-OLS" firstAttribute="top" secondItem="URo-F5-sJF" secondAttribute="bottom" constant="16" id="wba-7K-xdP"/>
                             <constraint firstItem="q27-pw-EPV" firstAttribute="top" secondItem="gVU-QQ-Ed5" secondAttribute="bottom" id="yor-xi-kMO"/>
                         </constraints>
                     </view>
@@ -2742,12 +2786,16 @@
                     <connections>
                         <outlet property="DropDownView" destination="gVU-QQ-Ed5" id="gPP-Sk-ozk"/>
                         <outlet property="MonthlyBtn" destination="jky-vb-c71" id="cR6-Db-0iU"/>
+                        <outlet property="NextWeek" destination="OeA-ts-yau" id="NKi-5x-Jnb"/>
+                        <outlet property="PreviousWeek" destination="anX-vP-wmI" id="YMT-Hr-CQz"/>
                         <outlet property="Todaybtn" destination="HuO-cr-o6d" id="Qi9-pp-7QR"/>
+                        <outlet property="WeekLabel" destination="MGd-hY-3mP" id="XSS-Rw-hTB"/>
                         <outlet property="WeeklyBtn" destination="Tk7-Km-1ty" id="xLO-BO-Ubn"/>
                         <outlet property="WeeklyView" destination="q27-pw-EPV" id="37l-eI-BHT"/>
                         <outlet property="dropDown" destination="DJd-7e-jFy" id="uOp-jn-z3J"/>
                         <outlet property="gridLayout" destination="bsP-C6-V3M" id="tBv-jV-uLF"/>
                         <outlet property="grid_CollectionView" destination="Tbk-c3-OLS" id="1Mr-Mc-URu"/>
+                        <segue destination="pvG-Fb-cwZ" kind="show" identifier="WeeklytoPatientDetails" id="MD8-IJ-hCJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0T-Zy-PsH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2990,6 +3038,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Rne-kA-T2P"/>
+        <segue reference="MD8-IJ-hCJ"/>
         <segue reference="xj4-rx-EOT"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -3009,6 +3059,10 @@
         <image name="Reset Password" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>
         <image name="Settings on" width="30" height="30"/>
+        <image name="arrowtriangle.backward" catalog="system" width="128" height="113"/>
+        <image name="arrowtriangle.backward.fill" catalog="system" width="128" height="113"/>
+        <image name="arrowtriangle.right" catalog="system" width="128" height="113"/>
+        <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
         <image name="back arrow" width="30" height="30"/>
         <image name="call" width="30" height="30"/>
         <image name="camara" width="30" height="30"/>

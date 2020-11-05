@@ -10,6 +10,8 @@
 		08FB168AA4789ED0F657A402 /* Pods_MediYoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFB20AF5223CB095C8B6057 /* Pods_MediYoga.framework */; };
 		21005DD8251BE3F90078E470 /* LabRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */; };
 		21005DDE251BE4210078E470 /* LabRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21005DDD251BE4210078E470 /* LabRequestViewController.swift */; };
+		21011C782553FCD100F97B73 /* CollectionViewCell_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21011C762553FCD100F97B73 /* CollectionViewCell_1.swift */; };
+		21011C792553FCD100F97B73 /* CollectionViewCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21011C772553FCD100F97B73 /* CollectionViewCell_1.xib */; };
 		210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */; };
 		210E88BF25186F0100C59A6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88BE25186F0100C59A6E /* AppDelegate.swift */; };
 		210E88C125186F0100C59A6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E88C025186F0100C59A6E /* SceneDelegate.swift */; };
@@ -98,6 +100,8 @@
 		190F8B6C7A49576D6704725D /* Pods-MediYogaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediYogaTests.release.xcconfig"; path = "Target Support Files/Pods-MediYogaTests/Pods-MediYogaTests.release.xcconfig"; sourceTree = "<group>"; };
 		21005DD6251BE3F90078E470 /* LabRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestTableViewCell.swift; sourceTree = "<group>"; };
 		21005DDD251BE4210078E470 /* LabRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRequestViewController.swift; sourceTree = "<group>"; };
+		21011C762553FCD100F97B73 /* CollectionViewCell_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell_1.swift; sourceTree = "<group>"; };
+		21011C772553FCD100F97B73 /* CollectionViewCell_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell_1.xib; sourceTree = "<group>"; };
 		210331CF2518EA7A0022E0E8 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		210E88BB25186F0100C59A6E /* MediYoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediYoga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		210E88BE25186F0100C59A6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 				21EAC39C254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift */,
 				21EAC3A1254F2BA80085F9B9 /* CollectionViewCell.swift */,
 				21EAC3A2254F2BA80085F9B9 /* CollectionViewCell.xib */,
+				21011C762553FCD100F97B73 /* CollectionViewCell_1.swift */,
+				21011C772553FCD100F97B73 /* CollectionViewCell_1.xib */,
 			);
 			path = Appointment;
 			sourceTree = "<group>";
@@ -548,6 +554,7 @@
 				21A175B125400D6A008950AB /* DoctorAudioTableViewCell.xib in Resources */,
 				21A175BB25400D88008950AB /* DoctorImageTableViewCell.xib in Resources */,
 				212FF9E3253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib in Resources */,
+				21011C792553FCD100F97B73 /* CollectionViewCell_1.xib in Resources */,
 				212FF9ED253D534500E6BD8D /* AudioFilePatientTableViewCell.xib in Resources */,
 				21A175C525400DA1008950AB /* AdminTextTableViewCell.xib in Resources */,
 				219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */,
@@ -712,6 +719,7 @@
 				21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */,
 				21A175C425400DA1008950AB /* AdminTextTableViewCell.swift in Sources */,
 				21EB295A25398AA700D26F6F /* ComChatReceiveimageTableViewCell.swift in Sources */,
+				21011C782553FCD100F97B73 /* CollectionViewCell_1.swift in Sources */,
 				211003A42533588400018E34 /* AdminComImageTableViewCell.swift in Sources */,
 				2176A80E2518C2B8005979E9 /* CommunicationViewController.swift in Sources */,
 				218AD762254C9CC600E169E4 /* WeeklyViewController.swift in Sources */,
