@@ -7,26 +7,25 @@
 
 import UIKit
 import Firebase
-struct appointment_time {
-    var Name: String
-    var Date: String
-    var appointmenttime: String
-    var weekday:String
-    init(Name: String,Date: String,appointmenttime: String,weekday:String) {
-            self.Name = Name
-            self.Date = Date
-            self.appointmenttime =  appointmenttime
-        self.weekday = weekday
-        }
-}
+
 class WeeklyViewController: UIViewController{
+   
     let db = Firestore.firestore()
-    var Time = [String]()
+    var Time:[String] = [" "]
     var week:[String] = ["Time"]
-    var TimeAppointment = [appointment_time]()
-//    var Name = [String]()
-//    var appointmenttime = [String]()
-//    var weekday = [String]()
+    var weeklyname:[String] = [" "]
+    var Timely:[String] = [" "]
+    var week_days:[String] = [" "]
+    var Sunday = [String: String]()
+    var Monday = [String: String]()
+    var Tuesday = [String: String]()
+    var Wednesday = [String: String]()
+    var Thursday = [String: String]()
+    var Friday = [String: String]()
+    var Saturday = [String: String]()
+
+
+    
     @IBOutlet weak var grid_CollectionView: UICollectionView! {
         didSet {
             grid_CollectionView.bounces = false
@@ -125,13 +124,43 @@ class WeeklyViewController: UIViewController{
                 let date = dateFormatter.date(from:isoDate)
                 let dayformate = DateFormatter()
                 dayformate.dateFormat = "dd,EEE"
+    
                 let day = dayformate.string(from: date!)
-                TimeAppointment.append(appointment_time(Name: documentData["patient_first_name"] as! String, Date: documentData["appointment_date"] as! String, appointmenttime: documentData["appointment_time"] as! String, weekday: day))
-//                Name.append(documentData["patient_first_name"] as! String)
-//                appointmenttime.append(documentData["appointment_time"] as! String)
-//                weekday.append(day)
+                if String(day.dropFirst(3)) == "Sun"{
+                    Sunday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Sunday : \(Sunday)")
                 
+                }else if String(day.dropFirst(3)) == "Mon"{
+                    Monday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Monday : \(Monday)")
+                
+                }else if String(day.dropFirst(3)) == "Tue"{
+                    Tuesday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Tuesday : \(Tuesday)")
+                
+                }else if String(day.dropFirst(3)) == "Wed"{
+                    Wednesday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Wednesday : \(Wednesday)")
+                
+                }else if String(day.dropFirst(3)) == "Thu"{
+                    Thursday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Thursday : \(Thursday)")
+                
+                }else if String(day.dropFirst(3)) == "Fri"{
+                    Friday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Friday : \(Friday)")
+                
+                }else if String(day.dropFirst(3)) == "Sat"{
+                    Saturday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    print("Saturday : \(Saturday)")
+                
+                }
+                weeklyname.append(documentData["patient_first_name"] as! String)
+                Timely.append(documentData["appointment_time"] as! String)
+                week_days.append(day)
+
     }
+
         DispatchQueue.main.async {
             self.grid_CollectionView.reloadData()
         }
@@ -164,7 +193,6 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as! CollectionViewCell
-
         if indexPath.section == 0{
 
                 cell.title_Label.text = week[indexPath.row]
@@ -173,7 +201,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
             }
 
-        else if indexPath.row == 0 && indexPath.section >= 1{
+        else if indexPath.item == 0 && indexPath.section >= 1{
             cell.title_Label.text = Time[indexPath.section]
             cell.title_Label.textColor = UIColor.black
             cell.title_Label.font = cell.title_Label.font.withSize(16)
@@ -182,83 +210,125 @@ extension WeeklyViewController: UICollectionViewDataSource {
         }
         else if indexPath.item == 1 && indexPath.section >= 1 {
             
-            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
-            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
-            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
-                print(TimeAppointment[indexPath.row].Name)
-                cell.title_Label.text = TimeAppointment[indexPath.row].Name
-                cell.title_Label.font = cell.title_Label.font.withSize(15)
-            
-                  }
-            else{
-
-                    cell.title_Label.text = " "
+            if Sunday.isEmpty != false{
+                cell.title_Label.text = " "
             }
+            else{
+                for (key,value) in Sunday{
+                    print("key-1 \(key) : value-1 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
         }
         
+        else if indexPath.item == 2 && indexPath.section >= 1 {
+            
+            if Monday.isEmpty != false{
+                cell.title_Label.text = " "
+            }
+            else{
+                for (key,value) in Monday{
+                    print("key-2 \(key) : value-2 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
+        }
+        else if indexPath.item == 3 && indexPath.section >= 1 {
+            
+            if Tuesday.isEmpty != false{
+                cell.title_Label.text = " "
+            }
+            else{
+                for (key,value) in Tuesday{
+                    print("key-3 \(key) : value-3 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
+        }
+        else if indexPath.item == 4 && indexPath.section >= 1 {
+            
+            if Wednesday.isEmpty != false{
+                cell.title_Label.text = " "
+            }
+            else{
+                for (key,value) in Wednesday{
+                    print("key-4 \(key) : value-4 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
+        }
+        else if indexPath.item == 5 && indexPath.section >= 1 {
+            
+            if Thursday.isEmpty != false{
+                cell.title_Label.text = " "
+            }
+            else{
+                for (key,value) in Thursday{
+                    print("key-5 \(key) : value-5 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
+        }
+        else if indexPath.item == 6 && indexPath.section >= 1 {
+            
+            if Friday.isEmpty != false{
+                cell.title_Label.text = " "
+            }
+            else{
+                for (key,value) in Friday{
+                    print("key-6 \(key) : value-6 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
+        }
+        else if indexPath.item == 7 && indexPath.section >= 1 {
+            
+            if Saturday.isEmpty != false{
+                cell.title_Label.text = " "
+            }
+            else{
+                for (key,value) in Saturday{
+                    print("key-7 \(key) : value-7 \(value)")
+                    if Time[indexPath.section] == key {
+                        cell.title_Label.text = value
+                        cell.title_Label.font = cell.title_Label.font.withSize(15)
+                }
+
+                }
+            }
+            
+        }
         
-        
-        else if indexPath.item == 2 && indexPath.section > 1 {
-            
-            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
-            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
-            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
-                print(TimeAppointment[indexPath.row].Name)
-                cell.title_Label.text = TimeAppointment[indexPath.row].Name
-                cell.title_Label.font = cell.title_Label.font.withSize(15)
-            
-                  }
-            else{
-
-                    cell.title_Label.text = " "
-            }
-        }
-        else if indexPath.item == 3 && indexPath.section > 1 {
-            
-            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
-            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
-            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
-                print(TimeAppointment[indexPath.row].Name)
-                cell.title_Label.text = TimeAppointment[indexPath.row].Name
-                cell.title_Label.font = cell.title_Label.font.withSize(15)
-            
-                  }
-            else{
-
-                    cell.title_Label.text = " "
-            }
-        }
-        else if indexPath.item == 4 && indexPath.section > 1 {
-            
-            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
-            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
-            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
-                print(TimeAppointment[indexPath.row].Name)
-                cell.title_Label.text = TimeAppointment[indexPath.row].Name
-                cell.title_Label.font = cell.title_Label.font.withSize(15)
-            
-                  }
-            else{
-
-                    cell.title_Label.text = " "
-            }
-        }
-        else if indexPath.item == 5 && indexPath.section > 1 {
-            
-            print(TimeAppointment[indexPath.row].weekday,week[indexPath.row])
-            print(TimeAppointment[indexPath.row].appointmenttime,Time[indexPath.section])
-            if Time[indexPath.section] == TimeAppointment[indexPath.row].appointmenttime{
-                print(TimeAppointment[indexPath.row].Name)
-                cell.title_Label.text = TimeAppointment[indexPath.row].Name
-                cell.title_Label.font = cell.title_Label.font.withSize(15)
-            
-                  }
-            else{
-
-                    cell.title_Label.text = " "
-            }
-        }
-
         else{
             cell.title_Label.text = " "
     }
@@ -295,6 +365,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
                     }
                     }
     }
+    
+    
 }
 
 
