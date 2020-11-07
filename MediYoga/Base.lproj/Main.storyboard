@@ -704,6 +704,7 @@
                         <segue destination="pvG-Fb-cwZ" kind="show" identifier="DeatailofPatient" id="eHB-pP-D7z"/>
                         <segue destination="UYI-Qa-4iX" kind="show" identifier="NotesSegue" animates="NO" id="JM1-Fs-KgZ"/>
                         <segue destination="HwG-VH-Ouk" kind="show" identifier="WeeklyViewController" animates="NO" id="6Jp-cB-T20"/>
+                        <segue destination="F9a-KK-y6H" kind="show" identifier="MonthlyView" animates="NO" id="iCR-cq-Elu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE4-8l-SeP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -714,7 +715,7 @@
         <scene sceneID="G0G-ta-Jka">
             <objects>
                 <viewController storyboardIdentifier="PatientDetailsViewController" modalPresentationStyle="fullScreen" id="pvG-Fb-cwZ" customClass="PatientDetailsViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Hmg-Pq-Lg6">
+                    <view key="view" contentMode="scaleToFill" id="Hmg-Pq-Lg6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -887,7 +888,7 @@
                                     <constraint firstAttribute="bottom" secondItem="bwI-Ri-sM7" secondAttribute="bottom" id="gaq-eE-BG6"/>
                                 </constraints>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dQf-as-tgJ">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dQf-as-tgJ">
                                 <rect key="frame" x="0.0" y="180" width="414" height="598"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -960,7 +961,7 @@
                                     <outlet property="delegate" destination="pvG-Fb-cwZ" id="t2Q-7F-35o"/>
                                 </connections>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-AX-nKU">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-AX-nKU">
                                 <rect key="frame" x="32" y="786" width="350" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE4-yx-M2R">
@@ -2568,6 +2569,197 @@
             </objects>
             <point key="canvasLocation" x="3486.9565217391305" y="626.78571428571422"/>
         </scene>
+        <!--Montly View Controller-->
+        <scene sceneID="t24-Sv-CXw">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="F9a-KK-y6H" customClass="MontlyViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xoz-y8-GKo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4Wr-ob-Snh">
+                                <rect key="frame" x="21.5" y="44" width="371" height="44.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waX-jW-fO4">
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="44.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="yTW-TG-j5G"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="37"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Appointment" translatesAutoresizingMaskIntoConstraints="NO" id="jxt-V0-pSU">
+                                        <rect key="frame" x="228" y="0.0" width="30" height="44.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="Q4u-TV-Sum"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQy-6U-kPZ">
+                                        <rect key="frame" x="266" y="0.0" width="67" height="44.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44.5" id="5lI-JI-Kea"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="67" id="SZT-wA-SBt"/>
+                                        </constraints>
+                                        <state key="normal" title="Monthly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="MonthlyActBtn:" destination="F9a-KK-y6H" eventType="touchUpInside" id="zhD-Bk-JBV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zca-1e-dfP">
+                                        <rect key="frame" x="341" y="0.0" width="30" height="44.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44.5" id="UcU-Zl-CfA"/>
+                                            <constraint firstAttribute="width" constant="30" id="lr6-kj-vS4"/>
+                                        </constraints>
+                                        <state key="normal" image="exapand on arrow"/>
+                                        <connections>
+                                            <action selector="MonthlyActBtn:" destination="F9a-KK-y6H" eventType="touchUpInside" id="iq8-Oy-vby"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="eQy-6U-kPZ" firstAttribute="leading" secondItem="jxt-V0-pSU" secondAttribute="trailing" constant="8" symbolic="YES" id="DJ7-mH-zYH"/>
+                                    <constraint firstItem="jxt-V0-pSU" firstAttribute="leading" secondItem="waX-jW-fO4" secondAttribute="trailing" constant="8" symbolic="YES" id="iXf-WU-BHp"/>
+                                    <constraint firstItem="zca-1e-dfP" firstAttribute="leading" secondItem="eQy-6U-kPZ" secondAttribute="trailing" constant="8" symbolic="YES" id="yyP-pM-P3t"/>
+                                </constraints>
+                            </stackView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uS-Tf-3c0">
+                                <rect key="frame" x="292" y="96" width="94" height="58"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-18-c0q">
+                                        <rect key="frame" x="8" y="2" width="78" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="O01-r2-Qm1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Today">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="TodayActBtn:" destination="F9a-KK-y6H" eventType="touchUpInside" id="dSg-va-dSm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-bH-z1w">
+                                        <rect key="frame" x="8" y="24" width="78" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="weekly">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="WeeklyActBtn:" destination="F9a-KK-y6H" eventType="touchUpInside" id="weP-bp-EQ8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="cvv-bH-z1w" firstAttribute="top" secondItem="GiF-18-c0q" secondAttribute="bottom" constant="8" id="6KH-OX-4Vt"/>
+                                    <constraint firstItem="cvv-bH-z1w" firstAttribute="trailing" secondItem="2uS-Tf-3c0" secondAttribute="trailingMargin" id="CKE-XB-3sH"/>
+                                    <constraint firstAttribute="bottom" secondItem="cvv-bH-z1w" secondAttribute="bottom" constant="5" id="DBk-uB-KOt"/>
+                                    <constraint firstItem="cvv-bH-z1w" firstAttribute="leading" secondItem="2uS-Tf-3c0" secondAttribute="leadingMargin" id="XFS-j0-nZ9"/>
+                                    <constraint firstItem="cvv-bH-z1w" firstAttribute="trailing" secondItem="GiF-18-c0q" secondAttribute="trailing" id="cul-FA-OFd"/>
+                                    <constraint firstItem="GiF-18-c0q" firstAttribute="top" secondItem="2uS-Tf-3c0" secondAttribute="top" constant="2" id="lLs-MH-67v"/>
+                                    <constraint firstItem="cvv-bH-z1w" firstAttribute="leading" secondItem="GiF-18-c0q" secondAttribute="leading" id="sp6-ts-dxB"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-Cg-dCr" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="162" width="414" height="394"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="firstWeekday">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="eventDefaultColor">
+                                        <color key="value" systemColor="systemOrangeColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleDefaultColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTodayColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titlePlaceholderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
+                                        <color key="value" systemColor="tertiaryLabelColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                                        <color key="value" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rowHeight">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="titleTextSize">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="weekdayTextSize">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="headerTitleTextSize">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="headerMinimumDissolvedAlpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="F9a-KK-y6H" id="k9a-kH-Wya"/>
+                                    <outlet property="delegate" destination="F9a-KK-y6H" id="ABD-Hi-YER"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d42-Ds-fDM">
+                                <rect key="frame" x="0.0" y="564" width="414" height="244"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="244" id="5fZ-Hh-Vru"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="F9a-KK-y6H" id="Cg2-6b-WVZ"/>
+                                    <outlet property="delegate" destination="F9a-KK-y6H" id="vgh-JZ-cNp"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="alc-DY-fVa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AMe-Cg-dCr" firstAttribute="trailing" secondItem="alc-DY-fVa" secondAttribute="trailing" id="551-Mg-dvF"/>
+                            <constraint firstItem="4Wr-ob-Snh" firstAttribute="top" secondItem="alc-DY-fVa" secondAttribute="top" id="85L-lE-LDq"/>
+                            <constraint firstItem="2uS-Tf-3c0" firstAttribute="leading" secondItem="alc-DY-fVa" secondAttribute="leading" constant="292" id="BIB-AG-CEt"/>
+                            <constraint firstItem="AMe-Cg-dCr" firstAttribute="leading" secondItem="alc-DY-fVa" secondAttribute="leading" id="Bgo-Ps-J2Z"/>
+                            <constraint firstItem="alc-DY-fVa" firstAttribute="trailing" secondItem="2uS-Tf-3c0" secondAttribute="trailing" constant="28" id="Bzv-6F-kv7"/>
+                            <constraint firstItem="d42-Ds-fDM" firstAttribute="trailing" secondItem="alc-DY-fVa" secondAttribute="trailing" id="RXw-bR-dgK"/>
+                            <constraint firstItem="AMe-Cg-dCr" firstAttribute="top" secondItem="4Wr-ob-Snh" secondAttribute="bottom" constant="73.5" id="Tse-AV-kNx"/>
+                            <constraint firstItem="d42-Ds-fDM" firstAttribute="leading" secondItem="alc-DY-fVa" secondAttribute="leading" id="a7j-5O-ltY"/>
+                            <constraint firstItem="AMe-Cg-dCr" firstAttribute="top" secondItem="2uS-Tf-3c0" secondAttribute="bottom" constant="8" id="cra-xG-hGR"/>
+                            <constraint firstItem="4Wr-ob-Snh" firstAttribute="centerX" secondItem="xoz-y8-GKo" secondAttribute="centerX" id="m7P-eP-puG"/>
+                            <constraint firstItem="alc-DY-fVa" firstAttribute="bottom" secondItem="d42-Ds-fDM" secondAttribute="bottom" constant="54" id="oLf-rC-qte"/>
+                            <constraint firstItem="2uS-Tf-3c0" firstAttribute="top" secondItem="4Wr-ob-Snh" secondAttribute="bottom" constant="7.5" id="ql0-UT-LLc"/>
+                            <constraint firstItem="d42-Ds-fDM" firstAttribute="top" secondItem="AMe-Cg-dCr" secondAttribute="bottom" constant="8" symbolic="YES" id="rRN-xy-efm"/>
+                            <constraint firstItem="4Wr-ob-Snh" firstAttribute="leading" secondItem="alc-DY-fVa" secondAttribute="leading" constant="21.5" id="xfI-D2-z0a"/>
+                            <constraint firstItem="alc-DY-fVa" firstAttribute="trailing" secondItem="4Wr-ob-Snh" secondAttribute="trailing" constant="21.5" id="zKg-9U-oSG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="AC3-N1-2GH"/>
+                    <connections>
+                        <outlet property="Calender_View" destination="AMe-Cg-dCr" id="whg-ev-Zcq"/>
+                        <outlet property="DropArrow" destination="zca-1e-dfP" id="Rik-Gz-dg3"/>
+                        <outlet property="MonthlyTitle" destination="eQy-6U-kPZ" id="7Q1-9g-Sug"/>
+                        <outlet property="MonthlyView" destination="2uS-Tf-3c0" id="GK8-l1-uZx"/>
+                        <outlet property="TodayTitle" destination="GiF-18-c0q" id="5kA-fV-0YT"/>
+                        <outlet property="WeeklyTitle" destination="cvv-bH-z1w" id="US0-ej-nA6"/>
+                        <outlet property="tableView" destination="d42-Ds-fDM" id="MF6-Tm-2Ju"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uNV-DF-aQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4488.4057971014499" y="-530.35714285714289"/>
+        </scene>
         <!--Weekly View Controller-->
         <scene sceneID="mPh-wY-6Ow">
             <objects>
@@ -2739,10 +2931,10 @@
                                             <action selector="PreviousWeekAct:" destination="HwG-VH-Ouk" eventType="touchUpInside" id="ByY-SF-P2i"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGd-hY-3mP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGd-hY-3mP">
                                         <rect key="frame" x="32" y="0.0" width="74" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="74" id="0PK-MO-Zcj"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="0PK-MO-Zcj"/>
                                             <constraint firstAttribute="height" constant="22" id="ezJ-Tb-Vq8"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -2796,6 +2988,7 @@
                         <outlet property="gridLayout" destination="bsP-C6-V3M" id="tBv-jV-uLF"/>
                         <outlet property="grid_CollectionView" destination="Tbk-c3-OLS" id="1Mr-Mc-URu"/>
                         <segue destination="pvG-Fb-cwZ" kind="show" identifier="WeeklytoPatientDetails" id="MD8-IJ-hCJ"/>
+                        <segue destination="F9a-KK-y6H" kind="show" identifier="WeekToMonth" animates="NO" id="Tkt-CJ-BgI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0T-Zy-PsH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3038,7 +3231,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rne-kA-T2P"/>
+        <segue reference="iCR-cq-Elu"/>
         <segue reference="MD8-IJ-hCJ"/>
         <segue reference="xj4-rx-EOT"/>
     </inferredMetricsTieBreakers>
@@ -3101,8 +3294,14 @@
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

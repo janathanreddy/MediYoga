@@ -13,6 +13,7 @@ class WeeklyViewController: UIViewController{
     let db = Firestore.firestore()
     var Time:[String] = [""]
     var week:[String] = ["Time"]
+    var nxtweek:[String] = [""]
     var Sunday = [String: String]()
     var Monday = [String: String]()
     var Tuesday = [String: String]()
@@ -27,9 +28,20 @@ class WeeklyViewController: UIViewController{
     var ThursdayPatient_id = [String: String]()
     var FridayPatient_id = [String: String]()
     var SaturdayPatient_id = [String: String]()
+    var Sundate:String = ""
+    var Mondate:String = ""
+    var Tuedate:String = ""
+    var Weddate:String = ""
+    var Thudate:String = ""
+    var Fridate:String = ""
+    var Satdate:String = ""
+
     var selectedpatient_id:String = ""
     var SelectedName:String = ""
     var Selectedtime:String = ""
+    var count:Int = 0
+
+
 
 
     @IBOutlet weak var NextWeek: UIButton!
@@ -70,21 +82,27 @@ class WeeklyViewController: UIViewController{
         grid_CollectionView.showsVerticalScrollIndicator = false
         grid_CollectionView.register(UINib(nibName: "CollectionViewCell_1", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell_1")
 
-
-
     }
     func currentweekdays(){
+        print("Count : \(count)")
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        let dayOfWeek = calendar.component(.weekday, from: today)
-        let weekdays = calendar.range(of: .weekday, in: .weekOfYear, for: today)!
+        let nextWeek:Date =  calendar.date(byAdding: .weekOfMonth, value: count, to: today)! as Date
+        let dayOfWeek = calendar.component(.weekday, from: nextWeek)
+        let weekdays = calendar.range(of: .weekday, in: .weekOfYear, for: nextWeek)!
         let days = (weekdays.lowerBound ..< weekdays.upperBound)
-            .compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: today) }
+            .compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: nextWeek) }
     let formatter = DateFormatter()
     formatter.dateFormat = "dd,EEE"
-    for date in days {
-        week.append(formatter.string(from: date))
-    }
+        week.removeAll()
+            for date in days {
+                if count == 0{
+                    week.append(formatter.string(from: date))
+                }else{
+                    week.append(formatter.string(from: date))
+                }
+                }
+        week.insert("Time", at: 0)
 
     }
     @IBAction func WeeklyAct(_ sender: Any) {
@@ -122,6 +140,8 @@ class WeeklyViewController: UIViewController{
         UIView.animate(withDuration: 0.5, animations: {
               self.dropDown.imageView!.transform = CGAffineTransform.identity
         })
+        
+        performSegue(withIdentifier: "WeekToMonth", sender: self)
 
     }
     
@@ -143,43 +163,56 @@ class WeeklyViewController: UIViewController{
                 if String(day.dropFirst(3)) == "Sun"{
                     Sunday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     SundayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
-                    print("Sunday : \(Sunday)")
+                    Sundate = day
+                    print("Sunday : \(Sunday) \(Sundate)")
                 
                 }else if String(day.dropFirst(3)) == "Mon"{
                     Monday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     MondayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    Mondate = day
 
-                    print("Monday : \(Monday)")
+
+                    print("Monday : \(Monday) \(Mondate)")
                 
                 }else if String(day.dropFirst(3)) == "Tue"{
                     Tuesday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     TuesdayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    Tuedate = day
 
-                    print("Tuesday : \(Tuesday)")
+
+                    print("Tuesday : \(Tuesday) \(Tuedate)")
                 
                 }else if String(day.dropFirst(3)) == "Wed"{
                     Wednesday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     WednesdayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    Weddate = day
 
-                    print("Wednesday : \(Wednesday)")
+
+                    print("Wednesday : \(Wednesday) \(Weddate)")
                 
                 }else if String(day.dropFirst(3)) == "Thu"{
                     Thursday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     ThursdayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    Thudate = day
 
-                    print("Thursday : \(Thursday)")
+
+                    print("Thursday : \(Thursday) \(Tuedate)")
                 
                 }else if String(day.dropFirst(3)) == "Fri"{
                     Friday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     FridayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    Fridate = day
 
-                    print("Friday : \(Friday)")
+
+                    print("Friday : \(Friday) \(Fridate)")
                 
                 }else if String(day.dropFirst(3)) == "Sat"{
                     Saturday.updateValue("\(documentData["patient_first_name"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
                     SaturdayPatient_id.updateValue("\(documentData["patient_id"] as! String)", forKey: "\(documentData["appointment_time"] as! String)")
+                    Satdate = day
 
-                    print("Saturday : \(Saturday)")
+
+                    print("Saturday : \(Saturday) \(Satdate)")
                 
                 }
 
@@ -195,9 +228,25 @@ class WeeklyViewController: UIViewController{
 
     
     @IBAction func PreviousWeekAct(_ sender: Any) {
+        count -= 1
+        PreviousWeek.isSelected = true
+        NextWeek.isSelected = false
+
+            currentweekdays()
+            grid_CollectionView.reloadData()
+
     }
     
     @IBAction func NextWeekAct(_ sender: Any) {
+
+        count += 1
+        NextWeek.isSelected = true
+        PreviousWeek.isSelected = false
+
+            currentweekdays()
+            grid_CollectionView.reloadData()
+        
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -213,6 +262,18 @@ class WeeklyViewController: UIViewController{
             
        }
    
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        NextWeek.isSelected = false
+        PreviousWeek.isSelected = false
+        DropDownView.isHidden = true
+        UIView.animate(withDuration: 0.5, animations: {
+              self.dropDown.imageView!.transform = CGAffineTransform.identity
+        })
+
+
     }
 
 }
@@ -264,21 +325,27 @@ extension WeeklyViewController: UICollectionViewDataSource {
         else if indexPath.item == 1 && indexPath.section >= 1 {
             let cell_1 = collectionView.dequeueReusableCell(withReuseIdentifier:"CollectionViewCell_1", for: indexPath) as? CollectionViewCell_1
             cell_1!.Label_1.text = ""
-            if Sunday.isEmpty != false{
+            if Sunday.isEmpty != false && Sundate.isEmpty != false{
                 cell_1?.Label_1.text = ""
 
             }
             else{
-                for (key,value) in Sunday{
-                    print("key-1 \(key) : value-1 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_1!.Label_1.text = value
-                        cell_1!.Label_1.textColor = UIColor.green
-                        cell_1!.Label_1.font = cell_1!.Label_1.font.withSize(15)
+                for i in week{
+                    for (key,value) in Sunday{
+                        if Time[indexPath.section] == key && i == Sundate {
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
-                }
 
+                            cell_1!.Label_1.text = value
+                            cell_1!.Label_1.textColor = UIColor.systemBlue
+                            cell_1!.Label_1.font = cell_1!.Label_1.font.withSize(15)
+                            cell_1!.backgroundColor = UIColor.clear
+
+                        }
+
+                    }
                 }
+                
             }
 
             cell_1!.backgroundColor = UIColor.white
@@ -289,23 +356,26 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
         }
         
-        else if indexPath.item == 2 && indexPath.section >= 1 {
+        else if indexPath.item == 2 && indexPath.section >= 1  {
             let cell_2 = collectionView.dequeueReusableCell(withReuseIdentifier:"CollectionViewCell_1", for: indexPath) as? CollectionViewCell_1
             cell_2?.Label_1.text = ""
-            if Monday.isEmpty != false{
+            if Monday.isEmpty != false && Mondate.isEmpty != false{
                 cell_2?.Label_1.text = ""
-
             }
             else{
-                for (key,value) in Monday{
-                    print("key-2 \(key) : value-2 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_2!.Label_1.text = value
-                        cell_2!.Label_1.textColor = UIColor.systemPink
-                        cell_2!.Label_1.font = cell_2!.Label_1.font.withSize(15)
+                for i in week{
+                    for (key,value) in Monday{
+                        if Time[indexPath.section] == key && i == Mondate {
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
-                }
+                            cell_2!.Label_1.text = value
+                            cell_2!.Label_1.textColor = UIColor.systemBlue
+                            cell_2!.Label_1.font = cell_2!.Label_1.font.withSize(15)
+                            cell_2!.backgroundColor = UIColor.clear
 
+                        }
+
+                    }
                 }
             }
             cell_2!.backgroundColor = UIColor.white
@@ -318,22 +388,26 @@ extension WeeklyViewController: UICollectionViewDataSource {
         else if indexPath.item == 3 && indexPath.section >= 1 {
             let cell_3 = collectionView.dequeueReusableCell(withReuseIdentifier:"CollectionViewCell_1", for: indexPath) as? CollectionViewCell_1
             cell_3?.Label_1.text = ""
-            if Tuesday.isEmpty != false{
+            if Tuesday.isEmpty != false && Tuedate.isEmpty != false{
                 cell_3?.Label_1.text = ""
                 cell_3!.backgroundColor = UIColor.clear
 
             }
             else{
-                for (key,value) in Tuesday{
-                    print("key-3 \(key) : value-3 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_3!.Label_1.text = value
-                        cell_3!.Label_1.textColor = UIColor.systemBlue
-                        cell_3!.Label_1.font = cell_3!.Label_1.font.withSize(15)
-                        cell_3!.backgroundColor = UIColor.clear
+                for i in week{
+                    for (key,value) in Tuesday{
+                        if Time[indexPath.section] == key && i == Tuedate {
+                            
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
-                }
+                            cell_3!.Label_1.text = value
+                            cell_3!.Label_1.textColor = UIColor.systemBlue
+                            cell_3!.Label_1.font = cell_3!.Label_1.font.withSize(15)
+                            cell_3!.backgroundColor = UIColor.clear
 
+                        }
+
+                    }
                 }
             }
 
@@ -353,16 +427,20 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
             }
             else{
-                for (key,value) in Wednesday{
-                    print("key-4 \(key) : value-4 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_4?.Label_1.text = value
-                        cell_4!.Label_1.textColor = UIColor.systemOrange
-                        cell_4!.Label_1.font = cell_4!.Label_1.font.withSize(15)
-                        cell!.backgroundColor = UIColor.clear
+                for i in week{
+                    for (key,value) in Wednesday{
+                        if Time[indexPath.section] == key && i == Weddate {
+                            
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
-                }
+                            cell_4!.Label_1.text = value
+                            cell_4!.Label_1.textColor = UIColor.systemBlue
+                            cell_4!.Label_1.font = cell_4!.Label_1.font.withSize(15)
+                            cell_4!.backgroundColor = UIColor.clear
 
+                        }
+
+                    }
                 }
             }
             cell_4!.backgroundColor = UIColor.white
@@ -379,15 +457,20 @@ extension WeeklyViewController: UICollectionViewDataSource {
                 cell_5!.Label_1.text = ""
             }
             else{
-                for (key,value) in Thursday{
-                    print("key-5 \(key) : value-5 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_5?.Label_1.text = value
-                        cell_5!.Label_1.textColor = UIColor.systemIndigo
+                for i in week{
+                    for (key,value) in Thursday{
+                        if Time[indexPath.section] == key && i == Thudate {
+                            
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
-                        cell_5!.Label_1.font = cell_5!.Label_1.font.withSize(15)
-                }
+                            cell_5!.Label_1.text = value
+                            cell_5!.Label_1.textColor = UIColor.systemBlue
+                            cell_5!.Label_1.font = cell_5!.Label_1.font.withSize(15)
+                            cell_5!.backgroundColor = UIColor.clear
 
+                        }
+
+                    }
                 }
             }
 
@@ -405,15 +488,20 @@ extension WeeklyViewController: UICollectionViewDataSource {
                 cell_6?.Label_1.text = ""
             }
             else{
-                for (key,value) in Friday{
-                    print("key-6 \(key) : value-6 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_6!.Label_1.text = value
-                        cell_6!.Label_1.textColor = UIColor.systemPurple
+                for i in week{
+                    for (key,value) in Friday{
+                        if Time[indexPath.section] == key && i == Fridate {
+                            
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
-                        cell_6!.Label_1.font = cell_6!.Label_1.font.withSize(15)
-                }
+                            cell_6!.Label_1.text = value
+                            cell_6!.Label_1.textColor = UIColor.systemBlue
+                            cell_6!.Label_1.font = cell_6!.Label_1.font.withSize(15)
+                            cell_6!.backgroundColor = UIColor.clear
 
+                        }
+
+                    }
                 }
             }
             cell_6!.backgroundColor = UIColor.white
@@ -432,14 +520,20 @@ extension WeeklyViewController: UICollectionViewDataSource {
                 cell_7?.Label_1.text = ""
             }
             else{
-                for (key,value) in Saturday{
-                    print("key-7 \(key) : value-7 \(value)")
-                    if Time[indexPath.section] == key {
-                        cell_7!.Label_1.text = value
-                        cell_7!.Label_1.textColor = UIColor.systemRed
-                        cell_7!.Label_1.font = cell_7!.Label_1.font.withSize(15)
-                }
+                for i in week{
+                    for (key,value) in Saturday{
+                        if Time[indexPath.section] == key && i == Satdate {
+                            
+                            print("\(Time[indexPath.section]) == \(key),\(i) == \(Mondate)")
 
+                            cell_7!.Label_1.text = value
+                            cell_7!.Label_1.textColor = UIColor.systemBlue
+                            cell_7!.Label_1.font = cell_7!.Label_1.font.withSize(15)
+                            cell_7!.backgroundColor = UIColor.clear
+
+                        }
+
+                    }
                 }
             }
             cell_7!.backgroundColor = UIColor.white
@@ -615,6 +709,4 @@ extension WeeklyViewController: UICollectionViewDataSource {
     
     
 }
-
-
 

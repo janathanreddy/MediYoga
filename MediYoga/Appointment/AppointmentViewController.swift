@@ -188,11 +188,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
     
     @IBAction func Weeklyact(_ sender: Any) {
-//        TodayWeeklyView.isHidden = true
-//        Todaytoptitle.setTitle("Weekly", for: .normal)
-//        UIView.animate(withDuration: 0.5, animations: {
-//              self.DownArrow.imageView!.transform = CGAffineTransform.identity
-//        })
         TodayWeeklyView.isHidden = true
         UIView.animate(withDuration: 0.5, animations: {
               self.DownArrow.imageView!.transform = CGAffineTransform.identity
@@ -203,11 +198,12 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     
     @IBAction func Monthlyact(_ sender: Any) {
         TodayWeeklyView.isHidden = true
-        Todaytoptitle.setTitle("Monthly", for: .normal)
         
         UIView.animate(withDuration: 0.5, animations: {
               self.DownArrow.imageView!.transform = CGAffineTransform.identity
         })
+        
+        performSegue(withIdentifier: "MonthlyView", sender: self)
 
 
     }
