@@ -35,6 +35,7 @@
 		212FF9E3253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */; };
 		212FF9EC253D534500E6BD8D /* AudioFilePatientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */; };
 		212FF9ED253D534500E6BD8D /* AudioFilePatientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */; };
+		213ED72A255910A400621F4E /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213ED729255910A300621F4E /* TabViewController.swift */; };
 		2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */; };
 		2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */; };
 		2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */; };
@@ -133,6 +134,7 @@
 		212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioFileDoctorTableViewCell.xib; sourceTree = "<group>"; };
 		212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFilePatientTableViewCell.swift; sourceTree = "<group>"; };
 		212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioFilePatientTableViewCell.xib; sourceTree = "<group>"; };
+		213ED729255910A300621F4E /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseHistoryViewController.swift; sourceTree = "<group>"; };
 		2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComChatReceiverTableViewCell.xib; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				210E88BE25186F0100C59A6E /* AppDelegate.swift */,
 				210E88C025186F0100C59A6E /* SceneDelegate.swift */,
+				213ED729255910A300621F4E /* TabViewController.swift */,
 				2110038225331F7500018E34 /* Signup_Page */,
 				2110038325331FB100018E34 /* Login_Page */,
 				21100388253320D300018E34 /* Communication */,
@@ -708,6 +711,7 @@
 				2176A8052518A059005979E9 /* AppointmentViewController.swift in Sources */,
 				21EAC3A3254F2BA80085F9B9 /* CollectionViewCell.swift in Sources */,
 				21FBA7FD251B7B3A00466C3A /* PatientHeaderCollectionReusableView.swift in Sources */,
+				213ED72A255910A400621F4E /* TabViewController.swift in Sources */,
 				2176A8402518E08B005979E9 /* SettingsViewController.swift in Sources */,
 				21A175BA25400D88008950AB /* DoctorImageTableViewCell.swift in Sources */,
 				211E7502251B27F500BFB6DC /* PatientDetailsViewController.swift in Sources */,

@@ -32,13 +32,16 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
     }()
 
     var CalenderView:FSCalendar = FSCalendar()
-    var datesWithEvent:[String] = []
-    var datesWithMultipleEvents:[String] = []
-    var AppointmentDate:[String] = []
+    var datesWithEvent = [String]()
+    var datesWithMultipleEvents = [String]()
+    var AppointmentDate = [String]()
     var db = Firestore.firestore()
     var dates_1:String = ""
-    var PatientTime:[String] = []
-    var PatientName:[String] = []
+    var PatientTime = [String]()
+    var PatientName = [String]()
+    var DoctorId:String = ""
+    var Patient_Id:String = ""
+    var Patient_ChatId = [String]()
 
 
 
@@ -61,6 +64,7 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         MonthlyView.isHidden = true
+        
         UIView.animate(withDuration: 0.5, animations: {
               self.DropArrow.imageView!.transform = CGAffineTransform.identity
         })
@@ -75,6 +79,7 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
            let formattteddate = dateFormatter.string(from: date)
            dates_1.append(formattteddate)
         print()
+        Patient_ChatId.removeAll()
         PatientName.removeAll()
         PatientTime.removeAll()
         
@@ -83,8 +88,10 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
 
                 for document in querySnapshot!.documents {
                 let documentData = document.data()
+                    Patient_ChatId.append(documentData["patient_id"] as! String)
                     PatientTime.append(documentData["appointment_time"] as! String)
                     PatientName.append("\(documentData["patient_first_name"] as! String) \(documentData["patient_last_name"] as! String)")
+                    
             
                 }
                     DispatchQueue.main.async {
@@ -121,9 +128,16 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
               self.DropArrow.imageView!.transform = CGAffineTransform.identity
         })
         self.dismiss(animated: true, completion: nil)
-
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        DoctorId = Patient_ChatId[indexPath.row]
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "MonthlytoPatientChat"{
+            let VC:ComChatViewController = segue.destination as! ComChatViewController
+            VC.Patient_Id = Patient_Id
+        }
+    }
     
     @IBAction func WeeklyActBtn(_ sender: Any) {
         print("Taped Weekly")

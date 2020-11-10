@@ -84,6 +84,7 @@ class WeeklyViewController: UIViewController{
 
     }
     func currentweekdays(){
+        week.removeAll()
         print("Count : \(count)")
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -94,7 +95,6 @@ class WeeklyViewController: UIViewController{
             .compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: nextWeek) }
     let formatter = DateFormatter()
     formatter.dateFormat = "dd,EEE"
-        week.removeAll()
             for date in days {
                 if count == 0{
                     week.append(formatter.string(from: date))
@@ -375,7 +375,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                         }
 
-                    }
+                    
                 }
             }
             cell_2!.backgroundColor = UIColor.white
@@ -384,6 +384,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
             return cell_2!
 
+            }
+            
         }
         else if indexPath.item == 3 && indexPath.section >= 1 {
             let cell_3 = collectionView.dequeueReusableCell(withReuseIdentifier:"CollectionViewCell_1", for: indexPath) as? CollectionViewCell_1
@@ -550,7 +552,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
         return cell!
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        selectedpatient_id.removeAll()
 
         if String(week[indexPath.row].dropFirst(3)) == "Sun"{
             for (key,value) in Sunday{
@@ -567,6 +569,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
                                     Selectedtime = key
 
                                     print(selectedpatient_id)
+                                    performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
                             }
             
                             }
@@ -586,6 +590,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
                                     Selectedtime = key
 
                                     print(selectedpatient_id)
+                                    performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
                             }
             
                             }
@@ -604,6 +610,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
                     Selectedtime = key
 
                     print(selectedpatient_id)
+                    performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
             }
 
             }
@@ -622,6 +630,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
             Selectedtime = key
 
             print(selectedpatient_id)
+            performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
     }
 
     }
@@ -640,6 +650,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
             Selectedtime = key
 
             print(selectedpatient_id)
+            performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
     }
 
     }
@@ -658,6 +670,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
             Selectedtime = key
 
             print(selectedpatient_id)
+            performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
     }
 
     }
@@ -675,12 +689,13 @@ extension WeeklyViewController: UICollectionViewDataSource {
             selectedpatient_id = value
             Selectedtime = key
             print(selectedpatient_id)
+            performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
+
     }
 
     }
 
 }
-        performSegue(withIdentifier: "WeeklytoPatientDetails", sender: self)
     }
     
     

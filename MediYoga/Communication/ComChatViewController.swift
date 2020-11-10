@@ -33,14 +33,14 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
    
  
     
-    
     var recorder: AVAudioRecorder!
     var player: AVAudioPlayer!
     var meterTimer: Timer!
     var soundFileURL: URL!
-
+    var Patient_Id:String = ""
     @IBOutlet weak var StopButton: UIButton!
 
+    @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var MicBtn: UIButton!
     @IBOutlet weak var SelectedImageView: UIImageView!
     let db = Firestore.firestore()
@@ -65,7 +65,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var MessageLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ActivityIndicator.alpha = 1
+        ActivityIndicator.startAnimating()
+
+        tableView.showsVerticalScrollIndicator = false
         askForNotifications()
         print("UserId: \(DoctorId) , documentID: \(documentID)")
         tableView.delegate = self
@@ -93,11 +96,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(UINib(nibName: "AudioFileDoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioFileDoctorTableViewCell")
         
         tableView.register(UINib(nibName: "AudioFilePatientTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioFilePatientTableViewCell")
-        
         messages()
         tableView.rowHeight = UITableView.automaticDimension
         scrollToBottom()
     }
+    
     
     @objc func didTapView(){
       self.view.endEditing(true)
@@ -111,7 +114,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.ButtomSpace.constant = keyBoardHeight
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
                 self.tableView.contentInset = contentInset
-                tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
+                if message.count != 0{
+                    tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
+                }
+
 
                 contentInset.bottom = keyBoardRect!.height
                 _ = NSIndexPath(row: 1, section: 0)
@@ -121,7 +127,9 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+
+    }
     @objc func keyBoardWillHide(notification: Notification){
         
         let contentInset:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -278,7 +286,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
 
 
         if FileManager.default.fileExists(atPath: soundFileURL.absoluteString) {
-            // probably won't happen. want to do something about it?
+            
             print("soundfile \(soundFileURL.absoluteString) exists")
         }
         
@@ -300,7 +308,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             recorder = nil
             print(error.localizedDescription)
         }
-        message.append(messagedata(text: "",time: "",isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record"))
+
 
         tableView.reloadData()
 
@@ -326,6 +334,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             SelectedImageView.image = images as! UIImage
             message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: ""))
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
+            tableView.endUpdates()
+            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
+
 
                 let randomid = UUID.init().uuidString
                 let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/\(randomid).jpg")
@@ -374,13 +387,22 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if message.count != 0{
+            
+            ActivityIndicator.stopAnimating()
+            ActivityIndicator.alpha = 0
+
+           
+        }
+
+
         if message[indexPath.row].isFirstUser == false && message[indexPath.row].ReceiverImageBool == false && message[indexPath.row].patientaudio == false{
             let ComChatReceiverTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComChatReceiverTableViewCell", for: indexPath) as! ComChatReceiverTableViewCell
             ComChatReceiverTableViewCell.ReceiverView.layer.cornerRadius = 16
             ComChatReceiverTableViewCell.ReceiverLabel.text = message[indexPath.row].text
             ComChatReceiverTableViewCell.ReadCheck.text = "unread"
             ComChatReceiverTableViewCell.ReceiverTime.text = message[indexPath.row].time
+
             return ComChatReceiverTableViewCell
         }
        
@@ -400,6 +422,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                     ComImageTableViewCell.sendlabel.isHidden = false
                     ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
                 }
+
                 return ComImageTableViewCell
             }
             let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
@@ -426,6 +449,9 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 ComImageTableViewCell.sendlabel.isHidden = false
                 ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
             }
+            ActivityIndicator.stopAnimating()
+            ActivityIndicator.alpha = 0
+
             return ComImageTableViewCell
         }
         else if message[indexPath.row].ReceiverImageBool == true && message[indexPath.row].isFirstUser == false{
@@ -453,6 +479,9 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 ComChatReceiveimageTableViewCell.ReceiverImageLabel.isHidden = false
                 ComChatReceiveimageTableViewCell.ReceiverImageLabel.text = message[indexPath.row].sentlabel
             }
+            ActivityIndicator.stopAnimating()
+            ActivityIndicator.alpha = 0
+
             return ComChatReceiveimageTableViewCell
         }
         else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true{
@@ -466,7 +495,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             AudioFileDoctorTableViewCell.index = indexPath
 
 
-            
+
             return AudioFileDoctorTableViewCell
             
         }
@@ -482,7 +511,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             AudioFilePatientTableViewCell.celldelegate = self
             AudioFilePatientTableViewCell.index = indexPath
 
-            
+
             return AudioFilePatientTableViewCell
             
         }
@@ -493,9 +522,9 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.CellMessageLabel.text = message[indexPath.row].text
                    cell.ReadCheckLabel.text = "unread"
             cell.timeLabel.text = message[indexPath.row].time
+
                        return cell
         }
-        
 
 return UITableViewCell()
 
@@ -542,7 +571,6 @@ return UITableViewCell()
     }
 
     func messages(){
-    
         db.collection("patient_chat").document(documentID).collection("messages").order(by: "time_stamp").getDocuments(){ [self] (snapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -765,7 +793,7 @@ return UITableViewCell()
     print(message[index].url)
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
-        storageref.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+        storageref.getData(maxSize: 10 ) { (data, error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -788,7 +816,7 @@ return UITableViewCell()
         print(message[index].url)
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("patient.m4a")
-        storageref.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+        storageref.getData(maxSize: 10 ) { (data, error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -806,16 +834,10 @@ return UITableViewCell()
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
+    
+    
+    
     }
-    
-}
-    
-    
-    
-    
+
 
 

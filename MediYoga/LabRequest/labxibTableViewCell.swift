@@ -8,6 +8,7 @@
 import UIKit
 
 protocol LabRequest_Xrays {
+    
     func X_rays(cell:labxibTableViewCell, didTappedThe button:UIButton?)
    }
 

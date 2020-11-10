@@ -67,7 +67,6 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
         patientage.text = age
         patinetappointtime.text = time
         patientage.text = age
-        
         Symptoms_Diagnosis()
         prescription()
         lab_requests()
@@ -163,67 +162,67 @@ class PatientDetailsViewController: UIViewController,UICollectionViewDelegate,UI
     }
     
     func prescription(){
-        
-        
-        db.collection("patient_prescriptions").document(patient_id).getDocument() { [self] (snapshot, err) in
-              if let err = err {
-                  print("Error getting documents: \(err)")
-              } else {
+         
+         
+         db.collection("patient_prescriptions").document(patient_id).getDocument() { [self] (snapshot, err) in
+            if snapshot?.data() == nil {
+                   print("Error getting documents: \(err)")
+               } else {
+                 for document in snapshot!.data()! as [String:Any] {
+                     for documents in document.value as! [[String:Any]]{
+                         let time_Stamp = documents["date"] as! Timestamp
+                         let timeStamp = time_Stamp.dateValue()
+                         let dateFormatter = DateFormatter()
+                         dateFormatter.dateFormat = "MMM dd,yyyy"
+                         let ChatTime = dateFormatter.string(from: timeStamp)
+                         if ChatTime == CurrentDate {
+                         for DrugList in documents["drugs"] as! [[String:Any]]{
+                            Description[2].append(DrugList["drug_name"] as? String ?? "No Prescription")}
+                         }
+                     }
+                   }
+                 DispatchQueue.main.async {
+                     self.PatientCollectionView.reloadData()
+                 }
+
+               }
+         }
+         
+     }
+     
+     func lab_requests(){
+         
+         
+         db.collection("patient_lab_requests").document(patient_id).getDocument() { [self] (snapshot, err) in
+            if snapshot?.data() == nil{
+                   print("Error getting documents: \(err)")
+               } else {
                 for document in snapshot!.data()! as [String:Any] {
                     for documents in document.value as! [[String:Any]]{
-                        let time_Stamp = documents["date"] as! Timestamp
-                        let timeStamp = time_Stamp.dateValue()
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MMM dd,yyyy"
-                        let ChatTime = dateFormatter.string(from: timeStamp)
-                        if ChatTime == CurrentDate {
-                        for DrugList in documents["drugs"] as! [[String:Any]]{
-                            Description[2].append(DrugList["drug_name"] as! String)}
-                        }
-                    }
-                  }
-                DispatchQueue.main.async {
-                    self.PatientCollectionView.reloadData()
-                }
+                         
+                         let time_Stamp = documents["date"] as! Timestamp
+                         let timeStamp = time_Stamp.dateValue()
+                         let dateFormatter = DateFormatter()
+                         dateFormatter.dateFormat = "MMM dd,yyyy"
+                         let ChatTime = dateFormatter.string(from: timeStamp)
+                         if ChatTime == CurrentDate {
+                         for requests in documents["requests"] as! [Any]{
+                             
+                            Description[3].append(requests as? String ?? "No Lab Request")
+                             
+                         }
+                         
+                     }
+                 }
+                 DispatchQueue.main.async {
+                     self.PatientCollectionView.reloadData()
+                 }
 
-              }
-        }
-        
-    }
-    
-    func lab_requests(){
-        
-        
-        db.collection("patient_lab_requests").document(patient_id).getDocument() { [self] (snapshot, err) in
-              if let err = err {
-                  print("Error getting documents: \(err)")
-              } else {
-                for document in snapshot!.data()! as [String:Any] {
-                    for documents in document.value as! [[String:Any]]{
-                        
-                        let time_Stamp = documents["date"] as! Timestamp
-                        let timeStamp = time_Stamp.dateValue()
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MMM dd,yyyy"
-                        let ChatTime = dateFormatter.string(from: timeStamp)
-                        if ChatTime == CurrentDate {
-                        for requests in documents["requests"] as! [Any]{
-                            
-                            Description[3].append(requests as! String)
-                            
-                        }
-                        
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.PatientCollectionView.reloadData()
-                }
-
-              }
-        }
-        
-    }
-    }
+               }
+         }
+         
+     }
+     }
     
     
     func date(){

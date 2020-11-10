@@ -13,14 +13,15 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     
     let db = Firestore.firestore()
     
+    @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var SearchButton: UIButton!
     @IBOutlet weak var CommunicationLabel: UILabel!
     @IBOutlet weak var NameSearch: UISearchBar!
     
     var searching = false
-    
     var name_1 = [filtername]()
     var searchedname_1 = [filtername]()
+    var didsearch = [DidSelect]()
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -35,17 +36,19 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
                   print("Error getting documents: \(err)")
               } else {
                   for document in snapshot!.documents {
+                    ActivityIndicator.alpha = 1
+                    ActivityIndicator.startAnimating() 
                     let docId = document.documentID
                     let documentData = document.data()
                     let participant_name = documentData["jJU6FoDijkb3MOdu7Eeh"] as? [String:Any]
                     let last_message = documentData["last_message"] as? String
                     let ChatId = documentData["users"] as! [Any]
-                    let last_message_time: Timestamp = documentData["last_message_time"] as! Timestamp
+                    let last_message_time: Timestamp = (documentData["last_message_time"] as! Timestamp)
                     let timeStamp = last_message_time.dateValue()
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "MMM dd"
                     let firebasedate = dateFormatter.string(from: timeStamp)
-                    self.name_1.append(filtername(name: participant_name!["participant_name"] as! String, image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as! Int), date: firebasedate, UserId: ChatId[1] as! String, documentID: docId, DoctorName: participant_name!["name"] as! String, DoctorId: ChatId[0] as! String ))
+                    self.name_1.append(filtername(name: participant_name!["participant_name"] as? String ?? "", image: "32", message: last_message!, unread: String(participant_name!["unread_count"] as? Int ?? 0), date: firebasedate, UserId: ChatId[1] as? String ?? "", documentID: docId, DoctorName: participant_name!["name"] as? String ?? "", DoctorId: ChatId[0] as? String ?? "" ))
                     
                     self.searchedname_1 = self.name_1
                   }
@@ -70,7 +73,12 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searching {
             return searchedname_1.count
+        } else {
+            return name_1.count
+        }
+        
     }
 
 
@@ -79,40 +87,41 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? CommunicationTableViewCell else {
             return UITableViewCell()
         }
-        cell.nameField.text = searchedname_1[indexPath.row].name
-        cell.chatimage.image = UIImage(named:searchedname_1[indexPath.row].image)
-        cell.CountUnseen.text = searchedname_1[indexPath.row].unread
-        cell.messageField.text = searchedname_1[indexPath.row].message
-        cell.ComDate.text = searchedname_1[indexPath.row].date
-        return cell
+        
+        if searching {
+            
+            cell.nameField.text = searchedname_1[indexPath.row].name
+            cell.chatimage.image = UIImage(named:searchedname_1[indexPath.row].image)
+            cell.CountUnseen.text = searchedname_1[indexPath.row].unread
+            cell.messageField.text = searchedname_1[indexPath.row].message
+            cell.ComDate.text = searchedname_1[indexPath.row].date
+            ActivityIndicator.alpha = 0
+            ActivityIndicator.startAnimating()
+
+            return cell
+
+        }else{
+        cell.nameField.text = name_1[indexPath.row].name
+        cell.chatimage.image = UIImage(named:name_1[indexPath.row].image)
+        cell.CountUnseen.text = name_1[indexPath.row].unread
+        cell.messageField.text = name_1[indexPath.row].message
+        cell.ComDate.text = name_1[indexPath.row].date
+        ActivityIndicator.alpha = 0
+        ActivityIndicator.startAnimating() 
+            return cell
+            
+        }
+
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        searchedname_1 = name_1.filter({ filtername -> Bool in
-            switch searchBar.selectedScopeButtonIndex {
-            case 0:
-                if searchText.isEmpty { return true }
-                return filtername.name.lowercased().contains(searchText.lowercased())
-            default:
-                return false
-            }
-        })
+        NameSearch.showsCancelButton = true
+
+        searchedname_1 = name_1.filter({$0.name.contains(searchText)})
+        searching = true
         tableView.reloadData()
     }
     
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        switch selectedScope {
-        case 0:
-            searchedname_1 = name_1
-        
-        default:
-            break
-        }
-        tableView.reloadData()
-    }
-
-
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         NameSearch.resignFirstResponder()
         tableView.reloadData()
@@ -132,21 +141,42 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         if segue.identifier == "ComSegue_1" {
             let VC:ComChatViewController = segue.destination as! ComChatViewController
             let indexPath = self.tableView.indexPathForSelectedRow
+            if searching{
+                VC.GroupName = didsearch[indexPath!.row].name
+                VC.imagename = didsearch[indexPath!.row].image
+                VC.UserId = didsearch[indexPath!.row].UserId
+                VC.documentID = didsearch[indexPath!.row].documentID
+                VC.DoctorId = didsearch[indexPath!.row].DoctorId
+                VC.DoctorName = didsearch[indexPath!.row].DoctorName
+
+            }else{
             VC.GroupName = name_1[indexPath!.row].name
             VC.imagename = name_1[indexPath!.row].image
             VC.UserId = name_1[indexPath!.row].UserId
             VC.documentID = name_1[indexPath!.row].documentID
             VC.DoctorId = name_1[indexPath!.row].DoctorId
             VC.DoctorName = name_1[indexPath!.row].DoctorName
+                
+            }
         }
         
                 }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didsearch.removeAll()
+
+        if searching {
+            didsearch.append(DidSelect(name: searchedname_1[indexPath.row].name, image: searchedname_1[indexPath.row].image, message: "", unread: "", date: "", UserId: searchedname_1[indexPath.row].UserId, documentID: searchedname_1[indexPath.row].documentID, DoctorName: searchedname_1[indexPath.row].DoctorName, DoctorId: searchedname_1[indexPath.row].DoctorId))
+                performSegue(withIdentifier: "ComSegue_1", sender: self)
+
+
+
+        }else{
+                performSegue(withIdentifier: "ComSegue_1", sender: self)
+
+        }
+
         
-        
-        performSegue(withIdentifier: "ComSegue_1", sender: self)
-        return tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @IBAction func SearchAction(_ sender: Any) {
@@ -158,7 +188,6 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
 }
-
 class filtername {
     let name: String
     let image: String
@@ -183,3 +212,29 @@ class filtername {
     
 
 }
+
+class DidSelect {
+    let name: String
+    let image: String
+    let message: String
+    let unread: String
+    let date: String
+    let UserId:String
+    let documentID:String
+    let DoctorName:String
+    let DoctorId:String
+    init(name: String,image: String,message: String,unread: String,date: String,UserId: String,documentID: String,DoctorName: String,DoctorId:String) {
+        self.name = name
+        self.image = image
+        self.message  = message
+        self.unread = unread
+        self.date = date
+        self.UserId = UserId
+        self.documentID = documentID
+        self.DoctorName = DoctorName
+        self.DoctorId = DoctorId
+    }
+    
+
+}
+

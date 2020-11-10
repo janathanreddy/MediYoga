@@ -25,7 +25,7 @@ class ViewController: UIViewController,UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ConnectivityCheck()
+//        ConnectivityCheck()
         LoginButton.layer.cornerRadius = 10
         PasswordTextField.rightViewMode = .unlessEditing
         button.setImage(UIImage(named: "eyeclose.png"), for: .normal)
@@ -126,36 +126,36 @@ class ViewController: UIViewController,UITextFieldDelegate{
         }
     }
     
-    
-    func ConnectivityCheck(){
-        let monitor = NWPathMonitor()
-        monitor.pathUpdateHandler = {path in
-            if path.status == .satisfied{
-                DispatchQueue.main.async {
-
-                    let alertController = UIAlertController(title: "Alert", message:
-                                                                "Online", preferredStyle: .alert)
-                    self.present(alertController,animated:true,completion:{Timer.scheduledTimer(withTimeInterval: 5, repeats:false, block: {_ in
-                        self.dismiss(animated: true, completion: nil)
-                    })})
-
-                }
-            }else{
-                DispatchQueue.main.async {
-
-                    let alertController = UIAlertController(title: "Alert", message:
-                                                                "Offline", preferredStyle: .alert)
-                    self.present(alertController,animated:true,completion:{Timer.scheduledTimer(withTimeInterval: 5, repeats:false, block: {_ in
-                        self.dismiss(animated: true, completion: nil)
-                    })})
-
-                }
-            }
-        }
-        let queue = DispatchQueue(label: "Network")
-        monitor.start(queue: queue)
-        
-        
-    }
+//
+//    func ConnectivityCheck(){
+//        let monitor = NWPathMonitor()
+//        monitor.pathUpdateHandler = {path in
+//            if path.status == .satisfied{
+//                DispatchQueue.main.async {
+//
+//                    let alertController = UIAlertController(title: "Alert", message:
+//                                                                "Online", preferredStyle: .alert)
+//                    self.present(alertController,animated:true,completion:{Timer.scheduledTimer(withTimeInterval: 5, repeats:false, block: {_ in
+//                        self.dismiss(animated: true, completion: nil)
+//                    })})
+//
+//                }
+//            }else{
+//                DispatchQueue.main.async {
+//
+//                    let alertController = UIAlertController(title: "Alert", message:
+//                                                                "Offline", preferredStyle: .alert)
+//                    self.present(alertController,animated:true,completion:{Timer.scheduledTimer(withTimeInterval: 5, repeats:false, block: {_ in
+//                        self.dismiss(animated: true, completion: nil)
+//                    })})
+//
+//                }
+//            }
+//        }
+//        let queue = DispatchQueue(label: "Network")
+//        monitor.start(queue: queue)
+//
+//
+//    }
 }
 

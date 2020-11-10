@@ -46,6 +46,10 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     var documentID: String = ""
     var DoctorName: String = ""
     var SelectedImages:String = ""
+    
+    
+    
+    @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var SelectedImage: UIImageView!
     @IBOutlet weak var ChatTextField: UITextField!
     @IBOutlet weak var View_Chat_Name: UILabel!
@@ -73,7 +77,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         tapRecognizer.addTarget(self, action: #selector(self.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
         
-        
+        ActivityIndicator.startAnimating()
         tableView.register(UINib(nibName: "DoctorImageTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorImageTableViewCell")
 
         tableView.register(UINib(nibName: "AdminTextTableViewCell", bundle: nil), forCellReuseIdentifier: "AdminTextTableViewCell")
@@ -109,8 +113,9 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
 
                 self.tableView.contentInset = contentInset
-
+                if message.count != 0{
                 tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
+                }
                 contentInset.bottom = keyBoardRect!.height
                 let indexpath = NSIndexPath(row: 1, section: 0)
                 UIView.animate(withDuration: 0.5, animations: {
@@ -148,6 +153,11 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if message.count != 0 {
+            ActivityIndicator.stopAnimating()
+            
+        }
+
         if message[indexPath.row].isFirstUser == false && message[indexPath.row].ReceiverImageBool == false{
             
             let AdminTextTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdminTextTableViewCell", for: indexPath) as! AdminTextTableViewCell
@@ -157,6 +167,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             print(message[indexPath.row].text)
             AdminTextTableViewCell.ReadCheck.text = "unread"
             AdminTextTableViewCell.Admintime.text = message[indexPath.row].time
+            
             return AdminTextTableViewCell
         }
         else if message[indexPath.row].sendimagebool == false && message[indexPath.row].ReceiverImageBool == true{
@@ -249,6 +260,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             cell.ChatLabel.text = message[indexPath.row].text
                    cell.ReadCheck.text = "unread"
             cell.ChatTime.text = message[indexPath.row].time
+            
                        return cell
         }
 

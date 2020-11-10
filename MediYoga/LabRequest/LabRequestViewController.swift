@@ -65,18 +65,22 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         if indexPath.row == 0 {
            let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath) as! LabRequestTableViewCell
             LabRequestTableViewCell.cellHeight()
             cell.labIMAGE.image = UIImage(named: tableviewdata[indexPath.section].imagepain)
             cell.labelname.text = tableviewdata[indexPath.section].title
+
             return cell
         }
         else{
             let xibcell = tableView.dequeueReusableCell(withIdentifier: "labxibTableViewCell",for: indexPath) as! labxibTableViewCell
             labxibTableViewCell.cellHeight()
+            
             tableView.separatorStyle = .none
             tableView.showsVerticalScrollIndicator = false
+
             xibcell.dropdownlabel.text = tableviewdata[indexPath.section].sectiondata[indexPath.row - 1]
             xibcell.CellDelegate = self
             xibcell.indexPath = indexPath
@@ -86,8 +90,10 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+
         if tableviewdata[indexPath.section].opened == true{
             tableviewdata[indexPath.section].opened = false
+            
             let sections = IndexSet.init(integer: indexPath.section)
             tableView.reloadSections(sections, with: .none)
         }else{

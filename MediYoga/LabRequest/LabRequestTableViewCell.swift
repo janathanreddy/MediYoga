@@ -9,11 +9,11 @@ import UIKit
 
 class LabRequestTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var DropdownBtn: UIButton!
     @IBOutlet weak var labelname: UILabel!
     @IBOutlet weak var labIMAGE: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
