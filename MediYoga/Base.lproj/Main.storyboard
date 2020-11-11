@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sg3-Kz-B2a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SAp-qX-NGn">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -2785,6 +2785,7 @@
                         <outlet property="WeeklyTitle" destination="cvv-bH-z1w" id="US0-ej-nA6"/>
                         <outlet property="tableView" destination="d42-Ds-fDM" id="MF6-Tm-2Ju"/>
                         <segue destination="r2P-Po-8kl" kind="show" identifier="MonthlytoPatientChat" id="hPa-9K-lIm"/>
+                        <segue destination="HwG-VH-Ouk" kind="show" identifier="MonthlyToWeek" id="nHx-YT-FfI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uNV-DF-aQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3273,6 +3274,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="hPa-9K-lIm"/>
+        <segue reference="nHx-YT-FfI"/>
         <segue reference="iCR-cq-Elu"/>
         <segue reference="eHB-pP-D7z"/>
         <segue reference="4Ab-mV-78u"/>

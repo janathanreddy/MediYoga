@@ -116,6 +116,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     @IBAction func MonthlyActBtn(_ sender: Any) {
         print("Taped Monthly")
         MonthlyView.isHidden = false
+        
 
     }
     
@@ -127,11 +128,13 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         UIView.animate(withDuration: 0.5, animations: {
               self.DropArrow.imageView!.transform = CGAffineTransform.identity
         })
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DoctorId = Patient_ChatId[indexPath.row]
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "MonthlytoPatientChat"{
             let VC:ComChatViewController = segue.destination as! ComChatViewController
@@ -147,7 +150,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         UIView.animate(withDuration: 0.5, animations: {
               self.DropArrow.imageView!.transform = CGAffineTransform.identity
         })
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "MonthlyToWeek", sender: self)
     }
     
     func retrieveData() {
