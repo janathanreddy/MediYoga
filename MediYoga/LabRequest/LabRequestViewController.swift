@@ -91,13 +91,13 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
 
-        if tableviewdata[indexPath.section].opened == true{
-            tableviewdata[indexPath.section].opened = false
+        if tableviewdata[indexPath.section].opened == false{
+            tableviewdata[indexPath.section].opened = true
             
             let sections = IndexSet.init(integer: indexPath.section)
             tableView.reloadSections(sections, with: .none)
         }else{
-            tableviewdata[indexPath.section].opened = true
+            tableviewdata[indexPath.section].opened = false
             let sections = IndexSet.init(integer: indexPath.section)
             tableView.reloadSections(sections, with: .none)
 

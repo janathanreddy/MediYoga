@@ -36,8 +36,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var DidSelectAppoint = [DidSelectAppoinment]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        ActivityIndicator.alpha = 1
-        ActivityIndicator.startAnimating() 
+//        ActivityIndicator.alpha = 1
+//        ActivityIndicator.startAnimating()
         DownArrow.isUserInteractionEnabled = true
         namesearch.delegate = self
         tableView.delegate = self
@@ -106,8 +106,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             cell.TimeField.text = searchedname_1[indexPath.row].time
             cell.ccdField.text = searchedname_1[indexPath.row].ccd
             cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
-            ActivityIndicator.stopAnimating()
-            ActivityIndicator.alpha = 0
+//            ActivityIndicator.stopAnimating()
+//            ActivityIndicator.alpha = 0
 
             return cell
 
@@ -120,8 +120,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                 cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
                 cell.celldelegate = self
                 cell.index = indexPath
-            ActivityIndicator.stopAnimating()
-            ActivityIndicator.alpha = 0
+//            ActivityIndicator.stopAnimating()
+//            ActivityIndicator.alpha = 0
 
 
                 return cell

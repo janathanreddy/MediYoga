@@ -11,17 +11,11 @@ import Firebase
 
 class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FSCalendarDelegate, FSCalendarDataSource{
     
-    @IBOutlet weak var DropArrow: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var MonthlyTitle: UIButton!
     
-    @IBOutlet weak var TodayTitle: UIButton!
-    
-    @IBOutlet weak var WeeklyTitle: UIButton!
-    
-    @IBOutlet weak var MonthlyView: UIView!
     
     @IBOutlet weak var Calender_View: UIView!
     
@@ -39,9 +33,15 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
     var dates_1:String = ""
     var PatientTime = [String]()
     var PatientName = [String]()
+    var PatientAge = [String]()
     var DoctorId:String = ""
     var Patient_Id:String = ""
     var Patient_ChatId = [String]()
+    var PatientTimedid:String = ""
+    var PatientNamedid:String = ""
+    var PatientAgedid:String = ""
+    var counts: [String: Int] = [:]
+
 
 
 
@@ -57,18 +57,7 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
         tableView.delegate = self
         retrieveData()
         CalenderView.rowHeight = 30
-        CalenderView.reloadData()
         
-
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        MonthlyView.isHidden = true
-        
-        UIView.animate(withDuration: 0.5, animations: {
-              self.DropArrow.imageView!.transform = CGAffineTransform.identity
-        })
-
 
     }
 
@@ -91,6 +80,7 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
                     Patient_ChatId.append(documentData["patient_id"] as! String)
                     PatientTime.append(documentData["appointment_time"] as! String)
                     PatientName.append("\(documentData["patient_first_name"] as! String) \(documentData["patient_last_name"] as! String)")
+                    PatientAge.append("\(String(documentData["patient_age"] as! Int))")
                     
             
                 }
@@ -115,42 +105,35 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
     @IBAction func MonthlyActBtn(_ sender: Any) {
         print("Taped Monthly")
-        MonthlyView.isHidden = false
         
 
     }
     
-    @IBAction func TodayActBtn(_ sender: Any) {
-        print("Taped Today")
-        MonthlyView.isHidden = true
-        MonthlyTitle.setTitle("Today", for: .normal)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-              self.DropArrow.imageView!.transform = CGAffineTransform.identity
-        })
-        dismiss(animated: true, completion: nil)
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DoctorId = Patient_ChatId[indexPath.row]
+        PatientTimedid = PatientTime[indexPath.row]
+        PatientAgedid = PatientAge[indexPath.row]
+        PatientNamedid = PatientName[indexPath.row]
+        Patient_Id = Patient_ChatId[indexPath.row]
+        performSegue(withIdentifier: "MonthlyToPatientDetails", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "MonthlytoPatientChat"{
             let VC:ComChatViewController = segue.destination as! ComChatViewController
             VC.Patient_Id = Patient_Id
+        }else if segue.identifier == "MonthlyToPatientDetails"{
+            let VC:PatientDetailsViewController = segue.destination as! PatientDetailsViewController
+            VC.patient_id = Patient_Id
+            VC.age = PatientAgedid
+            VC.name = PatientNamedid
+            VC.time = PatientTimedid
+            VC.image = "32"
         }
     }
     
-    @IBAction func WeeklyActBtn(_ sender: Any) {
-        print("Taped Weekly")
-        MonthlyView.isHidden = true
-        MonthlyTitle.setTitle("Weekly", for: .normal)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-              self.DropArrow.imageView!.transform = CGAffineTransform.identity
-        })
-        performSegue(withIdentifier: "MonthlyToWeek", sender: self)
+    @IBAction func BackButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     func retrieveData() {
@@ -166,7 +149,6 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             
     }
 
-                    var counts: [String: Int] = [:]
                     for item in AppointmentDate {
                         print("item : \(item)")
 
@@ -190,7 +172,6 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-
         let dateString = self.dateFormatter2.string(from: date)
         print("dateString : \(dateString)")
 
@@ -211,8 +192,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             calendar.appearance.eventDefaultColor = UIColor(red:red, green: green, blue: blue, alpha: 1)
             return 3
         }
-        CalenderView.reloadData()
-        self.viewWillAppear(true)
+
         return 0
     }
 }

@@ -60,15 +60,6 @@ class WeeklyViewController: UIViewController{
             gridLayout.stickyColumnsCount = 1
         }
     }
-    @IBOutlet weak var WeeklyBtn: UIButton!
-    
-    @IBOutlet weak var dropDown: UIButton!
-    
-    @IBOutlet weak var DropDownView: UIView!
-    
-    @IBOutlet weak var MonthlyBtn: UIButton!
-    
-    @IBOutlet weak var Todaybtn: UIButton!
     
     @IBOutlet weak var WeeklyView: UIView!
     override func viewDidLoad() {
@@ -104,46 +95,12 @@ class WeeklyViewController: UIViewController{
         week.insert("Time", at: 0)
 
     }
-    @IBAction func WeeklyAct(_ sender: Any) {
-        WeeklyBtn.isSelected = !WeeklyBtn.isSelected
-        dropDown.isSelected = !dropDown.isSelected
-        
-        if WeeklyBtn.isSelected == true || dropDown.isSelected == true{
-            
-            DropDownView.isHidden = false
-            UIView.animate(withDuration: 0.5, animations: {
-                self.dropDown.imageView!.transform = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
-            })
-
-            
-        }
-        else{
-            DropDownView.isHidden = true
-        }
-        
-        
-    }
+   
     
-    @IBAction func TodayAct(_ sender: Any) {
-        DropDownView.isHidden = true
-        
-        UIView.animate(withDuration: 0.5, animations: {
-              self.dropDown.imageView!.transform = CGAffineTransform.identity
-        })
+    @IBAction func BackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func MontlyAct(_ sender: Any) {
-        
-        DropDownView.isHidden = true
-        WeeklyBtn.setTitle("Monthly", for: .normal)
-        UIView.animate(withDuration: 0.5, animations: {
-              self.dropDown.imageView!.transform = CGAffineTransform.identity
-        })
-        
-        performSegue(withIdentifier: "WeekToMonth", sender: self)
-
-    }
     
     func DoctorAppointments(){
         db.collection("appointments").getDocuments(){ [self] (querySnapshot, error) in
@@ -277,17 +234,6 @@ class WeeklyViewController: UIViewController{
    
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        NextWeek.isSelected = false
-        PreviousWeek.isSelected = false
-        DropDownView.isHidden = true
-        UIView.animate(withDuration: 0.5, animations: {
-              self.dropDown.imageView!.transform = CGAffineTransform.identity
-        })
-
-
-    }
 
 }
 extension WeeklyViewController: UICollectionViewDelegateFlowLayout {
@@ -340,6 +286,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
             cell_1!.Label_1.text = ""
             if Sunday.isEmpty != false && Sundate.isEmpty != false{
                 cell_1?.Label_1.text = ""
+                
 
             }
             else{
