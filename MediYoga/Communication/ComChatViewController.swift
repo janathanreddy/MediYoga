@@ -73,7 +73,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         print("UserId: \(DoctorId) , documentID: \(documentID)")
         tableView.delegate = self
         tableView.dataSource = self
-        profileimage.layer.cornerRadius = 20
+        profileimage.layer.cornerRadius = 25
         profileimage.clipsToBounds = true
         self.picker.delegate=self
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

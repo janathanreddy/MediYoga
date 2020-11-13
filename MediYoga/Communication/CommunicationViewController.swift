@@ -28,7 +28,7 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 70
+        tableView.rowHeight = 100
         NameSearch.delegate = self
         NameSearch.showsScopeBar = false
         self.db.collection("patient_chat").getDocuments { [self] (snapshot, err) in
@@ -142,12 +142,12 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
             let VC:ComChatViewController = segue.destination as! ComChatViewController
             let indexPath = self.tableView.indexPathForSelectedRow
             if searching{
-                VC.GroupName = didsearch[indexPath!.row].name
-                VC.imagename = didsearch[indexPath!.row].image
-                VC.UserId = didsearch[indexPath!.row].UserId
-                VC.documentID = didsearch[indexPath!.row].documentID
-                VC.DoctorId = didsearch[indexPath!.row].DoctorId
-                VC.DoctorName = didsearch[indexPath!.row].DoctorName
+                VC.GroupName = searchedname_1[indexPath!.row].name
+                VC.imagename = searchedname_1[indexPath!.row].image
+                VC.UserId = searchedname_1[indexPath!.row].UserId
+                VC.documentID = searchedname_1[indexPath!.row].documentID
+                VC.DoctorId = searchedname_1[indexPath!.row].DoctorId
+                VC.DoctorName = searchedname_1[indexPath!.row].DoctorName
 
             }else{
             VC.GroupName = name_1[indexPath!.row].name
@@ -164,15 +164,13 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         didsearch.removeAll()
-
         if searching {
             didsearch.append(DidSelect(name: searchedname_1[indexPath.row].name, image: searchedname_1[indexPath.row].image, message: "", unread: "", date: "", UserId: searchedname_1[indexPath.row].UserId, documentID: searchedname_1[indexPath.row].documentID, DoctorName: searchedname_1[indexPath.row].DoctorName, DoctorId: searchedname_1[indexPath.row].DoctorId))
-                performSegue(withIdentifier: "ComSegue_1", sender: self)
-
-
+            performSegue(withIdentifier: "ComSegue_1", sender: self)
+            print("didsearch : \(searchedname_1[indexPath.row].documentID)")
 
         }else{
-                performSegue(withIdentifier: "ComSegue_1", sender: self)
+            performSegue(withIdentifier: "ComSegue_1", sender: self)
 
         }
 

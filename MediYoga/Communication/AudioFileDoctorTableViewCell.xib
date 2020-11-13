@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icF-e5-sMF">
                                 <rect key="frame" x="40" y="7" width="192" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="BXE-wb-e1T"/>
                                     <constraint firstAttribute="width" constant="192" id="fBC-Cp-5fM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -39,7 +38,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGq-y2-DFh">
-                                <rect key="frame" x="40" y="36" width="49" height="15"/>
+                                <rect key="frame" x="40" y="36" width="34" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -53,7 +52,6 @@
                             <constraint firstAttribute="bottom" secondItem="RGq-y2-DFh" secondAttribute="bottom" constant="6" id="HXf-dO-Y4S"/>
                             <constraint firstAttribute="bottom" secondItem="bWI-VB-duE" secondAttribute="bottom" constant="27" id="RTD-tE-Sdg"/>
                             <constraint firstItem="RGq-y2-DFh" firstAttribute="top" secondItem="icF-e5-sMF" secondAttribute="bottom" constant="8" symbolic="YES" id="VMz-xp-s4r"/>
-                            <constraint firstAttribute="trailing" secondItem="RGq-y2-DFh" secondAttribute="trailing" constant="201" id="VST-Jn-kXW"/>
                             <constraint firstAttribute="trailing" secondItem="icF-e5-sMF" secondAttribute="trailing" constant="58" id="csd-ha-JEF"/>
                             <constraint firstItem="icF-e5-sMF" firstAttribute="leading" secondItem="bWI-VB-duE" secondAttribute="trailing" constant="17" id="eM7-4L-Nb6"/>
                             <constraint firstItem="icF-e5-sMF" firstAttribute="top" secondItem="sso-2G-gMe" secondAttribute="top" constant="7" id="qlx-W1-G2u"/>
@@ -63,7 +61,7 @@
                 <constraints>
                     <constraint firstItem="sso-2G-gMe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="LeA-Bu-GRq"/>
                     <constraint firstAttribute="bottom" secondItem="sso-2G-gMe" secondAttribute="bottom" constant="8" id="dh7-st-crg"/>
-                    <constraint firstItem="sso-2G-gMe" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="mMC-5r-IpR"/>
+                    <constraint firstItem="sso-2G-gMe" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" placeholder="YES" id="mMC-5r-IpR"/>
                     <constraint firstAttribute="trailing" secondItem="sso-2G-gMe" secondAttribute="trailing" constant="20" id="w98-Cl-0Ax"/>
                 </constraints>
             </tableViewCellContentView>

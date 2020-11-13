@@ -36,8 +36,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var DidSelectAppoint = [DidSelectAppoinment]()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        ActivityIndicator.alpha = 1
-//        ActivityIndicator.startAnimating()
+        ActivityIndicator.startAnimating()
+        ActivityIndicator.alpha = 1
         DownArrow.isUserInteractionEnabled = true
         namesearch.delegate = self
         tableView.delegate = self
@@ -51,26 +51,41 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         tableView.showsVerticalScrollIndicator = false
         TodayWeeklyView.isHidden = true
         db.collection("appointments").whereField("appointment_date", isEqualTo: formattedDate).order(by: "appointment_time").getDocuments(){ [self] (querySnapshot, error) in
-                            if  error == nil && querySnapshot != nil {
+                    if  querySnapshot?.documents != nil && error == nil{
+                        if querySnapshot?.documents.isEmpty == true{
+                            ActivityIndicator.stopAnimating()
+                            ActivityIndicator.alpha = 0
+
+                            let alert = UIAlertController(title: "Alert", message: "No Appointment Today!", preferredStyle: .alert)
+                            self.present(alert, animated: true, completion: nil)
+                            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+
+
+                        }
+                            for document in querySnapshot!.documents {
                                 ActivityIndicator.alpha = 1
                                 ActivityIndicator.startAnimating()
-                            for document in querySnapshot!.documents {
+                                print("querySnapshot!.documents \(querySnapshot!.documents)")
                             let documentData = document.data()
+                            
                             let patient_first_name = documentData["patient_first_name"] as! String
                             let patient_id = documentData["patient_id"] as! String
                             let patient_age = String(documentData["patient_age"] as! Int)
                             let patient_gender = documentData["patient_gender"]as! String
                             let appointment_time = documentData["appointment_time"] as! String
                             let appointment_date = documentData["appointment_date"] as! String
-                            
+                                ActivityIndicator.alpha = 0
+                                ActivityIndicator.stopAnimating()
+
                                 self.name_1.append(filternames(name: patient_first_name,image:"35",age:patient_age,time:appointment_time,ccd:"CCD",at:"AT.png",patient_id:patient_id))
+
 
                     }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
                         
-                }
+                    }
             }
 
     }
@@ -106,25 +121,23 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
             cell.TimeField.text = searchedname_1[indexPath.row].time
             cell.ccdField.text = searchedname_1[indexPath.row].ccd
             cell.statusField.image = UIImage(named: searchedname_1[indexPath.row].at)
-//            ActivityIndicator.stopAnimating()
-//            ActivityIndicator.alpha = 0
+            ActivityIndicator.stopAnimating()
+            ActivityIndicator.alpha = 0
 
             return cell
 
         } else {
-                cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
-                cell.NameField.text = name_1[indexPath.row].name
-                cell.AgeField.text = name_1[indexPath.row].age
-                cell.TimeField.text = name_1[indexPath.row].time
-                cell.ccdField.text = name_1[indexPath.row].ccd
-                cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
-                cell.celldelegate = self
-                cell.index = indexPath
-//            ActivityIndicator.stopAnimating()
-//            ActivityIndicator.alpha = 0
-
-
-                return cell
+            cell.appointmentimage.image = UIImage(named: name_1[indexPath.row].image)
+            cell.NameField.text = name_1[indexPath.row].name
+            cell.AgeField.text = name_1[indexPath.row].age
+            cell.TimeField.text = name_1[indexPath.row].time
+            cell.ccdField.text = name_1[indexPath.row].ccd
+            cell.statusField.image = UIImage(named: name_1[indexPath.row].at)
+            cell.celldelegate = self
+            cell.index = indexPath
+            ActivityIndicator.stopAnimating()
+            ActivityIndicator.alpha = 0
+            return cell
         }
         return UITableViewCell()
     }
@@ -180,6 +193,9 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                     VC.age = self.name_1[indexPath.row].age
                     VC.cdd = self.name_1[indexPath.row].ccd
                     VC.patient_id = self.name_1[indexPath.row].patient_id
+                    ActivityIndicator.alpha = 1
+                    ActivityIndicator.startAnimating()
+
 
                 }
             }

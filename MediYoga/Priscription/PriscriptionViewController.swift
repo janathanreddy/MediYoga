@@ -76,15 +76,20 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PriscriptionTableViewCell
+            cell.PriscriptionLabel.text = names[indexPath.row]
+            cell.celldelegate = self
+            cell.index = indexPath
+
             for RET in RetFav{
                 if RET == names[indexPath.row]{
                     
                     cell.favbtn.isSelected = true
+
                 }
+
+                
             }
-            cell.PriscriptionLabel.text = names[indexPath.row]
-            cell.celldelegate = self
-            cell.index = indexPath
+
             return cell
 
         }

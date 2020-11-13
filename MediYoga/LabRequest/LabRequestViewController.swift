@@ -15,14 +15,17 @@ struct cellData {
     var sectiondata = [String]()
     
 }
-
+struct PainClass {
+    var title = String()
+    var sectiondata = [String]()
+    
+}
 class LabRequestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,LabRequest_Xrays {
-    
-    
-    
+    var selectedCell = [Int]()
     var db = Firestore.firestore()
     var xibindexpath:IndexPath?
     var tableviewdata = [cellData]()
+    var PainClass_1 = [PainClass]()
     var pains:[String] = ["Neck", "Head", "Shoulder", "Elbow", "Leg", "Hand", "Wrist"]
     
     var imagepains:[String] = ["Head.png","Neck.png","Back.png","Shoulder.png","Arm.png"]
@@ -71,7 +74,7 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
             LabRequestTableViewCell.cellHeight()
             cell.labIMAGE.image = UIImage(named: tableviewdata[indexPath.section].imagepain)
             cell.labelname.text = tableviewdata[indexPath.section].title
-
+            
             return cell
         }
         else{
@@ -82,6 +85,9 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
             tableView.showsVerticalScrollIndicator = false
 
             xibcell.dropdownlabel.text = tableviewdata[indexPath.section].sectiondata[indexPath.row - 1]
+
+
+
             xibcell.CellDelegate = self
             xibcell.indexPath = indexPath
 
@@ -89,20 +95,16 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+         let cell = tableView.cellForRow(at: indexPath) as? labxibTableViewCell
+        
 
-        if tableviewdata[indexPath.section].opened == false{
-            tableviewdata[indexPath.section].opened = true
-            
+            tableviewdata[indexPath.section].opened = !tableviewdata[indexPath.section].opened
+        
+
             let sections = IndexSet.init(integer: indexPath.section)
             tableView.reloadSections(sections, with: .none)
-        }else{
-            tableviewdata[indexPath.section].opened = false
-            let sections = IndexSet.init(integer: indexPath.section)
-            tableView.reloadSections(sections, with: .none)
-
-        }
     }
+
     @IBAction func backsegue(_ sender: Any) {
 
         dismiss(animated: true, completion: nil)
@@ -138,14 +140,17 @@ class LabRequestViewController: UIViewController,UITableViewDelegate,UITableView
     func X_rays(cell: labxibTableViewCell, didTappedThe button: UIButton?) {
         if button?.isSelected != true{
             guard let indexPath = tableView.indexPath(for: cell) else  { return }
+
             Selected_Xrays = Selected_Xrays.filter() { $0 != "\(tableviewdata[indexPath.section].sectiondata[indexPath.row - 1])"
             }
             print("Title : \(tableviewdata[indexPath.section].title) \n Deselected Selected_Xrays : \(tableviewdata[indexPath.section].title) \(Selected_Xrays)")
+            
 
         }else if button?.isSelected != false{
            guard let indexPath = tableView.indexPath(for: cell) else  { return }
             Selected_Xrays.append(tableviewdata[indexPath.section].sectiondata[indexPath.row - 1])
             print("Title : \(tableviewdata[indexPath.section].title) \n Seleceted Selected_Xrays : \(Selected_Xrays)")
+            
             
         }
     }

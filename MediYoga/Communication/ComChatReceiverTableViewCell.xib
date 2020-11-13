@@ -69,7 +69,6 @@
                     <constraint firstItem="HsN-AN-Fbo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Glm-43-W0t"/>
                     <constraint firstAttribute="bottom" secondItem="HsN-AN-Fbo" secondAttribute="bottom" constant="8" id="aNd-zl-o59"/>
                     <constraint firstItem="2e5-cN-dmA" firstAttribute="top" secondItem="d1v-wx-svo" secondAttribute="bottom" constant="8.5" id="gjx-bD-r9N"/>
-                    <constraint firstAttribute="trailing" secondItem="2e5-cN-dmA" secondAttribute="trailing" constant="300" id="uN1-LB-OFB"/>
                     <constraint firstAttribute="bottom" secondItem="2e5-cN-dmA" secondAttribute="bottom" constant="8" id="wGA-2R-LK0"/>
                 </constraints>
             </tableViewCellContentView>

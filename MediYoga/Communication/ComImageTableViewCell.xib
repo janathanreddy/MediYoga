@@ -40,20 +40,19 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unread" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgX-vf-bpv">
-                        <rect key="frame" x="285" y="177" width="42" height="15"/>
+                        <rect key="frame" x="288.5" y="177" width="42" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" verticalHuggingPriority="251" text="09.34 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plw-M7-yUg">
-                        <rect key="frame" x="335" y="177" width="59" height="15"/>
+                        <rect key="frame" x="338.5" y="177" width="55.5" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hgX-vf-bpv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="285" id="4rP-EU-dpG"/>
                     <constraint firstItem="8fN-0N-oIB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="EBo-eF-5Rj"/>
                     <constraint firstItem="Plw-M7-yUg" firstAttribute="leading" secondItem="hgX-vf-bpv" secondAttribute="trailing" constant="8" symbolic="YES" id="FGU-QX-1r0"/>
                     <constraint firstAttribute="bottom" secondItem="hgX-vf-bpv" secondAttribute="bottom" constant="11" id="T2Q-zb-y4R"/>
@@ -61,8 +60,8 @@
                     <constraint firstAttribute="trailing" secondItem="Plw-M7-yUg" secondAttribute="trailing" constant="20" id="eDO-od-mbp"/>
                     <constraint firstAttribute="bottom" secondItem="Plw-M7-yUg" secondAttribute="bottom" constant="11" id="hXl-kH-iX2"/>
                     <constraint firstItem="hgX-vf-bpv" firstAttribute="top" secondItem="8fN-0N-oIB" secondAttribute="bottom" constant="5" id="ke5-cw-M4t"/>
+                    <constraint firstItem="8fN-0N-oIB" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" placeholder="YES" id="oDY-pL-UJ0"/>
                     <constraint firstItem="Plw-M7-yUg" firstAttribute="top" secondItem="8fN-0N-oIB" secondAttribute="bottom" constant="5" id="rXu-5U-6sB"/>
-                    <constraint firstItem="8fN-0N-oIB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="154" id="z0S-Q0-0Tt"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

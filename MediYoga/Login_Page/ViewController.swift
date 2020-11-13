@@ -45,7 +45,11 @@ class ViewController: UIViewController,UITextFieldDelegate{
         
     }
     
-   
+    override func viewDidAppear(_ animated: Bool) {
+        MobileNoTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        PasswordTextField.borderStyle = UITextField.BorderStyle.roundedRect
+    
+    }
     
     @IBAction func passwordVissible(_ sender: Any){
         (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected

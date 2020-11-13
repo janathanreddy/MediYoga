@@ -20,7 +20,7 @@ class CommunicationTableViewCell: UITableViewCell {
         CountUnseen.clipsToBounds = true
         CountUnseen.layer.cornerRadius = 10
         chatimage.clipsToBounds = true
-        chatimage.layer.cornerRadius = 20
+        chatimage.layer.cornerRadius = 35
 
     }
 

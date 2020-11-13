@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,8 +38,8 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75r-rf-W5o">
-                                <rect key="frame" x="62" y="37" width="42" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75r-rf-W5o">
+                                <rect key="frame" x="62" y="37" width="29" height="12"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -47,12 +47,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                         <constraints>
+                            <constraint firstItem="0b1-hp-4zD" firstAttribute="leading" secondItem="Jdf-gK-fE7" secondAttribute="trailing" constant="17" id="9ZN-Xj-HBn"/>
                             <constraint firstItem="Jdf-gK-fE7" firstAttribute="leading" secondItem="yB3-XA-7BL" secondAttribute="leading" constant="30" id="Hol-82-N8h"/>
-                            <constraint firstItem="75r-rf-W5o" firstAttribute="leading" secondItem="yB3-XA-7BL" secondAttribute="leading" constant="62" id="KdD-OE-eLb"/>
-                            <constraint firstItem="0b1-hp-4zD" firstAttribute="leading" secondItem="Jdf-gK-fE7" secondAttribute="trailing" constant="17" id="MQm-P7-D55"/>
                             <constraint firstItem="75r-rf-W5o" firstAttribute="top" secondItem="0b1-hp-4zD" secondAttribute="bottom" constant="6" id="Mc9-bq-wQC"/>
+                            <constraint firstItem="75r-rf-W5o" firstAttribute="leading" secondItem="Jdf-gK-fE7" secondAttribute="trailing" constant="17" id="Qdy-El-BXu"/>
                             <constraint firstAttribute="bottom" secondItem="Jdf-gK-fE7" secondAttribute="bottom" constant="14" id="Vl4-SA-mDZ"/>
-                            <constraint firstAttribute="trailing" secondItem="75r-rf-W5o" secondAttribute="trailing" constant="186" id="eC6-Ap-XlG"/>
+                            <constraint firstAttribute="trailing" secondItem="75r-rf-W5o" secondAttribute="trailing" constant="199" id="YPJ-7M-5uJ"/>
                             <constraint firstAttribute="bottom" secondItem="75r-rf-W5o" secondAttribute="bottom" constant="8" id="qtO-Wx-aO2"/>
                             <constraint firstItem="0b1-hp-4zD" firstAttribute="top" secondItem="yB3-XA-7BL" secondAttribute="top" constant="14" id="rdW-Wa-inN"/>
                             <constraint firstItem="Jdf-gK-fE7" firstAttribute="top" secondItem="yB3-XA-7BL" secondAttribute="top" constant="1" id="uwv-x1-W8u"/>
@@ -61,7 +61,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="yB3-XA-7BL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="2od-lr-D0Q"/>
-                    <constraint firstItem="yB3-XA-7BL" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="IRm-ff-eAl"/>
+                    <constraint firstItem="yB3-XA-7BL" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" placeholder="YES" id="IRm-ff-eAl"/>
                     <constraint firstAttribute="bottom" secondItem="yB3-XA-7BL" secondAttribute="bottom" constant="8" id="lc5-jT-qX4"/>
                     <constraint firstItem="yB3-XA-7BL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ug2-eG-gME"/>
                 </constraints>

@@ -24,18 +24,15 @@ class labxibTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
     
     @IBAction func dropdownaction(_ sender: Any) {
         btncheck.isSelected = !btncheck.isSelected
         CellDelegate?.X_rays(cell: self, didTappedThe: sender as?UIButton)
-
-
     }
-    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+      }
+
     class func cellHeight() -> CGFloat {
         return 42
     }

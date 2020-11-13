@@ -73,11 +73,10 @@
                 <constraints>
                     <constraint firstItem="jAE-gG-TBJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="9PD-Hu-3wr"/>
                     <constraint firstAttribute="bottom" secondItem="Kkc-w1-LOv" secondAttribute="bottom" constant="6" id="FLl-Jd-Keg"/>
+                    <constraint firstItem="1II-Cn-QhL" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" placeholder="YES" id="NQ6-cN-HGQ"/>
                     <constraint firstItem="Kkc-w1-LOv" firstAttribute="leading" secondItem="jAE-gG-TBJ" secondAttribute="trailing" constant="19" id="QMT-GZ-kXk"/>
                     <constraint firstItem="1II-Cn-QhL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="QMb-Ww-Xna"/>
                     <constraint firstItem="Kkc-w1-LOv" firstAttribute="top" secondItem="1II-Cn-QhL" secondAttribute="bottom" constant="2.5" id="TMY-uw-pDN"/>
-                    <constraint firstAttribute="trailing" secondItem="1II-Cn-QhL" secondAttribute="trailing" constant="154" id="aeQ-6l-ugq"/>
-                    <constraint firstAttribute="trailing" secondItem="Kkc-w1-LOv" secondAttribute="trailing" constant="260" id="fgF-3t-hg4"/>
                     <constraint firstItem="1II-Cn-QhL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="kpX-BZ-j5p"/>
                     <constraint firstAttribute="bottom" secondItem="jAE-gG-TBJ" secondAttribute="bottom" constant="6" id="mtH-JA-fTH"/>
                     <constraint firstItem="jAE-gG-TBJ" firstAttribute="top" secondItem="1II-Cn-QhL" secondAttribute="bottom" constant="2" id="vGG-lh-21b"/>
