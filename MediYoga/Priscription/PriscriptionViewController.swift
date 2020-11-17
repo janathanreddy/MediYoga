@@ -49,6 +49,8 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         print("patient_id from Priscription : \(patient_id) ")
         selecteddruglist()
         
+        tableView.rowHeight = 70
+        
         
     }
     

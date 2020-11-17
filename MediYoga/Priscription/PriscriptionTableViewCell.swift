@@ -21,6 +21,7 @@ class PriscriptionTableViewCell: UITableViewCell {
     @IBOutlet weak var checkbtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
 
         // Initialization code
     }

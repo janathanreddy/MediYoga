@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,13 +40,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:20 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2v-CS-Qxz">
-                        <rect key="frame" x="20" y="46" width="55" height="12"/>
+                        <rect key="frame" x="20" y="46" width="47" height="12"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Unread" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVI-uQ-Rhb">
-                        <rect key="frame" x="79" y="46" width="35" height="12"/>
+                        <rect key="frame" x="71" y="46" width="35" height="12"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -61,7 +61,6 @@
                     <constraint firstItem="MVI-uQ-Rhb" firstAttribute="top" secondItem="uhp-mr-3Ve" secondAttribute="bottom" constant="5.5" id="fzH-e3-8as"/>
                     <constraint firstAttribute="bottom" secondItem="MVI-uQ-Rhb" secondAttribute="bottom" constant="11" id="hVl-z6-fo2"/>
                     <constraint firstItem="i2v-CS-Qxz" firstAttribute="top" secondItem="uhp-mr-3Ve" secondAttribute="bottom" constant="5.5" id="oN6-YF-oMW"/>
-                    <constraint firstAttribute="trailing" secondItem="MVI-uQ-Rhb" secondAttribute="trailing" constant="300" id="pQq-ni-f7O"/>
                     <constraint firstAttribute="bottom" secondItem="i2v-CS-Qxz" secondAttribute="bottom" constant="11" id="ydc-fK-ZDk"/>
                 </constraints>
             </tableViewCellContentView>

@@ -9,13 +9,12 @@ import UIKit
 import FSCalendar
 import Firebase
 
-class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FSCalendarDelegate, FSCalendarDataSource{
+class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FSCalendarDelegate, FSCalendarDataSource,FSCalendarDelegateAppearance{
     
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var MonthlyTitle: UIButton!
-    
     
     @IBOutlet weak var Calender_View: UIView!
     
@@ -170,10 +169,9 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         
         
 }
-    
+
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let dateString = self.dateFormatter2.string(from: date)
-        print("dateString : \(dateString)")
 
         if self.datesWithEvent.contains(dateString) {
 
@@ -184,7 +182,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             calendar.appearance.eventDefaultColor = UIColor(red:red, green: green, blue: blue, alpha: 1)
             return 1
         }
-        if self.datesWithMultipleEvents.contains(dateString) {
+        else if self.datesWithMultipleEvents.contains(dateString) {
             let red:CGFloat = CGFloat(drand48())
             let green:CGFloat = CGFloat(drand48())
             let blue:CGFloat = CGFloat(drand48())
@@ -192,7 +190,8 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             calendar.appearance.eventDefaultColor = UIColor(red:red, green: green, blue: blue, alpha: 1)
             return 3
         }
-
         return 0
+
     }
+    
 }

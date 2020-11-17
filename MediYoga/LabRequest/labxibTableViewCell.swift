@@ -34,7 +34,8 @@ class labxibTableViewCell: UITableViewCell {
       }
 
     class func cellHeight() -> CGFloat {
-        return 42
+        return 90
+        
     }
     
     class func reuseIdentifier() -> String {

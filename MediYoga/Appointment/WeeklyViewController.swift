@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import Foundation
+
 
 class WeeklyViewController: UIViewController{
    
@@ -240,9 +242,9 @@ extension WeeklyViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0{
-            return CGSize(width: 100, height: 50)
+            return CGSize(width: 150, height: 90)
         }
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 150, height: 90)
     }
 }
 extension WeeklyViewController: UICollectionViewDataSource {
@@ -263,7 +265,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
             cell!.title_Label.text = week[indexPath.row]
             cell!.title_Label.textColor = UIColor.white
-            cell!.title_Label.font = UIFont.boldSystemFont(ofSize: 17.0)
+            cell!.title_Label.font = UIFont.boldSystemFont(ofSize: 23)
             cell!.layer.borderWidth = 0.8
             cell!.title_Label.alpha = 1
             cell!.layer.borderColor = UIColor.systemGray6.cgColor
@@ -274,7 +276,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
         else if indexPath.item == 0 && indexPath.section >= 1{
             cell!.title_Label.text = Time[indexPath.section]
             cell!.title_Label.textColor = UIColor.black
-            cell!.title_Label.font = cell!.title_Label.font.withSize(16)
+            cell!.title_Label.font = cell!.title_Label.font.withSize(21)
             cell!.title_Label.alpha = 0.6
             cell!.layer.borderWidth = 0.8
             cell!.layer.borderColor = UIColor.systemGray6.cgColor
@@ -297,7 +299,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_1!.Label_1.text = value
                             cell_1!.Label_1.textColor = UIColor.systemBlue
-                            cell_1!.Label_1.font = cell_1!.Label_1.font.withSize(15)
+                            cell_1!.Label_1.font = cell_1!.Label_1.font.withSize(20)
                             cell_1!.backgroundColor = UIColor.clear
 
                         }
@@ -310,6 +312,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
             cell_1!.backgroundColor = UIColor.white
             cell_1!.layer.borderWidth = 0.8
             cell_1!.layer.borderColor = UIColor.systemGray5.cgColor
+
 
             return cell_1!
 
@@ -328,7 +331,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_2!.Label_1.text = value
                             cell_2!.Label_1.textColor = UIColor.systemBlue
-                            cell_2!.Label_1.font = cell_2!.Label_1.font.withSize(15)
+                            cell_2!.Label_1.font = cell_2!.Label_1.font.withSize(20)
                             cell_2!.backgroundColor = UIColor.clear
 
                         }
@@ -339,6 +342,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
             }
             cell_2!.backgroundColor = UIColor.white
             cell_2!.layer.borderWidth = 0.8
+            
             cell_2!.layer.borderColor = UIColor.systemGray5.cgColor
 
             return cell_2!
@@ -362,7 +366,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_3!.Label_1.text = value
                             cell_3!.Label_1.textColor = UIColor.systemBlue
-                            cell_3!.Label_1.font = cell_3!.Label_1.font.withSize(15)
+                            cell_3!.Label_1.font = cell_3!.Label_1.font.withSize(20)
                             cell_3!.backgroundColor = UIColor.clear
 
                         }
@@ -394,7 +398,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_4!.Label_1.text = value
                             cell_4!.Label_1.textColor = UIColor.systemBlue
-                            cell_4!.Label_1.font = cell_4!.Label_1.font.withSize(15)
+                            cell_4!.Label_1.font = cell_4!.Label_1.font.withSize(20)
                             cell_4!.backgroundColor = UIColor.clear
 
                         }
@@ -424,7 +428,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_5!.Label_1.text = value
                             cell_5!.Label_1.textColor = UIColor.systemBlue
-                            cell_5!.Label_1.font = cell_5!.Label_1.font.withSize(15)
+                            cell_5!.Label_1.font = cell_5!.Label_1.font.withSize(20)
                             cell_5!.backgroundColor = UIColor.clear
 
                         }
@@ -459,7 +463,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_6!.Label_1.text = value
                             cell_6!.Label_1.textColor = UIColor.systemBlue
-                            cell_6!.Label_1.font = cell_6!.Label_1.font.withSize(15)
+                            cell_6!.Label_1.font = cell_6!.Label_1.font.withSize(20)
                             cell_6!.backgroundColor = UIColor.clear
                             print("cel : \(cel)")
 
@@ -492,7 +496,7 @@ extension WeeklyViewController: UICollectionViewDataSource {
 
                             cell_7!.Label_1.text = value
                             cell_7!.Label_1.textColor = UIColor.systemBlue
-                            cell_7!.Label_1.font = cell_7!.Label_1.font.withSize(15)
+                            cell_7!.Label_1.font = cell_7!.Label_1.font.withSize(20)
                             cell_7!.backgroundColor = UIColor.clear
 
                         }
@@ -675,8 +679,8 @@ extension WeeklyViewController: UICollectionViewDataSource {
     }
     
     
-    
-    
+
+
     
 }
 

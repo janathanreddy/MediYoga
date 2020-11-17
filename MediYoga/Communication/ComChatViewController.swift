@@ -97,8 +97,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.register(UINib(nibName: "AudioFilePatientTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioFilePatientTableViewCell")
         messages()
+        tableView.allowsSelection = true
         tableView.rowHeight = UITableView.automaticDimension
-        scrollToBottom()
     }
     
     
@@ -370,7 +370,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             TextField.text = ""
             tableView.reloadData()
-            scrollToBottom()
 
                 } else {
                     print("Check Image Code Error...!!!")
@@ -530,15 +529,6 @@ return UITableViewCell()
 
     }
     
-    func scrollToBottom() {
-            if message.count >= 5 {
-            DispatchQueue.main.async {
-                let indexpath = IndexPath(row: self.message.count - 1, section: 0)
-                self.tableView.scrollToRow(at: indexpath, at: .bottom, animated: true)
-            }
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -637,11 +627,6 @@ return UITableViewCell()
     }
     
     
-    
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         recorder = nil
@@ -656,7 +641,7 @@ return UITableViewCell()
         do {
             self.player = try AVAudioPlayer(contentsOf: url)
             player.prepareToPlay()
-            player.volume = 1.0
+            player.volume = 7.0
             player.play()
         } catch {
             self.player = nil
@@ -752,6 +737,9 @@ return UITableViewCell()
                          let url = url!.absoluteString
                         print("url: \(url)")
                          db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "audio","time_stamp": FieldValue.serverTimestamp(),"type": 3,"content_url": url])
+                        self.present(alert, animated: true, completion: nil)
+                        tableView.reloadData()
+
                      }
              })
              }
@@ -793,7 +781,7 @@ return UITableViewCell()
     print(message[index].url)
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
-        storageref.getData(maxSize: 10 ) { (data, error) in
+        storageref.getData(maxSize: 10640060 ) { (data, error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -816,7 +804,7 @@ return UITableViewCell()
         print(message[index].url)
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("patient.m4a")
-        storageref.getData(maxSize: 10 ) { (data, error) in
+        storageref.getData(maxSize: 10640060) { (data, error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -833,8 +821,6 @@ return UITableViewCell()
             }
         
     }
-    
-    
     
     
     }
