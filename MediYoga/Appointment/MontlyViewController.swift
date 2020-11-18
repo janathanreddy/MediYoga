@@ -13,18 +13,14 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var MonthlyTitle: UIButton!
-    
     @IBOutlet weak var Calender_View: UIView!
-    
+    var CalenderView:FSCalendar = FSCalendar()
     fileprivate lazy var dateFormatter2: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM dd, yyyy"
         return formatter
     }()
-
-    var CalenderView:FSCalendar = FSCalendar()
     var datesWithEvent = [String]()
     var datesWithMultipleEvents = [String]()
     var AppointmentDate = [String]()
@@ -55,8 +51,11 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         retrieveData()
-        CalenderView.rowHeight = 30
         
+       
+        
+       
+
 
     }
 
@@ -89,7 +88,6 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
                 }
             }
         
-           tableView.reloadData()
        }
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return PatientName.count
@@ -148,29 +146,32 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             
     }
 
-                    for item in AppointmentDate {
-                        print("item : \(item)")
-
-                        counts[item] = (counts[item] ?? 0) + 1
-                    }
-
-                    for (key, value) in counts {
-                        if value > 1{
-                            datesWithMultipleEvents.append(key)
-                            print("datesWithMultipleEvents : \(datesWithMultipleEvents)")
-                        }
-                        else{
-                            datesWithEvent.append(key)
-                            print("datesWithEvent : \(datesWithEvent)")
-                        }
-                    }
+                   
     }
+                for item in AppointmentDate {
+                    print("item : \(item)")
+
+                    counts[item] = (counts[item] ?? 0) + 1
+                }
+
+                for (key, value) in counts {
+                    if value > 1{
+                        datesWithMultipleEvents.append(key)
+                        print("datesWithMultipleEvents : \(datesWithMultipleEvents)")
+                    }
+                    else{
+                        datesWithEvent.append(key)
+                        print("datesWithEvent : \(datesWithEvent)")
+                    }
+                }
             }
+        
         
         
 }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        
         let dateString = self.dateFormatter2.string(from: date)
 
         if self.datesWithEvent.contains(dateString) {
