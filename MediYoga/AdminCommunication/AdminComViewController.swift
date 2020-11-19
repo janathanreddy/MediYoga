@@ -364,7 +364,13 @@ return UITableViewCell()
         date()
         time()
         let textFromField:String = ChatTextField.text!
-        if ChatTextField != nil{
+        if ChatTextField.text?.isEmpty == true{
+            let alert = UIAlertController(title: "", message: "Message TextField Empty", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+
+        }
+        else{
             
             db.collection("internal_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": Doctor_ID,"sender_name": DoctorName,"text": textFromField,"time_stamp": FieldValue.serverTimestamp(),"type": 0])
             let newDocument = db.collection("internal_chat").document(documentID)

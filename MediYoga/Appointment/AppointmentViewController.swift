@@ -36,8 +36,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
     var DidSelectAppoint = [DidSelectAppoinment]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        ActivityIndicator.startAnimating()
-        ActivityIndicator.alpha = 1
         DownArrow.isUserInteractionEnabled = true
         namesearch.delegate = self
         tableView.delegate = self
@@ -53,8 +51,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
         db.collection("appointments").whereField("appointment_date", isEqualTo: formattedDate).order(by: "appointment_time").getDocuments(){ [self] (querySnapshot, error) in
                     if  querySnapshot?.documents != nil && error == nil{
                         if querySnapshot?.documents.isEmpty == true{
-                            ActivityIndicator.stopAnimating()
-                            ActivityIndicator.alpha = 0
 
                             let alert = UIAlertController(title: "Alert", message: "No Appointment Today!", preferredStyle: .alert)
                             self.present(alert, animated: true, completion: nil)
@@ -74,8 +70,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                             let patient_gender = documentData["patient_gender"]as! String
                             let appointment_time = documentData["appointment_time"] as! String
                             let appointment_date = documentData["appointment_date"] as! String
-                                ActivityIndicator.alpha = 0
-                                ActivityIndicator.stopAnimating()
 
                                 self.name_1.append(filternames(name: patient_first_name,image:"35",age:patient_age,time:appointment_time,ccd:"CCD",at:"AT.png",patient_id:patient_id))
 

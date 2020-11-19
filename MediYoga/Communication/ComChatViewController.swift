@@ -11,6 +11,7 @@ import AVFoundation
 
 
 struct messagedata {
+    
     var text : String
     var time : String
     var isFirstUser : Bool
@@ -22,7 +23,6 @@ struct messagedata {
     var doctoraudio: Bool
     var patientaudio: Bool
     var DoctorRecordLabel: String
-    
     
 }
 
@@ -484,9 +484,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             return ComChatReceiveimageTableViewCell
         }
         else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true{
-            
-            
-                let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
+            let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
             AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
             AudioFileDoctorTableViewCell.recordView.clipsToBounds = true
             AudioFileDoctorTableViewCell.recordLabel.text = "Dotor Audio Record"
@@ -502,7 +500,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         else if message[indexPath.row].patientaudio == true && message[indexPath.row].isFirstUser == false && message[indexPath.row].doctoraudio == false{
             
             
-                let AudioFilePatientTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFilePatientTableViewCell", for: indexPath) as! AudioFilePatientTableViewCell
+            let AudioFilePatientTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFilePatientTableViewCell", for: indexPath) as! AudioFilePatientTableViewCell
             AudioFilePatientTableViewCell.recordView.layer.cornerRadius = 10
             AudioFilePatientTableViewCell.recordView.clipsToBounds = true
             AudioFilePatientTableViewCell.recordlabel.text = "Patient Audio Record"
@@ -542,7 +540,13 @@ return UITableViewCell()
         date()
         time()
         let textFromField:String = TextField.text!
-        if TextField != nil{
+        if TextField.text?.isEmpty == true{
+            let alert = UIAlertController(title: "", message: "Message TextField Empty", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+
+        }
+        else{
             
             db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": textFromField,"time_stamp": FieldValue.serverTimestamp(),"type": 0])
             let newDocument = db.collection("patient_chat").document(documentID)
@@ -561,68 +565,74 @@ return UITableViewCell()
     }
 
     func messages(){
-        db.collection("patient_chat").document(documentID).collection("messages").order(by: "time_stamp").getDocuments(){ [self] (snapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in snapshot!.documents {
-                    
-                  let docId = document.documentID
-                  let documentData = document.data()
-                  let time_Stamp = documentData["time_stamp"] as! Timestamp
-                  let timeStamp = time_Stamp.dateValue()
-                  let dateFormatter = DateFormatter()
-                  dateFormatter.amSymbol = "AM"
-                  dateFormatter.pmSymbol = "PM"
-                  dateFormatter.dateFormat = "hh:mm a"
-                  let ChatTime = dateFormatter.string(from: timeStamp)
-                  let sender_id = documentData["sender_id"] as! String
-                    
-                    if sender_id == DoctorId {
-                        if documentData["type"] as! Int == 0{
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
-
-                            
-                        }
-                        else if documentData["type"] as! Int == 1{
             
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
-
-                            
-                        }
-                        
-                        else if documentData["type"] as! Int == 3{
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record"))
-                        }
-
-                    }
-                    else if sender_id != DoctorId{
-//                        print("Patient : \(documentData["text"] as! String)")
-                        if documentData["type"] as! Int == 0{
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
-                        }
-                        else if documentData["type"] as! Int == 1{
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
-
-
-                        }
-                        else if documentData["type"] as! Int == 3{
-                            message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: ""))
-
-
-                        }
-                        
-
-                    }
+            db.collection("patient_chat").document(documentID).collection("messages").order(by: "time_stamp").getDocuments(){ [self] (snapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in snapshot!.documents {
                     
+                      let docId = document.documentID
+                      let documentData = document.data()
+                      let time_Stamp = documentData["time_stamp"] as! Timestamp
+                      let timeStamp = time_Stamp.dateValue()
+                      let dateFormatter = DateFormatter()
+                      dateFormatter.amSymbol = "AM"
+                      dateFormatter.pmSymbol = "PM"
+                      dateFormatter.dateFormat = "hh:mm a"
+                      let ChatTime = dateFormatter.string(from: timeStamp)
+                      let sender_id = documentData["sender_id"] as! String
+                        
+                        if sender_id == DoctorId {
+                            if documentData["type"] as! Int == 0{
+                                
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
+
+                                
+                            }
+                            else if documentData["type"] as! Int == 1{
+                
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
+
+                                
+                            }
+                            
+                            else if documentData["type"] as! Int == 3{
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record"))
+                            }
+
+                        }
+                        else if sender_id != DoctorId{
+    //                        print("Patient : \(documentData["text"] as! String)")
+                            if documentData["type"] as! Int == 0{
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
+                            }
+                            else if documentData["type"] as! Int == 1{
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: ""))
+
+
+                            }
+                            else if documentData["type"] as! Int == 3{
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: ""))
+
+
+                            }
+                            
+
+                        }
+                        
+                        
+                        
+                    }
+                  DispatchQueue.main.async {
+                      self.tableView.reloadData()
+                  }
+
                 }
-              DispatchQueue.main.async {
-                  self.tableView.reloadData()
-              }
-
-            }
-            
-      }
+                
+                
+          }
+        
         
     }
     
@@ -709,11 +719,7 @@ return UITableViewCell()
         MicBtn.setTitle("", for: UIControl.State())
         MicBtn.imageView?.image = UIImage(systemName: "mic.circle.fill")
         
-        let alert = UIAlertController(title: "Recorder",
-                                      message: "Finished Recording",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Send", style: .default) {[unowned self] _ in
-            print("keep was tapped")
+        
             self.recorder = nil
             let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/recordings/\(randomid).m4a")
          print(uploadref)
@@ -737,20 +743,12 @@ return UITableViewCell()
                          let url = url!.absoluteString
                         print("url: \(url)")
                          db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "audio","time_stamp": FieldValue.serverTimestamp(),"type": 3,"content_url": url])
-                        self.present(alert, animated: true, completion: nil)
-                        tableView.reloadData()
-
                      }
              })
              }
-        })
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default) {[unowned self] _ in
-            print("delete was tapped")
-            self.recorder.deleteRecording()
-        })
         
-        self.present(alert, animated: true, completion: nil)
+
+       
     }
     
     
@@ -778,10 +776,10 @@ return UITableViewCell()
     
     
     func OnTouchDoctor(index: Int) {
-    print(message[index].url)
+        print("index: \(index) \(message[index].url)")
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
-        storageref.getData(maxSize: 10640060 ) { (data, error) in
+        storageref.getData(maxSize: 10640060 ) { [self] (data, error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -790,21 +788,22 @@ return UITableViewCell()
                             try d.write(to: fileURL)
                             self.player = try AVAudioPlayer(contentsOf: fileURL)
                             self.player.play()
+                            print("player : \(player.duration)")
+
                         } catch {
                             print(error)
                         }
                     }
                 }
             }
-        
     }
     
     func OnTouchPatient(index: Int) {
         
-        print(message[index].url)
+        print("index: \(index) \(message[index].url)")
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("patient.m4a")
-        storageref.getData(maxSize: 10640060) { (data, error) in
+        storageref.getData(maxSize: 10640060) { [self] (data, error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -813,6 +812,7 @@ return UITableViewCell()
                             try d.write(to: fileURL)
                             self.player = try AVAudioPlayer(contentsOf: fileURL)
                             self.player.play()
+                            print("player : \(player.duration)")
                         } catch {
                             print(error)
                         }
