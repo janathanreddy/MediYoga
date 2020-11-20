@@ -59,8 +59,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 
                         }
                             for document in querySnapshot!.documents {
-                                ActivityIndicator.alpha = 1
-                                ActivityIndicator.startAnimating()
                                 print("querySnapshot!.documents \(querySnapshot!.documents)")
                             let documentData = document.data()
                             
@@ -187,8 +185,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
                     VC.age = self.name_1[indexPath.row].age
                     VC.cdd = self.name_1[indexPath.row].ccd
                     VC.patient_id = self.name_1[indexPath.row].patient_id
-                    ActivityIndicator.alpha = 1
-                    ActivityIndicator.startAnimating()
 
 
                 }

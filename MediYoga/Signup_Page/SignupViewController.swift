@@ -47,11 +47,11 @@ class SignupViewController: UIViewController,UITextViewDelegate {
         
         let password = PasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let mobileno = MobileNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let Name = MobileNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let confirmpassword = MobileNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let Name = NameField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let confirmpassword = ConfirmPasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
 
         print(mobileno.count)
-        if mobileno == "" || password == "" || Name == "" || confirmpassword == ""{
+        if mobileno.isEmpty == true || password.isEmpty == true || Name.isEmpty == true || confirmpassword.isEmpty == true{
             
             let alertController = UIAlertController(title: "Alert", message:
                 "Fill All Fields", preferredStyle: .alert)

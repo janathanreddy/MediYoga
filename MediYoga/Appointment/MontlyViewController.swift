@@ -145,25 +145,25 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
                     
             
     }
+                    for item in AppointmentDate {
+                        print("item : \(item)")
 
+                        counts[item] = (counts[item] ?? 0) + 1
+                    }
+
+                    for (key, value) in counts {
+                        if value > 1{
+                            datesWithMultipleEvents.append(key)
+                            print("datesWithMultipleEvents : \(datesWithMultipleEvents)")
+                        }
+                        else{
+                            datesWithEvent.append(key)
+                            print("datesWithEvent : \(datesWithEvent)")
+                        }
+                    }
                    
     }
-                for item in AppointmentDate {
-                    print("item : \(item)")
-
-                    counts[item] = (counts[item] ?? 0) + 1
-                }
-
-                for (key, value) in counts {
-                    if value > 1{
-                        datesWithMultipleEvents.append(key)
-                        print("datesWithMultipleEvents : \(datesWithMultipleEvents)")
-                    }
-                    else{
-                        datesWithEvent.append(key)
-                        print("datesWithEvent : \(datesWithEvent)")
-                    }
-                }
+                
             }
         
         
@@ -176,19 +176,11 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
         if self.datesWithEvent.contains(dateString) {
 
-            let red:CGFloat = CGFloat(drand48())
-            let green:CGFloat = CGFloat(drand48())
-            let blue:CGFloat = CGFloat(drand48())
-
-            calendar.appearance.eventDefaultColor = UIColor(red:red, green: green, blue: blue, alpha: 1)
+            calendar.appearance.eventDefaultColor = UIColor.systemPink
             return 1
         }
         else if self.datesWithMultipleEvents.contains(dateString) {
-            let red:CGFloat = CGFloat(drand48())
-            let green:CGFloat = CGFloat(drand48())
-            let blue:CGFloat = CGFloat(drand48())
-
-            calendar.appearance.eventDefaultColor = UIColor(red:red, green: green, blue: blue, alpha: 1)
+            calendar.appearance.eventDefaultColor = UIColor.systemYellow
             return 3
         }
         return 0
