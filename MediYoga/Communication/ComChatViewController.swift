@@ -58,6 +58,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var documentID: String = ""
     var DoctorId: String = ""
     var DoctorName: String = ""
+    var playerDuration: String = ""
 
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
@@ -485,6 +486,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true{
             let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
+            AudioFileDoctorTableViewCell.recordBtn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+
             AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
             AudioFileDoctorTableViewCell.recordView.clipsToBounds = true
             AudioFileDoctorTableViewCell.recordLabel.text = "Dotor Audio Record"
@@ -563,7 +566,14 @@ return UITableViewCell()
        return true
         tableView.reloadData()
     }
-
+    @objc func buttonTapped(_ sender: UIButton) {
+        if sender.tag == 0{
+                sender.isSelected = false
+            
+        }else if sender.tag == 1{
+            sender.isSelected = true
+        }
+    }
     func messages(){
             
             db.collection("patient_chat").document(documentID).collection("messages").order(by: "time_stamp").getDocuments(){ [self] (snapshot, err) in
@@ -636,7 +646,7 @@ return UITableViewCell()
         
     }
     
-    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         recorder = nil
