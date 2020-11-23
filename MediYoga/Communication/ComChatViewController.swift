@@ -35,6 +35,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var recorder: AVAudioRecorder!
     var player: AVAudioPlayer!
+    var playerItem:AVPlayerItem?
+    fileprivate let seekDuration: Float64 = 10
     var meterTimer: Timer!
     var soundFileURL: URL!
     var Patient_Id:String = ""
@@ -486,7 +488,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true{
             let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
-            AudioFileDoctorTableViewCell.recordBtn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
 
             AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
             AudioFileDoctorTableViewCell.recordView.clipsToBounds = true
@@ -566,14 +567,7 @@ return UITableViewCell()
        return true
         tableView.reloadData()
     }
-    @objc func buttonTapped(_ sender: UIButton) {
-        if sender.tag == 0{
-                sender.isSelected = false
-            
-        }else if sender.tag == 1{
-            sender.isSelected = true
-        }
-    }
+   
     func messages(){
             
             db.collection("patient_chat").document(documentID).collection("messages").order(by: "time_stamp").getDocuments(){ [self] (snapshot, err) in
@@ -781,12 +775,22 @@ return UITableViewCell()
         
     }
     
+    func stringFromTimeInterval(interval: TimeInterval) -> String {
+        
+        let interval = Int(interval)
+        let seconds = interval % 60
+        let minutes = (interval / 60) % 60
+        let hours = (interval / 3600)
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
     
     
     
     
-    func OnTouchDoctor(index: Int) {
+func OnTouchDoctor(cell: AudioFileDoctorTableViewCell, didTappedThe button: UIButton?,index: Int) {
         print("index: \(index) \(message[index].url)")
+    guard let indexPath = tableView.indexPath(for: cell) else  { return }
+
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
         storageref.getData(maxSize: 10640060 ) { [self] (data, error) in
@@ -798,7 +802,48 @@ return UITableViewCell()
                             try d.write(to: fileURL)
                             self.player = try AVAudioPlayer(contentsOf: fileURL)
                             self.player.play()
-                            print("player : \(player.duration)")
+                            cell.recordBtn.isSelected = true
+                            if cell.recordBtn.tag == 0{
+                                self.player.pause()
+                                cell.recordBtn.isSelected = false
+                            }else{
+                                self.player.play()
+
+                            }
+//                            let duration : CMTime = (playerItem?.asset.duration)!
+//                            let seconds : Float64 = CMTimeGetSeconds(duration)
+//
+//                            let duration1 : CMTime = (playerItem?.currentTime())!
+//                            let seconds1 : Float64 = CMTimeGetSeconds(duration1)
+//
+//                            cell.DoctorAudioSlider.maximumValue = Float(seconds)
+//                            cell.DoctorAudioSlider.isContinuous = true
+//
+//                            print("player : \(player.duration),\(indexPath.row)")
+                            
+//
+//                            player!.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { (CMTime) -> Void in
+//                                if self.player!.currentItem?.status == .readyToPlay {
+//                                    let time : Float64 = CMTimeGetSeconds(self.player!.currentTime());
+//                                    self.playbackSlider.value = Float ( time );
+//
+//                                    self.lblcurrentText.text = self.stringFromTimeInterval(interval: time)
+//                                }
+//
+//                                let playbackLikelyToKeepUp = self.player?.currentItem?.isPlaybackLikelyToKeepUp
+//                                if playbackLikelyToKeepUp == false{
+//                                    print("IsBuffering")
+//                                    self.ButtonPlay.isHidden = true
+//                                    self.loadingView.isHidden = false
+//                                } else {
+//                                    //stop the activity indicator
+//                                    print("Buffering completed")
+//                                    self.ButtonPlay.isHidden = false
+//                                    self.loadingView.isHidden = true
+//                                }
+//
+//                            }
+                            
 
                         } catch {
                             print(error)
@@ -807,7 +852,7 @@ return UITableViewCell()
                 }
             }
     }
-    
+   
     func OnTouchPatient(index: Int) {
         
         print("index: \(index) \(message[index].url)")

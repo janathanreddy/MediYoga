@@ -8,7 +8,8 @@
 import UIKit
 
 protocol Doctorplay {
-    func OnTouchDoctor(index: Int)
+    func OnTouchDoctor(cell:AudioFileDoctorTableViewCell, didTappedThe button:UIButton?,index: Int)
+
 }
 
 
@@ -17,6 +18,7 @@ class AudioFileDoctorTableViewCell: UITableViewCell {
     var index: IndexPath?
     var celldelegate: Doctorplay?
     
+    @IBOutlet weak var DoctorAudioSlider: UISlider!
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var recordtimer: UILabel!
     @IBOutlet weak var recordLabel: UILabel!
@@ -31,9 +33,7 @@ class AudioFileDoctorTableViewCell: UITableViewCell {
     }
     
     @IBAction func DoctorActionPlay(_ sender: Any) {
-        
-        celldelegate?.OnTouchDoctor(index: index!.row)
-
+        celldelegate?.OnTouchDoctor(cell: self, didTappedThe: sender as?UIButton,index: index!.row)
     }
     
     
