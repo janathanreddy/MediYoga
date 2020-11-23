@@ -15,6 +15,7 @@ import FirebaseDatabase
 
 class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, TableViewCellindex{
     
+    @IBOutlet weak var NoAppointmentLabel: UILabel!
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var DownArrow: UIButton!
     @IBOutlet weak var TodayWeeklyView: UIView!
@@ -54,7 +55,10 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate,UITableVi
 
                             let alert = UIAlertController(title: "Alert", message: "No Appointment Today!", preferredStyle: .alert)
                             self.present(alert, animated: true, completion: nil)
-                            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+                            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+                            NoAppointmentLabel.text = "No Appointment Today"
+                            NoAppointmentLabel.isHidden = false
+                            
 
 
                         }
