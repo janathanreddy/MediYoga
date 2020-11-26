@@ -2325,7 +2325,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8S-Ls-Oa9">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="K8S-Ls-Oa9">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDo-he-wvA">
@@ -3290,11 +3290,90 @@
                         <outlet property="camerabutton" destination="Bx2-qT-yLx" id="QYV-5G-EW7"/>
                         <outlet property="profileimage" destination="HSc-Xr-2B1" id="RTb-qX-IgO"/>
                         <outlet property="tableView" destination="gAo-kw-Dkq" id="519-j4-lYD"/>
+                        <segue destination="5ke-1e-sQe" kind="show" identifier="ImageZoom" animates="NO" id="nru-T6-PES"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08V-zZ-30f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4842.0289855072469" y="-1497.3214285714284"/>
+        </scene>
+        <!--Image Zoom View Controller-->
+        <scene sceneID="ODo-FH-8FE">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="5ke-1e-sQe" customClass="ImageZoomViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oob-PE-UYo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="9JF-5I-ur5">
+                                <rect key="frame" x="0.0" y="94" width="414" height="714"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loading" translatesAutoresizingMaskIntoConstraints="NO" id="nzZ-Hd-Ian">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="652"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="652" id="MTA-h7-D9E"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nzZ-Hd-Ian" firstAttribute="leading" secondItem="9JF-5I-ur5" secondAttribute="leading" id="UXO-GF-xRr"/>
+                                    <constraint firstItem="nzZ-Hd-Ian" firstAttribute="bottom" secondItem="9JF-5I-ur5" secondAttribute="bottomMargin" id="VdE-X9-SCu"/>
+                                    <constraint firstItem="nzZ-Hd-Ian" firstAttribute="top" secondItem="9JF-5I-ur5" secondAttribute="top" id="ZqG-nM-37o"/>
+                                    <constraint firstAttribute="trailing" secondItem="nzZ-Hd-Ian" secondAttribute="trailing" id="azt-eF-GbJ"/>
+                                    <constraint firstItem="nzZ-Hd-Ian" firstAttribute="centerX" secondItem="9JF-5I-ur5" secondAttribute="centerX" id="gLr-jz-eIs"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="5ke-1e-sQe" id="eER-uy-Lry"/>
+                                </connections>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMt-S4-8Vm">
+                                <rect key="frame" x="50" y="0.0" width="364" height="86"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="UrO-En-gIa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tu8-7N-TxV">
+                                <rect key="frame" x="0.0" y="0.0" width="54" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="bm4-Lb-05T"/>
+                                </constraints>
+                                <state key="normal" image="back arrow"/>
+                                <connections>
+                                    <action selector="Dismiss:" destination="5ke-1e-sQe" eventType="touchUpInside" id="hfH-qS-Inz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OD8-J2-JZE"/>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9JF-5I-ur5" firstAttribute="top" secondItem="jMt-S4-8Vm" secondAttribute="bottom" constant="8" symbolic="YES" id="MHB-b7-jwA"/>
+                            <constraint firstItem="jMt-S4-8Vm" firstAttribute="trailing" secondItem="9JF-5I-ur5" secondAttribute="trailing" id="Mru-gE-4G5"/>
+                            <constraint firstItem="jMt-S4-8Vm" firstAttribute="top" secondItem="Tu8-7N-TxV" secondAttribute="top" id="ZAo-xm-lXB"/>
+                            <constraint firstItem="jMt-S4-8Vm" firstAttribute="leading" secondItem="OD8-J2-JZE" secondAttribute="leading" constant="50" id="bZA-wU-9Kk"/>
+                            <constraint firstItem="jMt-S4-8Vm" firstAttribute="top" secondItem="OD8-J2-JZE" secondAttribute="top" id="dEH-s3-qPa"/>
+                            <constraint firstItem="9JF-5I-ur5" firstAttribute="leading" secondItem="OD8-J2-JZE" secondAttribute="leading" id="gTE-EQ-kU5"/>
+                            <constraint firstItem="9JF-5I-ur5" firstAttribute="top" secondItem="Tu8-7N-TxV" secondAttribute="bottom" constant="8" symbolic="YES" id="gV9-5x-PGZ"/>
+                            <constraint firstItem="9JF-5I-ur5" firstAttribute="width" secondItem="oob-PE-UYo" secondAttribute="width" id="grh-t7-87C"/>
+                            <constraint firstItem="9JF-5I-ur5" firstAttribute="bottom" secondItem="OD8-J2-JZE" secondAttribute="bottom" id="iEJ-7N-uDs"/>
+                            <constraint firstItem="Tu8-7N-TxV" firstAttribute="leading" secondItem="9JF-5I-ur5" secondAttribute="leading" id="ul8-7V-Y08"/>
+                            <constraint firstItem="9JF-5I-ur5" firstAttribute="trailing" secondItem="OD8-J2-JZE" secondAttribute="trailing" id="z3v-al-eDe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="YQS-Om-WUZ"/>
+                    <connections>
+                        <outlet property="Scroll_Image" destination="nzZ-Hd-Ian" id="Vfk-gY-oqI"/>
+                        <outlet property="Scroll_View" destination="9JF-5I-ur5" id="88q-48-crt"/>
+                        <outlet property="labelimage" destination="jMt-S4-8Vm" id="g2c-Ei-Zyf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="70X-Vq-Z1L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5669.5652173913049" y="-1497.3214285714284"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -3311,6 +3390,7 @@
         <image name="Face id" width="30" height="30"/>
         <image name="Internal Chat" width="30" height="30"/>
         <image name="Internal Chat on" width="30" height="30"/>
+        <image name="Loading" width="400" height="300"/>
         <image name="Logout" width="30" height="30"/>
         <image name="Neck" width="30" height="30"/>
         <image name="Notification" width="30" height="30"/>
@@ -3373,6 +3453,9 @@
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

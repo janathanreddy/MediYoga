@@ -8,7 +8,7 @@
 import UIKit
 
 protocol Doctorplay {
-    func OnTouchDoctor(cell:AudioFileDoctorTableViewCell, didTappedThe button:UIButton?,index: Int)
+    func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button:UIButton?,index: Int)
 
 }
 
@@ -25,6 +25,10 @@ class AudioFileDoctorTableViewCell: UITableViewCell {
     @IBOutlet weak var recordBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
+        DoctorAudioSlider.minimumValue = 0
+        DoctorAudioSlider.isContinuous = true
+
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,7 +37,10 @@ class AudioFileDoctorTableViewCell: UITableViewCell {
     }
     
     @IBAction func DoctorActionPlay(_ sender: Any) {
-        celldelegate?.OnTouchDoctor(cell: self, didTappedThe: sender as?UIButton,index: index!.row)
+
+        celldelegate?.OnTouchDoctor(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+
+        
     }
     
     

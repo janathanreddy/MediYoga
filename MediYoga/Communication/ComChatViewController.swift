@@ -29,7 +29,9 @@ struct messagedata {
 
 
 
-class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay {
+class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay,DoctorImage {
+    
+    
    
  
     
@@ -40,6 +42,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var meterTimer: Timer!
     var soundFileURL: URL!
     var Patient_Id:String = ""
+    var Image_url:String?
+
     @IBOutlet weak var StopButton: UIButton!
 
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
@@ -61,7 +65,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var DoctorId: String = ""
     var DoctorName: String = ""
     var playerDuration: String = ""
-
+    var indexpathrow:Int?
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -89,7 +93,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: #selector(self.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
-        
         tableView.register(UINib(nibName: "ComImageTableViewCell", bundle: nil), forCellReuseIdentifier: "ComImageTableViewCell")
         
         tableView.register(UINib(nibName:"ComChatReceiverTableViewCell", bundle: nil), forCellReuseIdentifier: "ComChatReceiverTableViewCell")
@@ -411,6 +414,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         else if message[indexPath.row].sendimagebool == true{
             if message[indexPath.row].sentimage != nil{
             let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
+            ComImageTableViewCell.CellDelegate = self
+            ComImageTableViewCell.index = indexPath
             ComImageTableViewCell.sendimageview.layer.cornerRadius = 10
             ComImageTableViewCell.sendimageview.clipsToBounds = true
             ComImageTableViewCell.sendimage.layer.cornerRadius = 10
@@ -430,6 +435,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
             ComImageTableViewCell.sendimageview.layer.cornerRadius = 10
             ComImageTableViewCell.sendimageview.clipsToBounds = true
+            ComImageTableViewCell.CellDelegate = self
+            ComImageTableViewCell.index = indexPath
             ComImageTableViewCell.sendimage.layer.cornerRadius = 10
             ComImageTableViewCell.sendimage.clipsToBounds = true
             ComImageTableViewCell.ImageTime.text = message[indexPath.row].time
@@ -486,7 +493,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             return ComChatReceiveimageTableViewCell
         }
-        else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true{
+        else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true &&  message[indexPath.row].patientaudio == false {
             let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
 
             AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
@@ -505,6 +512,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             
             let AudioFilePatientTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFilePatientTableViewCell", for: indexPath) as! AudioFilePatientTableViewCell
+            
             AudioFilePatientTableViewCell.recordView.layer.cornerRadius = 10
             AudioFilePatientTableViewCell.recordView.clipsToBounds = true
             AudioFilePatientTableViewCell.recordlabel.text = "Patient Audio Record"
@@ -785,74 +793,52 @@ return UITableViewCell()
     }
     
     
-    
-    
-func OnTouchDoctor(cell: AudioFileDoctorTableViewCell, didTappedThe button: UIButton?,index: Int) {
-        print("index: \(index) \(message[index].url)")
-    guard let indexPath = tableView.indexPath(for: cell) else  { return }
 
+    
+func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIButton?,index: Int) {
+    
+    guard let indexPath = tableView.indexPath(for: cell) else  { return }
+    cell.DoctorAudioSlider.value = 0.0
+    indexpathrow = index
         let storageref = Storage.storage().reference(forURL: message[index].url)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
         storageref.getData(maxSize: 10640060 ) { [self] (data, error) in
                 if let error = error {
                     print(error)
                 } else {
+                    print("zero")
+
                     if let d = data {
+                        print("one")
                         do {
+                            print("two")
+
                             try d.write(to: fileURL)
                             self.player = try AVAudioPlayer(contentsOf: fileURL)
-                            self.player.play()
-                            cell.recordBtn.isSelected = true
-                            if cell.recordBtn.tag == 0{
-                                self.player.pause()
-                                cell.recordBtn.isSelected = false
-                            }else{
-                                self.player.play()
-
-                            }
-//                            let duration : CMTime = (playerItem?.asset.duration)!
-//                            let seconds : Float64 = CMTimeGetSeconds(duration)
-//
-//                            let duration1 : CMTime = (playerItem?.currentTime())!
-//                            let seconds1 : Float64 = CMTimeGetSeconds(duration1)
-//
-//                            cell.DoctorAudioSlider.maximumValue = Float(seconds)
-//                            cell.DoctorAudioSlider.isContinuous = true
-//
-//                            print("player : \(player.duration),\(indexPath.row)")
                             
-//
-//                            player!.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { (CMTime) -> Void in
-//                                if self.player!.currentItem?.status == .readyToPlay {
-//                                    let time : Float64 = CMTimeGetSeconds(self.player!.currentTime());
-//                                    self.playbackSlider.value = Float ( time );
-//
-//                                    self.lblcurrentText.text = self.stringFromTimeInterval(interval: time)
-//                                }
-//
-//                                let playbackLikelyToKeepUp = self.player?.currentItem?.isPlaybackLikelyToKeepUp
-//                                if playbackLikelyToKeepUp == false{
-//                                    print("IsBuffering")
-//                                    self.ButtonPlay.isHidden = true
-//                                    self.loadingView.isHidden = false
-//                                } else {
-//                                    //stop the activity indicator
-//                                    print("Buffering completed")
-//                                    self.ButtonPlay.isHidden = false
-//                                    self.loadingView.isHidden = true
-//                                }
-//
-//                            }
+                                print("nil")
+                                self.player!.play()
+                                player.currentTime = 0
+                                cell.recordBtn.setImage(UIImage(systemName: "pause.fill"), for: UIControl.State.normal)
+                                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true,block: {(timer) in
+                                        if indexPath.row == indexpathrow{
+                                            cell.DoctorAudioSlider.value = Float(player.currentTime)
+                                        }
+                                    })
                             
-
+                                cell.DoctorAudioSlider.isHidden = false
+                                cell.recordLabel.isHidden = true
+                            
                         } catch {
                             print(error)
                         }
                     }
                 }
             }
+    tableView.reloadData()
     }
-   
+    
+
     func OnTouchPatient(index: Int) {
         
         print("index: \(index) \(message[index].url)")
@@ -876,7 +862,24 @@ func OnTouchDoctor(cell: AudioFileDoctorTableViewCell, didTappedThe button: UIBu
             }
         
     }
-    
+    func TouchImageDoctor(cell: ComImageTableViewCell, didTappedThe button: UIButton?, index: Int) {
+        print("index : \(index)")
+        Image_url = message[index].url
+        print("Image_url : \(Image_url)")
+        performSegue(withIdentifier: "ImageZoom", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "ImageZoom"{
+            let VC:ImageZoomViewController = segue.destination as! ImageZoomViewController
+            VC.Patient_Id = Patient_Id
+            VC.documentID = documentID
+            VC.Image_url = Image_url
+            VC.DoctorId = DoctorId
+
+
+        }    }
     
     }
 

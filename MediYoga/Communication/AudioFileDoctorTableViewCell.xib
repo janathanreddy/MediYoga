@@ -29,32 +29,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWI-VB-duE">
-                                <rect key="frame" x="28" y="18" width="27" height="24"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWI-VB-duE">
+                                <rect key="frame" x="19" y="8" width="36" height="45"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
                                 <state key="normal" image="play.fill" catalog="system"/>
-                                <state key="selected" image="pause.fill" catalog="system"/>
                                 <connections>
                                     <action selector="DoctorActionPlay:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cR1-Jg-s6H"/>
                                 </connections>
                             </button>
-                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="xJv-6d-qnG">
-                                <rect key="frame" x="61" y="14" width="223" height="34"/>
+                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5Wv-Je-0TD">
+                                <rect key="frame" x="61" y="16" width="223" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="219" id="xHE-XW-CeB"/>
+                                </constraints>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="icF-e5-sMF" secondAttribute="trailing" constant="8" id="2ap-Lg-fNh"/>
-                            <constraint firstAttribute="trailing" secondItem="xJv-6d-qnG" secondAttribute="trailing" constant="8" id="4j2-BV-YL8"/>
-                            <constraint firstItem="bWI-VB-duE" firstAttribute="leading" secondItem="sso-2G-gMe" secondAttribute="leading" constant="28" id="CKU-wC-7WR"/>
-                            <constraint firstItem="bWI-VB-duE" firstAttribute="top" secondItem="sso-2G-gMe" secondAttribute="top" constant="18" id="ENg-zJ-ebk"/>
+                            <constraint firstItem="bWI-VB-duE" firstAttribute="leading" secondItem="sso-2G-gMe" secondAttribute="leading" constant="19" id="CKU-wC-7WR"/>
+                            <constraint firstItem="bWI-VB-duE" firstAttribute="top" secondItem="sso-2G-gMe" secondAttribute="top" constant="8" id="ENg-zJ-ebk"/>
                             <constraint firstItem="icF-e5-sMF" firstAttribute="top" secondItem="sso-2G-gMe" secondAttribute="top" constant="18" id="MXN-GR-bRh"/>
-                            <constraint firstItem="xJv-6d-qnG" firstAttribute="top" secondItem="sso-2G-gMe" secondAttribute="top" constant="14" id="P9i-H0-XK2"/>
-                            <constraint firstAttribute="bottom" secondItem="bWI-VB-duE" secondAttribute="bottom" constant="18" id="RTD-tE-Sdg"/>
-                            <constraint firstAttribute="bottom" secondItem="xJv-6d-qnG" secondAttribute="bottom" constant="13" id="THB-5h-opL"/>
-                            <constraint firstItem="xJv-6d-qnG" firstAttribute="leading" secondItem="bWI-VB-duE" secondAttribute="trailing" constant="8" symbolic="YES" id="a4k-di-pMC"/>
+                            <constraint firstItem="5Wv-Je-0TD" firstAttribute="top" secondItem="sso-2G-gMe" secondAttribute="top" constant="16" id="QBQ-d6-RMK"/>
+                            <constraint firstAttribute="bottom" secondItem="bWI-VB-duE" secondAttribute="bottom" constant="7" id="RTD-tE-Sdg"/>
                             <constraint firstItem="icF-e5-sMF" firstAttribute="leading" secondItem="bWI-VB-duE" secondAttribute="trailing" constant="8" symbolic="YES" id="cZF-IH-Z3y"/>
                             <constraint firstAttribute="bottom" secondItem="icF-e5-sMF" secondAttribute="bottom" constant="21" id="e2g-4d-rhJ"/>
+                            <constraint firstAttribute="bottom" secondItem="5Wv-Je-0TD" secondAttribute="bottom" constant="15" id="keO-dK-ODB"/>
+                            <constraint firstItem="5Wv-Je-0TD" firstAttribute="leading" secondItem="bWI-VB-duE" secondAttribute="trailing" constant="8" symbolic="YES" id="mhH-fd-XxC"/>
+                            <constraint firstAttribute="trailing" secondItem="5Wv-Je-0TD" secondAttribute="trailing" constant="8" id="uOJ-Up-C5G"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -67,7 +69,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="DoctorAudioSlider" destination="xJv-6d-qnG" id="20a-HP-Bfl"/>
+                <outlet property="DoctorAudioSlider" destination="5Wv-Je-0TD" id="0o0-ZN-AQv"/>
                 <outlet property="recordBtn" destination="bWI-VB-duE" id="5cW-PN-LAe"/>
                 <outlet property="recordLabel" destination="icF-e5-sMF" id="FNd-rd-GPR"/>
                 <outlet property="recordView" destination="sso-2G-gMe" id="yVh-7c-ZNF"/>
@@ -76,8 +78,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -7,8 +7,16 @@
 
 import UIKit
 
-class ComImageTableViewCell: UITableViewCell {
+protocol DoctorImage {
+    func TouchImageDoctor(cell: ComImageTableViewCell,didTappedThe button:UIButton?,index: Int)
 
+}
+
+class ComImageTableViewCell: UITableViewCell {
+    var index: IndexPath?
+    var CellDelegate: DoctorImage?
+
+    @IBOutlet weak var ImageBtn: UIButton!
     @IBOutlet weak var sendimageview: UIView!
     @IBOutlet weak var sendimage: UIImageView!
     @IBOutlet weak var sendlabel: UILabel!
@@ -18,8 +26,10 @@ class ComImageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        sendimageview.layer.borderWidth = 0.5
 
+        sendimageview.layer.borderWidth = 0.5
+        sendimage.isUserInteractionEnabled = false
+        ImageBtn.isUserInteractionEnabled = true
         sendimageview.layer.borderColor = UIColor.systemGray.cgColor
 
     }
@@ -27,7 +37,13 @@ class ComImageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+    }
+    @IBAction func ImageActBtn(_ sender: Any) {
+        print("Button Pressed")
+        CellDelegate?.TouchImageDoctor(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        print("Cell Index : \(index?.row)")
+
+
     }
     
 }
