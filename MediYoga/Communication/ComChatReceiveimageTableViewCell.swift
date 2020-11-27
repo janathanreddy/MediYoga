@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol PatientImage {
+    func TouchImagePatient(cell: ComChatReceiveimageTableViewCell,didTappedThe button:UIButton?,index: Int)
+}
 
 class ComChatReceiveimageTableViewCell: UITableViewCell {
 
@@ -13,8 +16,13 @@ class ComChatReceiveimageTableViewCell: UITableViewCell {
     @IBOutlet weak var ReceiverImage: UIImageView!
     @IBOutlet weak var ReceiverTime: UILabel!
     @IBOutlet weak var ReceiverImageLabel: UILabel!
+    @IBOutlet weak var ImageTouchBtn: UIButton!
     
     @IBOutlet weak var ReadCheck: UILabel!
+    
+    var index: IndexPath?
+    var CellDelegate: PatientImage?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         ReceiverView.layer.borderWidth = 0.5
@@ -30,4 +38,12 @@ class ComChatReceiveimageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func ImageTouchAction(_ sender: Any) {
+        
+        print("Button Pressed")
+        CellDelegate?.TouchImagePatient(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        print("Cell Index : \(index?.row)")
+
+
+    }
 }

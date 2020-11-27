@@ -37,6 +37,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDZ-PQ-gHT">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="AdminDoctorAct:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dIN-pM-Ybs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -57,6 +64,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="AdminDoctorTouch" destination="NDZ-PQ-gHT" id="I9f-2n-5Ib"/>
                 <outlet property="DoctorImageView" destination="ane-7r-r7e" id="IZs-Lt-cdY"/>
                 <outlet property="DoctorLabel" destination="zWa-Nn-vgz" id="Ul6-yi-jcW"/>
                 <outlet property="DoctorView" destination="wSU-E4-4aS" id="oct-pI-CnN"/>

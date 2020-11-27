@@ -26,10 +26,8 @@ struct MessageDataAdmin {
 
 
 
-class AdminComViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate
-//                              AdminGroupDoctorplay, AdminGroupplay
-{
-    
+class AdminComViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,AminDoctorImage,AminImage{
+   
     let picker = UIImagePickerController()
     var images = [UIImage]()
     var dateupdate: String?
@@ -46,8 +44,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     var documentID: String = ""
     var DoctorName: String = ""
     var SelectedImages:String = ""
-    
-    
+    var Image_url:String?
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var SelectedImage: UIImageView!
@@ -177,6 +174,8 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             AdminComImageTableViewCell.AdminImage_View.clipsToBounds = true
             AdminComImageTableViewCell.ChatImage.layer.cornerRadius = 10
             AdminComImageTableViewCell.ChatImage.clipsToBounds = true
+            AdminComImageTableViewCell.CellDelegate = self
+            AdminComImageTableViewCell.index = indexPath
 
             AdminComImageTableViewCell.ChatImage.image = message[indexPath.row].sentimage
             if message[indexPath.row].sentlabel == ""{
@@ -193,6 +192,8 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                 DoctorImageTableViewCell.DoctorImageView.clipsToBounds = true
                 DoctorImageTableViewCell.DoctorView.layer.cornerRadius = 10
                 DoctorImageTableViewCell.DoctorView.clipsToBounds = true
+                DoctorImageTableViewCell.CellDelegate = self
+                DoctorImageTableViewCell.index = indexPath
 
                 DoctorImageTableViewCell.DoctorImageView.image = message[indexPath.row].sentimage
                if message[indexPath.row].sentlabel == ""{
@@ -208,6 +209,9 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             DoctorImageTableViewCell.DoctorImageView.clipsToBounds = true
             DoctorImageTableViewCell.DoctorView.layer.cornerRadius = 10
             DoctorImageTableViewCell.DoctorView.clipsToBounds = true
+            DoctorImageTableViewCell.CellDelegate = self
+            DoctorImageTableViewCell.index = indexPath
+
             let storageref = Storage.storage().reference(forURL: message[indexPath.row].url)
             
             let fetchref = storageref.getData(maxSize: 4*1024*1024)
@@ -233,6 +237,9 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             AdminComImageTableViewCell.AdminImage_View.clipsToBounds = true
             AdminComImageTableViewCell.ChatImage.layer.cornerRadius = 10
             AdminComImageTableViewCell.ChatImage.clipsToBounds = true
+            AdminComImageTableViewCell.CellDelegate = self
+            AdminComImageTableViewCell.index = indexPath
+
             let storageref = Storage.storage().reference(forURL: message[indexPath.row].url)
             
             let fetchref = storageref.getData(maxSize: 4*1024*1024)
@@ -261,7 +268,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                    cell.ReadCheck.text = "unread"
             cell.ChatTime.text = message[indexPath.row].time
             
-                       return cell
+            return cell
         }
 
 return UITableViewCell()
@@ -464,13 +471,30 @@ return UITableViewCell()
 
     }
     
-//    func OnTouchDoctor(index: Int) {
-//        <#code#>
-//    }
-//    
-//    func OnTouchAdmin(index: Int){
-//        
-//    }
+    func AdminDoctorImage(cell: DoctorImageTableViewCell, didTappedThe button: UIButton?, index: Int) {
+        print("index : \(index)")
+        Image_url = message[index].url
+        print("Image_url : \(Image_url) \(documentID)")
+        performSegue(withIdentifier: "AdminImageZoom", sender: self)
+
+    }
+    
+    func AdminImage(cell: AdminComImageTableViewCell, didTappedThe button: UIButton?, index: Int) {
+        print("index : \(index)")
+        Image_url = message[index].url
+        print("Image_url : \(Image_url) \(documentID)")
+        performSegue(withIdentifier: "AdminImageZoom", sender: self)
+
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "AdminImageZoom"{
+            let VC:AdminimageZoomViewController = segue.destination as! AdminimageZoomViewController
+            VC.documentID = documentID
+            VC.Image_url = Image_url
+        }    }
     
 }
 

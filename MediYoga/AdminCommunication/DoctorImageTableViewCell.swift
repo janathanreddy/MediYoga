@@ -7,14 +7,24 @@
 
 import UIKit
 
-class DoctorImageTableViewCell: UITableViewCell {
 
+protocol AminDoctorImage {
+    func AdminDoctorImage(cell: DoctorImageTableViewCell,didTappedThe button:UIButton?,index: Int)
+}
+
+
+class DoctorImageTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var AdminDoctorTouch: UIButton!
     @IBOutlet weak var DoctorView: UIView!
     @IBOutlet weak var DoctorLabel: UILabel!
     @IBOutlet weak var DoctorImageView: UIImageView!
-    
+    var index: IndexPath?
+    var CellDelegate: AminDoctorImage?
+
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
         DoctorView.layer.borderWidth = 0.5
 
@@ -27,5 +37,16 @@ class DoctorImageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func AdminDoctorAct(_ sender: Any) {
+        
+        print("Button Pressed")
+        CellDelegate?.AdminDoctorImage(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        print("Cell Index : \(index?.row)")
+
+
+        
+    }
+    
     
 }

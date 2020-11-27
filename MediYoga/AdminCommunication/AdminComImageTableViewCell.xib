@@ -31,6 +31,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SxN-Nl-YPU">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="AdminTouch:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="D7g-l1-a10"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
@@ -49,6 +56,7 @@
             <connections>
                 <outlet property="AdminChatLabel" destination="WDx-wL-bzX" id="TVG-vY-hBQ"/>
                 <outlet property="AdminImage_View" destination="oIm-88-TWS" id="tCg-SE-Dbh"/>
+                <outlet property="AdminTouchImage" destination="SxN-Nl-YPU" id="c64-dZ-d5k"/>
                 <outlet property="ChatImage" destination="za1-PE-AXJ" id="C8g-qX-ybA"/>
             </connections>
             <point key="canvasLocation" x="13.043478260869566" y="102.79017857142857"/>

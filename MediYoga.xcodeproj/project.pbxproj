@@ -69,6 +69,7 @@
 		21A175BB25400D88008950AB /* DoctorImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175B925400D88008950AB /* DoctorImageTableViewCell.xib */; };
 		21A175C425400DA1008950AB /* AdminTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */; };
 		21A175C525400DA1008950AB /* AdminTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */; };
+		21A27C5F2570E54A0087BBEE /* AdminimageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A27C5E2570E54A0087BBEE /* AdminimageZoomViewController.swift */; };
 		21CEA26F25262ED90049B4F7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEA26E25262ED80049B4F7 /* Validation.swift */; };
 		21EAC39D254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EAC39C254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift */; };
 		21EAC3A3254F2BA80085F9B9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EAC3A1254F2BA80085F9B9 /* CollectionViewCell.swift */; };
@@ -169,6 +170,7 @@
 		21A175B925400D88008950AB /* DoctorImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoctorImageTableViewCell.xib; sourceTree = "<group>"; };
 		21A175C225400DA1008950AB /* AdminTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTextTableViewCell.swift; sourceTree = "<group>"; };
 		21A175C325400DA1008950AB /* AdminTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminTextTableViewCell.xib; sourceTree = "<group>"; };
+		21A27C5E2570E54A0087BBEE /* AdminimageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminimageZoomViewController.swift; sourceTree = "<group>"; };
 		21CEA26E25262ED80049B4F7 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		21EAC39C254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyGrid_CollectionViewLayout.swift; sourceTree = "<group>"; };
 		21EAC3A1254F2BA80085F9B9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				211003982533582100018E34 /* AdminComViewController.swift */,
 				2110039D2533585F00018E34 /* AdminComTableViewCell.swift */,
 				211003A22533588400018E34 /* AdminComImageTableViewCell.swift */,
+				21A27C5E2570E54A0087BBEE /* AdminimageZoomViewController.swift */,
 				21A175A425400D3A008950AB /* AdminAudioTableViewCell.swift */,
 				21A175AE25400D6A008950AB /* DoctorAudioTableViewCell.swift */,
 				21A175B825400D87008950AB /* DoctorImageTableViewCell.swift */,
@@ -751,6 +754,7 @@
 				216CA46F2556F06800A5D04A /* MontlyViewController.swift in Sources */,
 				212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */,
 				210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */,
+				21A27C5F2570E54A0087BBEE /* AdminimageZoomViewController.swift in Sources */,
 				21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */,
 				2176A85A2518E3F3005979E9 /* SettingsTableViewCell_3.swift in Sources */,
 				219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */,

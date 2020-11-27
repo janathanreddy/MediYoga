@@ -29,7 +29,8 @@ struct messagedata {
 
 
 
-class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay,DoctorImage {
+class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay,DoctorImage,PatientImage {
+    
     
     
    
@@ -465,6 +466,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else if message[indexPath.row].ReceiverImageBool == true && message[indexPath.row].isFirstUser == false{
             let ComChatReceiveimageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComChatReceiveimageTableViewCell", for: indexPath) as! ComChatReceiveimageTableViewCell
+            ComChatReceiveimageTableViewCell.CellDelegate = self
+            ComChatReceiveimageTableViewCell.index = indexPath
             ComChatReceiveimageTableViewCell.ReceiverView.layer.cornerRadius = 10
             ComChatReceiveimageTableViewCell.ReceiverView.clipsToBounds = true
             ComChatReceiveimageTableViewCell.ReceiverImage.layer.cornerRadius = 10
@@ -862,7 +865,15 @@ func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIBut
             }
         
     }
+    
     func TouchImageDoctor(cell: ComImageTableViewCell, didTappedThe button: UIButton?, index: Int) {
+        print("index : \(index)")
+        Image_url = message[index].url
+        print("Image_url : \(Image_url)")
+        performSegue(withIdentifier: "ImageZoom", sender: self)
+    }
+    
+    func TouchImagePatient(cell: ComChatReceiveimageTableViewCell, didTappedThe button: UIButton?, index: Int) {
         print("index : \(index)")
         Image_url = message[index].url
         print("Image_url : \(Image_url)")
