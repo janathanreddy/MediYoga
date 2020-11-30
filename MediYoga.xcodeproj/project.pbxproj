@@ -36,6 +36,8 @@
 		212FF9E3253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */; };
 		212FF9EC253D534500E6BD8D /* AudioFilePatientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */; };
 		212FF9ED253D534500E6BD8D /* AudioFilePatientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */; };
+		213961062575506200EE3DB5 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213961042575506200EE3DB5 /* HeaderTableViewCell.swift */; };
+		213961072575506200EE3DB5 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213961052575506200EE3DB5 /* HeaderTableViewCell.xib */; };
 		213ED72A255910A400621F4E /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213ED729255910A300621F4E /* TabViewController.swift */; };
 		2152AAB8252085F4009DAC98 /* CaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */; };
 		2155B416252B895400148B92 /* ComChatReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */; };
@@ -137,6 +139,8 @@
 		212FF9E1253D531400E6BD8D /* AudioFileDoctorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioFileDoctorTableViewCell.xib; sourceTree = "<group>"; };
 		212FF9EA253D534500E6BD8D /* AudioFilePatientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFilePatientTableViewCell.swift; sourceTree = "<group>"; };
 		212FF9EB253D534500E6BD8D /* AudioFilePatientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioFilePatientTableViewCell.xib; sourceTree = "<group>"; };
+		213961042575506200EE3DB5 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		213961052575506200EE3DB5 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		213ED729255910A300621F4E /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		2152AAB7252085F4009DAC98 /* CaseHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseHistoryViewController.swift; sourceTree = "<group>"; };
 		2155B414252B895400148B92 /* ComChatReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComChatReceiverTableViewCell.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 				21EB295925398AA700D26F6F /* ComChatReceiveimageTableViewCell.xib */,
 				2120D49B2528C457003332EF /* ComImageTableViewCell.xib */,
 				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
+				213961042575506200EE3DB5 /* HeaderTableViewCell.swift */,
+				213961052575506200EE3DB5 /* HeaderTableViewCell.xib */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -569,6 +575,7 @@
 				21A175A725400D3A008950AB /* AdminAudioTableViewCell.xib in Resources */,
 				216CA4762556F0AC00A5D04A /* MonthlyTableViewCell.xib in Resources */,
 				2155B417252B895400148B92 /* ComChatReceiverTableViewCell.xib in Resources */,
+				213961072575506200EE3DB5 /* HeaderTableViewCell.xib in Resources */,
 				210E88C825186F0500C59A6E /* Assets.xcassets in Resources */,
 				21A175B125400D6A008950AB /* DoctorAudioTableViewCell.xib in Resources */,
 				21A175BB25400D88008950AB /* DoctorImageTableViewCell.xib in Resources */,
@@ -711,6 +718,7 @@
 			files = (
 				2176A8142518D542005979E9 /* CommunicationTableViewCell.swift in Sources */,
 				21EAC39D254F2AEF0085F9B9 /* StickyGrid_CollectionViewLayout.swift in Sources */,
+				213961062575506200EE3DB5 /* HeaderTableViewCell.swift in Sources */,
 				21A175B025400D6A008950AB /* DoctorAudioTableViewCell.swift in Sources */,
 				219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */,
 				212FF9E2253D531400E6BD8D /* AudioFileDoctorTableViewCell.swift in Sources */,
