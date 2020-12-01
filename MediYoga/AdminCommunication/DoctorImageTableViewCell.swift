@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol AminDoctorImage {
-    func AdminDoctorImage(cell: DoctorImageTableViewCell,didTappedThe button:UIButton?,index: Int)
+    func AdminDoctorImage(cell: DoctorImageTableViewCell,didTappedThe button:UIButton?,index: Int,indexsec: Int)
 }
 
 
@@ -41,7 +41,7 @@ class DoctorImageTableViewCell: UITableViewCell {
     @IBAction func AdminDoctorAct(_ sender: Any) {
         
         print("Button Pressed")
-        CellDelegate?.AdminDoctorImage(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        CellDelegate?.AdminDoctorImage(cell: self,didTappedThe: sender as?UIButton,index: index!.row,indexsec: index!.section)
         print("Cell Index : \(index?.row)")
 
 

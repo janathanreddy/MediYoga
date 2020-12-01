@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AminImage {
-    func AdminImage(cell: AdminComImageTableViewCell,didTappedThe button:UIButton?,index: Int)
+    func AdminImage(cell: AdminComImageTableViewCell,didTappedThe button:UIButton?,index: Int,indexsec: Int)
 
 }
 class AdminComImageTableViewCell: UITableViewCell {
@@ -37,7 +37,7 @@ class AdminComImageTableViewCell: UITableViewCell {
     @IBAction func AdminTouch(_ sender: Any) {
         
         print("Button Pressed")
-        CellDelegate?.AdminImage(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        CellDelegate?.AdminImage(cell: self,didTappedThe: sender as?UIButton,index: index!.row,indexsec: index!.section)
         print("Cell Index : \(index?.row)")
 
         
