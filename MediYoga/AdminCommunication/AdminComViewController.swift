@@ -47,6 +47,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     var DoctorName: String = ""
     var SelectedImages:String = ""
     var Image_url:String?
+    var orderdate = String()
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var SelectedImage: UIImageView!
@@ -93,7 +94,6 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         
         messages()
 
-        
 
         tableView.rowHeight = UITableView.automaticDimension
 
@@ -195,11 +195,18 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let uniqueUnordered = Array(Set(SectionHeaderDate))
+
         if message.count != 0 {
             ActivityIndicator.stopAnimating()
             
         }
-
+        for i in uniqueUnordered{
+            for j in SectionHeaderDate{
+                print("\(i) == \(j)")
+                if i == j{
+                    print(message[indexPath.section][indexPath.row].date)
+           
         if message[indexPath.section][indexPath.row].isFirstUser == false && message[indexPath.section][indexPath.row].ReceiverImageBool == false{
             
             let AdminTextTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdminTextTableViewCell", for: indexPath) as! AdminTextTableViewCell
@@ -315,7 +322,10 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             
             return cell
         }
-
+        
+    }
+}
+}
 return UITableViewCell()
 
     }
@@ -466,7 +476,6 @@ return UITableViewCell()
                     headerdate.dateFormat = "dd MMMM yyyy"
                     let ChatDate = headerdate.string(from: timeStamp)
                     SectionHeaderDate.append(ChatDate)
-                    print("SectionHeaderDate : \(SectionHeaderDate)")
 
                     
 
