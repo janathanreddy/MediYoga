@@ -21,14 +21,31 @@ struct MessageDataAdmin {
     var doctoraudio: Bool
     var patientaudio: Bool
     var DoctorRecordLabel: String
-    var date:String
+    var date:Date
 
 }
 
+extension Date {
+    static func dateFromCustomString(customString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        return dateFormatter.date(from: customString) ?? Date()
+    }
+    
+    func reduceToMonthDayYear() -> Date {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: self)
+        let day = calendar.component(.day, from: self)
+        let year = calendar.component(.year, from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        return dateFormatter.date(from: "\(day)/\(month)/\(year)") ?? Date()
+    }
+}
 
 
 class AdminComViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,AminDoctorImage,AminImage{
-   
+    var message = [MessageDataAdmin]()
     var SectionHeaderDate = [String]()
     let picker = UIImagePickerController()
     var images = [UIImage]()
@@ -57,11 +74,13 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttomconstrains: NSLayoutConstraint!
     fileprivate let application = UIApplication.shared
-    var message = [[MessageDataAdmin]]()
+    
+    
+    var ChatMessage = [[MessageDataAdmin]]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-
         tableView.delegate = self
         tableView.dataSource = self
         print("Doctor_ID : \(Doctor_ID) , Admin_ID : \(Admin_ID)")
@@ -90,11 +109,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.register(UINib(nibName:"AdminAudioTableViewCell", bundle: nil), forCellReuseIdentifier: "AdminAudioTableViewCell")
         
         tableView.register(UINib(nibName: "DoctorAudioTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorAudioTableViewCell")
-        
-        
         messages()
-
-
         tableView.rowHeight = UITableView.automaticDimension
 
     }
@@ -115,7 +130,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
 
                 self.tableView.contentInset = contentInset
                 if message.count != 0{
-                tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
+                    tableView.scrollToRow(at: IndexPath(row: message.count-1 , section: ChatMessage.count-1), at: .top, animated: true)
                 }
                 contentInset.bottom = keyBoardRect!.height
                 let indexpath = NSIndexPath(row: 1, section: 0)
@@ -136,6 +151,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             self.view.layoutIfNeeded()
         })
     }
+    
     
     class DateHeaderLabel: UILabel {
         
@@ -162,26 +178,33 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = DateHeaderLabel()
-        label.text = SectionHeaderDate[section]
-        let containerView = UIView()
-        
-        containerView.addSubview(label)
-        containerView.backgroundColor = UIColor.white
-        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        return containerView
-
-
+        if let firstMessageInSection = ChatMessage[section].first {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            let dateString = dateFormatter.string(from: firstMessageInSection.date)
+            print("dateString : \(dateString)")
+            let label = DateHeaderLabel()
+            label.text = dateString
+            
+            let containerView = UIView()
+            containerView.backgroundColor = UIColor.white
+            containerView.addSubview(label)
+            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+            
+            return containerView
+            
+        }
+        return nil
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return ChatMessage.count
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return message.count
-    }
-
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
@@ -191,36 +214,28 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return message[section].count
+        return ChatMessage[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let uniqueUnordered = Array(Set(SectionHeaderDate))
 
-        if message.count != 0 {
+        if ChatMessage.count != 0 {
             ActivityIndicator.stopAnimating()
-            
         }
-        for i in uniqueUnordered{
-            for j in SectionHeaderDate{
-                print("\(i) == \(j)")
-                if i == j{
-                    print(message[indexPath.section][indexPath.row].date)
-           
-        if message[indexPath.section][indexPath.row].isFirstUser == false && message[indexPath.section][indexPath.row].ReceiverImageBool == false{
+        if ChatMessage[indexPath.section][indexPath.row].isFirstUser == false && ChatMessage[indexPath.section][indexPath.row].ReceiverImageBool == false{
             
             let AdminTextTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdminTextTableViewCell", for: indexPath) as! AdminTextTableViewCell
 
             AdminTextTableViewCell.AdmintextView.layer.cornerRadius = 16
-            AdminTextTableViewCell.AdminText.text = message[indexPath.section][indexPath.row].text
-            print(message[indexPath.section][indexPath.row].text)
+            AdminTextTableViewCell.AdminText.text = ChatMessage[indexPath.section][indexPath.row].text
+            print(ChatMessage[indexPath.section][indexPath.row].text)
             AdminTextTableViewCell.ReadCheck.text = "unread"
-            AdminTextTableViewCell.Admintime.text = message[indexPath.section][indexPath.row].time
+            AdminTextTableViewCell.Admintime.text = ChatMessage[indexPath.section][indexPath.row].time
             
             return AdminTextTableViewCell
         }
-        else if message[indexPath.section][indexPath.row].sendimagebool == false && message[indexPath.section][indexPath.row].ReceiverImageBool == true{
-         if message[indexPath.section][indexPath.row].sentimage != nil{
+        else if ChatMessage[indexPath.section][indexPath.row].sendimagebool == false && ChatMessage[indexPath.section][indexPath.row].ReceiverImageBool == true{
+         if ChatMessage[indexPath.section][indexPath.row].sentimage != nil{
                 let AdminComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdminImageCell", for: indexPath) as! AdminComImageTableViewCell
             AdminComImageTableViewCell.AdminImage_View.layer.cornerRadius = 10
             AdminComImageTableViewCell.AdminImage_View.clipsToBounds = true
@@ -229,16 +244,16 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             AdminComImageTableViewCell.CellDelegate = self
             AdminComImageTableViewCell.index = indexPath
 
-            AdminComImageTableViewCell.ChatImage.image = message[indexPath.section][indexPath.row].sentimage
-            if message[indexPath.section][indexPath.row].sentlabel == ""{
+            AdminComImageTableViewCell.ChatImage.image = ChatMessage[indexPath.section][indexPath.row].sentimage
+            if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 AdminComImageTableViewCell.AdminChatLabel.isHidden = true
             }else{
                 AdminComImageTableViewCell.AdminChatLabel.isHidden = false
-                AdminComImageTableViewCell.AdminChatLabel.text = message[indexPath.section][indexPath.row].sentlabel
+                AdminComImageTableViewCell.AdminChatLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
             }
             return AdminComImageTableViewCell
-        }}else if message[indexPath.section][indexPath.row].sendimagebool == true && message[indexPath.section][indexPath.row].isFirstUser == true{
-            if message[indexPath.section][indexPath.row].sentimage != nil{
+        }}else if ChatMessage[indexPath.section][indexPath.row].sendimagebool == true && ChatMessage[indexPath.section][indexPath.row].isFirstUser == true{
+            if ChatMessage[indexPath.section][indexPath.row].sentimage != nil{
                    let DoctorImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "DoctorImageTableViewCell", for: indexPath) as! DoctorImageTableViewCell
                 DoctorImageTableViewCell.DoctorImageView.layer.cornerRadius = 10
                 DoctorImageTableViewCell.DoctorImageView.clipsToBounds = true
@@ -247,12 +262,12 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                 DoctorImageTableViewCell.CellDelegate = self
                 DoctorImageTableViewCell.index = indexPath
 
-                DoctorImageTableViewCell.DoctorImageView.image = message[indexPath.section][indexPath.row].sentimage
-               if message[indexPath.section][indexPath.row].sentlabel == ""{
+                DoctorImageTableViewCell.DoctorImageView.image = ChatMessage[indexPath.section][indexPath.row].sentimage
+               if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 DoctorImageTableViewCell.DoctorLabel.isHidden = true
                }else{
                 DoctorImageTableViewCell.DoctorLabel.isHidden = false
-                DoctorImageTableViewCell.DoctorLabel.text = message[indexPath.section][indexPath.row].sentlabel
+                DoctorImageTableViewCell.DoctorLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
                }
                return DoctorImageTableViewCell
            }
@@ -264,9 +279,9 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             DoctorImageTableViewCell.CellDelegate = self
             DoctorImageTableViewCell.index = indexPath
 
-            let storageref = Storage.storage().reference(forURL: message[indexPath.section][indexPath.row].url)
+            let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url)
             
-            let fetchref = storageref.getData(maxSize: 4*1024*1024)
+            let fetchref = storageref.getData(maxSize: 1*1024*1024)
             { data, error in
                 if error != nil {
                     print("image Upload Error")
@@ -276,14 +291,14 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                self.reloadInputViews()
              }
             }
-            if message[indexPath.section][indexPath.row].sentlabel == ""{
+            if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 DoctorImageTableViewCell.DoctorLabel.isHidden = true
             }else{
                 DoctorImageTableViewCell.DoctorLabel.isHidden = false
-                DoctorImageTableViewCell.DoctorLabel.text = message[indexPath.section][indexPath.row].sentlabel
+                DoctorImageTableViewCell.DoctorLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
             }
             return DoctorImageTableViewCell
-        }else if message[indexPath.section][indexPath.row].ReceiverImageBool == true && message[indexPath.section][indexPath.row].isFirstUser == false{
+        }else if ChatMessage[indexPath.section][indexPath.row].ReceiverImageBool == true && ChatMessage[indexPath.section][indexPath.row].isFirstUser == false{
             let AdminComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdminComImageTableViewCell", for: indexPath) as! AdminComImageTableViewCell
             AdminComImageTableViewCell.AdminImage_View.layer.cornerRadius = 10
             AdminComImageTableViewCell.AdminImage_View.clipsToBounds = true
@@ -292,9 +307,9 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             AdminComImageTableViewCell.CellDelegate = self
             AdminComImageTableViewCell.index = indexPath
 
-            let storageref = Storage.storage().reference(forURL: message[indexPath.section][indexPath.row].url)
+            let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url)
             
-            let fetchref = storageref.getData(maxSize: 4*1024*1024)
+            let fetchref = storageref.getData(maxSize: 1*1024*1024)
             { data, error in
                 if error != nil {
                     print("image Upload Error")
@@ -304,11 +319,11 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                self.reloadInputViews()
              }
             }
-            if message[indexPath.section][indexPath.row].sentlabel == ""{
+            if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 AdminComImageTableViewCell.AdminChatLabel.isHidden = true
             }else{
                 AdminComImageTableViewCell.AdminChatLabel.isHidden = false
-                AdminComImageTableViewCell.AdminChatLabel.text = message[indexPath.section][indexPath.row].sentlabel
+                AdminComImageTableViewCell.AdminChatLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
             }
             return AdminComImageTableViewCell
         }
@@ -316,20 +331,17 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! AdminComTableViewCell
 
             cell.Chat_View.layer.cornerRadius = 16
-            cell.ChatLabel.text = message[indexPath.section][indexPath.row].text
+            cell.ChatLabel.text = ChatMessage[indexPath.section][indexPath.row].text
                    cell.ReadCheck.text = "unread"
-            cell.ChatTime.text = message[indexPath.section][indexPath.row].time
+            cell.ChatTime.text = ChatMessage[indexPath.section][indexPath.row].time
             
             return cell
-        }
-        
-    }
-}
 }
 return UITableViewCell()
 
     }
-
+    
+    
     @IBAction func CameraAct(_ sender: Any) {
         
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -346,7 +358,7 @@ return UITableViewCell()
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
             
             SelectedImage.image = images as! UIImage
-            message.append([MessageDataAdmin(text: ChatTextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: ChatTextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: "")])
+            message.append(MessageDataAdmin(text: ChatTextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: ChatTextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
 
                 let randomid = UUID.init().uuidString
                 let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/\(randomid).jpg")
@@ -439,11 +451,11 @@ return UITableViewCell()
             newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
             
-            message.append([MessageDataAdmin(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "",url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: "")])
+            message.append(MessageDataAdmin(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "",url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
             tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
+            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 1)], with: .fade)
             tableView.endUpdates()
-            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
+            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 1), at: .top, animated: true)
             ChatTextField.text = ""
             
         }
@@ -476,25 +488,24 @@ return UITableViewCell()
                     headerdate.dateFormat = "dd MMMM yyyy"
                     let ChatDate = headerdate.string(from: timeStamp)
                     SectionHeaderDate.append(ChatDate)
-
-                    
+                    print("ChatDate : \(ChatDate)")
 
                     if Doctor_ID == sender_id {
                         if documentData["type"] as! Int == 0{
-                            message.append([MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: "")])
-                            print("1. \(documentData["text"] as! String)")
+                            message.append(MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(ChatDate)")))
+                            print("1. \(documentData["text"] as! String) 2. \(ChatDate)")
 
                         }
                         else if documentData["type"] as! Int == 1{
                             print("2. \(documentData["text"] as! String)")
 
-                            message.append([MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: "")])
+                            message.append(MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(ChatDate)")))
 
 
                         }
 
                         else if documentData["type"] as! Int == 3{
-                            message.append([MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record", date: "")])
+                            message.append(MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record", date: Date.dateFromCustomString(customString: "\(ChatDate)")))
                         }
 
                     }
@@ -503,17 +514,17 @@ return UITableViewCell()
                         if documentData["type"] as! Int == 0{
                             print("3. \(documentData["text"] as! String)")
 
-                            message.append([MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: "")])
+                            message.append(MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(ChatDate)")))
                         }
                         else if documentData["type"] as! Int == 1{
                             print("4. \(documentData["text"] as! String)")
 
-                            message.append([MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: "")])
+                            message.append(MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(ChatDate)")))
 
 
                         }
                         else if documentData["type"] as! Int == 3{
-                            message.append([MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: "", date: "")])
+                            message.append(MessageDataAdmin(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(ChatDate)")))
 
 
                         }
@@ -522,19 +533,33 @@ return UITableViewCell()
                     }
 
                 }
+                
+                let Grouping_Message = Dictionary(grouping: message, by: {(element) -> Date in
+                    return element.date
+                })
+                print("Dictionary : \(Dictionary(grouping: message, by: { $0.date }))")
+
+                print("Grouping_Message : \(Grouping_Message)")
+                let keys = Grouping_Message.keys.sorted()
+                print("keys : \(keys)")
+                keys.forEach { (key) in
+                    let values = Grouping_Message[key]
+                    ChatMessage.append(values ?? [])
+                    print("chatMessages : \(values)")
+                }
+
               DispatchQueue.main.async {
                   self.tableView.reloadData()
               }
-
+                
             }
-
       }
-
+        
     }
     
     func AdminDoctorImage(cell: DoctorImageTableViewCell, didTappedThe button: UIButton?, index: Int,indexsec: Int) {
         print("index : \(index)")
-        Image_url = message[indexsec][index].url
+        Image_url = ChatMessage[indexsec][index].url
         print("Image_url : \(Image_url) \(documentID)")
         performSegue(withIdentifier: "AdminImageZoom", sender: self)
 
@@ -542,7 +567,7 @@ return UITableViewCell()
     
     func AdminImage(cell: AdminComImageTableViewCell, didTappedThe button: UIButton?, index: Int,indexsec: Int) {
         print("index : \(index)")
-        Image_url = message[indexsec][index].url
+        Image_url = ChatMessage[indexsec][index].url
         print("Image_url : \(Image_url) \(documentID)")
         performSegue(withIdentifier: "AdminImageZoom", sender: self)
 
@@ -560,21 +585,4 @@ return UITableViewCell()
 }
 
 
-extension Date {
-    static func dateFromCustomString(customString: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        return dateFormatter.date(from: customString) ?? Date()
-    }
-    
-    func reduceToMonthDayYear() -> Date {
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: self)
-        let day = calendar.component(.day, from: self)
-        let year = calendar.component(.year, from: self)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        return dateFormatter.date(from: "\(month)/\(day)/\(year)") ?? Date()
-    }
-}
 

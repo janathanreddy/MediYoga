@@ -30,13 +30,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jzf-wU-k9e">
+                                <rect key="frame" x="0.0" y="0.0" width="290" height="32.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Jzf-wU-k9e" secondAttribute="bottom" id="8OS-uH-VDD"/>
                             <constraint firstItem="ZeN-46-cqG" firstAttribute="leading" secondItem="uhp-mr-3Ve" secondAttribute="leading" constant="14" id="ERL-2b-1qw"/>
+                            <constraint firstAttribute="trailing" secondItem="Jzf-wU-k9e" secondAttribute="trailing" id="MBX-1f-4c6"/>
                             <constraint firstAttribute="bottom" secondItem="ZeN-46-cqG" secondAttribute="bottom" constant="6" id="MOt-Fn-0Kn"/>
                             <constraint firstAttribute="trailing" secondItem="ZeN-46-cqG" secondAttribute="trailing" constant="14" id="QH7-3i-G14"/>
                             <constraint firstItem="ZeN-46-cqG" firstAttribute="top" secondItem="uhp-mr-3Ve" secondAttribute="top" constant="6" id="UIY-F6-LSQ"/>
+                            <constraint firstItem="Jzf-wU-k9e" firstAttribute="top" secondItem="uhp-mr-3Ve" secondAttribute="top" id="fOr-5M-vp0"/>
+                            <constraint firstItem="Jzf-wU-k9e" firstAttribute="leading" secondItem="uhp-mr-3Ve" secondAttribute="leading" id="fVm-xR-nwt"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:20 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2v-CS-Qxz">
@@ -67,6 +74,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="AdminText" destination="ZeN-46-cqG" id="uqC-NL-opE"/>
+                <outlet property="AdmintailImageView" destination="Jzf-wU-k9e" id="AWS-QQ-u5L"/>
                 <outlet property="AdmintextView" destination="uhp-mr-3Ve" id="KHV-vM-uxK"/>
                 <outlet property="Admintime" destination="i2v-CS-Qxz" id="rDg-gy-FKO"/>
                 <outlet property="ReadCheck" destination="MVI-uQ-Rhb" id="NT7-0K-e9h"/>

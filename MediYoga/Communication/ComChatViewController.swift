@@ -23,10 +23,27 @@ struct messagedata {
     var doctoraudio: Bool
     var patientaudio: Bool
     var DoctorRecordLabel: String
-    var date:String
+    var date:Date
     
 }
 
+extension Date {
+    static func dateFromCustomstring(customString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        return dateFormatter.date(from: customString) ?? Date()
+    }
+    
+    func ReduceToMonthDayYear() -> Date {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: self)
+        let day = calendar.component(.day, from: self)
+        let year = calendar.component(.year, from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        return dateFormatter.date(from: "\(day)/\(month)/\(year)") ?? Date()
+    }
+}
 
 
 
@@ -72,6 +89,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var TextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var MessageLabel: UILabel!
+    var ChatMessage = [[messagedata]]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -150,13 +169,59 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.view.layoutIfNeeded()
         })
     }
-
+    
+    class DateHeaderLabel: UILabel {
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            backgroundColor = .tertiarySystemFill
+            textColor = .black
+            textAlignment = .center
+            translatesAutoresizingMaskIntoConstraints = false // enables auto layout
+            font = UIFont.boldSystemFont(ofSize: 14)
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        override var intrinsicContentSize: CGSize {
+            let originalContentSize = super.intrinsicContentSize
+            let height = originalContentSize.height + 12
+            layer.cornerRadius = height / 2
+            layer.masksToBounds = true
+            return CGSize(width: originalContentSize.width + 20, height: height)
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let firstMessageInSection = ChatMessage[section].first {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            let dateString = dateFormatter.string(from: firstMessageInSection.date)
+            print("dateString : \(dateString)")
+            let label = DateHeaderLabel()
+            label.text = dateString
+            
+            let containerView = UIView()
+            containerView.backgroundColor = UIColor.white
+            containerView.addSubview(label)
+            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+            
+            return containerView
+            
+        }
+        return nil
+    }
     func date(){
         
         let currentDateTime = Date()
         let formatter = DateFormatter()
         formatter.timeStyle = .none
-        formatter.dateStyle = .medium
+        formatter.dateFormat = "dd MMMM yyyy"
         dateupdate = formatter.string(from: currentDateTime)
         
     }
@@ -343,7 +408,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
             
             SelectedImageView.image = images as! UIImage
-            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: ""))
+            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
             tableView.endUpdates()
@@ -392,11 +457,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return message.count
+        return ChatMessage[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if message.count != 0{
+        if ChatMessage.count != 0{
             
             ActivityIndicator.stopAnimating()
             ActivityIndicator.alpha = 0
@@ -546,8 +611,12 @@ return UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return ChatMessage.count
     }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
@@ -570,7 +639,7 @@ return UITableViewCell()
             let newDocument = db.collection("patient_chat").document(documentID)
             newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
-            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: ""))
+            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
             tableView.endUpdates()
@@ -601,41 +670,41 @@ return UITableViewCell()
                       let ChatTime = dateFormatter.string(from: timeStamp)
                       let sender_id = documentData["sender_id"] as! String
                       let dateFormatter_1 = DateFormatter()
-                      dateFormatter_1.dateFormat = "MMM dd,yyyy"
+                      dateFormatter_1.dateFormat = "dd MMMM yyyy"
                       let SecDate = dateFormatter_1.string(from: timeStamp)
                         print("Date : \(SecDate)")
                         
                         if sender_id == DoctorId {
                             if documentData["type"] as! Int == 0{
                                 
-                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: SecDate))
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(SecDate)")))
 
                                 
                             }
                             else if documentData["type"] as! Int == 1{
                 
-                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: SecDate))
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: true, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(SecDate)")))
 
                                 
                             }
                             
                             else if documentData["type"] as! Int == 3{
-                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record", date: SecDate))
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: true,sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: true,patientaudio: false, DoctorRecordLabel: "Audio Record", date: Date.dateFromCustomString(customString: "\(SecDate)")))
                             }
 
                         }
                         else if sender_id != DoctorId{
     //                        print("Patient : \(documentData["text"] as! String)")
                             if documentData["type"] as! Int == 0{
-                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: SecDate))
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(SecDate)")))
                             }
                             else if documentData["type"] as! Int == 1{
-                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: SecDate))
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: true,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(SecDate)")))
 
 
                             }
                             else if documentData["type"] as! Int == 3{
-                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: "", date: SecDate))
+                                message.append(messagedata(text: documentData["text"] as! String,time: ChatTime,isFirstUser: false, sendimagebool: false, sentlabel: "", url: documentData["content_url"] as! String,ReceiverImageBool: false,doctoraudio: false,patientaudio: true, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(SecDate)")))
 
 
                             }
@@ -645,6 +714,19 @@ return UITableViewCell()
                         
                         
                         
+                    }
+                    let Grouping_Message = Dictionary(grouping: message, by: {(element) -> Date in
+                        return element.date
+                    })
+                    print("Dictionary : \(Dictionary(grouping: message, by: { $0.date }))")
+
+                    print("Grouping_Message : \(Grouping_Message)")
+                    let keys = Grouping_Message.keys.sorted()
+                    print("keys : \(keys)")
+                    keys.forEach { (key) in
+                        let values = Grouping_Message[key]
+                        ChatMessage.append(values ?? [])
+                        print("chatMessages : \(values)")
                     }
                   DispatchQueue.main.async {
                       self.tableView.reloadData()
