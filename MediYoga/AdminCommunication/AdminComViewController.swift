@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import Firebase
+import SDWebImage
 
 struct MessageDataAdmin {
     var text : String
@@ -65,6 +66,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     var SelectedImages:String = ""
     var Image_url:String?
     var orderdate = String()
+    
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var SelectedImage: UIImageView!
@@ -270,7 +272,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                 DoctorImageTableViewCell.DoctorLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
                }
                return DoctorImageTableViewCell
-           }
+            }else{
             let DoctorImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "DoctorImageTableViewCell", for: indexPath) as! DoctorImageTableViewCell
             DoctorImageTableViewCell.DoctorImageView.layer.cornerRadius = 10
             DoctorImageTableViewCell.DoctorImageView.clipsToBounds = true
@@ -284,11 +286,19 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             let fetchref = storageref.getData(maxSize: 1*1024*1024)
             { data, error in
                 if error != nil {
-                    print("image Upload Error")
+                    print("image Upload Error - DoctorImageTableViewCell")
              } else {
-
-                DoctorImageTableViewCell.DoctorImageView.image = UIImage(data: data!)
-               self.reloadInputViews()
+                DispatchQueue.global(qos: .background).async {
+                    let url = URL(string:(self.ChatMessage[indexPath.section][indexPath.row].url))
+                    let data = try? Data(contentsOf: url!)
+                    let image: UIImage = UIImage(data: data!)!
+                    DispatchQueue.main.async {
+//                        self.imageCache.setObject(image, forKey: NSString(string: (activeUser?.login!)!))
+                        DoctorImageTableViewCell.DoctorImageView.image = image
+//                        cell.imgFollow.image = image
+                    }
+                }
+//                    DoctorImageTableViewCell.DoctorImageView.image = UIImage(data: data!)
              }
             }
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
@@ -298,6 +308,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                 DoctorImageTableViewCell.DoctorLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
             }
             return DoctorImageTableViewCell
+            }
         }else if ChatMessage[indexPath.section][indexPath.row].ReceiverImageBool == true && ChatMessage[indexPath.section][indexPath.row].isFirstUser == false{
             let AdminComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdminComImageTableViewCell", for: indexPath) as! AdminComImageTableViewCell
             AdminComImageTableViewCell.AdminImage_View.layer.cornerRadius = 10
@@ -310,13 +321,14 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url)
             
             let fetchref = storageref.getData(maxSize: 1*1024*1024)
-            { data, error in
+            { [self] data, error in
                 if error != nil {
                     print("image Upload Error")
              } else {
+                
+                AdminComImageTableViewCell.imageView?.sd_setImage(with: URL(string: ChatMessage[indexPath.section][indexPath.row].url),placeholderImage: UIImage(named: "Loading"),options: [.continueInBackground,.progressiveLoad])
 
-                AdminComImageTableViewCell.ChatImage.image = UIImage(data: data!)
-               self.reloadInputViews()
+//                AdminComImageTableViewCell.ChatImage.image = UIImage(data: data!)
              }
             }
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
@@ -582,7 +594,13 @@ return UITableViewCell()
             VC.Image_url = Image_url
         }    }
     
+    
+    
 }
 
 
+class CustomImageView: UIImageView {
 
+
+    
+}

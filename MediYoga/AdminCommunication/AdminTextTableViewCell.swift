@@ -18,7 +18,6 @@ class AdminTextTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        AdmintailImageView.tintColor = UIColor(named:"chat_bubble_color_received”)
 
     }
 

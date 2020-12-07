@@ -9,7 +9,6 @@ import UIKit
 import FirebaseAuth
 import Firebase
 import Network
-import ReachabilityManager
 
 class ViewController: UIViewController,UITextFieldDelegate{
     
