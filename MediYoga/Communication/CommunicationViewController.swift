@@ -96,7 +96,7 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
             cell.messageField.text = searchedname_1[indexPath.row].message
             cell.ComDate.text = searchedname_1[indexPath.row].date
             ActivityIndicator.alpha = 0
-            ActivityIndicator.startAnimating()
+            ActivityIndicator.stopAnimating()
 
             return cell
 
@@ -107,7 +107,7 @@ class CommunicationViewController: UIViewController, UITableViewDelegate, UITabl
         cell.messageField.text = name_1[indexPath.row].message
         cell.ComDate.text = name_1[indexPath.row].date
         ActivityIndicator.alpha = 0
-        ActivityIndicator.startAnimating() 
+        ActivityIndicator.stopAnimating() 
             return cell
             
         }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DoctorImage {
-    func TouchImageDoctor(cell: ComImageTableViewCell,didTappedThe button:UIButton?,index: Int)
+    func TouchImageDoctor(cell: ComImageTableViewCell,didTappedThe button:UIButton?,index: Int,indexsec: Int)
 
 }
 
@@ -40,7 +40,7 @@ class ComImageTableViewCell: UITableViewCell {
     }
     @IBAction func ImageActBtn(_ sender: Any) {
         print("Button Pressed")
-        CellDelegate?.TouchImageDoctor(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        CellDelegate?.TouchImageDoctor(cell: self,didTappedThe: sender as?UIButton,index: index!.row, indexsec: index!.section)
         print("Cell Index : \(index?.row)")
 
 

@@ -61,6 +61,7 @@
 		2176A8532518E3D3005979E9 /* SettingsTableViewCell_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8512518E3D3005979E9 /* SettingsTableViewCell_2.swift */; };
 		2176A85A2518E3F3005979E9 /* SettingsTableViewCell_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */; };
 		218AD762254C9CC600E169E4 /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AD761254C9CC500E169E4 /* WeeklyViewController.swift */; };
+		218FBFBF257FBBC80014D348 /* DoctorImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218FBFBE257FBBC80014D348 /* DoctorImageCache.swift */; };
 		219846372521133A00E35F26 /* checkhistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */; };
 		219A1248251E4CAC0045F3B8 /* labxibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */; };
 		219A1249251E4CAC0045F3B8 /* labxibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */; };
@@ -164,6 +165,7 @@
 		2176A8512518E3D3005979E9 /* SettingsTableViewCell_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell_2.swift; sourceTree = "<group>"; };
 		2176A8582518E3F3005979E9 /* SettingsTableViewCell_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell_3.swift; sourceTree = "<group>"; };
 		218AD761254C9CC500E169E4 /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
+		218FBFBE257FBBC80014D348 /* DoctorImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorImageCache.swift; sourceTree = "<group>"; };
 		219846352521133A00E35F26 /* checkhistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkhistoryTableViewCell.swift; sourceTree = "<group>"; };
 		219A1246251E4CAC0045F3B8 /* labxibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = labxibTableViewCell.swift; sourceTree = "<group>"; };
 		219A1247251E4CAC0045F3B8 /* labxibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = labxibTableViewCell.xib; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				2155B415252B895400148B92 /* ComChatReceiverTableViewCell.xib */,
 				213961042575506200EE3DB5 /* HeaderTableViewCell.swift */,
 				213961052575506200EE3DB5 /* HeaderTableViewCell.xib */,
+				218FBFBE257FBBC80014D348 /* DoctorImageCache.swift */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -765,6 +768,7 @@
 				2120D49C2528C457003332EF /* ComImageTableViewCell.swift in Sources */,
 				216CA46F2556F06800A5D04A /* MontlyViewController.swift in Sources */,
 				212800D1252394ED00110A10 /* ComChatTableViewCell.swift in Sources */,
+				218FBFBF257FBBC80014D348 /* DoctorImageCache.swift in Sources */,
 				210331D02518EA7A0022E0E8 /* ResetPasswordViewController.swift in Sources */,
 				21A27C5F2570E54A0087BBEE /* AdminimageZoomViewController.swift in Sources */,
 				21FBA7F3251B542000466C3A /* PatientDetailsCollectionViewCell.swift in Sources */,

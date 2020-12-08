@@ -7,7 +7,7 @@
 
 import UIKit
 protocol PatientImage {
-    func TouchImagePatient(cell: ComChatReceiveimageTableViewCell,didTappedThe button:UIButton?,index: Int)
+    func TouchImagePatient(cell: ComChatReceiveimageTableViewCell,didTappedThe button:UIButton?,index: Int,indexsec: Int)
 }
 
 class ComChatReceiveimageTableViewCell: UITableViewCell {
@@ -41,7 +41,7 @@ class ComChatReceiveimageTableViewCell: UITableViewCell {
     @IBAction func ImageTouchAction(_ sender: Any) {
         
         print("Button Pressed")
-        CellDelegate?.TouchImagePatient(cell: self,didTappedThe: sender as?UIButton,index: index!.row)
+        CellDelegate?.TouchImagePatient(cell: self,didTappedThe: sender as?UIButton,index: index!.row, indexsec: index!.section)
         print("Cell Index : \(index?.row)")
 
 

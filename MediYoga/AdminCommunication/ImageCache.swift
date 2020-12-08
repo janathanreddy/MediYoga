@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+
 let imageCache = NSCache<NSString, AnyObject>()
 var spinner = UIActivityIndicatorView(style: .gray)
 var task:URLSessionDataTask!
@@ -36,8 +37,8 @@ extension UIImageView {
                 
                 if let downloadedImage = UIImage(data: data!) {
                     imageCache.setObject(downloadedImage, forKey: urlString as NSString)
-                    
                     self.image = downloadedImage
+
                 }
             })
             
@@ -56,4 +57,3 @@ extension UIImageView {
         }
     
 }
-

@@ -18,7 +18,7 @@ struct messagedata {
     var sendimagebool : Bool
     var sentimage:UIImage?
     var sentlabel:String
-    var url:String
+    var url:String?
     var ReceiverImageBool: Bool
     var doctoraudio: Bool
     var patientaudio: Bool
@@ -48,12 +48,7 @@ extension Date {
 
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay,DoctorImage,PatientImage {
-    
-    
-    
-   
- 
-    
+
     var recorder: AVAudioRecorder!
     var player: AVAudioPlayer!
     var playerItem:AVPlayerItem?
@@ -94,7 +89,6 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         ActivityIndicator.alpha = 1
         ActivityIndicator.startAnimating()
 
@@ -143,8 +137,8 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.ButtomSpace.constant = keyBoardHeight
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
                 self.tableView.contentInset = contentInset
-                if message.count != 0{
-                    tableView.scrollToRow(at: IndexPath(row: message.count - 1 , section: 0), at: .top, animated: true)
+                if ChatMessage.count != 0{
+                    tableView.scrollToRow(at: IndexPath(row: ChatMessage.count - 1 , section: 0), at: .top, animated: true)
                 }
 
 
@@ -470,18 +464,18 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
 
 
-        if message[indexPath.row].isFirstUser == false && message[indexPath.row].ReceiverImageBool == false && message[indexPath.row].patientaudio == false{
+        if ChatMessage[indexPath.section][indexPath.row].isFirstUser == false && ChatMessage[indexPath.section][indexPath.row].ReceiverImageBool == false && ChatMessage[indexPath.section][indexPath.row].patientaudio == false{
             let ComChatReceiverTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComChatReceiverTableViewCell", for: indexPath) as! ComChatReceiverTableViewCell
             ComChatReceiverTableViewCell.ReceiverView.layer.cornerRadius = 16
-            ComChatReceiverTableViewCell.ReceiverLabel.text = message[indexPath.row].text
+            ComChatReceiverTableViewCell.ReceiverLabel.text = ChatMessage[indexPath.section][indexPath.row].text
             ComChatReceiverTableViewCell.ReadCheck.text = "unread"
-            ComChatReceiverTableViewCell.ReceiverTime.text = message[indexPath.row].time
+            ComChatReceiverTableViewCell.ReceiverTime.text = ChatMessage[indexPath.section][indexPath.row].time
 
             return ComChatReceiverTableViewCell
         }
        
-        else if message[indexPath.row].sendimagebool == true{
-            if message[indexPath.row].sentimage != nil{
+        else if ChatMessage[indexPath.section][indexPath.row].sendimagebool == true{
+            if ChatMessage[indexPath.section][indexPath.row].sentimage != nil{
             let ComImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComImageTableViewCell", for: indexPath) as! ComImageTableViewCell
             ComImageTableViewCell.CellDelegate = self
             ComImageTableViewCell.index = indexPath
@@ -489,14 +483,14 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComImageTableViewCell.sendimageview.clipsToBounds = true
             ComImageTableViewCell.sendimage.layer.cornerRadius = 10
             ComImageTableViewCell.sendimage.clipsToBounds = true
-            ComImageTableViewCell.ImageTime.text = message[indexPath.row].time
-            ComImageTableViewCell.sendimage.image = message[indexPath.row].sentimage
+            ComImageTableViewCell.ImageTime.text = ChatMessage[indexPath.section][indexPath.row].time
+            ComImageTableViewCell.sendimage.image = ChatMessage[indexPath.section][indexPath.row].sentimage
 
-                if message[indexPath.row].sentlabel == "" {
+                if ChatMessage[indexPath.section][indexPath.row].sentlabel == "" {
                     ComImageTableViewCell.sendlabel.isHidden = true
                 }else{
                     ComImageTableViewCell.sendlabel.isHidden = false
-                    ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
+                    ComImageTableViewCell.sendlabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
                 }
 
                 return ComImageTableViewCell
@@ -508,31 +502,23 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComImageTableViewCell.index = indexPath
             ComImageTableViewCell.sendimage.layer.cornerRadius = 10
             ComImageTableViewCell.sendimage.clipsToBounds = true
-            ComImageTableViewCell.ImageTime.text = message[indexPath.row].time
-            let storageref = Storage.storage().reference(forURL: message[indexPath.row].url)
-            
-            let fetchref = storageref.getData(maxSize: 4*1024*1024)
-            { data, error in
-                if error != nil {
-                    print("image Upload Error")
-             } else {
-
-                ComImageTableViewCell.sendimage.image = UIImage(data: data!)
-               self.reloadInputViews()
-             }
+            ComImageTableViewCell.ImageTime.text = ChatMessage[indexPath.section][indexPath.row].time
+            let user = ChatMessage[indexPath.section][indexPath.row]
+            if let profileImageUrl = user.url {
+                ComImageTableViewCell.sendimage.LoadImageUsingCacheWithUrlString(profileImageUrl)
             }
-            if message[indexPath.row].sentlabel == ""{
+            if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 ComImageTableViewCell.sendlabel.isHidden = true
             }else{
                 ComImageTableViewCell.sendlabel.isHidden = false
-                ComImageTableViewCell.sendlabel.text = message[indexPath.row].sentlabel
+                ComImageTableViewCell.sendlabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
             }
             ActivityIndicator.stopAnimating()
             ActivityIndicator.alpha = 0
 
             return ComImageTableViewCell
         }
-        else if message[indexPath.row].ReceiverImageBool == true && message[indexPath.row].isFirstUser == false{
+        else if ChatMessage[indexPath.section][indexPath.row].ReceiverImageBool == true && ChatMessage[indexPath.section][indexPath.row].isFirstUser == false{
             let ComChatReceiveimageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ComChatReceiveimageTableViewCell", for: indexPath) as! ComChatReceiveimageTableViewCell
             ComChatReceiveimageTableViewCell.CellDelegate = self
             ComChatReceiveimageTableViewCell.index = indexPath
@@ -540,31 +526,25 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComChatReceiveimageTableViewCell.ReceiverView.clipsToBounds = true
             ComChatReceiveimageTableViewCell.ReceiverImage.layer.cornerRadius = 10
             ComChatReceiveimageTableViewCell.ReceiverImage.clipsToBounds = true
-            ComChatReceiveimageTableViewCell.ReceiverTime.text = message[indexPath.row].time
-            let storageref = Storage.storage().reference(forURL: message[indexPath.row].url)
-            
-            let fetchref = storageref.getData(maxSize: 4*1024*1024)
-            { data, error in
-                if error != nil {
-                    print("image Upload Error")
-             } else {
-
-                ComChatReceiveimageTableViewCell.ReceiverImage.image = UIImage(data: data!)
-               self.reloadInputViews()
-             }
+            ComChatReceiveimageTableViewCell.ReceiverTime.text = ChatMessage[indexPath.section][indexPath.row].time
+            let user = ChatMessage[indexPath.section][indexPath.row]
+            if let profileImageUrl = user.url {
+                
+                ComChatReceiveimageTableViewCell.ReceiverImage.LoadImageUsingCacheWithUrlString(profileImageUrl)
             }
-            if message[indexPath.row].sentlabel == ""{
+
+            if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 ComChatReceiveimageTableViewCell.ReceiverImageLabel.isHidden = true
             }else{
                 ComChatReceiveimageTableViewCell.ReceiverImageLabel.isHidden = false
-                ComChatReceiveimageTableViewCell.ReceiverImageLabel.text = message[indexPath.row].sentlabel
+                ComChatReceiveimageTableViewCell.ReceiverImageLabel.text = ChatMessage[indexPath.section][indexPath.row].sentlabel
             }
             ActivityIndicator.stopAnimating()
             ActivityIndicator.alpha = 0
 
             return ComChatReceiveimageTableViewCell
         }
-        else if message[indexPath.row].doctoraudio == true && message[indexPath.row].isFirstUser == true &&  message[indexPath.row].patientaudio == false {
+        else if ChatMessage[indexPath.section][indexPath.row].doctoraudio == true && ChatMessage[indexPath.section][indexPath.row].isFirstUser == true &&  ChatMessage[indexPath.section][indexPath.row].patientaudio == false {
             let AudioFileDoctorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFileDoctorTableViewCell", for: indexPath) as! AudioFileDoctorTableViewCell
 
             AudioFileDoctorTableViewCell.recordView.layer.cornerRadius = 10
@@ -579,7 +559,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         }
         
-        else if message[indexPath.row].patientaudio == true && message[indexPath.row].isFirstUser == false && message[indexPath.row].doctoraudio == false{
+        else if ChatMessage[indexPath.section][indexPath.row].patientaudio == true && ChatMessage[indexPath.section][indexPath.row].isFirstUser == false && ChatMessage[indexPath.section][indexPath.row].doctoraudio == false{
             
             
             let AudioFilePatientTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AudioFilePatientTableViewCell", for: indexPath) as! AudioFilePatientTableViewCell
@@ -599,9 +579,9 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_1", for: indexPath) as! ComChatTableViewCell
             cell.messageBackgroundView.layer.cornerRadius = 16
-            cell.CellMessageLabel.text = message[indexPath.row].text
+            cell.CellMessageLabel.text = ChatMessage[indexPath.section][indexPath.row].text
                    cell.ReadCheckLabel.text = "unread"
-            cell.timeLabel.text = message[indexPath.row].time
+            cell.timeLabel.text = ChatMessage[indexPath.section][indexPath.row].time
 
                        return cell
         }
@@ -892,7 +872,7 @@ func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIBut
     guard let indexPath = tableView.indexPath(for: cell) else  { return }
     cell.DoctorAudioSlider.value = 0.0
     indexpathrow = index
-        let storageref = Storage.storage().reference(forURL: message[index].url)
+    let storageref = Storage.storage().reference(forURL: message[index].url!)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
         storageref.getData(maxSize: 10640060 ) { [self] (data, error) in
                 if let error = error {
@@ -934,7 +914,7 @@ func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIBut
     func OnTouchPatient(index: Int) {
         
         print("index: \(index) \(message[index].url)")
-        let storageref = Storage.storage().reference(forURL: message[index].url)
+        let storageref = Storage.storage().reference(forURL: message[index].url!)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("patient.m4a")
         storageref.getData(maxSize: 10640060) { [self] (data, error) in
                 if let error = error {
@@ -955,16 +935,16 @@ func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIBut
         
     }
     
-    func TouchImageDoctor(cell: ComImageTableViewCell, didTappedThe button: UIButton?, index: Int) {
+    func TouchImageDoctor(cell: ComImageTableViewCell, didTappedThe button: UIButton?, index: Int,indexsec: Int) {
         print("index : \(index)")
-        Image_url = message[index].url
+        Image_url = ChatMessage[indexsec][index].url
         print("Image_url : \(Image_url)")
         performSegue(withIdentifier: "ImageZoom", sender: self)
     }
     
-    func TouchImagePatient(cell: ComChatReceiveimageTableViewCell, didTappedThe button: UIButton?, index: Int) {
+    func TouchImagePatient(cell: ComChatReceiveimageTableViewCell, didTappedThe button: UIButton?, index: Int,indexsec: Int) {
         print("index : \(index)")
-        Image_url = message[index].url
+        Image_url = ChatMessage[indexsec][index].url
         print("Image_url : \(Image_url)")
         performSegue(withIdentifier: "ImageZoom", sender: self)
     }
