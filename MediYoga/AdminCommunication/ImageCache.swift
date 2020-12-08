@@ -7,30 +7,53 @@
 
 import Foundation
 import UIKit
-
 let imageCache = NSCache<NSString, AnyObject>()
-var imageURLString: String?
+var spinner = UIActivityIndicatorView(style: .gray)
+var task:URLSessionDataTask!
 
-extension UIImageView{
+extension UIImageView {
 
-func downloadImageFrom(urlString: String, imageMode: UIView.ContentMode) {
-    guard let url = URL(string: urlString) else { return }
-    downloadImageFrom(url: url, imageMode: imageMode)
-}
+    func loadImageUsingCacheWithUrlString(_ urlString: String) {
+        self.image = nil
+        addspinner()
+                    if let task = task{
+                        task.cancel()
+                    }
+        if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
+            self.image = cachedImage
+            removespinner()
 
-func downloadImageFrom(url: URL, imageMode: UIView.ContentMode) {
-    contentMode = imageMode
-    if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
-        self.image = cachedImage
-    } else {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                let imageToCache = UIImage(data: data)
-//                self.imageCache.setObject(imageToCache!, forKey: url.absoluteString as NSString)
-                self.image = imageToCache
+            return
+        }
+        let url = URL(string: urlString)
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+        if let error = error {
+                print(error)
+                return
             }
-        }.resume()
+            
+            DispatchQueue.main.async(execute: {
+                
+                if let downloadedImage = UIImage(data: data!) {
+                    imageCache.setObject(downloadedImage, forKey: urlString as NSString)
+                    
+                    self.image = downloadedImage
+                }
+            })
+            
+        }).resume()
     }
+    
+    func addspinner(){
+            addSubview(spinner)
+            spinner.translatesAutoresizingMaskIntoConstraints = false
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            spinner.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            spinner.startAnimating()
+        }
+        func removespinner(){
+            spinner.removeFromSuperview()
+        }
+    
 }
-}
+

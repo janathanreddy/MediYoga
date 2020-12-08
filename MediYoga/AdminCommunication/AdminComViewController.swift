@@ -17,7 +17,7 @@ struct MessageDataAdmin {
     var sendimagebool : Bool
     var sentimage : UIImage?
     var sentlabel:String
-    var url:String
+    var url:String?
     var ReceiverImageBool: Bool
     var doctoraudio: Bool
     var patientaudio: Bool
@@ -66,6 +66,8 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     var SelectedImages:String = ""
     var Image_url:String?
     var orderdate = String()
+    let imagecahe = NSCache<AnyObject, AnyObject>()
+    
     
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
@@ -280,27 +282,29 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             DoctorImageTableViewCell.DoctorView.clipsToBounds = true
             DoctorImageTableViewCell.CellDelegate = self
             DoctorImageTableViewCell.index = indexPath
-
-            let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url)
-            
-            let fetchref = storageref.getData(maxSize: 1*1024*1024)
-            { data, error in
-                if error != nil {
-                    print("image Upload Error - DoctorImageTableViewCell")
-             } else {
-                DispatchQueue.global(qos: .background).async {
-                    let url = URL(string:(self.ChatMessage[indexPath.section][indexPath.row].url))
-                    let data = try? Data(contentsOf: url!)
-                    let image: UIImage = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-//                        self.imageCache.setObject(image, forKey: NSString(string: (activeUser?.login!)!))
-                        DoctorImageTableViewCell.DoctorImageView.image = image
-//                        cell.imgFollow.image = image
-                    }
+                let user = ChatMessage[indexPath.section][indexPath.row]
+                if let profileImageUrl = user.url {
+                    DoctorImageTableViewCell.DoctorImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
                 }
-//                    DoctorImageTableViewCell.DoctorImageView.image = UIImage(data: data!)
-             }
-            }
+                let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url!)
+            
+//            let fetchref = storageref.getData(maxSize: 1*1024*1024)
+//            { [self] (data, error) in
+//                if error != nil {
+//                    print("image Upload Error - DoctorImageTableViewCell")
+//             } else {
+//                
+////                DoctorImageTableViewCell.DoctorImageView?.sd_setImage(with: URL(string: ChatMessage[indexPath.section][indexPath.row].url),placeholderImage: UIImage(named: "Loading"),options: [.continueInBackground,.progressiveLoad])
+//                
+//                
+//                
+////                if let url_doctor = URL(string: ChatMessage[indexPath.section][indexPath.row].url){
+////                    DoctorImageTableViewCell.ImageIV.loadimage(from: url_doctor)
+////                }
+////
+////                    DoctorImageTableViewCell.DoctorImageView.image = UIImage(data: data!)
+//             }
+//            }
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 DoctorImageTableViewCell.DoctorLabel.isHidden = true
             }else{
@@ -318,7 +322,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             AdminComImageTableViewCell.CellDelegate = self
             AdminComImageTableViewCell.index = indexPath
 
-            let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url)
+            let storageref = Storage.storage().reference(forURL: ChatMessage[indexPath.section][indexPath.row].url!)
             
             let fetchref = storageref.getData(maxSize: 1*1024*1024)
             { [self] data, error in
@@ -326,9 +330,10 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                     print("image Upload Error")
              } else {
                 
-                AdminComImageTableViewCell.imageView?.sd_setImage(with: URL(string: ChatMessage[indexPath.section][indexPath.row].url),placeholderImage: UIImage(named: "Loading"),options: [.continueInBackground,.progressiveLoad])
+                
+//                AdminComImageTableViewCell.imageView?.sd_setImage(with: URL(string: ChatMessage[indexPath.section][indexPath.row].url),placeholderImage: UIImage(named: "Loading"),options: [.continueInBackground,.progressiveLoad])
 
-//                AdminComImageTableViewCell.ChatImage.image = UIImage(data: data!)
+                AdminComImageTableViewCell.ChatImage.image = UIImage(data: data!)
              }
             }
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
@@ -599,8 +604,3 @@ return UITableViewCell()
 }
 
 
-class CustomImageView: UIImageView {
-
-
-    
-}

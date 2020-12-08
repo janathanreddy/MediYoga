@@ -21,6 +21,8 @@ class DoctorImageTableViewCell: UITableViewCell {
     @IBOutlet weak var DoctorImageView: UIImageView!
     var index: IndexPath?
     var CellDelegate: AminDoctorImage?
+//    let ImageIV = CustomImage()
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
