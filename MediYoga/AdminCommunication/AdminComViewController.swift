@@ -122,6 +122,9 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func keyBoardWillShow(notification: Notification){
+        
+        tableView.keyboardDismissMode = .onDrag
+
         if let userInfo = notification.userInfo as? Dictionary<String, AnyObject>{
             let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey]
             let keyBoardRect = frame?.cgRectValue
@@ -129,13 +132,14 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
                 self.buttomconstrains.constant = keyBoardHeight
 
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
+                let section = self.ChatMessage.count - 1
+                let row = self.ChatMessage[section].count - 1
 
                 self.tableView.contentInset = contentInset
-                if message.count != 0{
-                    tableView.scrollToRow(at: IndexPath(row: message.count-1 , section: ChatMessage.count-1), at: .top, animated: true)
+                if ChatMessage.count != 0{
+                    tableView.scrollToRow(at: IndexPath(row: row, section: section), at: .top, animated: true)
                 }
                 contentInset.bottom = keyBoardRect!.height
-                let indexpath = NSIndexPath(row: 1, section: 0)
                 UIView.animate(withDuration: 0.5, animations: {
                     self.view.layoutIfNeeded()
                 })
@@ -144,7 +148,6 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     @objc func keyBoardWillHide(notification: Notification){
-        
         let contentInset:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.contentInset = contentInset
 
@@ -441,10 +444,14 @@ return UITableViewCell()
 
             
             message.append(MessageDataAdmin(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "",url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
+            
+            let section = self.ChatMessage.count - 1
+            let row = self.ChatMessage[section].count - 1
+
             tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 1)], with: .fade)
+            tableView.insertRows(at: [IndexPath.init(row: ChatMessage[section].count - 1, section: ChatMessage.count - 1)], with: .fade)
             tableView.endUpdates()
-            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 1), at: .top, animated: true)
+            tableView.scrollToRow(at: IndexPath(row: ChatMessage[section].count - 1, section: ChatMessage.count - 1), at: .top, animated: true)
             ChatTextField.text = ""
             
         }

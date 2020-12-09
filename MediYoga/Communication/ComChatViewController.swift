@@ -137,8 +137,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.ButtomSpace.constant = keyBoardHeight
                 var contentInset:UIEdgeInsets = self.tableView.contentInset
                 self.tableView.contentInset = contentInset
+                let section = self.ChatMessage.count - 1
+                let row = self.ChatMessage[section].count - 1
                 if ChatMessage.count != 0{
-                    tableView.scrollToRow(at: IndexPath(row: ChatMessage.count - 1 , section: 0), at: .top, animated: true)
+                    tableView.scrollToRow(at: IndexPath(row: row , section: section), at: .top, animated: true)
                 }
 
 
