@@ -112,6 +112,7 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.register(UINib(nibName: "DoctorAudioTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorAudioTableViewCell")
         messages()
+
         tableView.rowHeight = UITableView.automaticDimension
 
     }
@@ -350,7 +351,7 @@ return UITableViewCell()
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
             
             SelectedImage.image = images as! UIImage
-            message.append(MessageDataAdmin(text: ChatTextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: ChatTextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
+            ChatMessage.append([MessageDataAdmin(text: ChatTextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: ChatTextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)"))])
 
                 let randomid = UUID.init().uuidString
                 let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/\(randomid).jpg")
@@ -382,6 +383,10 @@ return UITableViewCell()
             
             ChatTextField.text = ""
             tableView.reloadData()
+            let section = ChatMessage.count-1
+            let row = ChatMessage[section].count-1
+            tableView.scrollToRow(at: IndexPath(row:ChatMessage[section].count-1, section: ChatMessage.count-1), at: .top, animated: true)
+
 
                 } else {
                     print("Check Image Code Error...!!!")
@@ -443,22 +448,19 @@ return UITableViewCell()
             newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
             
-            message.append(MessageDataAdmin(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "",url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
+            ChatMessage.append([MessageDataAdmin(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "",url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)"))])
             
-            let section = self.ChatMessage.count - 1
-            let row = self.ChatMessage[section].count - 1
+            tableView.reloadData()
 
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: ChatMessage[section].count - 1, section: ChatMessage.count - 1)], with: .fade)
-            tableView.endUpdates()
-            tableView.scrollToRow(at: IndexPath(row: ChatMessage[section].count - 1, section: ChatMessage.count - 1), at: .top, animated: true)
+            let section = ChatMessage.count-1
+            let row = ChatMessage[section].count-1
+            tableView.scrollToRow(at: IndexPath(row:ChatMessage[section].count-1, section: ChatMessage.count-1), at: .top, animated: true)
+
             ChatTextField.text = ""
             
         }
         
        return true
-        tableView.reloadData()
-        
     }
 
 
@@ -529,21 +531,8 @@ return UITableViewCell()
                     }
 
                 }
-                
-                let Grouping_Message = Dictionary(grouping: message, by: {(element) -> Date in
-                    return element.date
-                })
-                print("Dictionary : \(Dictionary(grouping: message, by: { $0.date }))")
-
-                print("Grouping_Message : \(Grouping_Message)")
-                let keys = Grouping_Message.keys.sorted()
-                print("keys : \(keys)")
-                keys.forEach { (key) in
-                    let values = Grouping_Message[key]
-                    ChatMessage.append(values ?? [])
-                    print("chatMessages : \(values)")
-                }
-
+                Groupbyheader()
+               
               DispatchQueue.main.async {
                   self.tableView.reloadData()
               }
@@ -552,7 +541,22 @@ return UITableViewCell()
       }
         
     }
-    
+    func Groupbyheader(){
+        let Grouping_Message = Dictionary(grouping: message, by: {(element) -> Date in
+            return element.date
+        })
+        print("Dictionary : \(Dictionary(grouping: message, by: { $0.date }))")
+
+        print("Grouping_Message : \(Grouping_Message)")
+        let keys = Grouping_Message.keys.sorted()
+        print("keys : \(keys)")
+        keys.forEach { (key) in
+            let values = Grouping_Message[key]
+            ChatMessage.append(values ?? [])
+            print("chatMessages : \(values)")
+        }
+
+    }
     func AdminDoctorImage(cell: DoctorImageTableViewCell, didTappedThe button: UIButton?, index: Int,indexsec: Int) {
         print("index : \(index)")
         Image_url = ChatMessage[indexsec][index].url
@@ -581,5 +585,4 @@ return UITableViewCell()
     
     
 }
-
 

@@ -404,12 +404,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let images = info[UIImagePickerController.InfoKey.originalImage] {
             
             SelectedImageView.image = images as! UIImage
-            message.append(messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
-            tableView.endUpdates()
-            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
-
+            ChatMessage.append([messagedata(text: TextField.text!, time: timeupdate!, isFirstUser: true, sendimagebool: true, sentimage: images as? UIImage , sentlabel: TextField.text!, url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)"))])
 
                 let randomid = UUID.init().uuidString
                 let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/\(randomid).jpg")
@@ -441,6 +436,10 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             TextField.text = ""
             tableView.reloadData()
+            let section = ChatMessage.count-1
+            let row = ChatMessage[section].count-1
+            tableView.scrollToRow(at: IndexPath(row:ChatMessage[section].count-1, section: ChatMessage.count-1), at: .top, animated: true)
+
 
                 } else {
                     print("Check Image Code Error...!!!")
@@ -621,16 +620,20 @@ return UITableViewCell()
             let newDocument = db.collection("patient_chat").document(documentID)
             newDocument.updateData(["last_message": textFromField,"last_message_time": FieldValue.serverTimestamp()])
 
-            message.append(messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)")))
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
-            tableView.endUpdates()
-            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
+            ChatMessage.append([messagedata(text: textFromField,time: timeupdate!,isFirstUser: true, sendimagebool: false, sentlabel: "", url: "",ReceiverImageBool: false,doctoraudio: false,patientaudio: false, DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)"))])
+            let section = ChatMessage.count-1
+            let row = ChatMessage[section].count-1
+            tableView.reloadData()
+            tableView.scrollToRow(at: IndexPath(row:ChatMessage[section].count-1, section: ChatMessage.count-1), at: .top, animated: true)
+
+//            tableView.beginUpdates()
+//            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
+//            tableView.endUpdates()
+//            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
             TextField.text = ""
             
         }
        return true
-        tableView.reloadData()
     }
    
     func messages(){
