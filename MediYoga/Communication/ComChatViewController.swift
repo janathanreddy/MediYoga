@@ -48,6 +48,7 @@ extension Date {
 
 
 class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIImagePickerControllerDelegate &  UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate, Doctorplay, PatientPlay,DoctorImage,PatientImage {
+    
 
     var recorder: AVAudioRecorder!
     var player: AVAudioPlayer!
@@ -80,6 +81,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var DoctorName: String = ""
     var playerDuration: String = ""
     var indexpathrow:Int?
+    var audio_url:String?
     @IBOutlet weak var profileimage: UIImageView!
     @IBOutlet weak var TextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -348,7 +350,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
         print("\(#function)")
         
         let currentFileName = "audio.m4a"
-        print(currentFileName)
+        print("currentFileName : \(currentFileName)")
         let data = Data()
 
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -626,10 +628,6 @@ return UITableViewCell()
             tableView.reloadData()
             tableView.scrollToRow(at: IndexPath(row:ChatMessage[section].count-1, section: ChatMessage.count-1), at: .top, animated: true)
 
-//            tableView.beginUpdates()
-//            tableView.insertRows(at: [IndexPath.init(row: message.count - 1, section: 0)], with: .fade)
-//            tableView.endUpdates()
-//            tableView.scrollToRow(at: IndexPath(row: message.count - 1, section: 0), at: .top, animated: true)
             TextField.text = ""
             
         }
@@ -752,7 +750,8 @@ return UITableViewCell()
     
  
     @IBAction func stopbtn(_ sender: Any) {
-        
+        time()
+        date()
         print("\(#function)")
         
         recorder?.stop()
@@ -769,6 +768,12 @@ return UITableViewCell()
             StopButton.isEnabled = false
             StopButton.isHidden = true
             MicBtn.isEnabled = true
+            
+            ChatMessage.append([messagedata(text: "", time: timeupdate!, isFirstUser: true, sendimagebool: false, sentimage: images as? UIImage , sentlabel: "", url: "\(audio_url)",ReceiverImageBool: false,doctoraudio: true,patientaudio: false,DoctorRecordLabel: "", date: Date.dateFromCustomString(customString: "\(dateupdate)"))])
+            tableView.reloadData()
+            let section = ChatMessage.count-1
+            let row = ChatMessage[section].count-1
+            tableView.scrollToRow(at: IndexPath(row:ChatMessage[section].count-1, section: ChatMessage.count-1), at: .top, animated: true)
         } catch {
             print("could not make session inactive")
             print(error.localizedDescription)
@@ -785,6 +790,7 @@ return UITableViewCell()
         MicBtn.isEnabled = true
         StopButton.isEnabled = false
         StopButton.isHidden = true
+
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
@@ -798,6 +804,8 @@ return UITableViewCell()
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder,
                                          successfully flag: Bool) {
+        date()
+        time()
         
         print("\(#function)")
         let randomid = NSUUID().uuidString
@@ -811,7 +819,7 @@ return UITableViewCell()
         
             self.recorder = nil
             let uploadref = Storage.storage().reference(withPath: "chat/euO4eHLyxXKDVmLCpNsO/recordings/\(randomid).m4a")
-         print(uploadref)
+         print("uploadref:\(uploadref)")
              let uploadMetadata = StorageMetadata()
             uploadMetadata.contentType = "audio/m4a"
 
@@ -831,12 +839,17 @@ return UITableViewCell()
                      if url != nil {
                          let url = url!.absoluteString
                         print("url: \(url)")
+                        audio_url = url
+                        print("audio_url : \(audio_url)")
+
                          db.collection("patient_chat").document(documentID).collection("messages").addDocument(data: ["sender_id": DoctorId,"sender_name": DoctorName,"text": "audio","time_stamp": FieldValue.serverTimestamp(),"type": 3,"content_url": url])
+                        
+
+
                      }
              })
              }
-        
-
+        tableView.reloadData()
        
     }
     
@@ -872,12 +885,12 @@ return UITableViewCell()
     
 
     
-func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIButton?,index: Int) {
+    func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIButton?,indexSec: Int,index: Int) {
     
     guard let indexPath = tableView.indexPath(for: cell) else  { return }
     cell.DoctorAudioSlider.value = 0.0
     indexpathrow = index
-    let storageref = Storage.storage().reference(forURL: message[index].url!)
+    let storageref = Storage.storage().reference(forURL: ChatMessage[indexSec][index].url!)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("doctor.m4a")
         storageref.getData(maxSize: 10640060 ) { [self] (data, error) in
                 if let error = error {
@@ -911,15 +924,16 @@ func OnTouchDoctor(cell: AudioFileDoctorTableViewCell,didTappedThe button: UIBut
                         }
                     }
                 }
-            }
-    tableView.reloadData()
+        
+            
+        }
     }
     
 
-    func OnTouchPatient(index: Int) {
+    func OnTouchPatient(indexSec: Int,index: Int) {
         
-        print("index: \(index) \(message[index].url)")
-        let storageref = Storage.storage().reference(forURL: message[index].url!)
+        print("index: \(index) \(ChatMessage[indexSec][index].url)")
+        let storageref = Storage.storage().reference(forURL: ChatMessage[indexSec][index].url!)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("patient.m4a")
         storageref.getData(maxSize: 10640060) { [self] (data, error) in
                 if let error = error {

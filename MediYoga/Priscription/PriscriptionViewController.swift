@@ -36,6 +36,7 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     var Favouritedrugs = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        selecteddruglist()
 
         date()
         indexselect()
@@ -47,7 +48,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         TextFieldDescription.contentVerticalAlignment = .top
         messages()
         print("patient_id from Priscription : \(patient_id) ")
-        selecteddruglist()
         
         tableView.rowHeight = 70
         
@@ -72,6 +72,17 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
             searchingcell.PriscriptionLabel.text = searchedname[indexPath.row]
             searchingcell.celldelegate = self
             searchingcell.index = indexPath
+            
+            for RET in RetFav{
+                if RET == searchedname[indexPath.row]{
+                    print("RET : \(RET) == searchedname : \(searchedname[indexPath.row])")
+
+                    searchingcell.favbtn.isSelected = true
+
+                }
+
+                
+            }
            
             return searchingcell
 
@@ -84,8 +95,11 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
 
             for RET in RetFav{
                 if RET == names[indexPath.row]{
-                    
+                    print("RET : \(RET) == names : \(names[indexPath.row])")
+
+
                     cell.favbtn.isSelected = true
+                    
 
                 }
 
@@ -103,7 +117,7 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     
 
     
-    func Favourite(cell: PriscriptionTableViewCell, didTappedThe button: UIButton?) {
+    func Favourite(cell: PriscriptionTableViewCell, didTappedThe button: UIButton?,index: Int) {
 
         cell.favbtn.isSelected = !cell.favbtn.isSelected
         if button?.isSelected != true{
@@ -125,7 +139,7 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
         }
        }
     
-    func Check(cell: PriscriptionTableViewCell, didTappedThe button: UIButton?) {
+    func Check(cell: PriscriptionTableViewCell, didTappedThe button: UIButton?,index: Int) {
 
         cell.checkbtn.isSelected = !cell.checkbtn.isSelected
         if button?.isSelected != true{
@@ -211,7 +225,7 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func SaveAct(_ sender: Any) {
-        
+        RetFav.removeAll()
         db.collection("prescription").document("drug_document").getDocument() { [self] (snapshot, err) in
               if let err = err {
                   print("Error getting documents: \(err)")
@@ -271,10 +285,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
                         }
                     }
                   }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-
 
               }
         }
@@ -294,9 +304,6 @@ class PriscriptionViewController: UIViewController, UITableViewDelegate, UITable
                         }
                     }
                   }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
 
               }
         }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PatientPlay {
-    func OnTouchPatient(index: Int)
+    func OnTouchPatient(indexSec:Int,index: Int)
 }
 
 
@@ -30,7 +30,7 @@ class AudioFilePatientTableViewCell: UITableViewCell {
     
     @IBAction func PlayAction(_ sender: Any) {
         
-        celldelegate?.OnTouchPatient(index: index!.row)
+        celldelegate?.OnTouchPatient(indexSec: index!.section, index: index!.row)
 
     }
     
