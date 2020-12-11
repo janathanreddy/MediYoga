@@ -23,7 +23,7 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
     }()
     var datesWithEvent = [String]()
     var datesWithMultipleEvents = [String]()
-    var AppointmentDate = [String]()
+    var appointmentdate = [String]()
     var db = Firestore.firestore()
     var dates_1:String = ""
     var PatientTime = [String]()
@@ -35,7 +35,6 @@ class MontlyViewController: UIViewController,UITableViewDelegate,UITableViewData
     var PatientTimedid:String = ""
     var PatientNamedid:String = ""
     var PatientAgedid:String = ""
-    var counts: [String: Int] = [:]
 
 
 
@@ -141,11 +140,12 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
                 for document in querySnapshot!.documents {
                 let documentData = document.data()
 
-                    AppointmentDate.append(documentData["appointment_date"] as! String)
+                    appointmentdate.append(documentData["appointment_date"] as! String)
                     
             
     }
-                    for item in AppointmentDate {
+                    var counts: [String: Int] = [:]
+                    for item in appointmentdate {
                         print("item : \(item)")
 
                         counts[item] = (counts[item] ?? 0) + 1
@@ -175,11 +175,12 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         let dateString = self.dateFormatter2.string(from: date)
 
         if self.datesWithEvent.contains(dateString) {
-
+            print("datesWithEvent_single : \(datesWithEvent.contains(dateString))")
             calendar.appearance.eventDefaultColor = UIColor.systemPink
             return 1
         }
         else if self.datesWithMultipleEvents.contains(dateString) {
+            
             calendar.appearance.eventDefaultColor = UIColor.systemYellow
             return 3
         }

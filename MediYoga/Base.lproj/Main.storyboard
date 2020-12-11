@@ -418,11 +418,11 @@
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="ogR-Lk-V6f" customClass="AppointmentViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kPQ-vy-Zbt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search Appointment" translatesAutoresizingMaskIntoConstraints="NO" id="tKe-Ta-vEz">
-                                <rect key="frame" x="14" y="121" width="374" height="44"/>
+                                <rect key="frame" x="14" y="77" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UcN-4J-yby"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="fgs-Rk-cjp"/>
@@ -435,7 +435,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LWl-OZ-Ycw">
-                                <rect key="frame" x="0.0" y="177" width="414" height="636"/>
+                                <rect key="frame" x="0.0" y="133" width="414" height="626"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="636" id="B4p-jW-PEE"/>
@@ -591,14 +591,14 @@
                                 </connections>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Appointment" translatesAutoresizingMaskIntoConstraints="NO" id="OrW-Mf-kgD">
-                                <rect key="frame" x="262" y="76" width="30" height="30"/>
+                                <rect key="frame" x="262" y="32" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Gyj-Uj-5s6"/>
                                     <constraint firstAttribute="width" constant="30" id="dI6-5I-Qqu"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-JD-BG6">
-                                <rect key="frame" x="14" y="69" width="220" height="44.5"/>
+                                <rect key="frame" x="14" y="25" width="220" height="44.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44.5" id="DkZ-9Q-2lj"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="s4d-fv-eNo"/>
@@ -608,7 +608,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9i-Uu-m7F">
-                                <rect key="frame" x="300" y="121" width="94" height="100"/>
+                                <rect key="frame" x="300" y="77" width="94" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLx-U5-jZQ">
                                         <rect key="frame" x="24" y="8" width="46" height="17"/>
@@ -679,7 +679,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-M7-AcE">
-                                <rect key="frame" x="300" y="76" width="88" height="30"/>
+                                <rect key="frame" x="300" y="32" width="88" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WYE-95-wRr"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="dez-7x-21c"/>
@@ -696,17 +696,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-Re-Ygw">
-                                <rect key="frame" x="369" y="80" width="23" height="23"/>
+                                <rect key="frame" x="369" y="36" width="23" height="23"/>
                                 <state key="normal" image="exapand on arrow"/>
                                 <connections>
                                     <action selector="actionTodayWeekly:" destination="ogR-Lk-V6f" eventType="touchUpInside" id="YwQ-9a-BTU"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="BWh-Pz-7u0">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="402.5" width="37" height="37"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVd-Cd-3Tu">
-                                <rect key="frame" x="40.5" y="426" width="333" height="44"/>
+                                <rect key="frame" x="40.5" y="399" width="333" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="333" id="8ab-dG-9qB"/>
                                     <constraint firstAttribute="height" constant="44" id="ZpB-Mx-oHI"/>
@@ -1543,7 +1543,7 @@
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="sPE-nm-AvD" customClass="AdminCommunicationViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dWL-SQ-OK6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yup-fM-6K6">
@@ -1551,7 +1551,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Communication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adx-7W-jdb">
-                                <rect key="frame" x="20" y="69" width="374" height="43"/>
+                                <rect key="frame" x="20" y="25" width="374" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="amF-Oo-u8z"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="e4F-bD-0j0"/>
@@ -1561,7 +1561,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="65b-5i-4nG">
-                                <rect key="frame" x="0.0" y="129" width="414" height="684"/>
+                                <rect key="frame" x="0.0" y="85" width="414" height="674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="414" id="39P-JQ-wal"/>
@@ -1681,11 +1681,11 @@
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="WHW-eY-ysj" customClass="SettingsViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A5O-zw-q5t">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9pt-1v-PF8">
-                                <rect key="frame" x="0.0" y="126" width="414" height="687"/>
+                                <rect key="frame" x="0.0" y="82" width="414" height="677"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="677" id="K4X-uU-du5"/>
@@ -1880,7 +1880,7 @@
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qS-RX-3Au">
-                                <rect key="frame" x="25" y="69" width="369" height="43"/>
+                                <rect key="frame" x="25" y="25" width="369" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="369" id="Mya-aU-oFp"/>
                                     <constraint firstAttribute="height" constant="43" id="WpI-FB-ONH"/>
@@ -2134,11 +2134,11 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="UYI-Qa-4iX" customClass="NOTESViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TZY-sT-pPa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLh-JB-gHc">
-                                <rect key="frame" x="49" y="301.5" width="316" height="293"/>
+                                <rect key="frame" x="49" y="274.5" width="316" height="293"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLm-hW-Kqm">
                                         <rect key="frame" x="128" y="14" width="60" height="28"/>
@@ -2189,7 +2189,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xSs-IH-I55">
-                                <rect key="frame" x="64.5" y="356" width="285" height="191"/>
+                                <rect key="frame" x="64.5" y="329" width="285" height="191"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="191" id="58B-1A-eWk"/>
@@ -2227,11 +2227,11 @@
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="ukh-c8-hsh" customClass="CommunicationViewController" customModule="MediYoga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abf-lL-bEB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kva-sx-1a3">
-                                <rect key="frame" x="0.0" y="117" width="414" height="696"/>
+                                <rect key="frame" x="0.0" y="73" width="414" height="686"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="686" id="8jw-D7-3Ht"/>
@@ -2325,7 +2325,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="6ws-PR-Yx1">
-                                <rect key="frame" x="20" y="64" width="374" height="43"/>
+                                <rect key="frame" x="20" y="20" width="374" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Communication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h94-AT-8bE">
                                         <rect key="frame" x="0.0" y="0.0" width="258" height="43"/>
@@ -2354,7 +2354,7 @@
                                 </constraints>
                             </stackView>
                             <searchBar hidden="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Search Group" translatesAutoresizingMaskIntoConstraints="NO" id="cXp-Xk-Tub">
-                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UTV-Cs-6fI"/>
                                 </constraints>
@@ -2364,7 +2364,7 @@
                                 </connections>
                             </searchBar>
                             <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="auI-ey-AUn">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="402.5" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3gz-TF-Vac"/>
@@ -3471,8 +3471,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RtK-sR-ms9"/>
-        <segue reference="eHB-pP-D7z"/>
+        <segue reference="93f-ev-zYm"/>
+        <segue reference="hPa-9K-lIm"/>
+        <segue reference="ILP-L1-Rgw"/>
         <segue reference="QyH-xi-0ch"/>
     </inferredMetricsTieBreakers>
     <resources>

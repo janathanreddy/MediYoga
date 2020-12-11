@@ -8,7 +8,6 @@
 import UIKit
 import AVFoundation
 import Firebase
-import SDWebImage
 
 struct MessageDataAdmin {
     var text : String
