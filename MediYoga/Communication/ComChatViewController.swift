@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import AVFoundation
+import ImageIO
 
 
 struct messagedata {
@@ -508,6 +509,7 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComImageTableViewCell.ImageTime.text = ChatMessage[indexPath.section][indexPath.row].time
             let user = ChatMessage[indexPath.section][indexPath.row]
             if let profileImageUrl = user.url {
+                
                 ComImageTableViewCell.sendimage.LoadImageUsingCacheWithUrlString(profileImageUrl)
             }
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
