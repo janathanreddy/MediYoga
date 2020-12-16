@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Nuke
 
 class AdminimageZoomViewController: UIViewController, UIScrollViewDelegate {
     
@@ -39,7 +40,11 @@ class AdminimageZoomViewController: UIViewController, UIScrollViewDelegate {
                             let sender_id = documentData["sender_id"] as! String
                                    print("\(documentData["content_url"] as! String)")
                             let storageref = Storage.storage().reference(forURL: documentData["content_url"] as! String)
+                            let url = URL(string: documentData["content_url"] as! String)
+                            Nuke.loadImage(with: url as! ImageRequestConvertible, into: ImageAdmin)
+
                             print("Matching : \(documentData["content_url"] as! String) = \(Image_url)")
+                            
                             let fetchref = storageref.getData(maxSize: 4*1024*1024)
                             { data, error in
                                 if error != nil {

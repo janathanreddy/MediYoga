@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import Firebase
+import Nuke
 
 struct MessageDataAdmin {
     var text : String
@@ -67,6 +68,10 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
     var orderdate = String()
     
     
+    var resizedImageProcessors: [ImageProcessing] {
+      let imageSize = CGSize(width: 240, height: 128)
+      return [ImageProcessors.Resize(size: imageSize, contentMode: .aspectFill)]
+    }
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var SelectedImage: UIImageView!
     @IBOutlet weak var ChatTextField: UITextField!
@@ -285,8 +290,13 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
             DoctorImageTableViewCell.index = indexPath
                 let user = ChatMessage[indexPath.section][indexPath.row]
                 if let profileImageUrl = user.url {
-                    
-                    DoctorImageTableViewCell.DoctorImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
+                    let image_Compress = URL(string: profileImageUrl)
+
+                    let request = ImageRequest(url: image_Compress!,processors: resizedImageProcessors)
+
+                    Nuke.loadImage(with: request as! ImageRequestConvertible, into: DoctorImageTableViewCell.DoctorImageView)
+
+//                    DoctorImageTableViewCell.DoctorImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
                 }
               
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
@@ -308,7 +318,13 @@ class AdminComViewController: UIViewController, UITableViewDelegate, UITableView
 
             let Admin_User = ChatMessage[indexPath.section][indexPath.row]
             if let profileImageUrl = Admin_User.url {
-                AdminComImageTableViewCell.ChatImage.loadImageUsingCacheWithUrlString(profileImageUrl)
+                let image_Compress = URL(string: profileImageUrl)
+
+                let request = ImageRequest(url: image_Compress!,processors: resizedImageProcessors)
+
+                Nuke.loadImage(with: request as! ImageRequestConvertible, into: AdminComImageTableViewCell.ChatImage)
+
+//                AdminComImageTableViewCell.ChatImage.loadImageUsingCacheWithUrlString(profileImageUrl)
             }
           
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{

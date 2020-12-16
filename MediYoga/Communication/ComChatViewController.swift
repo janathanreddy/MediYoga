@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import AVFoundation
 import ImageIO
+import Nuke
 
 
 struct messagedata {
@@ -59,7 +60,11 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
     var soundFileURL: URL!
     var Patient_Id:String = ""
     var Image_url:String?
-
+    
+    var resizedImageProcessors: [ImageProcessing] {
+      let imageSize = CGSize(width: 240, height: 111)
+      return [ImageProcessors.Resize(size: imageSize, contentMode: .aspectFill)]
+    }
     @IBOutlet weak var StopButton: UIButton!
 
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
@@ -509,8 +514,14 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComImageTableViewCell.ImageTime.text = ChatMessage[indexPath.section][indexPath.row].time
             let user = ChatMessage[indexPath.section][indexPath.row]
             if let profileImageUrl = user.url {
-                
-                ComImageTableViewCell.sendimage.LoadImageUsingCacheWithUrlString(profileImageUrl)
+//                Nuke.loadImage(with: url, into: cell.imageView)
+                let image_Compress = URL(string: profileImageUrl)
+
+                let request = ImageRequest(url: image_Compress!,processors: resizedImageProcessors)
+
+                Nuke.loadImage(with: request as! ImageRequestConvertible, into: ComImageTableViewCell.sendimage)
+
+//                ComImageTableViewCell.sendimage.LoadImageUsingCacheWithUrlString(profileImageUrl)
             }
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
                 ComImageTableViewCell.sendlabel.isHidden = true
@@ -534,8 +545,12 @@ class ComChatViewController: UIViewController, UITableViewDelegate, UITableViewD
             ComChatReceiveimageTableViewCell.ReceiverTime.text = ChatMessage[indexPath.section][indexPath.row].time
             let user = ChatMessage[indexPath.section][indexPath.row]
             if let profileImageUrl = user.url {
-                
-                ComChatReceiveimageTableViewCell.ReceiverImage.LoadImageUsingCacheWithUrlString(profileImageUrl)
+                let image_Compress = URL(string: profileImageUrl)
+                let request = ImageRequest(url: image_Compress!,processors: resizedImageProcessors)
+
+                Nuke.loadImage(with: request as! ImageRequestConvertible, into: ComChatReceiveimageTableViewCell.ReceiverImage)
+
+//                ComChatReceiveimageTableViewCell.ReceiverImage.LoadImageUsingCacheWithUrlString(profileImageUrl)
             }
 
             if ChatMessage[indexPath.section][indexPath.row].sentlabel == ""{
